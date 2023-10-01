@@ -1,0 +1,493 @@
+{
+  "Developer":{
+    "age":[22, 40],
+    "salary":[26000, 60000],
+    "experience":[0, 15],
+    "degree":false,
+    "smart_working":true,
+    "skills":[
+      "Python", "Java",  "SQL", "Git",
+      "Algorithm", "Database",
+      "Operating systems", "C++", "PHP", "C"
+    ],
+    "soft_skills":[
+      "Problem solving",  "Collaboration",
+      "Retail aptitude", "Flexibility",
+      "Professional Ethic", "Innovation", "Creativity"
+    ]
+  },
+  "Web Developer":{
+    "age":[25, 45],
+    "salary":[25000, 65000],
+    "experience":[0, 15],
+    "degree":true,
+    "smart_working":true,
+    "skills":[
+      "CSS", "Angular", "PHP", "MySQL",
+      "Ruby", "XAMPP", "Python", "SQL",
+      "Design patterns", "SQL", "HTML",
+      "Internet protocols"
+    ],
+    "soft_skills":[
+      "Problem solving",  "Teamwork",
+      "Effective communication", "Ability to manage stress",
+      "Innovation", "Flexibility"
+    ]
+  },
+  "HR Consultant":{
+    "age":[25, 50],
+    "salary":[20000, 50000],
+    "experience":[2, 15],
+    "degree":true,
+    "smart_working":true,
+    "skills":[
+      "HR Management", "Recruitment",
+      "Organisational development", "Industrial relations",
+      "Labour legislation", "Analysis of data",
+      "Selection and evaluation techniques", "Training and development"
+    ],
+    "soft_skills":[
+      "Empathy", "Management of the conflict",
+      "Negotiation", "Ability to listen",
+      "Coaching",  "Management of stress"
+    ]
+  },
+  "Marketing manager":{
+    "age":[28, 55],
+    "salary":[25000, 120000],
+    "experience":[5, 20],
+    "degree":true,
+    "smart_working":true,
+    "skills":[
+      "Strategies of marketing",
+      "Planning of campaigns", "Market research",
+      "Management of the brand", "Google Analytics",
+      "Hootsuite", "CMS"
+    ],
+    "soft_skills":[
+      "Leadership", "Creativity",
+      "Management of the team",  "Ability to adapt to new technologies",
+      "Critical thinking",  "Adaptability"
+    ]
+  },
+  "Operation manager":{
+    "age":[30, 60],
+    "salary":[70000, 150000],
+    "experience":[7, 25],
+    "degree":true,
+    "smart_working":true,
+    "skills":[
+      "Management of operations",
+      "Optimization of processes",
+      "Quality Control", "Logistics",
+      "Lean management ", "Six Sigma",
+      "ERP",  "Microsoft Excel"
+    ],
+    "soft_skills":[
+      "Strategic planning", "Management of time",
+      "Troubleshooting", "Management of stress"
+    ]
+  },
+  "Computer security analyst":{
+    "age":[26, 45],
+    "salary":[40000, 120000],
+    "experience":[3, 15],
+    "degree":true,
+    "smart_working":true,
+    "skills":[
+      "Cyber Security",
+      "Analysis of vulnerabilities",
+      "Incident Management", "Cryptography",
+      "Security of the networks", "GnuPG",
+      "Keepass", "SELinux"
+    ],
+    "soft_skills":[
+      "Critical thinking",
+      "Troubleshooting", "Collaboration",
+      "Innovation", "Adaptability"
+    ]
+  },
+  "Architectural engineer":{
+    "age":[25, 45],
+    "salary":[20000, 60000],
+    "experience":[0, 20],
+    "degree":true,
+    "smart_working":true,
+    "skills":[
+      "AutoCAD", "Solidworks", "Structural analysis", "Design",
+      "ANSYS", "MATLAB", "Simulink"
+    ],
+    "soft_skills":[
+      "Management of time", "Communication",
+      "Leadership", "Collaboration",
+      "Attention to detail", "Troubleshooting",
+      "Creativity", "Decision-making capacity"
+    ]
+  },
+  "Designer":{
+    "age":[22, 35],
+    "salary":[22000, 50000],
+    "experience":[0, 10],
+    "degree":false,
+    "smart_working":true,
+    "skills":[
+      "Adobe Photoshop",  "Adobe After Effect", "Adobe Illustrator",
+      "UI/UX Design", "Prototyping", "Figma", "Sketch",
+      "Blender", "CorelDRAW"
+    ],
+    "soft_skills":[
+      "Creativity", "Critical thinking", "Empathy",
+      "Adaptability", "Innovation"
+    ]
+  },
+  "Manager":{
+    "age":[30, 50],
+    "salary":[40000, 120000],
+    "experience":[0, 25],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Team Management", "Strategic planning",
+      "Negotiation",  "Market expertise"
+    ],
+    "soft_skills":[
+      "Leadership", "Effective communication",
+      "Analytical thinking", "Empathy",
+      "Adaptability",  "Innovation"
+    ]
+  },
+  "Data analyst":{
+    "age":[25, 45],
+    "salary":[20000, 50000],
+    "experience":[0, 20],
+    "degree":true,
+    "smart_working":true,
+    "skills":[
+      "Python", "R", "Root", "MATLAB",
+      "SQL", "Data Mining", "Microsoft Excel",
+      "Statistics", "SAS",
+      "Tableau", "Database"
+    ],
+    "soft_skills":[
+      "Critical analysis",
+      "Problem solving", "Clear communication",
+      "Creativity", "Proactivity"
+    ]
+  },
+  "System administrator":{
+    "age":[25, 45],
+    "salary":[25000,  50000],
+    "experience":[0, 20],
+    "degree":false,
+    "smart_working":false,
+    "skills":[
+      "Linux", "Network",
+      "Cyber Security", "Cloud management",
+      "Windows Server", "Unix",  "HTTP", "SMTP"
+    ],
+    "soft_skills":[
+      "Troubleshooting",
+      "Management of emergencies",
+      "Patience"
+    ]
+  },
+  "Architect":{
+    "age":[30, 55],
+    "salary":[25000, 60000],
+    "experience":[0, 30],
+    "degree":true,
+    "smart_working":true,
+    "skills":[
+      "AutoCAD",  "Revit", "Architectural design",
+      "Coordination of the project", "BIM",
+      "Vectorworks", "Rhinoceros 3D", "EnergyPlus", "Asana"
+    ],
+    "soft_skills":[
+      "Creativity", "Effective communication",
+      "Spatial thought", "Collaboration",
+      "Attention to detail"
+    ]
+  },
+  "Nurse":{
+    "age":[22, 50],
+    "salary":[20000, 40000],
+    "experience":[0, 15],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Anatomy", "Pharmacology",
+      "Health care", "Patient Management",
+      "Administration of drugs", "Medical emergencies"
+    ],
+    "soft_skills":[
+      "Empathy", "Communication",
+      "Management of stress", "Professional ethics",
+      "Organisation", "Flexibility"
+    ]
+  },
+  "Doctor":{
+    "age":[28,  60],
+    "salary":[25000, 80000],
+    "experience":[0, 30],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Diagnosis", "Therapy", "Management of patients",
+      "Prevention", "Anatomy", "Pharmacology", "Interpretation of the results",
+      "Pathology"
+    ],
+    "soft_skills":[
+      "Empathic communication",
+      "Teamwork", "Patience",
+      "Ethics", "Attention to the patient"
+    ]
+  },
+  "Surgeon":{
+    "age":[30, 60],
+    "salary":[40000, 120000],
+    "experience":[5, 30],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "General Surgery", "Specialized surgical procedures",
+      "Operating block management", "Surgical Anatomy",
+      "Surgical physiology", "Medical imaging"
+    ],
+    "soft_skills":[
+      "Precision", "Decision making",
+      "Management of stress", "Teamwork",
+      "Patience", "Ethics"
+    ]
+  },
+  "Nurse specialist":{
+    "age":[25, 50],
+    "salary":[35000, 50000],
+    "experience":[2, 20],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Specialized nursing assistance",
+      "Monitoring of patients",
+      "Administration of drugs",
+      "Oncology", "Intensive Care Unit"
+    ],
+    "soft_skills":[
+      "Empathy", "Organisation",
+      "Management of emergencies"
+    ]
+  },
+  "X-ray technician":{
+    "age":[25,  55],
+    "salary":[17000,  30000],
+    "experience":[0, 15],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Use of imaging equipment", "X-ray and scan reading",
+      "Preparation of patients", "Radiological safety"
+    ],
+    "soft_skills":[
+      "Precision",
+      "Attention to detail",
+      "Communication", "Empathy",
+      "Speed of learning",
+      "Organizational skills",
+      "Confidentiality", "Ethics"
+    ]
+  },
+  "Therapist":{
+    "age":[28,  60],
+    "salary":[17000, 30000],
+    "experience":[0, 30],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Psychological evaluation",
+      "Counseling", "Cognitive behavioral therapy",
+      "Theories of Behavior", "Ethics",
+      "Confidentiality", "Psychopharmacology"
+    ],
+    "soft_skills":[
+      "Empathy", "Active listening",
+      "Confidentiality",
+      "Relational Skills",
+      "Problem solving", "Ethics"
+    ]
+  },
+  "Pharmacist":{
+    "age":[ 25,  55 ],
+    "salary":[ 17000,  30000 ],
+    "experience":[ 0,  20 ],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Dispensing of drugs", "Information on drugs",
+      "Control of prescriptions", "Preparation of drugs",
+      "Management of the cash", "Pharmacology"
+    ],
+    "soft_skills":[
+      "Precision", "Communication",
+      "Knowledge of regulations", "Attention to the customer",
+      "Empathy", "Organizational skills"
+    ]
+  },
+  "Lawyer":{
+    "age":[28,  60],
+    "salary":[20000,  50000],
+    "experience":[0,  30],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Civil Law", "Criminal Law",
+      "Negotiation", "Legal Research",
+      "Procedural right", "Legal system"
+    ],
+    "soft_skills":[
+      "Argumentation", "Critical thinking",
+      "Persuasive communication", "Communication skills",
+      "Analytical skills"
+    ]
+  },
+  "Legal consultant":{
+    "age":[28,  50],
+    "salary":[20000, 45000],
+    "experience":[3, 20],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Civil Law",  "Criminal Law",
+      "Tax legislation", "Negotiation",
+      "Procedural right", "Contracts",
+      "Intellectual property", "Right to Work"
+    ],
+    "soft_skills":[
+      "Capacity for research",  "Customer orientation",
+      "Negotiation", "Management of stress",
+      "Integrity", "Ethics"
+    ]
+  },
+  "Financial analyst":{
+    "age":[25,  45],
+    "salary":[22000, 45000],
+    "experience":[0, 15],
+    "degree":true,
+    "smart_working":true,
+    "skills":[
+      "Financial analysis",
+      "Assessment of investments", "Risk Management",
+      "Financial markets", "Economics",
+      "Economic Law", "Investment"
+    ],
+    "soft_skills":[
+      "Critical analysis",
+      "Problem solving", "Effective communication",
+      "Attention to detail", "Management of stress"
+    ]
+  },
+  "Asset manager":{
+    "age":[30, 55],
+    "salary":[30000, 60000],
+    "experience":[5, 25],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Financial planning", "Investments",
+      "Management of the portfolio",
+      "Economics", "Investments",
+      "Financial analysis"
+    ],
+    "soft_skills":[
+      "Negotiation", "Customer orientation",
+      "Strategic Thinking", "Attention to detail"
+    ]
+  },
+  "Risk expert":{
+    "age":[ 28,  50 ],
+    "salary":[ 21000,  50000 ],
+    "experience":[ 3,  20 ],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Assessment of risk", "Management of losses",
+      "Analysis of financial security policies",
+      "Data analysis", "Financial risk",
+      "Environmental risk", "Management of the crisis"
+    ],
+    "soft_skills":[
+      "Analytical thinking", "Decision making", "Management of stress"
+    ]
+  },
+  "Financial consultant":{
+    "age":[25, 50],
+    "salary":[25000, 55000],
+    "experience":[0, 20],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Personal financial planning",
+      "Investments", "Insurance",
+      "Economics", "Financial markets",
+      "Commercial Law", "Actions"
+    ],
+    "soft_skills":[
+      "Empathy", "Persuasive communication",
+      "Customer orientation",
+      "Precision", "Attention to detail"
+    ]
+  },
+  "Market analyst":{
+    "age":[25,  45],
+    "salary":[23000, 55000],
+    "experience":[0, 15],
+    "degree":true,
+    "smart_working":true,
+    "skills":[
+      "Market research", "Analysis of trends",
+      "Forecast", "Analysis of data",
+      "Analysis of competitors", "Models of business",
+      "Strategies of the market"
+    ],
+    "soft_skills":[
+      "Critical thinking", "Effective presentation",
+      "Adaptability", "Teamwork",
+      "Customer orientation", "Problem solving"
+    ]
+  },
+  "Data Scientist":{
+    "age":[25, 45],
+    "salary":[21000, 45000],
+    "experience":[3, 15],
+    "degree":true,
+    "smart_working":true,
+    "skills":[
+      "Python", "R",
+      "SQL", "Machine Learning",
+      "Statistical", "Scikit-learn",
+      "TensorFlow", "Keras",
+      "PyTorch"
+    ],
+    "soft_skills":[
+      "Analytical thinking", "Solving the problems",
+      "effective communication", "Teamwork",
+      "Innovation", "Attention to detail"
+    ]
+  },
+  "Teacher":{
+    "age":[25, 60],
+    "salary":[15000, 23000],
+    "experience":[0, 30],
+    "degree":true,
+    "smart_working":false,
+    "skills":[
+      "Mathematics", "Italian",
+      "History", "Sciences", "English",
+      "Art", "Music",
+      "Gym", "Geograpy", "French", "Chemistry",
+      "Physics", "Physical education",
+      "Computer science", "Office suite"
+    ],
+    "soft_skills":[
+      "Patience", "Communication", "Empathy"
+    ]
+  }
+}
