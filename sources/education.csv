@@ -1,7 +1,7 @@
-Education,P1,P2
-Null,0.05,0
-Degree,0.25,0.30
-Bachelor D.,0.35,0.35
-Master D.,0.15,0.15
-PhD,0.11,0.11
-Researcher,0.08,0.08
+Rank,Education,P1,P2
+0,Null,0.05,0
+1,Degree,0.25,0.30
+2,Bachelor D.,0.35,0.35
+3,Master D.,0.15,0.15
+4,PhD,0.11,0.11
+5,Researcher,0.08,0.08
