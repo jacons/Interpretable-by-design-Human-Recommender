@@ -1,21 +1,11 @@
-Id,Job,Education,Age,Experience,Skills,Softskills,Offered_Salary,City,Nationality,SmartWork,Experience_abroad,Language
-0,Market analyst,PhD,32 - 44,8,"Analysis of data, Analysis of trends, Forecast","Critical thinking, Teamwork, Customer orientation",39007,Nurallao,Italiano,True,False,"Italiano, Argentino"
-1,Financial consultant,Master D.,34 - 36,9,"Economics, Insurance, Commercial Law, Actions","Customer orientation, Empathy, Persuasive communication, Precision",39996,Nurallao,Inglese,False,False,"Inglese, Italiano"
-2,Surgeon,Master D.,46 - 48,9,"Surgical physiology, Operating block management, General Surgery, Surgical Anatomy, Medical imaging","Management of stress, Precision, Decision making",80004,Rezzago,Inglese,False,False,"Inglese, Italiano"
-3,Teacher,Master D.,27 - 48,16,"Physics, Music, History, Art, Italian","Patience, Communication",19002,Gerenzano,Statunitense,False,False,"Statunitense, Francese, Egiziano"
-4,Legal consultant,Bachelor D.,34 - 41,20,"Negotiation, Intellectual property, Civil Law, Procedural right","Ethics, Capacity for research, Negotiation",32504,Nicorvo,Israeliano,False,False,Israeliano
-5,Architect,Bachelor D.,30 - 53,5,"EnergyPlus, BIM, AutoCAD, Coordination of the project, Asana","Effective communication, Creativity, Spatial thought",42497,Montacuto,Italiano,True,True,Italiano
-6,Doctor,Researcher,44 - 46,12,"Therapy, Pharmacology, Diagnosis, Management of patients","Teamwork, Patience, Ethics, Attention to the patient",52498,Spinete,Irlandese,False,True,"Irlandese, Brasiliano, Turco"
-7,Market analyst,Researcher,26 - 27,3,"Strategies of the market, Analysis of data, Analysis of competitors, Analysis of trends","Teamwork, Adaptability, Effective presentation, Critical thinking, Customer orientation",38998,Dolegna del Collio,Finlandese,True,True,Finlandese
-8,Teacher,Bachelor D.,33 - 59,28,"Chemistry, Physical education, French, Mathematics, Computer science","Empathy, Communication, Patience",19010,Cerignola,Cubano,False,True,Cubano
-9,Manager,Researcher,33 - 38,25,"Strategic planning, Negotiation","Innovation, Adaptability, Analytical thinking",79998,Beverino,Canadese,False,False,Canadese
-10,Lawyer,Researcher,49 - 54,11,"Procedural right, Negotiation","Argumentation, Critical thinking",34999,Feroleto della Chiesa,Italiano,False,True,"Italiano, Colombiano"
-11,Computer security analyst,Researcher,26 - 33,14,"SELinux, Cryptography, Security of the networks, Keepass, Incident Management","Adaptability, Critical thinking",79996,Santo Stefano Roero,Danese,True,True,Danese
-12,Architectural engineer,Bachelor D.,40 - 44,11,"ANSYS, MATLAB, Structural analysis, Solidworks, Design","Troubleshooting, Collaboration, Decision-making capacity, Communication, Creativity",40002,Sessame,Italiano,True,False,Italiano
-13,Manager,PhD,35 - 40,4,"Team Management, Negotiation, Market expertise, Strategic planning","Empathy, Adaptability",80010,Simbario,Italiano,False,False,"Italiano, Inglese, Tedesco"
-14,Risk expert,Bachelor D.,30 - 38,6,"Environmental risk, Management of the crisis, Management of losses","Analytical thinking, Management of stress, Decision making",35510,Desenzano del Garda,Italiano,False,False,"Italiano, Italiano, Italiano"
-15,Asset manager,Bachelor D.,42 - 51,14,"Investments, Management of the portfolio, Economics","Attention to detail, Negotiation, Strategic Thinking, Customer orientation",45010,Cagno,Francese,False,False,Francese
-16,Financial consultant,Bachelor D.,25 - 43,10,"Financial markets, Commercial Law","Precision, Customer orientation",40001,Caltignaga,Italiano,False,False,"Italiano, Italiano"
-17,Nurse,PhD,42 - 43,7,"Health care, Patient Management","Professional ethics, Flexibility, Management of stress, Organisation, Communication",29988,Sarsina,Israeliano,False,False,"Israeliano, Italiano"
-18,Risk expert,Degree,32 - 45,4,"Assessment of risk, Management of losses, Management of the crisis, Data analysis","Decision making, Management of stress",35497,Ostuni,Inglese,False,False,"Inglese, Italiano, Cubano"
-19,Financial analyst,PhD,30 - 39,9,"Economics, Financial markets, Economic Law","Management of stress, Attention to detail, Problem solving",33498,Ingria,Tedesco,True,True,"Tedesco, Italiano, Inglese"
+Id,Job,Education,Age,Experience,Skills,Softkills,Offered_Salary,City,Nationality,SmartWork,Experience_abroad,Language
+0,Lawyer,PhD,45 - 52,8,"Legal Research, Criminal Law, Legal system, Procedural right, Civil Law","Persuasive communication, Analytical skills",34986,Mercato Saraceno,Brasiliano,False,False,Brasiliano
+1,Risk expert,PhD,28 - 29,15,"Assessment of risk, Environmental risk, Management of the crisis, Data analysis","Analytical thinking, Decision making, Management of stress",35488,Leno,Portoghese,False,False,Portoghese
+2,Pharmacist,Bachelor D.,25 - 32,11,"Dispensing of drugs, Pharmacology, Management of the cash","Communication, Precision, Attention to the customer, Organizational skills, Knowledge of regulations",23496,Moscazzano,Messicano,False,False,Messicano
+3,Asset manager,PhD,38 - 48,5,"Management of the portfolio, Investments, Financial analysis, Financial planning","Strategic Thinking, Attention to detail, Customer orientation, Negotiation",45003,Ferla,Inglese,False,False,Inglese
+4,Designer,Bachelor D.,23 - 26,2,"Prototyping, Sketch, Figma, Blender, Adobe After Effect","Creativity, Adaptability, Innovation, Empathy, Critical thinking",36004,Gerenzano,Canadese,True,True,"Canadese, Inglese, Danese"
+5,Designer,Degree,25 - 29,10,"Sketch, Adobe Illustrator","Adaptability, Innovation, Empathy, Critical thinking",36006,Sumirago,Francese,True,True,Francese
+6,Data analyst,Master D.,37 - 37,8,"Tableau, SQL, Database","Proactivity, Problem solving, Creativity, Clear communication, Critical analysis",34990,Stigliano,Italiano,True,False,"Italiano, Portoghese"
+7,System administrator,Degree,25 - 35,7,"Windows Server, Cloud management, Network","Troubleshooting, Management of emergencies, Patience",37486,Torre San Patrizio,Inglese,False,False,Inglese
+8,Data Scientist,Bachelor D.,26 - 44,8,"Scikit-learn, Statistical, TensorFlow","effective communication, Teamwork, Analytical thinking",32999,Stezzano,Finlandese,True,True,"Finlandese, Argentino"
+9,Data analyst,Bachelor D.,29 - 37,8,"Root, R, SAS","Creativity, Proactivity",34996,Visco,Finlandese,True,False,Finlandese
