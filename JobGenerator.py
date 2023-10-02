@@ -96,7 +96,7 @@ class JobGenerator:
             return 1
         else:
             return self.distance[(self.distance["CityA"] == cityA) &
-                             (self.distance["CityB"] == cityB)]["Distance"].values[0]
+                                 (self.distance["CityB"] == cityB)]["Distance"].values[0]
 
     def find_similar(self, cv_skills: list, offer_skills: list) -> float:
 
@@ -207,7 +207,6 @@ class JobGenerator:
                                              "Experience_abroad", "Language"],
                                     dtype=np.float32)
         matrix_score["score"] = matrix_score.iloc[:, 2:13].sum(axis=1)
-
 
         matrix_score.to_csv("scores.csv", index=False)
         return matrix_score

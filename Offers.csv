@@ -1,11 +1,11 @@
 Id,Job,Education,Age,Experience,Skills,Softkills,Offered_Salary,City,Nationality,SmartWork,Experience_abroad,Language
-0,Lawyer,PhD,45 - 52,8,"Legal Research, Criminal Law, Legal system, Procedural right, Civil Law","Persuasive communication, Analytical skills",34986,Mercato Saraceno,Brasiliano,False,False,Brasiliano
-1,Risk expert,PhD,28 - 29,15,"Assessment of risk, Environmental risk, Management of the crisis, Data analysis","Analytical thinking, Decision making, Management of stress",35488,Leno,Portoghese,False,False,Portoghese
-2,Pharmacist,Bachelor D.,25 - 32,11,"Dispensing of drugs, Pharmacology, Management of the cash","Communication, Precision, Attention to the customer, Organizational skills, Knowledge of regulations",23496,Moscazzano,Messicano,False,False,Messicano
-3,Asset manager,PhD,38 - 48,5,"Management of the portfolio, Investments, Financial analysis, Financial planning","Strategic Thinking, Attention to detail, Customer orientation, Negotiation",45003,Ferla,Inglese,False,False,Inglese
-4,Designer,Bachelor D.,23 - 26,2,"Prototyping, Sketch, Figma, Blender, Adobe After Effect","Creativity, Adaptability, Innovation, Empathy, Critical thinking",36004,Gerenzano,Canadese,True,True,"Canadese, Inglese, Danese"
-5,Designer,Degree,25 - 29,10,"Sketch, Adobe Illustrator","Adaptability, Innovation, Empathy, Critical thinking",36006,Sumirago,Francese,True,True,Francese
-6,Data analyst,Master D.,37 - 37,8,"Tableau, SQL, Database","Proactivity, Problem solving, Creativity, Clear communication, Critical analysis",34990,Stigliano,Italiano,True,False,"Italiano, Portoghese"
-7,System administrator,Degree,25 - 35,7,"Windows Server, Cloud management, Network","Troubleshooting, Management of emergencies, Patience",37486,Torre San Patrizio,Inglese,False,False,Inglese
-8,Data Scientist,Bachelor D.,26 - 44,8,"Scikit-learn, Statistical, TensorFlow","effective communication, Teamwork, Analytical thinking",32999,Stezzano,Finlandese,True,True,"Finlandese, Argentino"
-9,Data analyst,Bachelor D.,29 - 37,8,"Root, R, SAS","Creativity, Proactivity",34996,Visco,Finlandese,True,False,Finlandese
+0,Teacher,Researcher,28 - 38,11,"French, Art, Mathematics","Communication, Empathy, Patience",18995,Celle Ligure,Francese,False,True,Francese
+1,Architect,Degree,30 - 54,26,"Architectural design, EnergyPlus, BIM","Creativity, Attention to detail, Spatial thought, Effective communication",42495,Lograto,Italiano,True,False,"Italiano, Inglese, Cinese"
+2,Nurse,Bachelor D.,41 - 41,8,"Health care, Anatomy, Pharmacology","Management of stress, Organisation, Professional ethics, Flexibility",29988,Pachino,Cubano,False,False,Cubano
+3,Data analyst,Degree,27 - 34,9,"SAS, Python, SQL","Problem solving, Proactivity",34999,Martignana di Po,Tedesco,True,False,"Tedesco, Italiano, Inglese"
+4,Pharmacist,Bachelor D.,42 - 49,18,"Preparation of drugs, Pharmacology, Control of prescriptions, Management of the cash","Knowledge of regulations, Organizational skills, Attention to the customer",23480,Calcio,Italiano,False,True,"Italiano, Brasiliano"
+5,Computer security analyst,Bachelor D.,33 - 42,14,"Keepass, GnuPG, Incident Management, Cyber Security, Security of the networks","Troubleshooting, Adaptability",79998,Fanano,Danese,True,True,"Danese, Turco"
+6,System administrator,Degree,25 - 42,20,"Cloud management, HTTP","Management of emergencies, Troubleshooting",37520,Gottolengo,Portoghese,False,True,Portoghese
+7,X-ray technician,Bachelor D.,46 - 47,0,"Preparation of patients, Radiological safety, X-ray and scan reading, Use of imaging equipment","Confidentiality, Precision, Communication, Ethics, Empathy",23488,Arcidosso,Tedesco,False,True,"Tedesco, Inglese"
+8,Nurse specialist,Degree,39 - 44,13,"Monitoring of patients, Intensive Care Unit","Empathy, Management of emergencies",42489,Chialamberto,Turco,False,True,"Turco, Inglese, Colombiano"
+9,Data analyst,Bachelor D.,43 - 44,2,"SAS, Database","Creativity, Proactivity",34992,Sant'Ilario d'Enza,Tedesco,True,False,"Tedesco, Inglese, Turco"
