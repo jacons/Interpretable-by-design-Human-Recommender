@@ -12,6 +12,15 @@ from tqdm import tqdm
 
 class JobGenerator:
     def __init__(self, jobs_lib: str, citizen: str, nationality: str, education: str, citizen_dist: str):
+        """
+        JobGenerator is a tool that allows us to generate synthetic data about the "curriculums" and "jobs offer".
+        In also can match them to generate the score(or label) (used to supervised task).
+        :param jobs_lib: Predefined jobs
+        :param citizen: Subsample of all citizens
+        :param nationality: Subsample of all nationality
+        :param education: Education hierarchy
+        :param citizen_dist: Distances among the previous citizens
+        """
 
         with open(jobs_lib, "r") as f:
             self.jobs = json.load(f)
@@ -22,12 +31,12 @@ class JobGenerator:
         self.nationality = pd.read_csv(nationality).astype(
             {'Nationality': 'string', 'P': 'float'})
 
-        self.distance = pd.read_csv(citizen_dist).astype(
-            {'CityA': 'string', 'CityB': 'string'})
+        self.distance = pd.read_csv(citizen_dist, index_col=[0, 1], skipinitialspace=True)
 
         self.education = pd.read_csv(education).astype(
             {'Rank': 'int', 'Education': 'string', 'P1': 'float', 'P2': 'float'})
 
+        # dictionary that map the id to a job name
         self.idx2jobName = {idx: k for idx, k in enumerate(self.jobs.keys())}
         self.max_city = len(self.all_citizen)
 
@@ -35,20 +44,22 @@ class JobGenerator:
         self.index = 0
 
         self.weights = np.array([
-            1.00,  # offer id
-            1.00,  # cv id
-            1.00,  # Job_relevance
-            0.10,  # Education
-            0.05,  # Age
-            0.1,  # Experience
-            1,  # Skills
-            0.5,  # Soft-kills
-            0.01,  # Offered_Salary
-            0.01,  # City
+            1,  # offer id (always "1" constant)
+            1,  # cv id (always "1" constant)
+
+            10,  # Job_relevance
+            8,  # Education
+            2,  # Age
+            3,  # Experience
+            10,  # Skills
+            6,  # Soft-kills
+            2,  # Offered_Salary
+            1,  # City
             0.5,  # SmartWork
-            0.5,  # Experience_abroad
-            0.7,  # Language
+            0.7,  # Experience_abroad
+            1,  # Language
         ], dtype=np.float32)
+        self.weights[2:] /= self.weights[2:].sum()
 
     def generate_skill2job(self) -> dict:
         skill2job = {}
@@ -92,11 +103,7 @@ class JobGenerator:
         return len(set(a) & set(b)) / len(b)
 
     def distance_city(self, cityA: str, cityB: str):
-        if cityA == cityB:
-            return 1
-        else:
-            return self.distance[(self.distance["CityA"] == cityA) &
-                                 (self.distance["CityB"] == cityB)]["Distance"].values[0]
+        return self.distance.loc[(cityA, cityB)].values[0]
 
     def find_similar(self, cv_skills: list, offer_skills: list) -> float:
 
@@ -174,7 +181,7 @@ class JobGenerator:
         self.index += 1
         return offer
 
-    def ScoreFunction(self, offers: DataFrame, cvs: DataFrame):
+    def ScoreFunction(self, offers: DataFrame, cvs: DataFrame) -> DataFrame:
 
         combinations = list(product(offers.itertuples(index=False), cvs.itertuples(index=False)))
         matrix_score = np.zeros((len(combinations), 13), dtype=np.float32)
@@ -208,5 +215,5 @@ class JobGenerator:
                                     dtype=np.float32)
         matrix_score["score"] = matrix_score.iloc[:, 2:13].sum(axis=1)
 
-        matrix_score.to_csv("scores.csv", index=False)
+        matrix_score.to_csv("outputs/scores.csv", index=False)
         return matrix_score
