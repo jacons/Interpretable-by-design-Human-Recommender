@@ -49,7 +49,6 @@ class JobGenerator:
         self.weights = np.array([
             1,  # offer id (always "1" constant)
             1,  # cv id (always "1" constant)
-
             10,  # Job_relevance
             7,  # Education
             0.5,  # SmartWork
