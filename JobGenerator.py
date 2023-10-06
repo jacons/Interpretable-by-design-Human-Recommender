@@ -14,7 +14,7 @@ class JobGenerator:
     def __init__(self, jobs_lib: str, citizen: str, nationality: str, education: str, citizen_dist: str):
         """
         JobGenerator is a tool that allows us to generate synthetic data about the "curriculums" and "jobs offer".
-        In also can match them to generate the score(or label) (used to supervised task).
+        In also can match them to generate the score(or label) (supervised task).
         :param jobs_lib: Predefined jobs
         :param citizen: Subsample of all citizens
         :param nationality: Subsample of all nationality
@@ -34,7 +34,10 @@ class JobGenerator:
         self.distance = pd.read_csv(citizen_dist, index_col=[0, 1], skipinitialspace=True)
 
         self.education = pd.read_csv(education).astype(
-            {'Rank': 'int', 'Education': 'string', 'P1': 'float', 'P2': 'float'})
+            {'Rank': 'int', 'Education': 'string', 'P1': 'float',
+             'P2': 'float', 'Min_age': 'int'})
+
+        self.education_ranks = dict(zip(self.education["Education"], self.education["Rank"]))
 
         # dictionary that map the id to a job name
         self.idx2jobName = {idx: k for idx, k in enumerate(self.jobs.keys())}
@@ -48,16 +51,17 @@ class JobGenerator:
             1,  # cv id (always "1" constant)
 
             10,  # Job_relevance
-            8,  # Education
-            2,  # Age
-            3,  # Experience
-            10,  # Skills
-            6,  # Soft-kills
-            2,  # Offered_Salary
-            1,  # City
+            7,  # Education
             0.5,  # SmartWork
-            0.7,  # Experience_abroad
-            1,  # Language
+            0.5,  # Experience_abroad
+            1,  # City
+            8,  # Skills
+            6,  # Soft-kills
+            2,  # Age
+            2,  # Experience
+            1,  # Offered_Salary
+            0.5,  # Language
+
         ], dtype=np.float32)
         self.weights[2:] /= self.weights[2:].sum()
 
@@ -91,19 +95,22 @@ class JobGenerator:
         return ", ".join(lang_list)
 
     @staticmethod
-    def score_age(ageO: str, ageC: int):
-        age = ageO.split()
-        if int(age[0]) < ageC < int(age[2]):
+    def score_piecewise_f(value: int, v_min: int, v_max: int, slope: int):
+        # Piecewise function to score. Max 1 Min 0
+
+        if int(v_min <= value <= v_max):
             return 1
-        else:
-            return -min(np.abs(int(age[0]) - ageC), np.abs(int(age[2]) - ageC))
+        if value > v_max:
+            return max((-value + v_max) / slope + 1, 0)
+        return max((value - v_min) / slope + 1, 0)
 
     @staticmethod
     def simple_intersection(a: list, b: list) -> float:
         return len(set(a) & set(b)) / len(b)
 
     def distance_city(self, cityA: str, cityB: str):
-        return self.distance.loc[(cityA, cityB)].values[0]
+        # same city maximal point
+        return 1 if cityA == cityB else self.distance.loc[(cityA, cityB)].values[0]
 
     def find_similar(self, cv_skills: list, offer_skills: list) -> float:
 
@@ -122,30 +129,54 @@ class JobGenerator:
         for skill_ in cv_skills:
             for job_ in similar_jobs:
                 if skill_ in self.jobs[job_]["skills"]:
-                    score += 0.5
+                    plus = (1 - score) / 2
+                    score += plus
                     break
         return score
 
     def generate_curriculum(self) -> dict:
-        jobName = self.idx2jobName[random.randint(0, len(self.idx2jobName) - 1)]
+        jobName = random.choice(self.idx2jobName)
         current_job = self.jobs[jobName]
 
+        # we impose the minimal instruction given the job
         degree = "P2" if current_job["degree"] else "P1"
-        mu_salary = sum(current_job["salary"]) / 2
+
+        """
+            ##### Observations #####:
+                Ideal salary (is depended of) Experience.
+                Experience (is depended of) Age.
+                Age (is depended of) Education.
+                Education (is depended of) type of work
+                
+                Language (is depended of) Nationality
+        """
+
         cv = dict(
             Id=self.index,
             Job=jobName,
             Education=self.education.sample(n=1, weights=degree)["Education"].values[0],
-            Age=random.randint(20, 70),
-            Experience=random.randint(*current_job["experience"]),
-            Skills=self.skill_gen(current_job["skills"]),
-            Softkills=self.skill_gen(current_job["soft_skills"]),
-            Ideal_Salary=int(random.gauss(mu_salary, 10)),
-            City=self.all_citizen[random.randint(0, self.max_city - 1)],
-            Nationality=self.nationality.sample(n=1, weights="P")["Nationality"].values[0],
-            SmartWork=current_job["smart_working"],
+            SmartWork=random.randint(0, 1) == 0 if current_job["smart_working"] else False,
             Experience_abroad=random.randint(0, 1) == 0,
+            Nationality=self.nationality.sample(n=1, weights="P")["Nationality"].values[0],
+            City=self.all_citizen[random.randint(0, self.max_city - 1)],
+            Skills=self.skill_gen(current_job["skills"]),
+            Softkills=self.skill_gen(current_job["soft_skills"])
         )
+        # Min age based on a type of education
+        min_age = self.education[self.education["Education"] == cv["Education"]]["Min_age"].values[0]
+        min_age = max(min_age, current_job["age"][0])
+
+        cv["Age"] = random.randint(min_age, current_job["age"][1])
+        cv["Experience"] = random.randint(0, cv["Age"] - min_age)
+
+        # Retrieve min and max salary
+        min_salary, max_salary = current_job["salary"]
+        # The min salary for this kind of curriculum is given by
+        # min_salary + 7% the salary of each year of experience
+        min_salary += int((min_salary * 0.07) * cv["Experience"])
+        min_salary = min(min_salary, max_salary)
+
+        cv["Ideal_Salary"] = random.randint(min_salary, max_salary)
         cv["Language"] = self.languages_gen(cv["Nationality"])
 
         self.index += 1
@@ -153,29 +184,47 @@ class JobGenerator:
 
     def generate_jobOffer(self) -> dict:
 
-        jobName = self.idx2jobName[random.randint(0, len(self.idx2jobName) - 1)]
+        jobName = random.choice(self.idx2jobName)
         current_job = self.jobs[jobName]
 
-        age1, age2 = random.randint(*current_job["age"]), random.randint(*current_job["age"])
-        if age1 > age2:
-            age1, age2 = age2, age1
+        """
+            ##### Observations #####:
+                Ideal salary (is depended of) Experience.
+                Experience (is depended of) Age.
+                Age (is depended of) Education.
+                Education (is depended of) type of work
+                
+                Language (is depended of) Nationality
+        """
 
         degree = "P2" if current_job["degree"] else "P1"
-        mu_salary = sum(current_job["salary"]) / 2
+
         offer = dict(
             Id=self.index,
             Job=jobName,
             Education=self.education.sample(n=1, weights=degree)["Education"].values[0],
-            Age=str(age1) + " - " + str(age2),
-            Experience=random.randint(*current_job["experience"]),
+            SmartWork=random.randint(0, 1) == 0 if current_job["smart_working"] else False,
+            Experience_abroad=random.randint(0, 1) == 0,
+            Nationality=self.nationality.sample(n=1, weights="P")["Nationality"].values[0],
+            City=self.all_citizen[random.randint(0, self.max_city - 1)],
             Skills=self.skill_gen(current_job["skills"]),
             Softkills=self.skill_gen(current_job["soft_skills"]),
-            Offered_Salary=int(random.gauss(mu_salary, 10)),
-            City=self.all_citizen[random.randint(0, self.max_city - 1)],
-            Nationality=self.nationality.sample(n=1, weights="P")["Nationality"].values[0],
-            SmartWork=current_job["smart_working"],
-            Experience_abroad=random.randint(0, 1) == 0
         )
+        # Min age based on a type of education
+        min_age = self.education[self.education["Education"] == offer["Education"]]["Min_age"].values[0]
+        min_age = max(min_age, current_job["age"][0])
+        max_age = random.randint(min_age, current_job["age"][1])
+
+        offer["Age"] = f"{min_age}-{max_age}"
+        offer["Experience"] = random.randint(0, max_age - min_age)
+
+        # The min salary for this kind of curriculum is given by
+        # min_salary + 7% the salary of each year of experience
+        min_salary, max_salary = current_job["salary"]  # Retrieve min and max salary
+        min_salary += int((min_salary * 0.07) * offer["Experience"])
+        min_salary = min(min_salary, max_salary)
+
+        offer["Offered_Salary"] = random.randint(min_salary, max_salary)
         offer["Language"] = self.languages_gen(offer["Nationality"])
 
         self.index += 1
@@ -184,36 +233,44 @@ class JobGenerator:
     def ScoreFunction(self, offers: DataFrame, cvs: DataFrame) -> DataFrame:
 
         combinations = list(product(offers.itertuples(index=False), cvs.itertuples(index=False)))
-        matrix_score = np.zeros((len(combinations), 13), dtype=np.float32)
+        score = np.zeros((len(combinations), 13), dtype=np.float32)
 
         for idx, (offer, cv) in enumerate(tqdm(combinations)):
-            edu_offer = self.education[self.education["Education"] == offer[2]]["Rank"].values[0]
-            edu_cv = self.education[self.education["Education"] == cv[2]]["Rank"].values[0]
+            edu_offer = self.education_ranks.get(offer[2])
+            edu_cv = self.education_ranks.get(cv[2])
 
+            cv_skill, offer_skill = cv[7].split(", "), offer[7].split(", ")
+            cv_s_skill, offer_s_skill = cv[8].split(", "), offer[8].split(", ")
+            age_o = offer[9].split("-")
             cv_languages, offer_languages = cv[12].split(", "), offer[12].split(", ")
-            cv_skill, offer_skill = cv[5].split(", "), offer[5].split(", ")
-            cv_s_skill, offer_s_skill = cv[6].split(", "), offer[6].split(", ")
+            age_min, age_max = int(age_o[0]), int(age_o[1])
 
-            matrix_score[idx][0] = offer[0]
-            matrix_score[idx][1] = cv[0]
-            matrix_score[idx][2] = 1 if offer[1] == cv[1] else -1  # Job_relevance, max 1, min -1
-            matrix_score[idx][3] = 1 if edu_cv >= edu_offer else edu_cv - edu_offer  # Education max 1, min -5
-            matrix_score[idx][4] = self.score_age(offer[3], cv[3])  # Age max 1, min -inf
-            matrix_score[idx][5] = 1 if cv[4] >= offer[4] else cv[4] - offer[4]  # Experience max 1, min -inf
-            matrix_score[idx][6] = self.find_similar(cv_skill, offer_skill)  # Skills
-            matrix_score[idx][7] = self.simple_intersection(cv_s_skill, offer_s_skill)  # Soft-kills max 1, min 0
-            matrix_score[idx][8] = 1 if offer[7] >= cv[7] else offer[7] - cv[7]  # Offered_Salary max 1, min -inf
-            matrix_score[idx][9] = self.distance_city(offer[8], cv[8])  # City max 1, min 0
-            matrix_score[idx][10] = 1 if cv[10] == offer[10] else -1  # SmartWork max 1, min -1
-            matrix_score[idx][11] = 1 if cv[11] == offer[11] else -1  # Experience_abroad max 1, min -1
-            matrix_score[idx][12] = self.simple_intersection(cv_languages, offer_languages)  # Language max 1, min 0
+            score[idx][0] = offer[0]
+            score[idx][1] = cv[0]
+            score[idx][2] = 1 if offer[1] == cv[1] else -1  # Job_relevance, max 1, min -1
+            score[idx][3] = 1 if edu_cv >= edu_offer else edu_cv - edu_offer  # Education max 1, min -5
+            score[idx][4] = (1 if cv[3] else -1) if offer[3] else 0  # SmartWork max 1, min -1
+            score[idx][5] = 1 if cv[4] == offer[4] else -1  # Experience_abroad max 1, min -1
+            score[idx][6] = self.distance_city(offer[6], cv[6])  # City max 1, min 0
+            score[idx][7] = self.find_similar(cv_skill, offer_skill)  # Skills
+            score[idx][8] = self.simple_intersection(cv_s_skill, offer_s_skill)  # Soft-kills max 1, min 0
+            score[idx][9] = self.score_piecewise_f(cv[9], age_min, age_max, 7)  # Age max 1, min -inf
 
-        matrix_score = pd.DataFrame(data=matrix_score * self.weights,
-                                    columns=["id_offer", "id_cv", "Job relevance", "Education", "Age", "Experience",
-                                             "Skills", "Soft-skills", "Salary", "City", "SmartWork",
-                                             "Experience_abroad", "Language"],
-                                    dtype=np.float32)
-        matrix_score["score"] = matrix_score.iloc[:, 2:13].sum(axis=1)
+            # Experience max 1, min 0
+            score[idx][10] = 1 if offer[10] <= cv[10] else max((cv[10] - offer[10]) / 6 + 1, 0)
+            # Salary max 1, min -inf
+            score[idx][11] = 1 if cv[11] <= offer[11] else max((-cv[11] + offer[11]) / 300 + 1, 0)
 
-        matrix_score.to_csv("outputs/scores.csv", index=False)
-        return matrix_score
+            score[idx][12] = self.simple_intersection(cv_languages, offer_languages)  # Language max 1, min 0
+
+        score = pd.DataFrame(data=score * self.weights,
+                             columns=["id_offer", "id_cv", "Job relevance", "Education", "SmartWork",
+                                      "Experience_abroad", "City", "Skills", "Soft-skills",
+                                      "Age", "Experience", "Salary", "Language"],
+                             dtype=np.float32)
+
+        score["score"] = score.iloc[:, 2:13].sum(axis=1)
+        score["score"] += np.random.normal(0, 0.3, score.shape[0])  # random noise
+        # 0.3
+        score.to_csv("outputs/scores.csv", index=False)
+        return score
