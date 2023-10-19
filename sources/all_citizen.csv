@@ -1,479 +1,1197 @@
-Agnone
-Albaredo per San Marco
-Albera Ligure
-Albonese
-Alessano
-Allerona
-Alonte
-Annone Veneto
-Aosta
-Apecchio
-Arcidosso
-Argusto
-Ariano nel Polesine
-Arnasco
-Ascoli Satriano
-Asiago
-Asolo
-Atessa
-Atina
-Augusta
-Auletta
-Auronzo di Cadore
-Azzano Mella
-Azzano San Paolo
-Baceno
-Badesi
-Bagnolo del Salento
-Bajardo
-Barasso
-Barrafranca
-Barzana
-Basciano
-Bedizzole
-Belforte del Chienti
-Bene Vagienna
-Bernate Ticino
-Beverino
-Bianchi
-Bianze'
-Bisceglie
-Boissano
-Bojano
-Bompensiere
-Bomporto
-Bonarcado
-Borgo San Giacomo
-Borgo Velino
-Borgomasino
-Borgomezzavalle
-Boschi Sant'Anna
-Bosnasco
-Brembate
-Brendola
-Brienno
-Brosso
-Brugnato
-Bruino
-Buccino
-Cagno
-Calasetta
-Calci
-Calcio
-Caldes
-Caltignaga
-Caluso
-Camerano Casasco
-Camerata Picena
-Campobello di Licata
-Campomorone
-Camugnano
-Candia Lomellina
-Canneto Pavese
-Cansano
-Capraia e Limite
-Capranica Prenestina
-Capriolo
-Carpegna
-Carre'
-Carzano
-Casalattico
-Casale Monferrato
-Casarsa della Delizia
-Casella
-Cassago Brianza
-Castel Rocchero
-Castel di Lucio
-Castelcucco
-Castelfondo
-Castelfranco Emilia
-Castellabate
-Castellazzo Bormida
-Castelleone
-Castelluccio Superiore
-Castelmezzano
-Castelnuovo Berardenga
-Castelnuovo Bormida
-Castelnuovo Don Bosco
-Castiglione del Lago
-Castrofilippo
-Cautano
-Cavasso Nuovo
-Celico
-Celle Ligure
-Celle di Bulgheria
-Celle di Macra
-Cellino Attanasio
-Ceneselli
-Cerea
-Cereseto
-Cerignola
-Cernusco sul Naviglio
-Cervia
-Cesaro'
-Chialamberto
-Chianciano Terme
-Chianocco
-Chiaravalle Centrale
-Chiavenna
-Chiusa
-Cittaducale
-Civitanova Marche
-Civitanova del Sannio
-Civitella del Tronto
-Colledara
-Colleferro
-Collelongo
-Colli a Volturno
-Colmurano
-Comignago
-Comunanza
-Corbara
-Cordignano
-Corinaldo
-Corleone
-Cornaredo
-Cornegliano Laudense
-Corvara
-Cossogno
-Costacciaro
-Costigliole d'Asti
-Crotone
-Curno
-Curti
-Decimoputzu
-Desenzano del Garda
-Desulo
-Diano Marina
-Dolegna del Collio
-Dolianova
-Dolo
-Dorio
-Dusino San Michele
-Falcade
-Falzes
-Fanano
-Ferla
-Feroleto della Chiesa
-Fiave'
-Fiesse
-Filottrano
-Fiumicello
-Fiumicino
-Fie' allo Sciliar
-Fluminimaggiore
-Foiano della Chiana
-Fontana Liri
-Forli' del Sannio
-Francavilla al Mare
-Frassinetto
-Galliavola
-Gambolo'
-Gambugliano
-Gandino
-Garlate
-Gassino Torinese
-Gerenzano
-Ghilarza
-Giffoni Sei Casali
-Gissi
-Golasecca
-Gonars
-Gorla Maggiore
-Gorzegno
-Gottolengo
-Graglia
-Granarolo dell'Emilia
-Gravina di Catania
-Grezzago
-Grosio
-Grottole
-Guidonia Montecelio
-Ingria
-Inveruno
-Irsina
-Isili
-Isola Dovarese
-Ittiri
-Lacchiarella
-Lacco Ameno
-Lanciano
-Landiona
-Lapedona
-Lascari
-Leno
-Lequile
-Lequio Tanaro
-Limone Piemonte
-Liscate
-Lisciano Niccone
-Lograto
-Loreto
-Lupara
-Lusciano
-Mafalda
-Magre' sulla strada del vino
-Malles Venosta
-Malo
-Marano Principato
-Marano di Napoli
-Marano sul Panaro
-Marciano della Chiana
-Martignana di Po
-Martinsicuro
-Maser
-Mason Vicentino
-Massa Fermana
-Massa Marittima
-Mazzarrone
-Mercato Saraceno
-Mereto di Tomba
-Mergozzo
-Merone
-Mezzana Bigli
-Mezzanino
-Miggiano
-Miglierina
-Miglionico
-Modica
-Moena
-Moggio
-Moiano
-Molino dei Torti
-Molteno
-Molvena
-Monacilioni
-Moncalvo
+Capiago Intimiano
+Bertinoro
+Basiano
+Tribogna
+Rhemes-Notre-Dame
+Riva di Solto
+Castelsilano
+Torrevecchia Pia
+Stradella
+Zoagli
+Tortorici
+Cenate Sopra
+Bianze
+Cossano Canavese
+Corneliano d'Alba
+Boffalora d'Adda
+Cecima
+Morsasco
+Volla
+Poggiardo
+Scillato
+Pietraroja
+Calvatone
+Castrovillari
+Sedrina
+Busso
+San Marcello Piteglio
+Urbisaglia
+Casal Cermelli
+Castelfranco Piandisco
+Chiusa Sclafani
+Candiolo
+Cimbergo
+Lauro
+Challand-Saint-Victor
+Castiglione d'Orcia
+Castel Sant'Elia
+Ripalta Guerina
+San Mauro la Bruca
+Nogara
+Marineo
+Bollate
+Cerro al Volturno
+Tresana
+Montemagno
+Casale Marittimo
+Cento
+Magre sulla strada del vino
+Villata
 Mongrando
-Monserrato
-Montacuto
-Montaldo Scarampi
-Monte Rinaldo
-Monte San Giacomo
-Montecastello
-Montefalcone di Val Fortore
-Montefano
-Monteflavio
-Montefusco
-Montelanico
-Monteleone Sabino
-Monteleone d'Orvieto
-Montella
-Montesano Salentino
-Mordano
-Morfasso
-Moscazzano
-Moso in Passiria
-Mosso
-Motta Camastra
-Muscoline
-Nespolo
-Nicorvo
-Nosate
-Nova Levante
-Novara
-Novedrate
-Nurallao
-Nureci
-Nusco
-Oldenico
-Oliena
-Olmo Gentile
-Origgio
-Ortignano Raggiolo
-Osilo
-Ostuni
-Pachino
-Padula
-Pago Veiano
-Paisco Loveno
-Palestro
-Pallanzeno
-Pannarano
-Parcines
-Parenti
-Pareto
-Paruzzaro
-Pastena
-Pasturana
-Paulilatino
-Pavarolo
-Pederobba
-Pelugo
-Pennadomo
-Pescara
-Petritoli
-Piana Crixia
-Picciano
-Picerno
-Pico
-Pietra Ligure
-Pietra de' Giorgi
-Pietrabruna
-Pietracatella
-Pieve Albignola
-Piovera
-Piubega
-Plati'
-Poggio Nativo
-Poggio Picenze
-Pojana Maggiore
-Pont-Canavese
-Pontestura
-Posta
-Potenza
-Pratovecchio Stia
-Predosa
-Priola
-Priverno
-Pre'-Saint-Didier
-Ravarino
-Ravenna
-Recetto
-Remedello
-Rezzago
-Ricengo
-Ripa Teatina
-Rivalba
-Rivalta Bormida
-Rivodutri
-Roaschia
-Robilante
-Rocca Grimalda
-Rocca d'Evandro
-Roddino
-Rodello
-Rodengo Saiano
-Rogno
-Roma
-Roncola
-Ronca'
-Roure
-Russi
-Salerano Canavese
-Salussola
-Saluzzo
-Salo'
-San Chirico Nuovo
-San Clemente
-San Damiano Macra
-San Damiano al Colle
-San Germano Vercellese
-San Giovanni Ilarione
-San Giovanni Lupatoto
-San Giovanni Valdarno
-San Leucio del Sannio
-San Lorenzo in Campo
+Baricella
+Casalincontrada
+Treppo Grande
+Villanuova sul Clisi
+Toano
+Dolzago
+Trecastelli
+Casola Valsenio
+Bovezzo
+Labro
+Funes
+Cannole
+Dolce
+Pescarolo ed Uniti
+Boissano
+Levanto
+Minturno
+Mozzanica
+Cerignale
+Pergine Valdarno
+Gardone Riviera
+Comerio
+Dongo
+Sassinoro
+Barbarano Romano
+Sant'Angelo di Brolo
+Santa Maria Imbaro
+Castelleone
+Santa Teresa Gallura
 San Marcellino
-San Martino Sannita
-San Marzano Oliveto
-San Massimo
-San Nicola Arcella
-San Paolo Solbrito
-San Piero Patti
-San Pietro Clarenza
-San Pietro in Cariano
-San Vito
-Sanarica
-Sant'Agata del Bianco
-Sant'Ambrogio sul Garigliano
-Sant'Andrea Frius
-Sant'Angelo Lodigiano
-Sant'Apollinare
-Sant'Eufemia d'Aspromonte
-Sant'Ilario d'Enza
-Santa Lucia di Serino
-Santa Maria a Monte
-Santa Marina Salina
-Santa Venerina
-Santo Stefano Roero
-Santo Stefano di Camastra
-Sarego
-Sarsina
-Sassocorvaro
-Sassuolo
-Savelli
-Savoia di Lucania
-Scandale
-Schio
-Selargius
-Semestene
-Senerchia
-Serra d'Aiello
-Sessame
-Sesto Calende
-Sicignano degli Alburni
-Signa
-Siliqua
-Simbario
-Smerillo
-Sommariva Perno
-Sorisole
-Sovere
-Sovizzo
-Sperlonga
-Spinete
-Stezzano
-Stigliano
-Strambinello
-Suardi
-Sumirago
-Tarantasca
-Tarzo
-Tavarnelle Val di Pesa
-Tavazzano con Villavesco
-Telti
-Teora
-Terzorio
-Testico
-Tito
-Ton
-Torre Pallavicina
-Torre San Patrizio
-Tramonti di Sotto
-Trasquera
-Tre Ville
-Trescore Balneario
-Trevenzuolo
-Trevi
-Tribano
-Tufo
-Tuglie
-Ussana
-Vadena
-Vaglia
-Vaglio Basilicata
-Vaiano Cremasco
-Valdengo
-Valfenera
-Valgrisenche
-Valle di Casies
-Valledolmo
-Vallefiorita
-Vallio Terme
-Valsinni
-Valstagna
-Valtopina
-Vanzago
-Vedeseta
-Vendone
+Solbiate
+Montefortino
+Aggius
+Peveragno
+Rasun-Anterselva
+Castellazzo Novarese
+Poggiodomo
+Clavesana
+Vidigulfo
+Cascina
+Calvenzano
+Formello
+Gera Lario
 Ventotene
+Basiliano
+Gorzegno
+Apice
+Castel San Niccolo
+Putifigari
+San Sebastiano da Po
+Pietra Ligure
+Gaglianico
+Stanghella
+Commezzadura
+Capriolo
+Bressanone
+Carpinone
+Rumo
+Mombasiglio
+Giaglione
+Castell'Arquato
+Bassano in Teverina
+Librizzi
+Bigarello
+Camporosso
+Rivarone
+Silvano Pietra
+Monte San Giovanni Campano
+Subiaco
+Molvena
+Salasco
+Cimitile
+Martinsicuro
+Petrella Tifernina
+Cairano
+Pessano con Bornago
+Surano
+Pederobba
+Strevi
+Treglio
+Vico del Gargano
+Caines
+Chiusaforte
+Sarmato
+Monteviale
+Camogli
+Nembro
+Arese
+Uboldo
+Porto Cesareo
+Zeri
+Grandola ed Uniti
+Trevi
+Molinara
+Diano Marina
+San Dorligo della Valle-Dolina
+Vigasio
+Montenero Sabino
+San Miniato
+Bonemerse
+Benevento
+Porto Sant'Elpidio
+Civita
+Campi Bisenzio
+Crosia
+Monte di Malo
+Pisa
+Gallicano
+Santa Ninfa
+Sanfre
+Piano di Sorrento
+Chiusano d'Asti
+Pianella
+Cagno
+Borgo San Martino
+Pentone
+San Mauro Cilento
+Santa Luce
+Ciconio
+San Colombano Certenoli
+Samugheo
+Luserna San Giovanni
+Picciano
+Ariccia
+Petriano
+Rieti
+Abano Terme
+Aielli
+Sarroch
+Acireale
+Porto Ceresio
+Radda in Chianti
+Ponso
+Torre di Ruggiero
+Salza di Pinerolo
+Chiaromonte
+Citerna
+Montauro
+Montezemolo
+Cogollo del Cengio
+Malvagna
+Caldiero
+Sillano Giuncugnano
+Gorle
+Uggiate-Trevano
+Fossalto
+Curno
+Godega di Sant'Urbano
+Valle di Casies
+Cossato
+Sant'Omero
+San Floriano del Collio
+Settimo Milanese
+Polia
+Isnello
+Locatello
+Casole d'Elsa
+Fino Mornasco
+Aosta
+Murialdo
+Cividate al Piano
+Asiago
+Parella
+Casacanditella
+Barrali
+Basciano
+Somaglia
+Olivola
+Valsamoggia
+Mercato San Severino
+Formignana
+Tavenna
+Monleale
+Barone Canavese
+Monte San Giusto
+Santa Maria Maggiore
+Palazzo Pignano
+Lonato del Garda
+Costabissara
+Robecco d'Oglio
+Bagnolo Mella
+Caselette
+Arzano
+Castellalto
+Ronsecco
+Dalmine
+Conca Casale
+Crecchio
+Aritzo
+Burgio
+Brusnengo
+Bastida Pancarana
+Maranzana
+Berzo Demo
+Santa Caterina dello Ionio
+Magliano in Toscana
+Correggio
+Pieve a Nievole
+Roe Volciano
+Ziano Piacentino
+Sant'Ambrogio di Valpolicella
+Piovera
+Tarsia
+San Vito di Fagagna
+Novellara
+Monticelli Pavese
+Casella
+Torrice
+Villaga
+Castelnuovo Calcea
+Castellino Tanaro
+Reggello
+San Bernardino Verbano
+Massa
+Sesto San Giovanni
+Pontinia
+Roburent
+Villa San Secondo
+Villadeati
+Castelcucco
+Cormons
+Cappadocia
+Cassaro
+Aradeo
+Sesto al Reghena
+Terranova di Pollino
+Villafranca d'Asti
+Traversetolo
+Bagnolo San Vito
+Barzio
+Albagiara
+Saviore dell'Adamello
+Villastellone
+Paularo
+Pella
+Zambana
+Osini
+Rivello
+Piane Crati
+Arienzo
+Sfruz
+Mairago
+Bellinzago Lombardo
+Mel
+Agrigento
+Scontrone
+Galliate Lombardo
+Castellina in Chianti
+Fresagrandinaria
+Manzano
+Bortigiadas
+Ordona
+Torre d'Isola
+Esine
+Massiola
+Contrada
+Lesignano de' Bagni
+Osasio
+Torresina
+Barzano
+Matino
+Isola del Gran Sasso d'Italia
+Monte Giberto
+Montu Beccaria
+Altavilla Monferrato
+Bosnasco
+Filago
+San Gimignano
+Sammichele di Bari
+Orsogna
+Piove di Sacco
+Cisterna di Latina
+Sasso di Castalda
+Campagnano di Roma
+Montelupone
+Rocca di Botte
+Bellinzago Novarese
+Conco
+Roccavignale
+Monteiasi
+Portomaggiore
+Bieno
+Lascari
+San Paolo Bel Sito
+Jenne
+Corno Giovine
+Bernate Ticino
+Sedini
+Ferno
+Tesero
+Pizzoferrato
+Primiero San Martino di Castrozza
+Venetico
+Polverigi
+Paderna
+Scandale
+Tursi
+Marostica
+Zanica
+Verghereto
+Camisano
+Ozzano Monferrato
+Massarosa
+Castelbottaccio
+Cavedago
+Camastra
+Quingentole
+Serravalle Sesia
+Ronchi dei Legionari
+Grottammare
+Valverde
+Squinzano
+Ferrera di Varese
+San Teodoro
+Vallebona
+Bolognano
+Cerano
+Asigliano Veneto
+Fiuminata
+Flero
+Sarnano
+Tavarnelle Val di Pesa
+Poggio San Vicino
+Viadana
+Petralia Sottana
+Noceto
+Castro
+Monterosi
+Cheremule
+Castellar Guidobono
+Cerreto Guidi
+Ussana
+Ceva
+Pisogne
+Marina di Gioiosa Ionica
+Pieve Albignola
+Rosignano Marittimo
+Napoli
+Succivo
+Pinzano al Tagliamento
+Camisano Vicentino
+Parma
+Cressa
+San Giuseppe Vesuviano
+Sporminore
+Oricola
+Barisciano
+Civitella Alfedena
+Dosso del Liro
+Vicchio
+Mussomeli
+Noasca
+Orotelli
+L'Aquila
+Rose
+Quinto Vercellese
+Calalzo di Cadore
+Moncalieri
+Castello di Brianza
+Vignanello
+San Sosti
+Marsaglia
+Acri
+Calopezzati
+Valloriate
+Mozzo
+Spoleto
+Savogna
+Abbadia San Salvatore
+Ospedaletto Lodigiano
+Paterno Calabro
+San Pier d'Isonzo
+Colonnella
+Pico
+Vigo di Cadore
+Talmassons
+Mezzano
+Castel del Monte
+Condro
+Lagundo
+Caldes
+Borgo Val di Taro
+Belmonte Castello
+Agosta
+Miagliano
+Chialamberto
+Burgos
+Francofonte
+Scoppito
+Boroneddu
+Monfumo
+Barni
+Pieve di Soligo
+Tocco da Casauria
+Nocara
+Valmadrera
+Mossano
+Argenta
+Tronzano Vercellese
+Maratea
+Castano Primo
+Pescopagano
+Acquasanta Terme
+Carzano
+Cugnoli
+Dumenza
+San Cosmo Albanese
+Roncoferraro
+Anticoli Corrado
+Rovetta
+Gallo Matese
+Follonica
+Torrazza Piemonte
+Bienno
+San Colombano al Lambro
+Corchiano
+Paulilatino
+Serrastretta
+Saint-Denis
+Recale
+Vallemaio
+Beinasco
+Rio Saliceto
+Arcola
+Garaguso
+Ardauli
+Corsano
+Pietrastornina
+Conza della Campania
+Ton
+Vigonovo
+Villa di Chiavenna
+Grosseto
+San Clemente
+Salerno
+Villa d'Adda
+San Giorgio di Lomellina
+Piateda
+Ruda
+Cassina Rizzardi
+Livinallongo del Col di Lana
+Barete
+Impruneta
+Nuraminis
+Marsicovetere
+Pontecurone
+Bianco
+Brissago-Valtravaglia
+Francavilla Marittima
+Gallicano nel Lazio
+Venzone
+Tradate
+Puegnago sul Garda
+Roverchiara
+Pietranico
+Volterra
+San Felice a Cancello
+Paratico
+Tresivio
+Fiesso Umbertiano
+Galliavola
+Morcone
+Ortacesus
+Floresta
+Isola Dovarese
+Fagagna
+Nulvi
+Palombaro
+Solarino
+Malo
+Oglianico
+Villorba
+Canosio
+Menfi
+Lattarico
+Comunanza
+Futani
+Cottanello
+Mason Vicentino
+Casalfiumanese
+Montano Lucino
+Saletto
+Belcastro
+Angiari
+Santa Giustina in Colle
+Belluno
+Merlino
+Ailano
+Esporlatu
+Campo Calabro
+Maccastorna
+Borgia
+Cortenova
+Force
+San Canzian d'Isonzo
+Santarcangelo di Romagna
+Ortelle
+San Benedetto in Perillis
+Osidda
+Castel Giorgio
+La Valle
+Marradi
+Monforte San Giorgio
+Roccavaldina
+Bargagli
+Cantalupo Ligure
+Bardineto
+Castiglione d'Adda
+Bellante
+Lu
+Bagnone
+Circello
+Prignano sulla Secchia
+Casalzuigno
+Sarcedo
+Comacchio
+Montjovet
+Pagliara
+Cassinelle
+Pollein
+Soleto
+Lamon
+Verdellino
+Noicattaro
+Danta di Cadore
+Bonorva
+Chieuti
+Brescia
+Roddino
+Occhiobello
+Mogliano Veneto
+Barbania
+Ascoli Satriano
+Bagnolo Piemonte
+Marmirolo
+Carpenedolo
+Serramazzoni
+Feltre
+Paderno Ponchielli
+Fragneto l'Abate
+Borgo San Siro
+Castel San Lorenzo
+Bonito
+Arsita
+Castelnuovo della Daunia
+Agropoli
 Verduno
-Verretto
-Vialfre'
-Viggiu'
-Viguzzolo
-Villa di Tirano
-Villadose
-Villafranca Padovana
-Villasalto
+Sparone
+Torrenova
+Alba Adriatica
+Gavardo
+Monte Rinaldo
+Seren del Grappa
+Castelvetro Piacentino
+Pozzolengo
+Mangone
+Esino Lario
+Cadoneghe
+Pressana
+Roatto
+Montecchio Maggiore
+Capitignano
+Camporeale
+Daverio
+Sant'Agnello
+Domicella
+San Giorgio della Richinvelda
+Domusnovas
+Borgoratto Alessandrino
+Sagliano Micca
+Salsomaggiore Terme
+Riomaggiore
+Santo Stefano Roero
+Samolaco
+Siligo
+Carovigno
+Caraffa del Bianco
+Corio
+Villa Guardia
+Caluso
+Cascinette d'Ivrea
+Castel San Giovanni
+Boretto
+Lana
+Ginestra degli Schiavoni
+Galbiate
+Rapolla
+Minucciano
+Castel del Giudice
+Belveglio
+Banchette
+Trezzano Rosa
+Megliadino San Vitale
+Nicorvo
+Rottofreno
+Bolzano Vicentino
+Montecorvino Pugliano
+Sorisole
+Stigliano
+Crotta d'Adda
+Castel Volturno
+Formicola
+Ospitaletto
+Borgo a Mozzano
+Rotzo
+Brivio
+Crissolo
+Gravellona Toce
+Casapinta
+Castelbellino
+Sale delle Langhe
+Roncade
+Perloz
+Catenanuova
+Crognaleto
+Pancalieri
+Moncucco Torinese
+Vocca
+Lastra a Signa
+Savona
+Offanengo
+Massazza
+Manerbio
+Vische
+Favale di Malvaro
+Ischia
+Roccafiorita
+Frugarolo
+Povoletto
+Montorso Vicentino
+Calvi Risorta
+Campotosto
+Brozolo
+Finale Emilia
+Santa Giustina
+Favignana
+Ponte in Valtellina
+Portico di Caserta
+Matera
+Chiuduno
+Scorrano
+Bastia Mondovi
+Caselle in Pittari
+Pont-Canavese
+Buggerru
+Arsiero
+Monserrato
+Molini di Triora
+Battifollo
+Chambave
+Quattro Castella
+Borgo Tossignano
+Bonavigo
+Alvignano
+Gioia del Colle
+Roisan
+Briaglia
+Stimigliano
+Serradifalco
+Castel Madama
+Castegnato
+Taino
+Refrontolo
+Villa Collemandina
+Montefredane
+Valbrembo
+Acqualagna
+Capodimonte
+Borgoratto Mormorolo
+San Bartolomeo in Galdo
+Cantiano
+Campobello di Mazara
+Arguello
+San Marco la Catola
+Solbiate Olona
+Nemoli
+Giffoni Valle Piana
+Canazei
+Sant'Alfio
+Ponte nelle Alpi
+Sillavengo
+Moso in Passiria
+Travedona-Monate
+San Genesio Atesino
+Campo nell'Elba
+Veronella
+Cipressa
+Castelfranco in Miscano
+Boville Ernica
+Erli
+Sesto Campano
+Castelbello-Ciardes
+Torano Castello
+Fanna
+Serrapetrona
+Bitetto
+Cocquio-Trevisago
+Luni
+Minori
+Giarre
+Palmariggi
+Trani
+San Gervasio Bresciano
+Villa Castelli
+Varano de' Melegari
+Jerzu
+Salizzole
+Toceno
+Vibo Valentia
+Scanzano Jonico
+Montegaldella
+Vercana
+San Pancrazio
+Castel Gandolfo
+Erve
+Villa Lagarina
+Cavallino
+Barlassina
+Camerata Cornello
+Mesenzana
+Girasole
+Bagnaria
+Sant'Agapito
+Premia
+Occhieppo Inferiore
+Girifalco
+Orsara Bormida
+Banzi
+Guardabosone
+Besate
+Rosignano Monferrato
+Marnate
+Vaie
+Caravate
+Palazzago
+San Giacomo Vercellese
+Cannara
+Fiesco
+Sapri
+Castagnole Piemonte
+Sestri Levante
+Petrosino
+Borghetto d'Arroscia
+Villaurbana
+Vallarsa
+Martignano
+Sassofeltrio
+Mesola
+Marentino
+Saonara
+Sant'Agata Fossili
+Bianzone
+Solza
+Civitaluparella
+Calvanico
+Sogliano Cavour
+Cellio
+Montefranco
+Carro
+Martirano Lombardo
+Sangineto
+Ortona dei Marsi
+Vibonati
+Guastalla
+Longiano
+Grottole
+Palazzolo Acreide
+Vigodarzere
+Casatenovo
+Antillo
+Montalto Ligure
+Torrita di Siena
+Arizzano
+Milano
+Cremia
+Acquaviva Collecroce
+Taurano
+San Pietro in Guarano
+Bettona
+Grassano
+Luzzi
+Vacri
+Saracinesco
+Berzo Inferiore
+Onifai
+Torriglia
+Siliqua
+Canale d'Agordo
+Ronco all'Adige
+Ossimo
+Sambuco
+Massignano
+Torre Bormida
+Capri
+Toro
+Montecilfone
+Riccione
+Castel di Lucio
+Pojana Maggiore
+Cossano Belbo
+San Vito dei Normanni
+Traona
+Cusano Milanino
+Bolzano
+Tizzano Val Parma
+Cinte Tesino
+Musei
+Cercemaggiore
+Vallanzengo
+Vellezzo Bellini
+Fontana Liri
+Sarentino
+Cimolais
+Acquapendente
+Bonea
+Ortovero
+Villanterio
+San Mauro Forte
+Mandatoriccio
+Borghetto di Borbera
+Leni
+Rio nell'Elba
+Castelnuovo Scrivia
+Sovizzo
+Ome
+Calliano
+Vione
+Rhemes-Saint-Georges
+Trissino
+Garzigliana
+Sestriere
+Roccamandolfi
+Amelia
+Pognana Lario
+Farindola
+Portoscuso
+Arcidosso
+Filogaso
+Soprana
+Isola del Piano
+Laives
+Fontanarosa
+Pauli Arbarei
+Roccagloriosa
+Citta di Castello
+Borriana
+Paderno del Grappa
+Isola di Fondra
+Rosa
+Cecina
+Carbonara al Ticino
+Valdieri
+Pozzilli
+Verona
+Filottrano
+Aprica
+Noragugume
+Conversano
+Elice
+Comano
+Maiera
+Giurdignano
+Castelnuovo Berardenga
+Casalmoro
+Angrogna
+Pieve Santo Stefano
+Ottati
+Quarna Sotto
+Rubano
+Lapio
+Villa del Bosco
+Alagna Valsesia
+Rocca San Felice
+Colli sul Velino
+Cortanze
+Verrua Po
+Samone
+Mazzarrone
+Volpedo
+Pontirolo Nuovo
+Castagneto Carducci
+Cava de' Tirreni
+Rocchetta Tanaro
+Brignano Gera d'Adda
+Oliveto Lario
+Spadafora
+Camigliano
+Carpasio
+Pezzana
+Valdisotto
+Borgo Virgilio
+Cammarata
+Santa Maria a Vico
+Sant'Eufemia d'Aspromonte
+Crespano del Grappa
+Bomarzo
+Lotzorai
+Borgo Vercelli
+San Vito al Torre
+Champdepraz
+Naso
+Pratiglione
+Zafferana Etnea
+Moriago della Battaglia
+Villadossola
+Montagnareale
+Motta Sant'Anastasia
+Leno
+Cavagnolo
+San Vito sullo Ionio
+Coseano
+Lugnano in Teverina
+Ailoche
+Verolengo
+Giungano
+Casale Cremasco-Vidolasco
+Manduria
+Reino
+Telve di Sopra
+Ventimiglia di Sicilia
+Trasaghis
+Diano San Pietro
+Popoli
+Cergnago
+Pietra Marazzi
+Garda
+Sommariva del Bosco
+Masate
+Viggiano
+Raddusa
+Las Plassas
+Magomadas
+Premosello-Chiovenda
+Valprato Soana
+Pratella
+Parzanica
+Sanarica
+Nogaredo
+Tramonti
+Torre Canavese
+Sirignano
+Castello dell'Acqua
+Ginosa
+Campodolcino
+Scansano
+Sartirana Lomellina
+Scano di Montiferro
+Malnate
+Lequio Tanaro
+Campitello di Fassa
+Magnacavallo
+Carolei
+San Martino in Passiria
+Castiadas
+Carpineto della Nora
+Botricello
+Faeto
+San Cono
+Soveria Simeri
+Monte San Giovanni in Sabina
+Torri di Quartesolo
+Nole
+Solarolo
+Castel Condino
+Viadanica
+Spilinga
+Picinisco
+Villavallelonga
+Artena
+Campomorone
+Massafra
+Salbertrand
+Rescaldina
+Tolfa
+Sinagra
+Cerreto Castello
+Chiavenna
+Balocco
+Turbigo
+Rapagnano
+Albuzzano
+Arvier
+Formigine
+Andrano
+Lettopalena
+Donato
+Lomazzo
+Refrancore
+Marliana
+San Michele di Serino
+Challand-Saint-Anselme
+Borgomezzavalle
+Galtelli
+Casalbordino
+Agna
+Paladina
+Imer
+San Tammaro
+Torri del Benaco
+Rosora
+Trodena nel parco naturale
+Avigliano Umbro
+Maggiora
+Gargallo
+Masserano
+Grignasco
+Lizzanello
+Bulzi
+San Costantino Albanese
+Petilia Policastro
+Villafalletto
+Schiavon
+Tiggiano
+Castione Andevenno
+Mandello Vitta
+Dipignano
+Serravalle di Chienti
+Dairago
+Montegridolfo
+Borghetto Lodigiano
+Magenta
+Corropoli
+Cicagna
+Nizza di Sicilia
+Rossiglione
+Carfizzi
+Castelbaldo
+Santa Margherita d'Adige
+Monasterolo Casotto
+Jacurso
+Fumane
+Desulo
+Porto Empedocle
+Castelnuovo Belbo
+Lavagno
+Francavilla Angitola
+Pallanzeno
+Eupilio
+Roccabascerana
+Chiuppano
+Noventa Padovana
+Salice Salentino
+Borghi
+Nibionno
+Soresina
+Trenzano
+Cuveglio
+Piana Crixia
+Albanella
+Monteriggioni
+San Potito Sannitico
+Prato allo Stelvio
+Malosco
+Oderzo
+Sant'Urbano
+Caposele
+Valdaone
+Cazzano Sant'Andrea
+Piuro
+Sestino
+Sassello
+Torre Mondovi
+Beverino
+Anacapri
+Niella Tanaro
+Celle Enomondo
 Vimercate
-Visco
-Vistrorio
-Viterbo
-Vitulano
-Voltido
-Zagarise
-Zelbio
-Zignago
-Zugliano
+Masone
+Saliceto
+Barolo
+Castronovo di Sicilia
+Velo Veronese
+Motta Camastra
+Castelletto d'Erro
+Loro Piceno
+Torre Beretti e Castellaro
+Borgo di Terzo
+Assisi
+Martirano
+Soncino
+Garlasco
+Guarcino
+Teglio
+Valledoria
+Casale Monferrato
+San Lupo
+Letojanni
+Bidoni
+Tavullia
+Cassino
+Carloforte
+Erto e Casso
+Niscemi
+San Rufo
+Motta di Livenza
+Pecco
+Rivarolo Mantovano
+Pramaggiore
+Zola Predosa
+Amatrice
+Petriolo
+San Marco dei Cavoti
+Monteleone d'Orvieto
+Vitulazio
+Zumaglia
+Brondello
+Vallepietra
+Gazzola
+Pianengo
+Bresimo
+Lonigo
+Chiaramonti
+Montebruno
+Gardone Val Trompia
+Acquaviva d'Isernia
+Bellaria-Igea Marina
+Breme
+Remedello
+Villasanta
+Campo Ligure
+Suvereto
+Vendrogno
+Candidoni
+Bronzolo
+Simeri Crichi
+Rio Marina
+Savoia di Lucania
+Valfurva
+Terruggia
+Galluccio
+Castellammare del Golfo
+Monticello Brianza
+Calusco d'Adda
+Codevilla
+Salcito
+Boltiere
+Campi Salentina
+Colloredo di Monte Albano
+Sasso Marconi
+Pietradefusi
+Arluno
+Sant'Angelo Romano
+Senise
+Sulbiate
+Rezzago
+Pietraferrazzana
+Bizzarone

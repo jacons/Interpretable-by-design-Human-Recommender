@@ -8,12 +8,15 @@
     "skills":[
       "Python", "Java",  "SQL", "Git",
       "Algorithm", "Database",
-      "Operating systems", "C++", "PHP", "C"
+      "Operating systems", "C++", "PHP", "C", "Kubernetes", "Doker"
     ],
     "soft_skills":[
       "Problem solving",  "Collaboration",
       "Retail aptitude", "Flexibility",
       "Professional Ethic", "Innovation", "Creativity"
+    ],
+    "certificates": [
+      "CCNA", "CSM", "PMP","IELTS","CAE"
     ]
   },
   "Web Developer":{
@@ -26,12 +29,15 @@
       "CSS", "Angular", "PHP", "MySQL",
       "Ruby", "XAMPP", "Python", "SQL",
       "Design patterns", "SQL", "HTML",
-      "Internet protocols"
+      "Internet protocols", "Doker"
     ],
     "soft_skills":[
       "Problem solving",  "Teamwork",
       "Effective communication", "Ability to manage stress",
       "Innovation", "Flexibility"
+    ],
+    "certificates": [
+      "CSM","CPMP","PMP","IELTS"
     ]
   },
   "HR Consultant":{
@@ -50,6 +56,9 @@
       "Empathy", "Management of the conflict",
       "Negotiation", "Ability to listen",
       "Coaching",  "Management of stress"
+    ],
+    "certificates": [
+      "PHR", "SPHR","SHRM-CP","IELTS"
     ]
   },
   "Marketing manager":{
@@ -68,7 +77,8 @@
       "Leadership", "Creativity",
       "Management of the team",  "Ability to adapt to new technologies",
       "Critical thinking",  "Adaptability"
-    ]
+    ],
+    "certificates": []
   },
   "Operation manager":{
     "age":[30, 60],
@@ -86,7 +96,8 @@
     "soft_skills":[
       "Strategic planning", "Management of time",
       "Troubleshooting", "Management of stress"
-    ]
+    ],
+    "certificates": ["IELTS"]
   },
   "Computer security analyst":{
     "age":[26, 45],
@@ -105,6 +116,9 @@
       "Critical thinking",
       "Troubleshooting", "Collaboration",
       "Innovation", "Adaptability"
+    ],
+    "certificates": [
+      "CompTIA A+", "CISSP", "CEH", "PMP","IELTS"
     ]
   },
   "Architectural engineer":{
@@ -122,7 +136,8 @@
       "Leadership", "Collaboration",
       "Attention to detail", "Troubleshooting",
       "Creativity", "Decision-making capacity"
-    ]
+    ],
+    "certificates": []
   },
   "Designer":{
     "age":[22, 35],
@@ -138,7 +153,8 @@
     "soft_skills":[
       "Creativity", "Critical thinking", "Empathy",
       "Adaptability", "Innovation"
-    ]
+    ],
+    "certificates": []
   },
   "Manager":{
     "age":[30, 50],
@@ -154,7 +170,8 @@
       "Leadership", "Effective communication",
       "Analytical thinking", "Empathy",
       "Adaptability",  "Innovation"
-    ]
+    ],
+    "certificates": ["IELTS"]
   },
   "Data analyst":{
     "age":[25, 45],
@@ -172,7 +189,8 @@
       "Critical analysis",
       "Problem solving", "Clear communication",
       "Creativity", "Proactivity"
-    ]
+    ],
+    "certificates": []
   },
   "System administrator":{
     "age":[25, 45],
@@ -189,6 +207,9 @@
       "Troubleshooting",
       "Management of emergencies",
       "Patience"
+    ],
+    "certificates": [
+      "CompTIA A+", "CCNA", "CISSP", "ACSA", "MCAA"
     ]
   },
   "Architect":{
@@ -206,7 +227,8 @@
       "Creativity", "Effective communication",
       "Spatial thought", "Collaboration",
       "Attention to detail"
-    ]
+    ],
+    "certificates": []
   },
   "Nurse":{
     "age":[22, 50],
@@ -223,7 +245,8 @@
       "Empathy", "Communication",
       "Management of stress", "Professional ethics",
       "Organisation", "Flexibility"
-    ]
+    ],
+    "certificates": ["CHISP","CMeA","RN","EMT", "CPHQ"]
   },
   "Doctor":{
     "age":[28,  60],
@@ -240,7 +263,8 @@
       "Empathic communication",
       "Teamwork", "Patience",
       "Ethics", "Attention to the patient"
-    ]
+    ],
+    "certificates": ["CHISP","CMeA","EMT", "CPHQ"]
   },
   "Surgeon":{
     "age":[30, 60],
@@ -257,7 +281,8 @@
       "Precision", "Decision making",
       "Management of stress", "Teamwork",
       "Patience", "Ethics"
-    ]
+    ],
+    "certificates": ["CHISP","CMeA","EMT", "CPHQ"]
   },
   "Nurse specialist":{
     "age":[25, 50],
@@ -274,7 +299,8 @@
     "soft_skills":[
       "Empathy", "Organisation",
       "Management of emergencies"
-    ]
+    ],
+    "certificates": ["CHISP","CMeA","RN","EMT", "CPHQ"]
   },
   "X-ray technician":{
     "age":[25,  55],
@@ -293,7 +319,8 @@
       "Speed of learning",
       "Organizational skills",
       "Confidentiality", "Ethics"
-    ]
+    ],
+    "certificates": ["EMT","PMP"]
   },
   "Therapist":{
     "age":[28,  60],
@@ -312,7 +339,8 @@
       "Confidentiality",
       "Relational Skills",
       "Problem solving", "Ethics"
-    ]
+    ],
+    "certificates": ["IELTS"]
   },
   "Pharmacist":{
     "age":[ 25,  55 ],
@@ -329,7 +357,8 @@
       "Precision", "Communication",
       "Knowledge of regulations", "Attention to the customer",
       "Empathy", "Organizational skills"
-    ]
+    ],
+    "certificates": ["IELTS","CHISP"]
   },
   "Lawyer":{
     "age":[28,  60],
@@ -346,7 +375,8 @@
       "Argumentation", "Critical thinking",
       "Persuasive communication", "Communication skills",
       "Analytical skills"
-    ]
+    ],
+    "certificates": ["CPA","CFA","CMA","CIA","CFE","CGFM","IELTS"]
   },
   "Legal consultant":{
     "age":[28,  50],
@@ -364,7 +394,8 @@
       "Capacity for research",  "Customer orientation",
       "Negotiation", "Management of stress",
       "Integrity", "Ethics"
-    ]
+    ],
+    "certificates": ["CPA","CFA","CMA","CIA","CFE","CGFM","IELTS"]
   },
   "Financial analyst":{
     "age":[25,  45],
@@ -382,7 +413,8 @@
       "Critical analysis",
       "Problem solving", "Effective communication",
       "Attention to detail", "Management of stress"
-    ]
+    ],
+    "certificates": ["CPA","CFA","CMA","CIA","CFE","CGFM","IELTS"]
   },
   "Asset manager":{
     "age":[30, 55],
@@ -399,7 +431,8 @@
     "soft_skills":[
       "Negotiation", "Customer orientation",
       "Strategic Thinking", "Attention to detail"
-    ]
+    ],
+    "certificates": ["CPA","CFA","CMA","CIA","CFE","CGFM","IELTS"]
   },
   "Risk expert":{
     "age":[ 28,  50 ],
@@ -415,7 +448,8 @@
     ],
     "soft_skills":[
       "Analytical thinking", "Decision making", "Management of stress"
-    ]
+    ],
+    "certificates": ["CPA","CFA","CMA","CIA","CFE","CGFM","IELTS"]
   },
   "Financial consultant":{
     "age":[25, 50],
@@ -433,7 +467,8 @@
       "Empathy", "Persuasive communication",
       "Customer orientation",
       "Precision", "Attention to detail"
-    ]
+    ],
+    "certificates": ["CPA","CFA","CMA","CIA","CFE","CGFM","IELTS"]
   },
   "Market analyst":{
     "age":[25,  45],
@@ -451,7 +486,8 @@
       "Critical thinking", "Effective presentation",
       "Adaptability", "Teamwork",
       "Customer orientation", "Problem solving"
-    ]
+    ],
+    "certificates": ["CPA","CFA","CMA","CIA","CFE","CGFM","IELTS"]
   },
   "Data Scientist":{
     "age":[25, 45],
@@ -470,7 +506,8 @@
       "Analytical thinking", "Solving the problems",
       "effective communication", "Teamwork",
       "Innovation", "Attention to detail"
-    ]
+    ],
+    "certificates": []
   },
   "Teacher":{
     "age":[25, 60],
@@ -488,6 +525,7 @@
     ],
     "soft_skills":[
       "Patience", "Communication", "Empathy"
-    ]
+    ],
+    "certificates": ["CAE","CPLP","TEFL","CPTD","CEP","CMT"]
   }
 }
