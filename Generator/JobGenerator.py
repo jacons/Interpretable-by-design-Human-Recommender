@@ -166,7 +166,7 @@ class JobGenerator:
         min_salary += int((min_salary * 0.07) * cv["YearExp"])
         min_salary = min(min_salary, max_salary)
 
-        cv["Ideal_Salary"] = random.randint(min_salary, max_salary)  # 20
+        cv["Ideal_Salary"] = int(random.randint(min_salary, max_salary)/100)*100  # 20
         cv["SmartWork"] = random.randint(0, 1) == 0 if current_job["smart_working"] else False  # 21
         cv["Experience_abroad"] = random.randint(0, 1) == 0  # 22
 
@@ -234,7 +234,7 @@ class JobGenerator:
         min_salary += int((min_salary * 0.07) * offer["YearExp"])
         min_salary = min(min_salary, max_salary)
 
-        offer["Offered_Salary"] = random.randint(min_salary, max_salary)  # 21
+        offer["Offered_Salary"] = int(random.randint(min_salary, max_salary)/100)*100  # 21
         offer["SmartWork"] = random.randint(0, 1) == 0 if current_job["smart_working"] else False  # 22
         offer["Experience_abroad"] = random.randint(0, 1) == 0  # 23
 

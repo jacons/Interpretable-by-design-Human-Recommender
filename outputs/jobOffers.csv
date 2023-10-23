@@ -1,0 +1,101 @@
+qId,Job,Education,City,Skills0,Skills1,Skills2,Skills3,Skills4,Softskills0,Softskills1,Softskills2,Softskills3,Softskills4,AgeMin,AgeMax,Language0,Language1,Language2,Certificates,YearExp,Offered_Salary,SmartWork,Experience_abroad
+0,Pharmacist,Bachelor D.,Brissago-Valtravaglia,Control of prescriptions,Management of the cash,Information on drugs,Pharmacology,Preparation of drugs,Organizational skills,Attention to the customer,Precision,-,-,25,34,Francese - C2,-,-,,0,29300,0,0
+1,Risk expert,Bachelor D.,Villa Castelli,Environmental risk,-,-,-,-,Analytical thinking,Management of stress,Decision making,-,-,28,37,Irlandese - C2,Inglese - A2,-,"CFE,CMA,CFA",1,36700,0,0
+2,Web Developer,Degree,Solarino,Angular,-,-,-,-,Teamwork,Problem solving,Flexibility,Effective communication,Ability to manage stress,25,29,Italiano - C2,-,-,"IELTS,CPMP",1,61400,1,0
+3,Data analyst,Degree,Burgio,Tableau,-,-,-,-,Critical analysis,Proactivity,-,-,-,25,34,Italiano - C2,-,-,,3,33800,1,1
+4,Marketing manager,PhD,Castelvetro Piacentino,Strategies of marketing,Planning of campaigns,Google Analytics,-,-,Creativity,-,-,-,-,28,41,Italiano - C2,-,-,,4,113600,1,1
+5,Web Developer,Degree,Riomaggiore,Internet protocols,XAMPP,Ruby,Angular,-,Ability to manage stress,-,-,-,-,25,32,Italiano - C2,-,-,IELTS,3,64600,0,0
+6,Data analyst,Degree,Brusnengo,Root,SQL,SAS,-,-,Problem solving,-,-,-,-,25,30,Israeliano - C2,Messicano - A2,-,,3,41600,0,1
+7,Data Scientist,Degree,Molini di Triora,R,Keras,SQL,Python,Machine Learning,Analytical thinking,Attention to detail,-,-,-,25,34,Inglese - C2,-,-,,2,29300,0,1
+8,Architectural engineer,Degree,Esporlatu,ANSYS,Design,Simulink,AutoCAD,-,Decision-making capacity,Leadership,Communication,Collaboration,-,25,33,Italiano - C2,Israeliano - B1,Venezuelano - A1,,3,31200,1,1
+9,Surgeon,Bachelor D.,Nembro,Medical imaging,Operating block management,Surgical physiology,-,-,Management of stress,-,-,-,-,30,37,Francese - C2,-,-,,1,110000,0,0
+10,Developer,Degree,Alagna Valsesia,C++,PHP,-,-,-,Flexibility,Innovation,-,-,-,22,36,Italiano - C2,-,-,CAE,5,46100,0,1
+11,Legal consultant,Bachelor D.,Riomaggiore,Intellectual property,Tax legislation,Negotiation,Right to Work,-,Capacity for research,Ethics,Negotiation,Management of stress,Integrity,28,29,Finlandese - C2,-,-,,1,41500,0,0
+12,Pharmacist,PhD,Boissano,Preparation of drugs,-,-,-,-,Precision,Communication,-,-,-,27,37,Italiano - C2,-,-,,3,29100,0,0
+13,Data analyst,Bachelor D.,Picciano,Tableau,Statistics,R,-,-,Proactivity,Problem solving,Clear communication,Creativity,-,25,41,Lituano - C2,Italiano - C1,Italiano - C1,,7,49900,1,0
+14,Nurse,Bachelor D.,Andrano,Health care,Anatomy,Administration of drugs,Medical emergencies,Pharmacology,Management of stress,-,-,-,-,22,33,Tedesco - C2,-,-,EMT,3,29700,0,0
+15,Marketing manager,Bachelor D.,Sarcedo,Market research,Planning of campaigns,CMS,Hootsuite,-,Leadership,Critical thinking,Ability to adapt to new technologies,-,-,28,55,Tedesco - C2,-,-,,6,95700,1,0
+16,Marketing manager,Degree,Garlasco,Management of the brand,CMS,Strategies of marketing,Market research,-,Creativity,Ability to adapt to new technologies,Adaptability,Leadership,Critical thinking,28,28,Inglese - C2,Israeliano - B2,-,,0,62900,1,0
+17,Marketing manager,Degree,San Rufo,Strategies of marketing,-,-,-,-,Adaptability,Leadership,Management of the team,Creativity,-,28,45,Italiano - C2,-,-,,2,81200,0,0
+18,X-ray technician,Degree,Pieve di Soligo,Radiological safety,Use of imaging equipment,Preparation of patients,X-ray and scan reading,-,Speed of learning,Organizational skills,Ethics,Confidentiality,Communication,25,54,Cinese - C2,Italiano - A1,-,"EMT,PMP",4,29400,0,1
+19,Marketing manager,Bachelor D.,Magenta,Google Analytics,-,-,-,-,Leadership,Creativity,-,-,-,28,30,Tedesco - C2,Russo - A1,-,,2,41300,0,0
+20,Financial analyst,Master D.,Ortovero,Financial analysis,Risk Management,Investment,Economic Law,Financial markets,Critical analysis,Problem solving,-,-,-,25,29,Cubano - C2,-,-,"IELTS,CFA",2,42300,0,1
+21,Marketing manager,Master D.,Gazzola,Hootsuite,Market research,Management of the brand,-,-,Management of the team,-,-,-,-,28,31,Argentino - C2,-,-,,3,34200,1,0
+22,Teacher,Degree,Cecima,Chemistry,Music,Physics,Art,-,Empathy,Patience,Communication,-,-,25,32,Egiziano - C2,-,-,,2,19500,0,1
+23,HR Consultant,Bachelor D.,Sarroch,Selection and evaluation techniques,Recruitment,Labour legislation,-,-,Management of the conflict,Empathy,Negotiation,Management of stress,-,25,45,Francese - C2,Cinese - C1,-,,3,31400,1,0
+24,HR Consultant,Bachelor D.,Ponte nelle Alpi,Selection and evaluation techniques,Analysis of data,Labour legislation,Organisational development,-,Management of stress,Ability to listen,-,-,-,25,27,Italiano - C2,Pakistano - A1,-,"SHRM-CP,IELTS,SPHR",2,45000,1,1
+25,Architect,Bachelor D.,Castelfranco in Miscano,Asana,Architectural design,AutoCAD,-,-,Collaboration,-,-,-,-,30,39,Italiano - C2,Francese - A2,-,,3,42200,1,0
+26,Operation manager,Master D.,Tresivio,Six Sigma,ERP,Microsoft Excel,Quality Control,Lean management ,Troubleshooting,-,-,-,-,30,46,Italiano - C2,-,-,,0,109900,1,0
+27,Teacher,Bachelor D.,Ossimo,History,Chemistry,-,-,-,Empathy,Communication,Patience,-,-,25,60,Venezuelano - C2,-,-,,3,20500,0,0
+28,Legal consultant,Master D.,Bagnone,Civil Law,Right to Work,Tax legislation,Negotiation,-,Ethics,Capacity for research,Negotiation,Customer orientation,Integrity,28,38,Italiano - C2,-,-,"CGFM,CFA",2,36100,0,0
+29,Designer,Master D.,Cavedago,Adobe After Effect,-,-,-,-,Empathy,Creativity,-,-,-,24,27,Italiano - C2,-,-,,0,38400,1,0
+30,Teacher,Master D.,Villa Guardia,Italian,Gym,French,Art,Geograpy,Patience,Communication,-,-,-,25,30,Inglese - C2,Portoghese - A1,-,CPLP,4,21600,0,0
+31,Therapist,Bachelor D.,Sant'Omero,Confidentiality,-,-,-,-,Ethics,Empathy,Problem solving,-,-,28,43,Colombiano - C2,-,-,IELTS,8,28400,0,0
+32,Surgeon,Degree,Cerro al Volturno,General Surgery,Specialized surgical procedures,Operating block management,-,-,Ethics,Patience,Precision,Management of stress,Decision making,30,40,Italiano - C2,-,-,,3,105100,0,1
+33,Computer security analyst,Bachelor D.,Cavedago,Incident Management,GnuPG,Analysis of vulnerabilities,-,-,Critical thinking,Collaboration,Innovation,-,-,26,30,Egiziano - C2,-,-,,2,113000,1,1
+34,Designer,Master D.,Masone,CorelDRAW,Adobe Photoshop,Prototyping,Sketch,Adobe After Effect,Innovation,Critical thinking,Creativity,Empathy,-,24,26,Portoghese - C2,-,-,,2,33300,1,0
+35,Marketing manager,Degree,Pognana Lario,Hootsuite,Strategies of marketing,Google Analytics,Management of the brand,-,Adaptability,-,-,-,-,28,36,Italiano - C2,-,-,,1,65500,0,0
+36,Operation manager,Degree,Vigodarzere,Logistics,Microsoft Excel,Quality Control,Management of operations,-,Troubleshooting,Strategic planning,Management of stress,-,-,30,58,Colombiano - C2,Inglese - B2,-,IELTS,3,115900,0,0
+37,Therapist,Bachelor D.,Vellezzo Bellini,Confidentiality,Theories of Behavior,Psychopharmacology,Psychological evaluation,Cognitive behavioral therapy,Relational Skills,Active listening,Problem solving,Empathy,Ethics,28,32,Italiano - C2,-,-,,1,27300,0,1
+38,Operation manager,Bachelor D.,Donato,Management of operations,ERP,Logistics,-,-,Management of time,Management of stress,Troubleshooting,Strategic planning,-,30,37,Inglese - C2,Italiano - A2,-,,2,110500,1,0
+39,Marketing manager,Bachelor D.,Cercemaggiore,Market research,CMS,Hootsuite,-,-,Leadership,Ability to adapt to new technologies,Creativity,Critical thinking,Management of the team,28,29,Italiano - C2,Pakistano - A1,Statunitense - B2,,1,96200,1,0
+40,Lawyer,Degree,Tavarnelle Val di Pesa,Legal Research,Procedural right,Criminal Law,Legal system,Negotiation,Analytical skills,Communication skills,-,-,-,28,55,Egiziano - C2,Inglese - B1,-,"IELTS,CFA",6,29800,0,1
+41,HR Consultant,Bachelor D.,Lapio,Organisational development,Labour legislation,HR Management,-,-,Coaching,Negotiation,Ability to listen,Management of the conflict,Empathy,25,34,Tunisino - C2,-,-,,3,36400,1,0
+42,Market analyst,Degree,Pentone,Strategies of the market,-,-,-,-,Critical thinking,Customer orientation,Problem solving,Effective presentation,Teamwork,25,35,Italiano - C2,-,-,CIA,6,33300,1,1
+43,Data analyst,Degree,Ariccia,Tableau,Python,R,-,-,Proactivity,-,-,-,-,25,34,Italiano - C2,-,-,,4,44100,0,1
+44,Surgeon,Bachelor D.,Caselle in Pittari,Surgical physiology,Specialized surgical procedures,Operating block management,-,-,Patience,Decision making,Management of stress,Ethics,Precision,30,53,Cubano - C2,Finlandese - A2,-,CMeA,5,106400,0,1
+45,Doctor,Degree,Massafra,Anatomy,Pharmacology,Management of patients,-,-,Patience,-,-,-,-,28,53,Statunitense - C2,-,-,CHISP,1,69500,0,1
+46,Financial consultant,Bachelor D.,Banzi,Investments,Insurance,Economics,Commercial Law,-,Precision,-,-,-,-,25,33,Tunisino - C2,Messicano - B1,Irlandese - A1,IELTS,4,47000,0,1
+47,Computer security analyst,Bachelor D.,Formigine,Incident Management,Cyber Security,Analysis of vulnerabilities,SELinux,GnuPG,Innovation,-,-,-,-,26,44,Irlandese - C2,-,-,"PMP,CEH",2,53700,0,1
+48,Data analyst,Master D.,Cantiano,Microsoft Excel,MATLAB,Python,Tableau,Database,Clear communication,Problem solving,Creativity,Critical analysis,Proactivity,25,35,Italiano - C2,-,-,,2,36300,1,0
+49,Financial analyst,Bachelor D.,Pratella,Economic Law,Assessment of investments,Investment,-,-,Effective communication,Critical analysis,-,-,-,25,34,Venezuelano - C2,-,-,,3,34800,1,0
+50,Surgeon,Degree,Portico di Caserta,Surgical Anatomy,General Surgery,Operating block management,-,-,Ethics,-,-,-,-,30,60,Venezuelano - C2,-,-,EMT,2,58000,0,0
+51,Architect,Master D.,Stimigliano,Rhinoceros 3D,EnergyPlus,Asana,-,-,Creativity,-,-,-,-,30,40,Inglese - C2,Francese - B1,-,,3,41000,1,0
+52,HR Consultant,Degree,Piuro,HR Management,Industrial relations,Selection and evaluation techniques,Recruitment,Labour legislation,Management of stress,Management of the conflict,-,-,-,25,43,Inglese - C2,Italiano - A2,Italiano - A2,,4,42900,1,1
+53,Computer security analyst,Master D.,Marsicovetere,SELinux,Keepass,GnuPG,-,-,Innovation,Adaptability,Troubleshooting,-,-,26,29,Inglese - C2,-,-,,3,76200,1,0
+54,Pharmacist,Bachelor D.,Sestri Levante,Information on drugs,Dispensing of drugs,Control of prescriptions,-,-,Communication,Precision,Attention to the customer,-,-,25,48,Italiano - C2,-,-,IELTS,2,26700,0,0
+55,Developer,Null,Erve,Database,Algorithm,Operating systems,PHP,Kubernetes,Creativity,Professional Ethic,Problem solving,Retail aptitude,-,22,25,Inglese - C2,Tedesco - C1,-,,1,37500,0,0
+56,Nurse specialist,Master D.,San Cosmo Albanese,Administration of drugs,Specialized nursing assistance,Oncology,-,-,Empathy,Organisation,Management of emergencies,-,-,25,47,Italiano - C2,Egiziano - A2,-,,2,43000,0,0
+57,Market analyst,Bachelor D.,Capodimonte,Analysis of data,Analysis of trends,Models of business,-,-,Adaptability,Customer orientation,-,-,-,25,30,Italiano - C2,-,-,"CFA,CIA,CFE",2,31400,1,0
+58,HR Consultant,Master D.,Caraffa del Bianco,HR Management,Labour legislation,Organisational development,Analysis of data,-,Management of stress,Ability to listen,Management of the conflict,Empathy,-,25,33,Italiano - C2,-,-,IELTS,3,30100,1,0
+59,Surgeon,Master D.,Pauli Arbarei,General Surgery,Operating block management,Specialized surgical procedures,-,-,Management of stress,Decision making,Patience,Precision,-,30,32,Turco - C2,-,-,,1,51100,0,0
+60,Computer security analyst,Bachelor D.,Samone,Cyber Security,Analysis of vulnerabilities,Cryptography,Incident Management,Security of the networks,Collaboration,Critical thinking,-,-,-,26,44,Inglese - C2,Italiano - A2,Italiano - A1,,4,117500,0,1
+61,Asset manager,Degree,Sovizzo,Financial analysis,Investments,-,-,-,Customer orientation,-,-,-,-,30,33,Italiano - C2,-,-,,2,57700,0,0
+62,Financial analyst,Bachelor D.,Rivarolo Mantovano,Economics,Risk Management,Assessment of investments,Financial analysis,Economic Law,Attention to detail,-,-,-,-,25,35,Italiano - C2,-,-,CGFM,6,39700,0,1
+63,Operation manager,Master D.,Fumane,Six Sigma,-,-,-,-,Management of time,Troubleshooting,-,-,-,30,44,Israeliano - C2,-,-,IELTS,2,111500,1,1
+64,Data analyst,Bachelor D.,Canazei,SQL,Statistics,Database,Tableau,Root,Creativity,Problem solving,Proactivity,-,-,25,37,Italiano - C2,-,-,,3,35400,0,0
+65,Nurse,Degree,Fino Mornasco,Pharmacology,-,-,-,-,Empathy,Organisation,Communication,Management of stress,Flexibility,22,41,Italiano - C2,-,-,EMT,0,21400,0,0
+66,Data Scientist,Master D.,Citerna,Statistical,-,-,-,-,Solving the problems,-,-,-,-,25,26,Italiano - C2,Francese - C1,-,,1,37500,0,0
+67,Nurse specialist,Degree,Lomazzo,Administration of drugs,Specialized nursing assistance,Monitoring of patients,Intensive Care Unit,-,Management of emergencies,Empathy,Organisation,-,-,25,34,Italiano - C2,Canadese - A2,-,CPHQ,4,49300,0,1
+68,Data analyst,Degree,Minucciano,Tableau,-,-,-,-,Proactivity,-,-,-,-,25,40,Argentino - C2,Italiano - B1,-,,2,27600,0,1
+69,Developer,Bachelor D.,Lonato del Garda,C,Kubernetes,Git,-,-,Flexibility,Innovation,Professional Ethic,-,-,22,28,Turco - C2,-,-,CCNA,6,48600,0,1
+70,Computer security analyst,Degree,San Gimignano,GnuPG,-,-,-,-,Innovation,Collaboration,Troubleshooting,-,-,26,44,Italiano - C2,Tedesco - C1,-,,3,88200,1,1
+71,Computer security analyst,Bachelor D.,Erli,Security of the networks,SELinux,Analysis of vulnerabilities,Cyber Security,GnuPG,Collaboration,Critical thinking,-,-,-,26,39,Italiano - C2,-,-,"CompTIA A+,CISSP,IELTS",2,73800,0,0
+72,Legal consultant,Degree,Piane Crati,Right to Work,Tax legislation,Contracts,Civil Law,-,Capacity for research,Integrity,Management of stress,Ethics,-,28,47,Cubano - C2,-,-,,3,32800,0,1
+73,Designer,Null,Saracinesco,Adobe Illustrator,-,-,-,-,Innovation,Empathy,Creativity,Adaptability,Critical thinking,22,24,Inglese - C2,-,-,,2,29400,1,1
+74,Manager,Degree,Tavullia,Negotiation,-,-,-,-,Analytical thinking,Adaptability,Effective communication,Leadership,-,30,31,Italiano - C2,-,-,,1,82800,0,0
+75,X-ray technician,Degree,San Martino in Passiria,Preparation of patients,Use of imaging equipment,Radiological safety,X-ray and scan reading,-,Communication,Precision,Organizational skills,Speed of learning,Attention to detail,25,26,Inglese - C2,-,-,,1,20100,0,0
+76,Nurse,Bachelor D.,Massafra,Health care,Pharmacology,-,-,-,Flexibility,-,-,-,-,22,41,Turco - C2,Cubano - B1,-,"CMeA,EMT,CPHQ",3,33200,0,0
+77,Web Developer,Bachelor D.,Chiusano d'Asti,Ruby,SQL,Doker,Design patterns,-,Flexibility,-,-,-,-,25,29,Tedesco - C2,-,-,,4,61400,1,0
+78,Asset manager,Master D.,Quinto Vercellese,Economics,-,-,-,-,Strategic Thinking,Attention to detail,Customer orientation,Negotiation,-,30,30,Colombiano - C2,Italiano - A2,-,,0,53200,0,1
+79,Nurse specialist,PhD,Vico del Gargano,Monitoring of patients,Administration of drugs,Intensive Care Unit,Oncology,-,Organisation,Empathy,-,-,-,27,47,Francese - C2,-,-,,5,48800,0,0
+80,Teacher,Bachelor D.,Castelletto d'Erro,Mathematics,-,-,-,-,Patience,Communication,Empathy,-,-,25,45,Inglese - C2,Turco - A2,Italiano - A1,"CEP,CPTD",2,19600,0,1
+81,Marketing manager,Bachelor D.,Quingentole,Strategies of marketing,Planning of campaigns,-,-,-,Leadership,Adaptability,Management of the team,Ability to adapt to new technologies,Creativity,28,53,Italiano - C2,-,-,,3,96700,1,1
+82,Financial analyst,Degree,Sogliano Cavour,Investment,-,-,-,-,Attention to detail,Effective communication,Problem solving,-,-,25,34,Italiano - C2,Tunisino - B2,-,,4,42200,0,1
+83,Surgeon,Degree,Cairano,Medical imaging,Surgical physiology,Specialized surgical procedures,Operating block management,Surgical Anatomy,Teamwork,Precision,Management of stress,Ethics,Patience,30,51,Italiano - C2,-,-,EMT,7,76900,0,1
+84,HR Consultant,Master D.,Casale Cremasco-Vidolasco,Recruitment,Industrial relations,HR Management,Organisational development,Training and development,Coaching,Negotiation,Ability to listen,Management of stress,-,25,48,Italiano - C2,-,-,,1,30200,1,0
+85,Designer,Bachelor D.,Fagagna,Sketch,Adobe Photoshop,Figma,-,-,Critical thinking,Creativity,-,-,-,22,32,Inglese - C2,-,-,,4,28100,0,0
+86,Web Developer,Degree,Campo nell'Elba,Ruby,XAMPP,-,-,-,Effective communication,Flexibility,Ability to manage stress,-,-,25,42,Italiano - C2,-,-,,3,33700,0,0
+87,Developer,Null,Ventotene,Algorithm,Kubernetes,SQL,Doker,PHP,Innovation,Problem solving,Retail aptitude,Creativity,Professional Ethic,22,24,Italiano - C2,-,-,"IELTS,CAE",1,40900,1,0
+88,Computer security analyst,Degree,Olivola,Incident Management,SELinux,-,-,-,Troubleshooting,Collaboration,Innovation,Adaptability,Critical thinking,26,45,Inglese - C2,Italiano - C1,-,"CISSP,CEH,CompTIA A+",3,105300,0,0
+89,Therapist,Bachelor D.,Colonnella,Theories of Behavior,Ethics,Cognitive behavioral therapy,Psychological evaluation,Psychopharmacology,Problem solving,Confidentiality,Ethics,Empathy,-,28,53,Pakistano - C2,Italiano - B1,-,,2,24100,0,1
+90,Computer security analyst,Degree,Bressanone,SELinux,-,-,-,-,Adaptability,Critical thinking,-,-,-,26,31,Pakistano - C2,-,-,"PMP,IELTS",5,94300,1,1
+91,System administrator,Degree,Varano de' Melegari,SMTP,-,-,-,-,Patience,Troubleshooting,Management of emergencies,-,-,25,45,Italiano - C2,Francese - B1,Inglese - A1,,1,39100,0,1
+92,Architect,Master D.,Monte San Giovanni in Sabina,Coordination of the project,Asana,AutoCAD,Rhinoceros 3D,-,Effective communication,-,-,-,-,30,33,Tunisino - C2,-,-,,3,57400,1,0
+93,Risk expert,PhD,Villaurbana,Environmental risk,Management of losses,Management of the crisis,Data analysis,Financial risk,Decision making,Management of stress,Analytical thinking,-,-,28,50,Francese - C2,-,-,,4,27200,0,0
+94,X-ray technician,Bachelor D.,Gera Lario,Preparation of patients,X-ray and scan reading,-,-,-,Confidentiality,Attention to detail,Precision,Empathy,-,25,32,Portoghese - C2,Inglese - B2,-,,4,25200,0,0
+95,Designer,Master D.,Vitulazio,Blender,-,-,-,-,Critical thinking,Creativity,Adaptability,Empathy,-,24,28,Tedesco - C2,Italiano - A2,Canadese - B1,,2,29800,0,0
+96,Risk expert,Degree,Spilinga,Management of the crisis,-,-,-,-,Decision making,Analytical thinking,Management of stress,-,-,28,46,Cubano - C2,Italiano - A1,-,CPA,2,46400,0,0
+97,X-ray technician,Bachelor D.,Calusco d'Adda,Preparation of patients,Use of imaging equipment,X-ray and scan reading,-,-,Communication,Speed of learning,Ethics,Attention to detail,-,25,54,Inglese - C2,-,-,,1,28400,0,1
+98,Data Scientist,Bachelor D.,Vallebona,Keras,R,TensorFlow,Python,-,Innovation,Solving the problems,-,-,-,25,38,Cubano - C2,-,-,,2,24200,1,1
+99,Market analyst,Bachelor D.,Santa Caterina dello Ionio,Market research,Analysis of data,Analysis of trends,Models of business,Strategies of the market,Adaptability,Problem solving,Effective presentation,Critical thinking,Teamwork,25,35,Norvegese - C2,Inglese - A1,Italiano - A2,,3,47900,0,1
