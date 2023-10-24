@@ -1,12 +1,11 @@
 import sys
-from typing import Tuple
-
-from interpret.glassbox import ExplainableBoostingClassifier as EBClassifier
-from numpy import asarray
-from pandas import read_csv, DataFrame
 from sklearn.metrics import ndcg_score
-from sklearn.model_selection import train_test_split, ParameterGrid
+from numpy import asarray
+from interpret.glassbox import ExplainableBoostingClassifier as EBClassifier
 from tqdm import tqdm
+from sklearn.model_selection import train_test_split, ParameterGrid
+from pandas import read_csv, DataFrame
+from typing import Tuple
 
 
 class EBMGridSearch:
@@ -60,18 +59,22 @@ class EBMGridSearch:
 
         return avg_nDCG / n_groups
 
+    def fit(self, **conf):
+        model = EBClassifier(**self.default_par, **conf)
+        model.fit(self.X_train, self.y_train)
+        return model
+
     def grid_search(self, hyperparameters: dict = None):
 
-        best_model_ = (None, None, -sys.maxsize)
+        best_model_: Tuple = (None, None, -sys.maxsize)
 
         progress_bar = tqdm(ParameterGrid(hyperparameters))
         for conf in progress_bar:
-            model = EBClassifier(**self.default_par, **conf)
-            model.fit(self.X_train, self.y_train)
 
+            model = self.fit(**conf)
             avg_nDCG = self.eval_model(model)
 
             if avg_nDCG > best_model_[2]:
                 best_model_ = (model, conf, avg_nDCG)
-            progress_bar.set_postfix(nDCG=best_model_[2])
+            progress_bar.set_postfix(nDCG_15_at=best_model_[2])
         return best_model_
