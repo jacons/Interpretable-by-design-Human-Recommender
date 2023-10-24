@@ -10,32 +10,34 @@ from Generator.SkillGraph import SkillGraph
 
 
 class MatchingScore:
-    def __init__(self, citizen_dist: str, jobGenerator: JobGenerator):
+    def __init__(self, cities_dist: str, jobGenerator: JobGenerator):
         self.skillGraph = SkillGraph(jobGenerator.jobs)
 
         self.education_ranks = dict(zip(jobGenerator.education["Education"], jobGenerator.education["Rank"]))
         self.len_ed_rank = len(self.education_ranks)
 
-        self.distance = read_csv(citizen_dist, index_col=[0, 1], skipinitialspace=True)
+        self.distance = read_csv(cities_dist, index_col=[0, 1], skipinitialspace=True)
         self.max_distance = self.distance["D"].max()
 
         self.lvl2value = {t[1]: t[0] for t in jobGenerator.languages_level.itertuples()}
 
         self.weights = np.array([
-            8,  # Education
+            10,  # Education
             2,  # City
             15,  # Skills
             5,  # SoftSkills
             2,  # Age
-            6,  # Language
-            3,  # Certificates
-            2,  # Experience
-            1,  # Offered_Salary
+            7,  # Language
+            4,  # Certificates
+            3,  # Experience
+            2,  # Offered_Salary
             1,  # SmartWork
             1,  # Experience abroad
 
         ], dtype=np.float32)
-        self.weights /= self.weights.sum()
+
+        min_, max_ = min(self.weights), max(self.weights)
+        self.weights = (self.weights - min_) / (max_ - min_)
 
     def educationScore(self, offer: str, cv: str) -> int:
         edu_cv = self.education_ranks.get(cv)
@@ -49,8 +51,8 @@ class MatchingScore:
         if cityA == cityB:
             return 1
 
-        s_citizen = sorted([cityA, cityB])
-        dist = self.distance.loc[(s_citizen[0], s_citizen[1])].values[0]
+        s_cities = sorted([cityA, cityB])
+        dist = self.distance.loc[(s_cities[0], s_cities[1])].values[0]
 
         return 1 if dist < range_ else 1 - (dist - range_) / self.max_distance
 
@@ -58,6 +60,8 @@ class MatchingScore:
 
         offer = set([x for x in offer if x != "-"])
         cv = set([x for x in cv if x != "-"])
+
+        n_offer_skil = len(offer)
 
         intersect = list(offer & cv)
         score = len(intersect) / len(offer)  # "1" perfect, "0" bad
@@ -72,14 +76,24 @@ class MatchingScore:
                 paths = []
                 for cv_sk_ in cv:
                     n_hops = self.skillGraph.shortest_path(cv_sk_, job_sk_) - 1
-                    paths.append(1 / n_hops)
-                plus += min(paths)
-            plus /= len(offer)
+                    paths.append(n_hops)
+                plus += 1 / min(paths)
+            plus = plus / n_offer_skil
 
         return score + plus
 
     @staticmethod
     def softSkillScore(offer: list, cv: list) -> float:
+
+        offer = set([x for x in offer if x != "-"])
+        cv = set([x for x in cv if x != "-"])
+
+        if len(offer) == 0:
+            return 0
+        return len(offer & cv) / len(offer)
+
+    @staticmethod
+    def certificateScore(offer: list, cv: list) -> float:
 
         offer = set([x for x in offer if x != "-"])
         cv = set([x for x in cv if x != "-"])
@@ -121,7 +135,7 @@ class MatchingScore:
     @staticmethod
     def experienceScore(offer: int, cv: int) -> float:
         # Salary max 1, min 0
-        return 1 if cv >= offer else max((cv - offer) / 6 + 1, 0)
+        return 1 if cv >= offer else 0 if cv == 0 else max((cv - offer) / 6 + 1, 0)
 
     @staticmethod
     def salaryScore(offer: int, cv: int) -> float:
@@ -134,27 +148,27 @@ class MatchingScore:
 
         for idx, (offer, cv) in enumerate(tqdm(combinations)):
             offer_skills = [offer[4], offer[5], offer[6], offer[7], offer[8]]
-            cv_skills = [cv[4], cv[5], cv[6], cv[7], cv[8]]
+            cv_skills = [cv[5], cv[6], cv[7], cv[8], cv[9]]
             offer_s_skills = [offer[9], offer[10], offer[11], offer[12], offer[13]]
-            cv_s_skills = [cv[9], cv[10], cv[11], cv[12], cv[13]]
-            cv_age, age_min, age_max = cv[14], offer[14], offer[15]
-            cv_languages = [cv[15], cv[16], cv[17]]
+            cv_s_skills = [cv[10], cv[11], cv[12], cv[13], cv[14]]
+            cv_age, age_min, age_max = cv[15], offer[14], offer[15]
+            cv_languages = [cv[16], cv[17], cv[18]]
             offer_languages = [offer[16], offer[17], offer[18]]
-            cv_sm, offer_sm = cv[21], offer[22]
-            cv_ea, offer_ea = cv[22], offer[23]
-            cv_cert, offer_cert = cv[18], offer[19]
+            cv_sm, offer_sm = cv[22], offer[22]
+            cv_ea, offer_ea = cv[23], offer[23]
+            cv_cert, offer_cert = cv[19], offer[19]
 
             score[idx, 0] = offer[0]
             score[idx, 1] = cv[0]
-            score[idx, 2] = self.educationScore(offer[2], cv[1])
-            score[idx, 3] = self.cityScore(offer[3], cv[2], cv[3])
+            score[idx, 2] = self.educationScore(offer[2], cv[2])
+            score[idx, 3] = self.cityScore(offer[3], cv[3], cv[4])
             score[idx, 4] = self.skillScore(offer_skills, cv_skills)
             score[idx, 5] = self.softSkillScore(offer_s_skills, cv_s_skills)
             score[idx, 6] = self.ageScore(cv_age, age_min, age_max)
             score[idx, 7] = self.languageScore(offer_languages, cv_languages)
-            score[idx, 8] = self.softSkillScore(offer_cert, cv_cert)
-            score[idx, 9] = self.experienceScore(offer[20], cv[19])
-            score[idx, 10] = self.salaryScore(offer[21], cv[20])
+            score[idx, 8] = self.certificateScore(offer_cert, cv_cert)  # certificate no skill!!!!!
+            score[idx, 9] = self.experienceScore(offer[20], cv[20]) if cv[1] == offer[1] else 0
+            score[idx, 10] = self.salaryScore(offer[21], cv[21])
             score[idx, 11] = (1 if cv_sm else 0) if offer_sm else 0  # SmartWork max 1, min 0
             score[idx, 12] = (1 if cv_ea else 0) if offer_ea else 0  # Experience_abroad max 1, min 0
 

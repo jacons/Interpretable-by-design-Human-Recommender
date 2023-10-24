@@ -2,6 +2,7 @@ import itertools
 import sys
 
 import networkx as nx
+from matplotlib import pyplot as plt
 from numpy import zeros, eye
 
 
@@ -44,3 +45,15 @@ class SkillGraph:
 
         except nx.NetworkXNoPath:
             return sys.maxsize if output == "len" else None
+
+    def show_connected_components(self):
+        connected_components = list(nx.connected_components(self.__skill_graph))
+
+        for i, component in enumerate(connected_components, 1):
+            subgraph = self.__skill_graph.subgraph(component)
+            pos = nx.spring_layout(subgraph)
+
+            plt.figure()
+            labels = {node_id: self.__id2name[node_id] for node_id in subgraph.nodes()}
+            nx.draw(subgraph, pos, with_labels=True, node_color='green', node_size=50, font_size=10, labels=labels)
+            plt.title(f"Connected Component ", i)

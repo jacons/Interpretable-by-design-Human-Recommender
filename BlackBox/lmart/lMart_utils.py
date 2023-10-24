@@ -37,7 +37,11 @@ class LMARTGridsearch:
         self.qIds_test = self.test.groupby("qId")["qId"].count().to_numpy()
         self.X_test, self.y_test = self.test.iloc[:, 2:13], self.test[["qId", "kId", "labels"]]
 
-        self.default_par = dict(
+        def log_output(r):
+            # callback function (used to avoid logging during the grid-search)
+            pass
+
+        self.default_par = dict(  # default parameters pt.1
             objective="lambdarank",
             class_weight="balanced",
             metric="ndcg",
@@ -46,11 +50,7 @@ class LMARTGridsearch:
             n_jobs=-1,
             verbose=-1
         )
-
-        def log_output(eval_result):
-            pass
-
-        self.ranker_par = dict(
+        self.ranker_par = dict(  # default ranker parameters (used in fitting) pt.2
             X=self.X_train,
             y=self.y_train["labels"],
             group=self.qIds_train,
@@ -63,31 +63,48 @@ class LMARTGridsearch:
         self.nDCG_at = nDCG_at
         return
 
-    def eval_model(self, model: LGBMRanker, df: DataFrame = None, qIds: ndarray = None) -> float:
-
+    def eval_model(self, model: LGBMRanker, df: DataFrame = None,
+                   qIds: ndarray = None, nDCG_at: int = -1) -> float:
+        """
+        Custom evaluation function: the function groups by the "job-offers" and foreach set, it predicts
+        the "lambdas" that it uses to sort (by relevance).
+        After obtained nDCGs apply the average.
+        """
         df = self.valid if df is None else df
         n_qIds = len(self.qIds_val) if qIds is None else len(qIds)
+        nDCG_at = self.nDCG_at if nDCG_at == -1 else nDCG_at
 
         avg_nDCG = 0
         for _, v in df.groupby("qId"):
             tr, y = v.iloc[:, 2:13], asarray([v["labels"].to_numpy()])
-            y_pred = asarray([model.predict(tr)])
-            avg_nDCG += ndcg_score(y, y_pred, k=self.nDCG_at)
+            lambdas = asarray([model.predict(tr)])  # predict lambdas
+
+            # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG
+            avg_nDCG += ndcg_score(y, lambdas, k=nDCG_at)
+
+        # dived by the number of jobs-offer to obtain the average.
         return avg_nDCG / n_qIds
+
+    def fit(self, **conf) -> LGBMRanker:
+        model = LGBMRanker(**self.default_par, **conf)
+        model.fit(**self.ranker_par)
+        return model
 
     def grid_search(self, hyperparameters: dict = None) -> Tuple:
 
-        best_model_ = (None, None, -sys.maxsize)
+        # keep the current: (best_model, best_params, best nDCG)
+        best_model_: Tuple = (None, None, -sys.maxsize)
 
+        # explore all possible combinations of hyperparameters
         progress_bar = tqdm(ParameterGrid(hyperparameters))
         for conf in progress_bar:
 
-            model = LGBMRanker(**self.default_par, **conf)
-            model.fit(**self.ranker_par)
-
+            model = self.fit(**conf)
             avg_nDCG = self.eval_model(model)
+
+            # if the model is better respect to the previous one, it updates the tuple
             if avg_nDCG > best_model_[2]:
                 best_model_ = (model, conf, avg_nDCG)
 
-            progress_bar.set_postfix(nDCG=best_model_[2])
+            progress_bar.set_postfix(nDCG_15=best_model_[2])
         return best_model_

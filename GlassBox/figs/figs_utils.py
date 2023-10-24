@@ -17,6 +17,7 @@ class FIGSGridSearch:
 
         scores = read_csv(path_dataset)
 
+        # features for the decision trees
         self.feature_name = list(scores.iloc[:, 2:13].columns)
 
         # Holdout splitting
@@ -30,19 +31,29 @@ class FIGSGridSearch:
         self.nDCG_at = nDCG_at
         return
 
-    def eval_model(self, model: FIGSRegressor, df: DataFrame = None) -> float:
-
+    def eval_model(self, model: FIGSRegressor, df: DataFrame = None, nDCG_at: int = -1) -> float:
+        """
+        Custom evaluation function: the function groups by the "job-offers" and foreach set, it predicts
+        the "regression score" that it uses to sort (by relevance).
+        After obtained nDCGs apply the average.
+        """
         df = self.valid if df is None else df
+        nDCG_at = self.nDCG_at if nDCG_at == -1 else nDCG_at
 
         avg_nDCG, n_groups = 0, 0
 
         for _, v in df.groupby("qId"):
             tr, y = v.iloc[:, 2:13].values, asarray([v["labels"].to_numpy()])
             y_pred = asarray([model.predict(tr)])
-            avg_nDCG += ndcg_score(y, y_pred, k=self.nDCG_at)
+            avg_nDCG += ndcg_score(y, y_pred, k=nDCG_at)
             n_groups += 1
 
         return avg_nDCG / n_groups
+
+    def fit(self, **param) -> FIGSRegressor:
+        model = FIGSRegressor(**param)
+        model.fit(self.X_train, self.y_train, self.feature_name)
+        return model
 
     @staticmethod
     def split_list(all_configs, n):
@@ -53,7 +64,7 @@ class FIGSGridSearch:
     def parallel_gridsearch_routine(self, params: list, worker_id: int, sycDict: dict):
 
         print("Start worker ", worker_id)
-        best_model_ = (None, None, -sys.maxsize)
+        best_model_: Tuple = (None, None, -sys.maxsize)
 
         for conf in params:
             model = FIGSRegressor(**conf)
@@ -95,15 +106,17 @@ class FIGSGridSearch:
 
     def grid_search(self, hyperparameters: dict = None):
 
-        best_model_ = (None, None, -sys.maxsize)
+        # keep the current: (best_model, best_params, best nDCG)
+        best_model_: Tuple = (None, None, -sys.maxsize)
 
+        # explore all possible combinations of hyperparameters
         progress_bar = tqdm(ParameterGrid(hyperparameters))
         for conf in progress_bar:
-            model = FIGSRegressor(**conf)
-            model.fit(self.X_train, self.y_train, self.feature_name)
 
+            model = self.fit(**conf)
             avg_nDCG = self.eval_model(model)
 
+            # if the model is better respect to the previous one, it updates the tuple
             if avg_nDCG > best_model_[2]:
                 best_model_ = (model, conf, avg_nDCG)
             progress_bar.set_postfix(nDCG=best_model_[2])

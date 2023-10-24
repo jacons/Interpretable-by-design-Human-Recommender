@@ -25,7 +25,7 @@ def build_citizen_distance(path: str = None,
     # Reduce the dimension of the file and combine the citizen
     df = df.sample(frac=sub_sample)
 
-    all_citizen_path = "all_citizen.csv" if all_citizen_path is None else all_citizen_path
+    all_citizen_path = "all_cities.csv" if all_citizen_path is None else all_citizen_path
     df["comune"].to_csv(all_citizen_path, index=False)
     print("Completed")
 
@@ -52,13 +52,13 @@ def build_citizen_distance(path: str = None,
     # Casting and sorting
     df = df[["A", "B", "D"]].astype({"A": "string", "B": "string", "D": "int"})
     df.sort_values(["A", "B", "D"], inplace=True)
-    output_file = "citizen_distance.csv" if c_distance_path is None else c_distance_path
+    output_file = "cities_distance.csv" if c_distance_path is None else c_distance_path
     df.to_csv(output_file, index=False)
     print("Completed")
 
     return df
 
 
-build_citizen_distance(sub_sample=0.15, c_distance_path="../sources/citizen_distance.csv",
-                       all_citizen_path="../sources/all_citizen.csv")
+build_citizen_distance(sub_sample=0.15, c_distance_path="../sources/cities_distance.csv",
+                       all_citizen_path="../sources/all_cities.csv")
 # %%
