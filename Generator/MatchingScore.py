@@ -1,4 +1,5 @@
 from itertools import product
+from typing import Tuple
 
 import numpy as np
 from numpy.random import normal
@@ -10,7 +11,16 @@ from Generator.SkillGraph import SkillGraph
 
 
 class MatchingScore:
-    def __init__(self, cities_dist: str, jobGenerator: JobGenerator):
+    def __init__(self,
+                 jobGenerator: JobGenerator,
+                 cities_dist: str,
+                 labels: int,
+                 weight: np.ndarray,
+                 noise: Tuple[float]):
+
+        self.n_labels = labels
+        self.noise = noise  # mean and stddev
+
         self.skillGraph = SkillGraph(jobGenerator.jobs)
 
         self.education_ranks = dict(zip(jobGenerator.education["Education"], jobGenerator.education["Rank"]))
@@ -21,23 +31,11 @@ class MatchingScore:
 
         self.lvl2value = {t[1]: t[0] for t in jobGenerator.languages_level.itertuples()}
 
-        self.weights = np.array([
-            10,  # Education
-            2,  # City
-            15,  # Skills
-            5,  # SoftSkills
-            2,  # Age
-            7,  # Language
-            4,  # Certificates
-            3,  # Experience
-            2,  # Offered_Salary
-            1,  # SmartWork
-            1,  # Experience abroad
+        self.weights = self.normalize_weights(weight)
 
-        ], dtype=np.float32)
-
-        min_, max_ = min(self.weights), max(self.weights)
-        self.weights = (self.weights - min_) / (max_ - min_)
+    @staticmethod
+    def normalize_weights(weights: np.ndarray):
+        return weights / weights.sum()
 
     def educationScore(self, offer: str, cv: str) -> int:
         edu_cv = self.education_ranks.get(cv)
@@ -135,15 +133,15 @@ class MatchingScore:
     @staticmethod
     def experienceScore(offer: int, cv: int) -> float:
         # Salary max 1, min 0
-        return 1 if cv >= offer else 0 if cv == 0 else max((cv - offer) / 6 + 1, 0)
+        return 1 if cv >= offer else 0 if cv <= 0 else max((cv - offer) / 8 + 1, 0)
 
     @staticmethod
     def salaryScore(offer: int, cv: int) -> float:
         # Salary max 1, min 0
-        return 1 if cv <= offer else max((offer - cv) / 300 + 1, 0)
+        return 1 if cv <= offer else max((offer - cv) / 500 + 1, 0)
 
-    def scoreFunction(self, offers: DataFrame, cvs: DataFrame, path: str = None):
-        combinations = list(product(offers.itertuples(), cvs.itertuples()))
+    def scoreFunction(self, offers: DataFrame, curricula: DataFrame, path: str = None):
+        combinations = list(product(offers.itertuples(), curricula.itertuples()))
         score = np.zeros((len(combinations), 13), dtype=np.float32)
 
         for idx, (offer, cv) in enumerate(tqdm(combinations)):
@@ -189,11 +187,12 @@ class MatchingScore:
         score['w_score'] = features.apply(lambda row: np.dot(row, self.weights), axis=1)
 
         # Summing in both the random noise
-        score["score"] += normal(0, 0.2, score.shape[0])  # random noise
-        score['w_score'] += normal(0, 0.2, score.shape[0])  # random noise
+        score["score"] += normal(self.noise[0], self.noise[1], score.shape[0])  # random noise
+        score['w_score'] += normal(self.noise[0], self.noise[1], score.shape[0])  # random noise
 
         # labels
-        intervals, edges = np.histogram(score.sort_values("w_score", ascending=False)["w_score"].to_numpy(), bins=6)
+        intervals, edges = np.histogram(score.sort_values("w_score", ascending=False)["w_score"].to_numpy(),
+                                        bins=self.n_labels)
         score2inter = {i: (edges[i], edges[i + 1]) for i in range(len(intervals))}
 
         def score2label(score_value: float) -> int:
@@ -202,8 +201,8 @@ class MatchingScore:
             for i, (v_min, v_max) in score2inter.items():
                 if v_min <= score_value < v_max:
                     return i
-            if score_value >= score2inter[5][1]:
-                return 5
+            if score_value >= score2inter[self.n_labels - 1][1]:
+                return self.n_labels - 1
 
         score["labels"] = score['w_score'].apply(score2label)
         if path is not None:

@@ -1,5 +1,6 @@
 import json
 import random
+from typing import Tuple
 
 import numpy as np
 import pandas as pd
@@ -10,11 +11,14 @@ from tqdm import tqdm
 
 
 class JobGenerator:
-    def __init__(self, jobs_lib: str,
+    def __init__(self,
+                 jobs_lib: str,
                  cities: str,
                  nationality: str,
                  education: str,
-                 language_level: str):
+                 language_level: str,
+                 lang_level_dist:Tuple[float],
+                 certificates_dist:Tuple[float]):
         """
         JobGenerator is a tool that allows us to generate synthetic data about the "curriculums" and "jobs offer".
         In also can match them to generate the score(or label) (supervised task).
@@ -24,6 +28,8 @@ class JobGenerator:
         :param education: Education hierarchy
         """
 
+        self.certificates_dist = certificates_dist
+        self.lang_level_dist = lang_level_dist
         with open(jobs_lib, "r") as f:
             self.jobs = json.load(f)
 
@@ -60,7 +66,7 @@ class JobGenerator:
         lang_list = [nationality + " - C2"]
         other_l = self.languages.drop(self.languages[self.languages["Languages"] == nationality].index)
 
-        n_languages = random.choices(arange(min_, max_ + 1), k=1, weights=[0.70, 0.20, 0.10])[0]
+        n_languages = random.choices(arange(min_, max_ + 1), k=1, weights=self.lang_level_dist)[0]
         for i in range(n_languages):
             sampled_language = other_l.sample(n=1, weights="P")["Languages"].values[0]
             sampled_level = self.languages_level.sample(n=1, weights="P")["Level"].values[0]
@@ -72,11 +78,10 @@ class JobGenerator:
             lang_list.extend(["-" for _ in range(n_languages, max_)])
         return lang_list
 
-    @staticmethod
-    def generate_certificates(all_certificates: list, min_: int = 0, max_: int = 3) -> str:
+    def generate_certificates(self, all_certificates: list, min_: int = 0, max_: int = 3) -> str:
         max_cert = len(all_certificates)
 
-        n_cert = random.choices(arange(min_, max_ + 1), k=1, weights=[0.41, 0.28, 0.19, 0.12])[0]
+        n_cert = random.choices(arange(min_, max_ + 1), k=1, weights=self.certificates_dist)[0]
         n_cert = min(n_cert, max_cert)
 
         r_idx_skill = choice(arange(0, max_cert), size=n_cert, replace=False)

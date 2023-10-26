@@ -1,6 +1,7 @@
 import sys
 from typing import Tuple
 
+import numpy as np
 from lightgbm import LGBMRanker
 from numpy import asarray, ndarray
 from pandas import read_csv, DataFrame
@@ -8,8 +9,10 @@ from sklearn.metrics import ndcg_score
 from sklearn.model_selection import train_test_split, ParameterGrid
 from tqdm import tqdm
 
+from Utils.Utils import GridSearch
 
-class LMARTGridsearch:
+
+class LMARTGridsearch(GridSearch):
 
     def __init__(self, path_dataset: str,
                  random_state: int = None,
@@ -64,7 +67,7 @@ class LMARTGridsearch:
         return
 
     def eval_model(self, model: LGBMRanker, df: DataFrame = None,
-                   qIds: ndarray = None, nDCG_at: int = -1) -> float:
+                   qIds: ndarray = None, nDCG_at: list = None) -> dict:
         """
         Custom evaluation function: the function groups by the "job-offers" and foreach set, it predicts
         the "lambdas" that it uses to sort (by relevance).
@@ -72,18 +75,21 @@ class LMARTGridsearch:
         """
         df = self.valid if df is None else df
         n_qIds = len(self.qIds_val) if qIds is None else len(qIds)
-        nDCG_at = self.nDCG_at if nDCG_at == -1 else nDCG_at
+        nDCG_at = [self.nDCG_at] if nDCG_at is None else nDCG_at
+        avg_nDCG = np.zeros((len(nDCG_at)))
 
-        avg_nDCG = 0
         for _, v in df.groupby("qId"):
             tr, y = v.iloc[:, 2:13], asarray([v["labels"].to_numpy()])
             lambdas = asarray([model.predict(tr)])  # predict lambdas
 
             # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG
-            avg_nDCG += ndcg_score(y, lambdas, k=nDCG_at)
+            for i, nDCG in enumerate(nDCG_at):
+                avg_nDCG[i] += ndcg_score(y, lambdas, k=nDCG)
 
         # dived by the number of jobs-offer to obtain the average.
-        return avg_nDCG / n_qIds
+        avg_nDCG /= n_qIds
+        results = {"nDCG@"+str(nDCG): round(avg_nDCG[i], 4) for i, nDCG in enumerate(nDCG_at)}
+        return results
 
     def fit(self, **conf) -> LGBMRanker:
         model = LGBMRanker(**self.default_par, **conf)
@@ -100,7 +106,7 @@ class LMARTGridsearch:
         for conf in progress_bar:
 
             model = self.fit(**conf)
-            avg_nDCG = self.eval_model(model)
+            avg_nDCG = self.eval_model(model)["nDCG@"+str(self.nDCG_at)]
 
             # if the model is better respect to the previous one, it updates the tuple
             if avg_nDCG > best_model_[2]:
