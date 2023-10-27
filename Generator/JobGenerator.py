@@ -166,7 +166,7 @@ class JobGenerator:
             Certificates=self.generate_certificates(current_job["certificates"])  # 19
         )
 
-        yearExp = int(np.random.poisson(3))
+        yearExp = int(np.random.poisson(2))
         cv["YearExp"] = min(yearExp, cv["Age"] - min_age)  # 20
 
         # Retrieve min and max salary
@@ -234,7 +234,7 @@ class JobGenerator:
             Certificates=self.generate_certificates(current_job["certificates"])  # 19
         )
 
-        yearExp = int(np.random.poisson(3))
+        yearExp = int(np.random.poisson(2))
         offer["YearExp"] = min(yearExp, max_age - min_age)  # 20
 
         # Retrieve min and max salary

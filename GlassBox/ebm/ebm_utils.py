@@ -1,6 +1,7 @@
 import sys
 
 import numpy as np
+from numpy.core.records import ndarray
 from sklearn.metrics import ndcg_score
 from numpy import asarray
 from tqdm import tqdm
@@ -29,10 +30,11 @@ class EBMGridSearch(GridSearch):
         self.X_valid, self.y_valid = self.valid.iloc[:, 2:13], self.valid[target]
         self.X_test, self.y_test = self.test.iloc[:, 2:13], self.test[target]
 
+        self.features_name = list(scores.iloc[:, 2:13].columns)
         self.default_par = dict(
-            feature_names=list(scores.iloc[:, 2:13].columns),
+            feature_names=self.features_name,
             n_jobs=-1,
-            objective='log_loss',
+            objective="rmse" if task == "Regressor" else "log_loss",
             exclude=[],
             feature_types=None,
             max_bins=256,
@@ -60,11 +62,13 @@ class EBMGridSearch(GridSearch):
         n_groups = 0
 
         for _, v in df.groupby("qId"):
-            tr, y = v.iloc[:, 2:13].values, asarray([v["labels"].to_numpy()])
-            y_pred = asarray([model.predict(tr)])
+            v = v.sort_values("labels", ascending=False)
+
+            features, target = v.iloc[:, 2:13].values, asarray([v["labels"].to_numpy()])
+            y_pred = asarray([model.predict(features)])
             # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG
             for i, nDCG in enumerate(nDCG_at):
-                avg_nDCG[i] += ndcg_score(y, y_pred, k=nDCG)
+                avg_nDCG[i] += ndcg_score(target, y_pred, k=nDCG)
             n_groups += 1
 
         # dived by the number of jobs-offer to obtain the average.
@@ -87,3 +91,24 @@ class EBMGridSearch(GridSearch):
                 best_model_ = (model, conf, avg_nDCG)
             progress_bar.set_postfix(nDCG_15_at=best_model_[2])
         return best_model_
+
+    @staticmethod
+    def pairwise_function(cuts: ndarray, contribution: ndarray, value: float) -> float:
+
+        if value < cuts[0]:
+            return contribution[0]
+        for i in range(len(cuts)-1):
+            if cuts[i] <= value <= cuts[i+1]:
+                return contribution[i+1]
+        if value > cuts[-1]:
+            return contribution[-1]
+
+    def explanation(self, model, index_feature: int, eps: float = 0.01) -> Tuple[ndarray, ndarray]:
+
+        min_, max_ = model.feature_bounds_[index_feature]
+        cuts = model.bins_[index_feature][0]
+        contrib = model.term_scores_[index_feature][1:-1]
+
+        x = np.arange(min_, max_, eps)
+        y = [self.pairwise_function(cuts, contrib, v_) for v_ in x]
+        return x, y

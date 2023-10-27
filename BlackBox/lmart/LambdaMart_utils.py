@@ -79,12 +79,14 @@ class LMARTGridsearch(GridSearch):
         avg_nDCG = np.zeros((len(nDCG_at)))
 
         for _, v in df.groupby("qId"):
-            tr, y = v.iloc[:, 2:13], asarray([v["labels"].to_numpy()])
-            lambdas = asarray([model.predict(tr)])  # predict lambdas
+            v = v.sort_values("labels", ascending=False)
+
+            features, target = v.iloc[:, 2:13], asarray([v["labels"].to_numpy()])
+            lambdas = asarray([model.predict(features)])  # predict lambdas
 
             # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG
             for i, nDCG in enumerate(nDCG_at):
-                avg_nDCG[i] += ndcg_score(y, lambdas, k=nDCG)
+                avg_nDCG[i] += ndcg_score(target, lambdas, k=nDCG)
 
         # dived by the number of jobs-offer to obtain the average.
         avg_nDCG /= n_qIds

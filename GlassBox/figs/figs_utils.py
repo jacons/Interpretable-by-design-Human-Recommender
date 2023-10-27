@@ -2,7 +2,6 @@ import sys
 from typing import Tuple
 
 import numpy as np
-from imodels import FIGSRegressor
 from numpy import asarray
 from pandas import read_csv, DataFrame
 from sklearn.metrics import ndcg_score
@@ -50,12 +49,14 @@ class FIGSGridSearch(GridSearch):
         n_groups = 0
 
         for _, v in df.groupby("qId"):
-            tr, y = v.iloc[:, 2:13].values, asarray([v["labels"].to_numpy()])
-            y_pred = asarray([model.predict(tr)])
+            v = v.sort_values("labels", ascending=False)
+
+            features, target = v.iloc[:, 2:13].values, asarray([v["labels"].to_numpy()])
+            y_pred = asarray([model.predict(features)])
 
             # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG
             for i, nDCG in enumerate(nDCG_at):
-                avg_nDCG[i] += ndcg_score(y, y_pred, k=nDCG)
+                avg_nDCG[i] += ndcg_score(target, y_pred, k=nDCG)
             n_groups += 1
 
         # dived by the number of jobs-offer to obtain the average.
@@ -88,49 +89,3 @@ class FIGSGridSearch(GridSearch):
             progress_bar.set_postfix(nDCG=best_model_[2])
 
         return best_model_
-
-
-"""
-    def parallel_gridsearch_routine(self, params: list, worker_id: int, sycDict: dict):
-
-        print("Start worker ", worker_id)
-        best_model_: Tuple = (None, None, -sys.maxsize)
-
-        for conf in params:
-            model = FIGSRegressor(**conf)
-            model.fit(self.X_train, self.y_train, self.feature_name)
-
-            avg_nDCG = self.eval_model(model)["nDCG@"+str(self.nDCG_at)]
-
-            if avg_nDCG > best_model_[2]:
-                best_model_ = (model, conf, avg_nDCG)
-
-        sycDict[worker_id] = best_model_
-        print("End worker ", worker_id)
-        return
-
-    def parallel_gridsearch(self, hyperparameters: dict = None, jobs: int = 2) -> Tuple:
-
-        best_models = Manager().dict()  # define a synchronized and shared variable.
-        grid_list = self.split_list(list(ParameterGrid(hyperparameters)), jobs)
-
-        workers = empty(jobs, dtype=Process)
-        for idx, params in enumerate(grid_list):
-            workers[idx] = Process(target=self.parallel_gridsearch_routine, args=(params, idx, best_models))
-            workers[idx].start()
-
-        for idx, _ in enumerate(grid_list):
-            workers[idx].join()
-
-        print(best_models)
-
-        best_model = None
-        for v in best_models.values():
-            if best_model is None:
-                best_model = v
-            elif v[2] > best_model[2]:
-                best_model = v
-
-        print(best_model)
-        return best_model  # best_model_
-"""

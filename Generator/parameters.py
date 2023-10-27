@@ -7,17 +7,17 @@ file_path = dict(
     education="../sources/education.csv",
     language_level="../sources/language_level.csv",
 
-    lang_level_dist=[0.70, 0.20, 0.10],
+    lang_level_dist=[0.35, 0.45, 0.20],
     certificates_dist=[0.41, 0.28, 0.19, 0.12]
 )
 
 curriculum_par = dict(
-    size=750,
+    size=200,
     path="../outputs/curricula.csv"
 )
 
 jobOffer_par = dict(
-    size=120,
+    size=100,
     path="../outputs/jobOffers.csv"
 )
 
