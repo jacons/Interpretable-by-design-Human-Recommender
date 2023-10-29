@@ -23,7 +23,7 @@ jobOffer_par = dict(
 
 matching_par = dict(
     cities_dist="../sources/cities_distance.csv",
-    labels=5,
+    bins=5,
 
     weight=np.array([
         12,  # Education

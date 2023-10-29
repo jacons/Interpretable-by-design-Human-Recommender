@@ -21,7 +21,7 @@ class JobGenerator:
                  certificates_dist:Tuple[float]):
         """
         JobGenerator is a tool that allows us to generate synthetic data about the "curriculums" and "jobs offer".
-        In also can match them to generate the score(or label) (supervised task).
+        In also can match them to generate the score(relevance) (supervised task).
         :param jobs_lib: Predefined jobs
         :param cities: Subsample of all citizens
         :param nationality: Subsample of all nationality

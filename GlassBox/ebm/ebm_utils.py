@@ -18,7 +18,7 @@ class EBMGridSearch(GridSearch):
 
         self.train, self.valid, self.test = read_csv(train), read_csv(valid), read_csv(test)
 
-        target = ["w_score"] if task == "Regression" else ["labels"]
+        target = ["labels"]  # ["w_score"] if task == "Regression" else ["labels"]
         self.X_train, self.y_train = self.train.iloc[:, 2:13], self.train[target]
         self.X_valid, self.y_valid = self.valid.iloc[:, 2:13], self.valid[target]
         self.X_test, self.y_test = self.test.iloc[:, 2:13], self.test[target]
@@ -89,9 +89,9 @@ class EBMGridSearch(GridSearch):
 
         if value < cuts[0]:
             return contribution[0]
-        for i in range(len(cuts)-1):
-            if cuts[i] <= value <= cuts[i+1]:
-                return contribution[i+1]
+        for i in range(len(cuts) - 1):
+            if cuts[i] <= value <= cuts[i + 1]:
+                return contribution[i + 1]
         if value > cuts[-1]:
             return contribution[-1]
 

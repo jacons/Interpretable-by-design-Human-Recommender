@@ -15,13 +15,13 @@ class MatchingScore:
     def __init__(self,
                  jobGenerator: JobGenerator,
                  cities_dist: str,
-                 labels: int,
+                 bins: int,
                  weight: np.ndarray,
                  noise: Tuple[float],
                  split_size: Tuple[float],
                  split_seed: int):
 
-        self.n_labels = labels
+        self.bins = bins  # Number of "labels"
         self.noise = noise  # mean and stddev
         self.split_size = split_size
         self.split_seed = split_seed
@@ -197,7 +197,7 @@ class MatchingScore:
 
         # labels
         intervals, edges = np.histogram(score.sort_values("w_score", ascending=False)["w_score"].to_numpy(),
-                                        bins=self.n_labels)
+                                        bins=self.bins)
         score2inter = {i: (edges[i], edges[i + 1]) for i in range(len(intervals))}
 
         def score2label(score_value: float) -> int:
@@ -206,8 +206,8 @@ class MatchingScore:
             for i, (v_min, v_max) in score2inter.items():
                 if v_min <= score_value < v_max:
                     return i
-            if score_value >= score2inter[self.n_labels - 1][1]:
-                return self.n_labels - 1
+            if score_value >= score2inter[self.bins - 1][1]:
+                return self.bins - 1
 
         score["labels"] = score['w_score'].apply(score2label)
 
