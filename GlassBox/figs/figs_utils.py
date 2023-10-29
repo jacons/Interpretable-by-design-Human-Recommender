@@ -5,33 +5,25 @@ import numpy as np
 from numpy import asarray
 from pandas import read_csv, DataFrame
 from sklearn.metrics import ndcg_score
-from sklearn.model_selection import train_test_split, ParameterGrid
+from sklearn.model_selection import ParameterGrid
 from tqdm import tqdm
 
 from Utils.Utils import GridSearch
 
 
 class FIGSGridSearch(GridSearch):
-    def __init__(self, path_dataset: str,
-                 task: str = "Regressor",
-                 random_state: int = None,
-                 split_size: Tuple[float, float] = (0.33, 0.33),
-                 nDCG_at: int = 15):
 
-        scores = read_csv(path_dataset)
+    def __init__(self, train: str, valid: str, test: str, task: str, nDCG_at: int):
 
-        # features for the decision trees
-        self.feature_name = list(scores.iloc[:, 2:13].columns)
+        self.train, self.valid, self.test = read_csv(train), read_csv(valid), read_csv(test)
 
-        # Holdout splitting
-        train, self.test = train_test_split(scores, test_size=split_size[0], random_state=random_state)
-        self.train, self.valid = train_test_split(train, test_size=split_size[1], random_state=random_state)
-
-        target = ["w_score"] if task == "Regressor" else ["labels"]
+        target = ["w_score"] if task == "Regression" else ["labels"]
         self.X_train, self.y_train = asarray(self.train.iloc[:, 2:13]), self.train[target].values.ravel()
         self.X_valid, self.y_valid = asarray(self.valid.iloc[:, 2:13]), self.valid[target].values.ravel()
         self.X_test, self.y_test = asarray(self.test.iloc[:, 2:13]), self.test[target].values.ravel()
 
+        # features for the decision trees
+        self.feature_name = list(self.train.iloc[:, 2:13].columns)
         self.nDCG_at = nDCG_at
         return
 

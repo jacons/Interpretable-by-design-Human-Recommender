@@ -1,11 +1,12 @@
 import sys
 
 import numpy as np
-from numpy.core.records import ndarray
+
+from numpy import ndarray
 from sklearn.metrics import ndcg_score
 from numpy import asarray
 from tqdm import tqdm
-from sklearn.model_selection import train_test_split, ParameterGrid
+from sklearn.model_selection import ParameterGrid
 from pandas import read_csv, DataFrame
 from typing import Tuple
 
@@ -13,39 +14,30 @@ from Utils.Utils import GridSearch
 
 
 class EBMGridSearch(GridSearch):
-    def __init__(self, path_dataset: str,
-                 task: str = "Regressor",
-                 random_state: int = None,
-                 split_size: Tuple[float, float] = (0.33, 0.33),
-                 nDCG_at: int = 15):
+    def __init__(self, train: str, valid: str, test: str, task: str, nDCG_at: int):
 
-        scores = read_csv(path_dataset)
+        self.train, self.valid, self.test = read_csv(train), read_csv(valid), read_csv(test)
 
-        # Holdout splitting
-        train, self.test = train_test_split(scores, test_size=split_size[0], random_state=random_state)
-        self.train, self.valid = train_test_split(train, test_size=split_size[1], random_state=random_state)
-
-        target = ["w_score"] if task == "Regressor" else ["labels"]
+        target = ["w_score"] if task == "Regression" else ["labels"]
         self.X_train, self.y_train = self.train.iloc[:, 2:13], self.train[target]
         self.X_valid, self.y_valid = self.valid.iloc[:, 2:13], self.valid[target]
         self.X_test, self.y_test = self.test.iloc[:, 2:13], self.test[target]
 
-        self.features_name = list(scores.iloc[:, 2:13].columns)
+        self.features_name = list(self.train.iloc[:, 2:13].columns)
         self.default_par = dict(
             feature_names=self.features_name,
             n_jobs=-1,
-            objective="rmse" if task == "Regressor" else "log_loss",
+            objective="rmse" if task == "Regression" else "log_loss",
             exclude=[],
             feature_types=None,
             max_bins=256,
             max_interaction_bins=32,
-            interactions=0,
             validation_size=0.15,
             outer_bags=8,
             inner_bags=0,
             greediness=0.0,
             smoothing_rounds=0,
-            max_rounds=5000,
+            max_rounds=8000,
             early_stopping_rounds=50,
             early_stopping_tolerance=0.0001)
 
@@ -93,7 +85,7 @@ class EBMGridSearch(GridSearch):
         return best_model_
 
     @staticmethod
-    def pairwise_function(cuts: ndarray, contribution: ndarray, value: float) -> float:
+    def pairwise_function(cuts: ndarray, contribution: ndarray, value: float):
 
         if value < cuts[0]:
             return contribution[0]
@@ -103,7 +95,7 @@ class EBMGridSearch(GridSearch):
         if value > cuts[-1]:
             return contribution[-1]
 
-    def explanation(self, model, index_feature: int, eps: float = 0.01) -> Tuple[ndarray, ndarray]:
+    def explanation(self, model, index_feature: int, eps: float = 0.01):
 
         min_, max_ = model.feature_bounds_[index_feature]
         cuts = model.bins_[index_feature][0]

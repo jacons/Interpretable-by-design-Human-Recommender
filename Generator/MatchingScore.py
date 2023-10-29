@@ -4,6 +4,7 @@ from typing import Tuple
 import numpy as np
 from numpy.random import normal
 from pandas import read_csv, DataFrame
+from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
 from Generator.JobGenerator import JobGenerator
@@ -16,10 +17,14 @@ class MatchingScore:
                  cities_dist: str,
                  labels: int,
                  weight: np.ndarray,
-                 noise: Tuple[float]):
+                 noise: Tuple[float],
+                 split_size: Tuple[float],
+                 split_seed: int):
 
         self.n_labels = labels
         self.noise = noise  # mean and stddev
+        self.split_size = split_size
+        self.split_seed = split_seed
 
         self.skillGraph = SkillGraph(jobGenerator.jobs)
 
@@ -140,7 +145,7 @@ class MatchingScore:
         # Salary max 1, min 0
         return 1 if cv <= offer else max((offer - cv) / 500 + 1, 0)
 
-    def scoreFunction(self, offers: DataFrame, curricula: DataFrame, path: str = None):
+    def scoreFunction(self, offers: DataFrame, curricula: DataFrame, output_file: str = None):
         combinations = list(product(offers.itertuples(), curricula.itertuples()))
         score = np.zeros((len(combinations), 13), dtype=np.float32)
 
@@ -205,7 +210,16 @@ class MatchingScore:
                 return self.n_labels - 1
 
         score["labels"] = score['w_score'].apply(score2label)
-        if path is not None:
-            score.to_csv(path, index=False)
+
+        if output_file is not None:
+            score.to_csv(f"../outputs/scores/{output_file}.csv", index=False)
+
+        train, test = train_test_split(score, test_size=self.split_size[0], random_state=self.split_seed)
+        train, valid = train_test_split(train, test_size=self.split_size[1], random_state=self.split_seed)
+
+        if output_file is not None:
+            train.to_csv(f"../outputs/scores/{output_file}_tr.csv", index=False)
+            valid.to_csv(f"../outputs/scores/{output_file}_vl.csv", index=False)
+            test.to_csv(f"../outputs/scores/{output_file}_ts.csv", index=False)
 
         return score

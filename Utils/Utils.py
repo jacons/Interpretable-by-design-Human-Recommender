@@ -11,6 +11,7 @@ from sklearn.metrics import ndcg_score
 
 
 class GridSearch:
+
     @staticmethod
     def save_model(model: LGBMRanker, name: str = "model"):
         if not os.path.exists("saved_models"):
@@ -20,7 +21,7 @@ class GridSearch:
 
     @staticmethod
     def load_model(name: str = "model") -> Tuple[Any, dict]:
-        with open('saved_models/' + name + ".pkl", 'rb') as file:
+        with open(name + ".pkl", 'rb') as file:
             model = pickle.load(file)
         return model
 

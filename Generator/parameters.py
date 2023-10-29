@@ -12,23 +12,24 @@ file_path = dict(
 )
 
 curriculum_par = dict(
-    size=200,
+    size=300,
     path="../outputs/curricula.csv"
 )
 
 jobOffer_par = dict(
-    size=100,
+    size=50,
     path="../outputs/jobOffers.csv"
 )
 
 matching_par = dict(
     cities_dist="../sources/cities_distance.csv",
     labels=5,
+
     weight=np.array([
         12,  # Education
         2,  # City
-        15,  # Skills
-        6,  # SoftSkills
+        20,  # Skills
+        10,  # SoftSkills
         3,  # Age
         8,  # Language
         5,  # Certificates
@@ -37,5 +38,8 @@ matching_par = dict(
         1,  # SmartWork
         1,  # Experience abroad
     ], dtype=np.float32),
-    noise=(0, 0.2)  # mean and stddev
+    noise=(0, 0.1),  # mean and stddev
+
+    split_size=(0.33, 0.33),  # Hold-out
+    split_seed=841  # Reproducible splitting
 )
