@@ -4,17 +4,20 @@ from pandas import DataFrame
 from unidecode import unidecode
 
 
-def build_cities_distance(path: str = None,
-                          c_distance_path: str = None,
+def build_cities_distance(c_distance_path: str = None,
                           all_cities_path: str = None,
                           sub_sample: float = 0.1) -> DataFrame:
-    ITALIAN_CITIES = "https://raw.githubusercontent.com/MatteoHenryChinaski" + \
-                     "/Comuni-Italiani-2018-Sql-Json-excel/master/italy_geo.json"
+    ITALIAN_GEO = "https://raw.githubusercontent.com/MatteoHenryChinaski" + \
+                  "/Comuni-Italiani-2018-Sql-Json-excel/master/italy_geo.json"
 
-    path = ITALIAN_CITIES if path is None else path
+    ITALIAN_CITIES = "https://raw.githubusercontent.com/MatteoHenryChinaski" + \
+                     "/Comuni-Italiani-2018-Sql-Json-excel/master/italy_cities.json"
 
     print("Downloading and Loading source data...", end="")
-    df = pd.read_json(path)
+    df_geo = pd.read_json(ITALIAN_GEO)
+    df_cities = pd.read_json(ITALIAN_CITIES)
+
+    df = df_cities.merge(df_geo[["istat", "lng", "lat"]], on="istat")
     print("Completed")
 
     print("Data cleaning...", end="")
@@ -25,8 +28,10 @@ def build_cities_distance(path: str = None,
     # Reduce the dimension of the file and combine the cities
     df = df.sample(frac=sub_sample)
 
+    df["P"] = df["num_residenti"] / df["num_residenti"].sum()
     all_cities_path = "all_cities.csv" if all_cities_path is None else all_cities_path
-    df["comune"].to_csv(all_cities_path, index=False)
+    df[["comune", "num_residenti", "P"]].to_csv(all_cities_path, index=False)
+    df.drop(["num_residenti"], axis=1, inplace=True)
     print("Completed")
 
     print("Merging...", end="")

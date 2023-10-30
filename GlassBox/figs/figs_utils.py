@@ -17,7 +17,7 @@ class FIGSGridSearch(GridSearch):
 
         self.train, self.valid, self.test = read_csv(train), read_csv(valid), read_csv(test)
 
-        target = ["w_score"] if task == "Regression" else ["labels"]
+        target = ["w_score"] if task == "Regression" else ["relevance"]
         self.X_train, self.y_train = asarray(self.train.iloc[:, 2:13]), self.train[target].values.ravel()
         self.X_valid, self.y_valid = asarray(self.valid.iloc[:, 2:13]), self.valid[target].values.ravel()
         self.X_test, self.y_test = asarray(self.test.iloc[:, 2:13]), self.test[target].values.ravel()
@@ -41,9 +41,9 @@ class FIGSGridSearch(GridSearch):
         n_groups = 0
 
         for _, v in df.groupby("qId"):
-            v = v.sort_values("labels", ascending=False)
+            v = v.sort_values("relevance", ascending=False)
 
-            features, target = v.iloc[:, 2:13].values, asarray([v["labels"].to_numpy()])
+            features, target = v.iloc[:, 2:13].values, asarray([v["relevance"].to_numpy()])
             y_pred = asarray([model.predict(features)])
 
             # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG

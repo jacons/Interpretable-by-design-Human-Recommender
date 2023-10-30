@@ -32,13 +32,13 @@ class GridSearch:
         avg_nDCG = np.zeros((3, len(nDCG_at)))
 
         for _, v in df.groupby("qId"):
-            v = v.sort_values("labels", ascending=False)
+            v = v.sort_values("relevance", ascending=False)
 
-            _, y = v.iloc[:, 2:13], asarray([v["labels"].to_numpy()])
+            _, y = v.iloc[:, 2:13], asarray([v["relevance"].to_numpy()])
 
-            random_lambdas = asarray([v.sample(frac=1)["labels"].to_numpy()])
-            perfect_lambdas = asarray([v.sort_values("labels", ascending=False)["labels"].to_numpy()])
-            worst_lambdas = asarray([v.sort_values("labels")["labels"].to_numpy()])
+            random_lambdas = asarray([v.sample(frac=1)["relevance"].to_numpy()])
+            perfect_lambdas = asarray([v.sort_values("relevance", ascending=False)["relevance"].to_numpy()])
+            worst_lambdas = asarray([v.sort_values("relevance")["relevance"].to_numpy()])
 
             for i, nDCG in enumerate(nDCG_at):
                 avg_nDCG[0, i] += ndcg_score(y, random_lambdas, k=nDCG)

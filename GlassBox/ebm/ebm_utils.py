@@ -18,7 +18,7 @@ class EBMGridSearch(GridSearch):
 
         self.train, self.valid, self.test = read_csv(train), read_csv(valid), read_csv(test)
 
-        target = ["labels"]  # ["w_score"] if task == "Regression" else ["labels"]
+        target = ["w_score"] if task == "Regression" else ["relevance"]
         self.X_train, self.y_train = self.train.iloc[:, 2:13], self.train[target]
         self.X_valid, self.y_valid = self.valid.iloc[:, 2:13], self.valid[target]
         self.X_test, self.y_test = self.test.iloc[:, 2:13], self.test[target]
@@ -54,9 +54,9 @@ class EBMGridSearch(GridSearch):
         n_groups = 0
 
         for _, v in df.groupby("qId"):
-            v = v.sort_values("labels", ascending=False)
+            v = v.sort_values("relevance", ascending=False)
 
-            features, target = v.iloc[:, 2:13].values, asarray([v["labels"].to_numpy()])
+            features, target = v.iloc[:, 2:13].values, asarray([v["relevance"].to_numpy()])
             y_pred = asarray([model.predict(features)])
             # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG
             for i, nDCG in enumerate(nDCG_at):

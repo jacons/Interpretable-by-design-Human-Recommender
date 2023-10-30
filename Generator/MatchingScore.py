@@ -21,7 +21,7 @@ class MatchingScore:
                  split_size: Tuple[float],
                  split_seed: int):
 
-        self.bins = bins  # Number of "labels"
+        self.bins = bins  # Number of relevances
         self.noise = noise  # mean and stddev
         self.split_size = split_size
         self.split_seed = split_seed
@@ -195,7 +195,7 @@ class MatchingScore:
         score["score"] += normal(self.noise[0], self.noise[1], score.shape[0])  # random noise
         score['w_score'] += normal(self.noise[0], self.noise[1], score.shape[0])  # random noise
 
-        # labels
+        # relevance
         intervals, edges = np.histogram(score.sort_values("w_score", ascending=False)["w_score"].to_numpy(),
                                         bins=self.bins)
         score2inter = {i: (edges[i], edges[i + 1]) for i in range(len(intervals))}
@@ -209,7 +209,7 @@ class MatchingScore:
             if score_value >= score2inter[self.bins - 1][1]:
                 return self.bins - 1
 
-        score["labels"] = score['w_score'].apply(score2label)
+        score["relevance"] = score['w_score'].apply(score2label)
 
         if output_file is not None:
             score.to_csv(f"../outputs/scores/{output_file}.csv", index=False)

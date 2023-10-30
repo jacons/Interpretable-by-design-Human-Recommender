@@ -25,13 +25,13 @@ class LMARTGridsearch(GridSearch):
 
         # Preparing the datasets
         self.qIds_train = self.train.groupby("qId")["qId"].count().to_numpy()
-        self.X_train, self.y_train = self.train.iloc[:, 2:13], self.train[["qId", "kId", "labels"]]
+        self.X_train, self.y_train = self.train.iloc[:, 2:13], self.train[["qId", "kId", "relevance"]]
 
         self.qIds_val = self.valid.groupby("qId")["qId"].count().to_numpy()
-        self.X_valid, self.y_valid = self.valid.iloc[:, 2:13], self.valid[["qId", "kId", "labels"]]
+        self.X_valid, self.y_valid = self.valid.iloc[:, 2:13], self.valid[["qId", "kId", "relevance"]]
 
         self.qIds_test = self.test.groupby("qId")["qId"].count().to_numpy()
-        self.X_test, self.y_test = self.test.iloc[:, 2:13], self.test[["qId", "kId", "labels"]]
+        self.X_test, self.y_test = self.test.iloc[:, 2:13], self.test[["qId", "kId", "relevance"]]
 
         def log_output(r):
             # callback function (used to avoid logging during the grid-search)
@@ -48,9 +48,9 @@ class LMARTGridsearch(GridSearch):
         )
         self.ranker_par = dict(  # default ranker parameters (used in fitting) pt.2
             X=self.X_train,
-            y=self.y_train["labels"],
+            y=self.y_train["relevance"],
             group=self.qIds_train,
-            eval_set=[(self.X_valid, self.y_valid["labels"])],
+            eval_set=[(self.X_valid, self.y_valid["relevance"])],
             eval_group=[self.qIds_val],
             eval_at=nDCG_at,
             callbacks=[log_output]
@@ -71,9 +71,9 @@ class LMARTGridsearch(GridSearch):
         avg_nDCG = np.zeros((len(nDCG_at)))
 
         for _, v in df.groupby("qId"):
-            v = v.sort_values("labels", ascending=False)
+            v = v.sort_values("relevance", ascending=False)
 
-            features, target = v.iloc[:, 2:13], asarray([v["labels"].to_numpy()])
+            features, target = v.iloc[:, 2:13], asarray([v["relevance"].to_numpy()])
             lambdas = asarray([model.predict(features)])  # predict lambdas
 
             # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG

@@ -17,8 +17,8 @@ class JobGenerator:
                  nationality: str,
                  education: str,
                  language_level: str,
-                 lang_level_dist:Tuple[float],
-                 certificates_dist:Tuple[float]):
+                 lang_level_dist: Tuple[float],
+                 certificates_dist: Tuple[float]):
         """
         JobGenerator is a tool that allows us to generate synthetic data about the "curriculums" and "jobs offer".
         In also can match them to generate the score(relevance) (supervised task).
@@ -33,8 +33,8 @@ class JobGenerator:
         with open(jobs_lib, "r") as f:
             self.jobs = json.load(f)
 
-        with open(cities, "r") as f:
-            self.all_cities = f.read().split("\n")
+        self.all_cities = read_csv(cities, usecols=[0, 2]).astype(
+            {'comune': 'string', 'P': 'float'})
 
         self.languages = read_csv(nationality).astype(
             {'Languages': 'string', 'P': 'float'})
@@ -48,7 +48,6 @@ class JobGenerator:
 
         # dictionary that map the id to a job name
         self.idx2jobName = {idx: k for idx, k in enumerate(self.jobs.keys())}
-        self.max_city = len(self.all_cities)
 
     @staticmethod
     def generate_skills(all_skill: list, min_: int = 1, max_: int = 5) -> list[str]:
@@ -147,7 +146,7 @@ class JobGenerator:
         cv = dict(
             IdealJob=job_name,  # 1
             Education=education,  # 2
-            City=self.all_cities[random.randint(0, self.max_city - 1)],  # 3
+            City=self.all_cities.sample(n=1, weights="P")["comune"].values[0],  # 3
             JobRange=choice(arange(30, 160, 10)),  # 4
             Skills0=skills[0],  # 5
             Skills1=skills[1],  # 6
@@ -215,7 +214,7 @@ class JobGenerator:
         offer = dict(
             Job=jobName,  # 1
             Education=education,  # 2
-            City=self.all_cities[random.randint(0, self.max_city - 1)],  # 3
+            City=self.all_cities.sample(n=1, weights="P")["comune"].values[0],  # 3
             Skills0=skills[0],  # 4
             Skills1=skills[1],  # 5
             Skills2=skills[2],  # 6

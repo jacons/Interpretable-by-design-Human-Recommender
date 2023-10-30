@@ -1,4 +1,4 @@
-qId,kId,Education,City,Skills,SoftSkills,Age,Language,Certificates,Experience,Salary,SmartWork,Experience_abroad,score,w_score,labels
+qId,kId,Education,City,Skills,SoftSkills,Age,Language,Certificates,Experience,Salary,SmartWork,Experience_abroad,score,w_score,relevance
 0,0,0.6,0.8632846,0.0,0.2,0.71428573,0.5,0.0,0.0,1.0,0,0,3.8845213641253546,0.21380133362183357,1
 0,1,1.0,0.9509888,0.0,0.0,1.0,0.0,0.0,0.0,1.0,0,0,3.9854305760110895,0.38968944146500734,2
 0,2,0.8,0.43680137,0.0,0.0,1.0,0.5,0.0,0.0,1.0,0,0,3.674095240102076,0.313082451753532,1
