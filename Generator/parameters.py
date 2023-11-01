@@ -9,8 +9,8 @@ file_path = dict(
     languages_path="../sources/languages.csv",  # All language
     education_path="../sources/education.csv",  # Education hierarchy
 
-    lang_level_distribution=[0.35, 0.45, 0.20],  # Distribution of extra languages that the candidate knows [0-1-2]
-    certificates_distribution=[0.41, 0.28, 0.19, 0.12]  # Distribution of certificates [0-1-2-3]
+    lang_level_distribution=[0.65, 0.25, 0.10],  # Distribution of extra languages that the candidate knows [0-1-2]
+    # certificates_distribution=[0.41, 0.28, 0.19, 0.12]  # Distribution of certificates [0-1-2-3]
 )
 
 curriculum_par = dict(
