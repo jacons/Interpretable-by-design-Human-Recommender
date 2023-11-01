@@ -1,14 +1,16 @@
 import numpy as np
 
 file_path = dict(
-    jobs_lib="../sources/jobs_library.json",
-    cities="../sources/all_cities.csv",
-    nationality="../sources/languages.csv",
-    education="../sources/education.csv",
-    language_level="../sources/language_level.csv",
+    job2skills_path="../sources/job2skills.csv",
+    occupation_path="../sources/occupations.csv",
+    skills_path="../sources/skills.csv",
+    cities_path="../sources/all_cities.csv",  # All cites used
+    languages_level_path="../sources/languages_level.csv",  # All language levels
+    languages_path="../sources/languages.csv",  # All language
+    education_path="../sources/education.csv",  # Education hierarchy
 
-    lang_level_dist=[0.35, 0.45, 0.20],
-    certificates_dist=[0.41, 0.28, 0.19, 0.12]
+    lang_level_distribution=[0.35, 0.45, 0.20],  # Distribution of extra languages that the candidate knows [0-1-2]
+    certificates_distribution=[0.41, 0.28, 0.19, 0.12]  # Distribution of certificates [0-1-2-3]
 )
 
 curriculum_par = dict(
