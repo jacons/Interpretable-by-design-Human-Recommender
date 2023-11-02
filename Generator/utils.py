@@ -65,14 +65,15 @@ def prepare_datasets(raw_sources: str, output_dir: str):
     occ2skills = pd.read_csv(raw_sources + "/occupationSkillRelations_en.csv")
     skills = pd.read_csv(raw_sources + "/skills_en.csv")
 
-    occupation = occupation[["conceptUri", "preferredLabel", "description"]].astype(
-        dtype={"conceptUri": "string", "preferredLabel": "string"})
+    # ---------------------------------------------------------------------
+    occupation = occupation[["conceptUri", "preferredLabel", "code"]].astype(
+        dtype={"conceptUri": "string", "preferredLabel": "string", "code": "string"})
     # remove the link (to simply the notation)
     occupation["conceptUri"] = occupation["conceptUri"].str.replace(OCCUPATION_PATH, "")
-
     occupation.rename(
-        columns={"conceptUri": "id_occupation", "preferredLabel": "Occupation"}, inplace=True)
-
+        columns={"conceptUri": "id_occupation", "preferredLabel": "occupation",
+                 "code": "group"}, inplace=True)
+    # ---------------------------------------------------------------------
     occ2skills = occ2skills[["occupationUri", "relationType", "skillUri"]].astype(
         dtype={"occupationUri": "string", "relationType": "string", "skillUri": "string"})
 
@@ -81,30 +82,33 @@ def prepare_datasets(raw_sources: str, output_dir: str):
     occ2skills["skillUri"] = occ2skills["skillUri"].str.replace(SKILL_PATH, "")
 
     occ2skills.rename(
-        columns={"occupationUri": "id_occupation", "skillUri": "id_skill"}, inplace=True)
-
-    skills = skills[["conceptUri", "preferredLabel", "description"]].astype(
-        dtype={"conceptUri": "string", "preferredLabel": "string"})
+        columns={"occupationUri": "id_occupation", "skillUri": "id_skill",
+                 "relationType": "relation_type"}, inplace=True)
+    # ---------------------------------------------------------------------
+    skills = skills[["conceptUri", "preferredLabel", "skillType"]].astype(
+        dtype={"conceptUri": "string", "preferredLabel": "string", "skillType": "string"})
 
     # remove the link (to simply the notation)
     skills["conceptUri"] = skills["conceptUri"].str.replace(SKILL_PATH, "")
     skills.rename(
-        columns={"conceptUri": "id_skill", "preferredLabel": "Skill"}, inplace=True)
+        columns={"conceptUri": "id_skill", "preferredLabel": "Skill",
+                 "skillType": "type"}, inplace=True)
+    # ---------------------------------------------------------------------
 
     occupation.to_csv(output_dir + "/occupations.csv", quoting=csv.QUOTE_ALL, index=False)
     skills.to_csv(output_dir + "/skills.csv", quoting=csv.QUOTE_ALL, index=False)
 
-    # remove "description" BEFORE merge
-    occupation.drop("description", axis=1, inplace=True)
-    skills.drop("description", axis=1, inplace=True)
+    # remove "code" and "type" BEFORE merge
+    occupation.drop("group", axis=1, inplace=True)
+    skills.drop("type", axis=1, inplace=True)
 
     job_library = occupation.merge(occ2skills.merge(skills, on="id_skill"), on="id_occupation")
-    job_library = job_library[["id_occupation", "relationType", "id_skill"]]
+    job_library = job_library[["id_occupation", "relation_type", "id_skill"]]
 
-    job_library.to_csv(output_dir + "/jobs_library.csv", index=False)
+    job_library.to_csv(output_dir + "/job2skills.csv", index=False)
 
     print("Completed")
 
 
 prepare_datasets(raw_sources="../raw_sources", output_dir="../sources/")
-build_cities_distance(raw_sources="../raw_sources", output_dir="../sources/", sub_sample=0.15)
+# build_cities_distance(raw_sources="../raw_sources", output_dir="../sources/", sub_sample=0.15)
