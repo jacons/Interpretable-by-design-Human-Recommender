@@ -7,7 +7,7 @@ from numpy import arange
 from pandas import DataFrame, read_csv
 from tqdm import tqdm
 
-from Generator.JobGraph import JobGraph
+from Generator.JobGraph import JobGraph, RelationNode, TypeNode
 
 
 def kid_generator():
@@ -39,50 +39,60 @@ class JobGenerator:
         """
 
         self.job_graph = JobGraph(job2skills_path, occupation_path, skills_path)
-
         self.lang_level_dist = lang_level_distribution
+        self.kid_generator = kid_generator()
+        self._load_data(cities_path, languages_level_path, languages_path, education_path)
 
-        self.all_cities = read_csv(cities_path, usecols=[0, 2]).astype(
-            {'comune': 'string', 'P': 'float'})
+    def _load_data(self, cities_path, languages_level_path, languages_path, education_path):
+        self.all_cities = read_csv(cities_path, usecols=[0, 2]).astype({'comune': 'string', 'P': 'float'})
 
         self.languages_level = read_csv(languages_level_path, index_col=0).astype(
             {"A1": "float", "A2": "float", "B1": "float", "B2": "float", "C1": "float", "C2": "float"})
 
-        self.languages = read_csv(languages_path).astype(
-            {"Languages": "string", "Prob": "int"})
+        self.languages = read_csv(languages_path).astype({"Languages": "string", "Prob": "int"})
 
-        self.education = read_csv(education_path).astype(
-            {'Importance': 'int', 'Education': 'string', 'P1': 'float',
-             'P2': 'float', 'Min_age': 'int'})
+        self.education = read_csv(education_path, index_col=0).astype(
+            {'Education': 'string', 'P1': 'float', 'P2': 'float', 'Min_age': 'int'})
 
         self.idx2language = {lang[0]: lang[1] for lang in self.languages.itertuples()}
         self.language2idx = {lang[1]: lang[0] for lang in self.languages.itertuples()}
 
-        self.kid_generator = kid_generator()
-
     def generate_edu(self):
-        # sample a "essential education"
-        sample_educational = self.education.sample(n=1, weights="P2")
-        edu_essential = sample_educational["Education"].values[0]
-        importance = sample_educational["Importance"].values[0]
+        # Sample an "essential education"
+        sample_educational = random.choices(self.education.index, k=1, weights=self.education["P2"])[0]
+        edu_essential = self.education.loc[sample_educational, "Education"]
+        importance = sample_educational
 
-        # define a optional (Desirable) education
+        # Define an optional (Desirable) education
         edu_optional = "-"
-        if random.random() >= 0.5 == 0 and importance <= 3:
-            edu_optional = self.education[self.education["Importance"] == importance + 1]["Education"].values[0]
+        if random.random() >= 0.5 and importance <= 3:
+            next_importance = importance + 1
+            edu_optional = self.education.loc[next_importance, "Education"]
+
         return edu_essential, edu_optional
 
-    def generate_skill(self, id_occ: str, min_: int = 2, max_: int = 6):
-        skills_essential = self.job_graph.sample_skills(id_occ, "essential",
-                                                        min_=min_,
-                                                        max_=max_,
-                                                        convert_name=True)
+    def generate_skills(self, id_occ: str):
+        skills_es = self.job_graph.sample_skills(id_occ,
+                                                 RelationNode.ES, TypeNode.SK,
+                                                 min_=2, max_=4,
+                                                 convert_ids=True)
 
-        skills_optional = self.job_graph.sample_skills(id_occ, "optional",
-                                                       min_=min_,
-                                                       max_=max_,
-                                                       convert_name=True)
-        return skills_essential, skills_optional
+        skills_op = self.job_graph.sample_skills(id_occ,
+                                                 RelationNode.OP, TypeNode.SK,
+                                                 min_=0, max_=3,
+                                                 convert_ids=True)
+
+        knowledge_es = self.job_graph.sample_skills(id_occ,
+                                                    RelationNode.ES, TypeNode.KN,
+                                                    min_=2, max_=4,
+                                                    convert_ids=True)
+
+        knowledge_op = self.job_graph.sample_skills(id_occ,
+                                                    RelationNode.OP, TypeNode.KN,
+                                                    min_=0, max_=3,
+                                                    convert_ids=True)
+
+        return skills_es, skills_op, knowledge_es, knowledge_op
 
     def generate_languages(self, e_lang=(1, 2), o_lang=(0, 1)):
         # chose a number of essential languages (1 or 2)
@@ -115,14 +125,14 @@ class JobGenerator:
 
         return language_essential, language_optional, language_levels
 
-    def __jobOffer(self) -> dict:
+    def __jobOffer(self, qId: int) -> dict:
         # ------------------------------------------------------------------
         # randomly select one Job (id Occupation, Occupation name)
-        id_occ, job_Name = self.job_graph.sample_occupation(True)
+        id_occ, job_Name = self.job_graph.sample_occupation()
         # ------------------------------------------------------------------
         edu_essential, edu_optional = self.generate_edu()
         # ------------------------------------------------------------------
-        skills_essential, skills_optional = self.generate_skill(id_occ)
+        skills_es, skills_op, knowledge_es, knowledge_op = self.generate_skills(id_occ)
         # ------------------------------------------------------------------
         min_age = self.education[self.education["Education"] == edu_essential]["Min_age"].values[0]
         max_age = min_age + random.randint(5, 20)
@@ -131,9 +141,10 @@ class JobGenerator:
         # ------------------------------------------------------------------
         exp_essential = int(np.random.poisson(1.5))
         exp_essential = "-" if exp_essential == 0 else exp_essential
-        exp_optional = exp_essential if random.random() <= 0.50 else "-"
+        exp_optional = True if random.random() <= 0.50 else False
         # ------------------------------------------------------------------
         offer = dict(
+            qId=qId,  # 0
             Job=job_Name,  # 1
             Edu_essential=edu_essential,  # 2
             Edu_optional=edu_optional,  # 3
@@ -141,44 +152,38 @@ class JobGenerator:
             AgeMax=max_age,  # 5
             City=self.all_cities.sample(n=1, weights="P")["comune"].values[0],  # 6
 
-            Competence_essential0=0,  # 7
-            Competence_essential1=0,  # 8
-            Competence_essential2=0,  # 9
-            Competence_essential3=0,  # 10
-
-            Competence_optional0=0,  # 7
-            Competence_optional1=0,  # 8
-            Competence_optional2=0,  # 9
-            Competence_optional3=0,  # 10
-
-            Knoleadge_essential0=0,  # 7
-            Knoleadge_essential1=0,  # 8
-            Knoleadge_essential2=0,  # 9
-            Knoleadge_essential3=0,  # 10
-
-            Knoleadge_optional0=0,  # 7
-            Knoleadge_optional1=0,  # 8
-            Knoleadge_optional2=0,  # 9
-            Knoleadge_optional3=0,  # 10
-
-            Language_essential0=language_essential[0],  # 19
-            Language_essential1=language_essential[1],  # 20
-            Language_optional0=language_optional[0],  # 21
-            Language_level0=language_levels[0],  # 22
-            Language_level1=language_levels[1],  # 23
-            Language_level2=language_levels[2],  # 24
-            Experience_essential=exp_essential,  # 25
-            Experience_optional=exp_optional  # 26
+            Competence_essential0=skills_es[0],  # 7
+            Competence_essential1=skills_es[1],  # 8
+            Competence_essential2=skills_es[2],  # 9
+            Competence_essential3=skills_es[3],  # 10
+            Competence_optional0=skills_op[0],  # 11
+            Competence_optional1=skills_op[1],  # 12
+            Competence_optional2=skills_op[2],  # 13
+            Knoleadge_essential0=knowledge_es[0],  # 14
+            Knoleadge_essential1=knowledge_es[1],  # 15
+            Knoleadge_essential2=knowledge_es[2],  # 16
+            Knoleadge_essential3=knowledge_es[3],  # 16
+            Knoleadge_optional0=knowledge_op[0],  # 18
+            Knoleadge_optional1=knowledge_op[1],  # 19
+            Knoleadge_optional2=knowledge_op[2],  # 20
+            Language_essential0=language_essential[0],  # 21
+            Language_essential1=language_essential[1],  # 22
+            Language_optional0=language_optional[0],  # 23
+            Language_level0=language_levels[0],  # 24
+            Language_level1=language_levels[1],  # 25
+            Language_level2=language_levels[2],  # 26
+            Experience_essential=exp_essential,  # 27
+            Experience_optional=exp_optional  # 28
         )
         return offer
 
     def get_offers(self, size: int = 1, path: str = None) -> DataFrame:
 
-        offers = [self.__jobOffer() for _ in tqdm(range(size))]
+        offers = [self.__jobOffer(idx) for idx in tqdm(range(size))]
         offers = pd.DataFrame(offers)
 
         if path is not None:
-            offers.to_csv(path, index_label="qId")
+            offers.to_csv(path, index=False)
 
         return offers
 
@@ -224,13 +229,13 @@ class JobGenerator:
             self.job_graph.sample_skills(id_occ,
                                          relation_type="essential",
                                          min_=0, max_=other_essential_skills,
-                                         convert_name=True, exclude=skills)
+                                         convert_ids=True, exclude=skills)
         )
         skills.extend(
             self.job_graph.sample_skills(id_occ,
                                          relation_type="optional",
                                          min_=0, max_=optional_skills,
-                                         convert_name=True)
+                                         convert_ids=True)
         )
         return skills
 

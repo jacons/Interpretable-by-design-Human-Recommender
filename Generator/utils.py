@@ -85,14 +85,14 @@ def prepare_datasets(raw_sources: str, output_dir: str):
         columns={"occupationUri": "id_occupation", "skillUri": "id_skill",
                  "relationType": "relation_type"}, inplace=True)
     # ---------------------------------------------------------------------
-    skills = skills[["conceptUri", "preferredLabel", "skillType"]].astype(
+    skills = skills[["conceptUri", "preferredLabel", "skillType", "reuseLevel"]].astype(
         dtype={"conceptUri": "string", "preferredLabel": "string", "skillType": "string"})
 
     # remove the link (to simply the notation)
     skills["conceptUri"] = skills["conceptUri"].str.replace(SKILL_PATH, "")
     skills.rename(
         columns={"conceptUri": "id_skill", "preferredLabel": "Skill",
-                 "skillType": "type"}, inplace=True)
+                 "skillType": "type", "reuseLevel": "sector"}, inplace=True)
     # ---------------------------------------------------------------------
 
     occupation.to_csv(output_dir + "/occupations.csv", quoting=csv.QUOTE_ALL, index=False)
@@ -100,7 +100,7 @@ def prepare_datasets(raw_sources: str, output_dir: str):
 
     # remove "code" and "type" BEFORE merge
     occupation.drop("group", axis=1, inplace=True)
-    skills.drop("type", axis=1, inplace=True)
+    skills.drop(["type","sector"], axis=1, inplace=True)
 
     job_library = occupation.merge(occ2skills.merge(skills, on="id_skill"), on="id_occupation")
     job_library = job_library[["id_occupation", "relation_type", "id_skill"]]
