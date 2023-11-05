@@ -66,13 +66,25 @@ def prepare_datasets(raw_sources: str, output_dir: str):
     skills = pd.read_csv(raw_sources + "/skills_en.csv")
 
     # ---------------------------------------------------------------------
-    occupation = occupation[["conceptUri", "preferredLabel", "code"]].astype(
-        dtype={"conceptUri": "string", "preferredLabel": "string", "code": "string"})
+    occupation = occupation[["conceptUri", "preferredLabel", "altLabels", "code"]].astype(
+        dtype={"conceptUri": "string", "preferredLabel": "string", "code": "string",
+               "altLabels": "string"})
     # remove the link (to simply the notation)
     occupation["conceptUri"] = occupation["conceptUri"].str.replace(OCCUPATION_PATH, "")
     occupation.rename(
         columns={"conceptUri": "id_occupation", "preferredLabel": "occupation",
-                 "code": "group"}, inplace=True)
+                 "code": "group", "altLabels": "synonyms"}, inplace=True)
+
+    occupation["synonyms"] = occupation["synonyms"].str.split("\n")
+    occupation["synonyms"] = occupation["synonyms"].fillna("[]")
+
+    occupation_synonyms = []
+    for row in occupation.itertuples():
+        for syn in row[3]:
+            occupation_synonyms.append(dict(label=syn, id_occupation=row[1]))
+    occupation_synonyms = pd.DataFrame(occupation_synonyms)
+    occupation.dropna(inplace=True)
+
     # ---------------------------------------------------------------------
     occ2skills = occ2skills[["occupationUri", "relationType", "skillUri"]].astype(
         dtype={"occupationUri": "string", "relationType": "string", "skillUri": "string"})
@@ -84,23 +96,41 @@ def prepare_datasets(raw_sources: str, output_dir: str):
     occ2skills.rename(
         columns={"occupationUri": "id_occupation", "skillUri": "id_skill",
                  "relationType": "relation_type"}, inplace=True)
+    occupation.dropna(inplace=True)
     # ---------------------------------------------------------------------
-    skills = skills[["conceptUri", "preferredLabel", "skillType", "reuseLevel"]].astype(
-        dtype={"conceptUri": "string", "preferredLabel": "string", "skillType": "string"})
+    skills = skills[["conceptUri", "preferredLabel", "skillType", "reuseLevel", "altLabels"]].astype(
+        dtype={"conceptUri": "string", "preferredLabel": "string", "skillType": "string",
+               "altLabels": "string", "reuseLevel": "string"})
 
     # remove the link (to simply the notation)
     skills["conceptUri"] = skills["conceptUri"].str.replace(SKILL_PATH, "")
     skills.rename(
         columns={"conceptUri": "id_skill", "preferredLabel": "Skill",
-                 "skillType": "type", "reuseLevel": "sector"}, inplace=True)
+                 "skillType": "type", "reuseLevel": "sector", "altLabels": "synonyms"}, inplace=True)
+
+    skills["synonyms"] = skills["synonyms"].str.split("\n")
+    skills["synonyms"] = skills["synonyms"].fillna("[]")
+
+    skills_synonyms = []
+    for row in skills.itertuples():
+        for syn in row[5]:
+            skills_synonyms.append(dict(label=syn, id_skill=row[1]))
+    skills_synonyms = pd.DataFrame(skills_synonyms)
+    skills.dropna(inplace=True)
     # ---------------------------------------------------------------------
+    # remove "synonyms" BEFORE store occupations and skills
+    occupation.drop("synonyms", axis=1, inplace=True)
+    skills.drop("synonyms", axis=1, inplace=True)
 
     occupation.to_csv(output_dir + "/occupations.csv", quoting=csv.QUOTE_ALL, index=False)
+    occupation_synonyms.to_csv(output_dir + "/occupation_synonyms.csv", quoting=csv.QUOTE_ALL, index=False)
+
     skills.to_csv(output_dir + "/skills.csv", quoting=csv.QUOTE_ALL, index=False)
+    skills_synonyms.to_csv(output_dir + "/skills_synonyms.csv", quoting=csv.QUOTE_ALL, index=False)
 
     # remove "code" and "type" BEFORE merge
-    occupation.drop("group", axis=1, inplace=True)
-    skills.drop(["type","sector"], axis=1, inplace=True)
+    occupation.drop(["group"], axis=1, inplace=True)
+    skills.drop(["type", "sector"], axis=1, inplace=True)
 
     job_library = occupation.merge(occ2skills.merge(skills, on="id_skill"), on="id_occupation")
     job_library = job_library[["id_occupation", "relation_type", "id_skill"]]

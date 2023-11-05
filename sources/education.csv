@@ -1,6 +1,6 @@
-Importance,Education,P1,P2,Min_age
-0,Null,0.119,0,16
-1,Degree,0.299,0.349,18
-2,Bachelor D.,0.372,0.397,21
-3,Master D.,0.198,0.223,24
-4,PhD,0.012,0.031,27
+Importance,Education,Distribution,Min_age
+0,"Less-than-degree",0.5846,16
+1,"Degree",0.3040,18
+2,"Bachelor-D".,0.0251,21
+3,"Master-D.",0.0833,24
+4,"PhD",0.0029,27

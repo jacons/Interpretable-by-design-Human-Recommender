@@ -38,13 +38,13 @@ class JobGraph:
 
         # remove an occupation that hasn't "essential skills"
         self.occupation = self.occupation[self.occupation.index != "a580e79a-b752-49c1-b033-b5ab2b34bfba"]
-        self.occupation["group"] = self.occupation["group"].str[:self.OCCUPATION_GROUP_THRESHOLD]
+        self.occupation["group"] = self.occupation["group"].str[:self.OCCUPATION_GROUP_THRESHOLD].astype(int)
 
         self.graph = nx.Graph()
 
         # Add occupation nodes to the graph
         self.graph.add_nodes_from(
-            [(occupation[0], {"type": "occupation", "label": occupation[1]})
+            [(occupation[0], {"type": "occupation", "label": occupation[1], "isco_group": occupation[2]})
              for occupation in self.occupation.itertuples()]
         )
 
@@ -64,7 +64,7 @@ class JobGraph:
             if (occ1[0] != occ2[0]) and (occ1[2] == occ2[2]):
                 self.graph.add_edge(occ1[0], occ2[0], relation="same_group")
 
-        self.name2id_skill = {tuple_[2]: tuple_[1] for tuple_ in self.skills.itertuples()}
+        self.name2id_skill = {tuple_[1]: tuple_[0] for tuple_ in self.skills.itertuples()}
 
     def return_neighbors(self, id_node: str,
                          relation: RelationNode,
@@ -126,13 +126,13 @@ class JobGraph:
             sampled.extend(["-" for _ in range(n, max_)])
         return sampled
 
-    def sample_occupation(self):
+    def sample_occupation(self) -> tuple[str, str, int]:
         """
         Sample an occupation
-        :return:
+        :return: id_occupation, label, isco group
         """
         id_occ = self.occupation.sample().index[0]
-        return id_occ, self.graph.nodes[id_occ]["label"]
+        return id_occ, self.graph.nodes[id_occ]["label"], self.graph.nodes[id_occ]["isco_group"]
 
     def get_similar_job(self, id_occ: str, exclude: list = None, convert_ids: bool = False) -> list:
         """
@@ -144,12 +144,12 @@ class JobGraph:
         """
         return list(self.return_neighbors(id_occ, RelationNode.JB, TypeNode.OC, exclude, convert_ids))
 
-    def get_job_with_skill(self, skills: list[str]) -> list[str]:
+    def get_job_with_skill(self, competences: list[str], knowledge: list[str]) -> list[str]:
         """
-        Give a list of skills, return a list of occupation that has these skills
-        :param skills:
+        Give a list of competence & knowledge, return a list of occupation that has these skills
         :return:
         """
+        skills = competences + knowledge
         nodes = [set(self.graph.neighbors(self.name2id_skill[skill])) for skill in skills]
         if nodes:
             similar_jobs = reduce(set.intersection, nodes)
