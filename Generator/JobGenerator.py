@@ -47,6 +47,8 @@ class JobGenerator:
         self.education = read_csv(sources["education_path"], index_col=0).astype(
             {'Education': 'string', 'Distribution': 'float', 'Min_age': 'int'})
 
+        self.skills_synonyms = read_csv(sources["skill_synonyms_path"])
+
         min_ed = read_csv(sources["min_edu_occupation_path"]).astype(
             {"id_group": "int", "id_edu": "int"}
         )
@@ -140,6 +142,7 @@ class JobGenerator:
         # ------------------------------------------------------------------
         skills_es, skills_op, knowledge_es, knowledge_op = self.generate_skills(id_occ)
         # ------------------------------------------------------------------
+        min_age += random.randint(0, 5)
         max_age = min_age + random.randint(5, 20)
         # ------------------------------------------------------------------
         language_essential, language_optional, language_levels = self.generate_languages()
@@ -225,7 +228,7 @@ class JobGenerator:
 
                 # retrieve all jobs that have there skills
                 similar_jobs = self.job_graph.get_job_with_skill(competence, knowledge)
-                ideal_job = random.sample(similar_jobs)
+                ideal_job = random.sample(similar_jobs, k=1)[0]
 
                 curricula.append(
                     self.get_curriculum(job_offer[0],  # qId
@@ -243,10 +246,13 @@ class JobGenerator:
             bar.set_postfix(qId=job_offer[0])
         return DataFrame(curricula)
 
-    def generate_other_skill_from(self, id_occ: str, competences: list[str], knowledge: list[str]):
+    def generate_other_skill_from(self, id_occ: str,
+                                  competences: list[str],
+                                  knowledge: list[str],
+                                  min_: int = 0):
 
-        competences_to_fill = 7 - len(competences)  # max 5 / min 3
-        knowledge_to_fill = 7 - len(knowledge)  # max 5 / min 3
+        competences_to_fill = 7 - len(competences)  # max 6 / min 3
+        knowledge_to_fill = 7 - len(knowledge)  # max 6 / min 3
 
         other_essential_competences = random.randint(0, competences_to_fill)
         other_essential_knowledge = random.randint(0, knowledge_to_fill)
@@ -320,10 +326,12 @@ class JobGenerator:
         if languages is None:
             languages = []
 
+        min_ = 0  # minial competence and skills
         if id_occ is None:
             id_occ, _, group = self.job_graph.sample_occupation()
             min_edu = self.min_edu[group // 1000]
             edu_essential = self.education.loc[min_edu, "Education"]
+            min_ = 2  # if it's a random cv, at least it has to 3 skills
 
         edu_row = self.education[self.education["Education"] == edu_essential]
         min_edu = edu_row.index.values[0]
@@ -334,11 +342,15 @@ class JobGenerator:
         if random.random() <= 0.80:
             age = random.randint(min_age, max_age)
         else:
-            age = random.randint(edu_row["Min_age"].values[0], 60)
+            age = random.randint(edu_row["Min_age"].values[0], 40)
         # ------------------------------------------------------------------
-        new_competences, new_knowledge = self.generate_other_skill_from(id_occ, competences, knowledge)
+
+        new_competences, new_knowledge = self.generate_other_skill_from(id_occ, competences, knowledge, min_)
         new_competences += competences
         new_knowledge += knowledge
+
+        new_knowledge = sorted(new_knowledge, reverse=True)
+        new_competences = sorted(new_competences, reverse=True)
         # ------------------------------------------------------------------
         languages, langs_level = self.generate_other_lang_from(languages, langs_level)
         # ------------------------------------------------------------------
@@ -379,3 +391,17 @@ class JobGenerator:
         )
 
         return cv
+
+    def upgrade_with_synonymous(self, cv: DataFrame, p: float):
+
+        synonyms = self.skills_synonyms
+
+        for i in tqdm(cv.sample(frac=p).index):
+            for pos_ in [6, 13]:
+                for j in range(random.randint(1, 7)):
+                    skill = cv.iloc[i, pos_ + j]
+                    if skill == "-":
+                        break
+                    uri = synonyms[(synonyms["label"] == skill) & (synonyms["default"] == 1)]["id_skill"].values[0]
+                    sy = synonyms[synonyms["id_skill"] == uri].sample()["label"].values[0]
+                    cv.iloc[i, pos_ + j] = sy

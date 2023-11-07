@@ -76,7 +76,7 @@ class JobGraph:
         :param id_node: Id of occupation or skill/knowledge
         :param relation: "essential", "optional" or "same_group" (only for occupation)
         :param type_node: "occupation", "skill" or "knowledge"
-        :param exclude: list of node to exclude
+        :param exclude: list of id node to exclude
         :param convert_ids: if true coverts ids into name
         :return: list of nodes
         """
@@ -103,7 +103,7 @@ class JobGraph:
                       type_node: TypeNode,
                       min_: int = 2, max_: int = 6,
                       convert_ids: bool = False,
-                      exclude: list = None):
+                      exclude: list[str] = None):
         """
         Sample skill for a given occupation
         :param id_occ: id occupation
@@ -116,6 +116,8 @@ class JobGraph:
 
         :return: A list of len "max_" with an "n" number of skill "min_" <= "n" <= "max_"
         """
+        if exclude is not None:
+            exclude = [self.name2id_skill[e] for e in exclude]
         list_ = self.return_neighbors(id_occ, relation, type_node, exclude, convert_ids)
 
         n = min(random.randint(min_, max_), len(list_))
@@ -133,16 +135,6 @@ class JobGraph:
         """
         id_occ = self.occupation.sample().index[0]
         return id_occ, self.graph.nodes[id_occ]["label"], self.graph.nodes[id_occ]["isco_group"]
-
-    def get_similar_job(self, id_occ: str, exclude: list = None, convert_ids: bool = False) -> list:
-        """
-        Give an occupation return a list of occupation with the same group
-        :param id_occ: id occupation
-        :param exclude: list of id occupation to exclude
-        :param convert_ids: if true convert id into name
-        :return:
-        """
-        return list(self.return_neighbors(id_occ, RelationNode.JB, TypeNode.OC, exclude, convert_ids))
 
     def get_job_with_skill(self, competences: list[str], knowledge: list[str]) -> list[str]:
         """

@@ -10,8 +10,7 @@ file_paths = dict(
     education_path="../sources/education.csv",  # Education hierarchy
 
     min_edu_occupation_path="../sources/min_education.csv",  # Minimal education for isco groups
-    occupation_synonyms_path="../sources/occupation_synonyms.csv",  # Occupation synonyms
-    skill_synonyms_path="../sources/skills_synonyms.csv.csv",  # Skills synonyms
+    skill_synonyms_path="../sources/skills_synonyms.csv",  # Skills synonyms
 
     lang_level_distribution=[0.65, 0.35],  # Distribution of extra languages that the candidate knows [0-1]
     # certificates_distribution=[0.41, 0.28, 0.19, 0.12] # Distribution of certificates [0-1-2-3]

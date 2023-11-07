@@ -74,17 +74,6 @@ def prepare_datasets(raw_sources: str, output_dir: str):
     occupation.rename(
         columns={"conceptUri": "id_occupation", "preferredLabel": "occupation",
                  "code": "group", "altLabels": "synonyms"}, inplace=True)
-
-    occupation["synonyms"] = occupation["synonyms"].str.split("\n")
-    occupation["synonyms"] = occupation["synonyms"].fillna("[]")
-
-    occupation_synonyms = []
-    for row in occupation.itertuples():
-        for syn in row[3]:
-            occupation_synonyms.append(dict(label=syn, id_occupation=row[1]))
-    occupation_synonyms = pd.DataFrame(occupation_synonyms)
-    occupation.dropna(inplace=True)
-
     # ---------------------------------------------------------------------
     occ2skills = occ2skills[["occupationUri", "relationType", "skillUri"]].astype(
         dtype={"occupationUri": "string", "relationType": "string", "skillUri": "string"})
@@ -109,21 +98,22 @@ def prepare_datasets(raw_sources: str, output_dir: str):
                  "skillType": "type", "reuseLevel": "sector", "altLabels": "synonyms"}, inplace=True)
 
     skills["synonyms"] = skills["synonyms"].str.split("\n")
-    skills["synonyms"] = skills["synonyms"].fillna("[]")
 
     skills_synonyms = []
     for row in skills.itertuples():
-        for syn in row[5]:
-            skills_synonyms.append(dict(label=syn, id_skill=row[1]))
+        if isinstance(row[5], list):
+            for syn in row[5]:
+                if syn != row[2]:
+                    skills_synonyms.append(dict(label=syn, default=0, id_skill=row[1]))
+        skills_synonyms.append(dict(label=row[2], default=1, id_skill=row[1]))
     skills_synonyms = pd.DataFrame(skills_synonyms)
-    skills.dropna(inplace=True)
+
     # ---------------------------------------------------------------------
     # remove "synonyms" BEFORE store occupations and skills
     occupation.drop("synonyms", axis=1, inplace=True)
     skills.drop("synonyms", axis=1, inplace=True)
 
     occupation.to_csv(output_dir + "/occupations.csv", quoting=csv.QUOTE_ALL, index=False)
-    occupation_synonyms.to_csv(output_dir + "/occupation_synonyms.csv", quoting=csv.QUOTE_ALL, index=False)
 
     skills.to_csv(output_dir + "/skills.csv", quoting=csv.QUOTE_ALL, index=False)
     skills_synonyms.to_csv(output_dir + "/skills_synonyms.csv", quoting=csv.QUOTE_ALL, index=False)
@@ -142,3 +132,4 @@ def prepare_datasets(raw_sources: str, output_dir: str):
 
 prepare_datasets(raw_sources="../raw_sources", output_dir="../sources/")
 # build_cities_distance(raw_sources="../raw_sources", output_dir="../sources/", sub_sample=0.15)
+# %%
