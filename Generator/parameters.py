@@ -17,12 +17,12 @@ file_paths = dict(
 )
 
 curriculum_par = dict(
-    size=300,
+    mu=5,
     path="../outputs/curricula.csv"
 )
 
 jobOffer_par = dict(
-    size=50,
+    size=10,
     path="../outputs/jobOffers.csv"
 )
 

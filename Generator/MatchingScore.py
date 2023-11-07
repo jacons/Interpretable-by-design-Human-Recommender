@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
 from Generator.JobGenerator import JobGenerator
-from Generator.SkillGraph import SkillGraph
+from Generator.JobGraph import JobGraph
 
 
 class MatchingScore:
@@ -21,36 +21,36 @@ class MatchingScore:
                  split_size: Tuple[float],
                  split_seed: int):
 
-        self.bins = bins  # Number of relevances
-        self.noise = noise  # mean and stddev
-        self.split_size = split_size
-        self.split_seed = split_seed
-
-        self.skillGraph = SkillGraph(jobGenerator.jobs)
-
-        self.education_ranks = dict(zip(jobGenerator.education["Education"], jobGenerator.education["Rank"]))
-        self.len_ed_rank = len(self.education_ranks)
-
         self.distance = read_csv(cities_dist, index_col=[0, 1], skipinitialspace=True)
         self.max_distance = self.distance["D"].max()
 
-        self.lvl2value = {t[1]: t[0] for t in jobGenerator.languages_level.itertuples()}
+        self.education = {i[1]: i[0] for i in jobGenerator.education.itertuples()}
+        self.lvl2value = {v: i for i, v in enumerate(["A1", "A2", "B1", "B2", "C1", "C2"])}
+        self.education["-"] = "-"
+        self.len_ed_rank = len(self.education)
+        return
+        # self.bins = bins  # Number of relevances
+        # self.noise = noise # mean and stddev
+        # self.split_size = split_size
+        # self.split_seed = split_seed
 
-        self.weights = self.normalize_weights(weight)
+        # self.job_graph = jobGenerator.job_graph
 
-    @staticmethod
-    def normalize_weights(weights: np.ndarray):
-        return weights / weights.sum()
+        # self.weights = self.normalize_weights(weight)
 
-    def educationScore(self, offer: str, cv: str) -> int:
-        edu_cv = self.education_ranks.get(cv)
-        edu_offer = self.education_ranks.get(offer)
+    def educationScore(self, offer_ess: str, offer_op: str, cv: str) -> int:
+        # max 1,25 min 0
+        cv = self.education[cv]  # level of candidate's education
+        offer_ess = self.education[offer_ess]  # essential education
+        offer_op = self.education[offer_op]  # optional education
 
-        # Education max 1, min 0
-        return 1 if edu_cv >= edu_offer else 1 - (edu_offer - edu_cv) / self.len_ed_rank
+        score = 1 if offer_ess <= cv else 0
+        bonus = 0 if offer_op == "-" else 0.25 if offer_op <= cv else 0
+
+        return score + bonus
 
     def cityScore(self, cityA: str, cityB: str, range_: int) -> float:
-
+        # max 1 min 0
         if cityA == cityB:
             return 1
 
@@ -58,6 +58,94 @@ class MatchingScore:
         dist = self.distance.loc[(s_cities[0], s_cities[1])].values[0]
 
         return 1 if dist < range_ else 1 - (dist - range_) / self.max_distance
+
+    @staticmethod
+    def ageScore(cv: int, v_min: int, v_max: int) -> float:
+        # max 1 min 0
+        return 1 if int(v_min <= cv <= v_max) else 0
+
+    @staticmethod
+    def experienceScore(offer_ess: str, offer_op: bool, cv: int) -> float:
+        # max 1,25 min 0
+        score, bonus = 0, 0
+        if offer_ess != "-":
+            score += 1 if int(offer_ess) <= cv else 0
+            bonus += 0.25 if int(offer_ess) <= cv else 0 if offer_op else 0
+
+        return score + bonus
+
+    def languageScore(self, essential: list[tuple], cv: list[tuple], optional: tuple) -> float:
+
+        score, bonus = 0, 0
+        for a, b in product(essential, cv):
+            if a[0] == b[0]:
+                lvl_of = self.lvl2value[a[1]]
+                lvl_cv = self.lvl2value[b[1]]
+                score += 1 if lvl_of <= lvl_cv else 1 / (lvl_of - lvl_cv)
+
+        for lang, lvl in cv:
+            if lang == optional[0]:
+                lvl_of = self.lvl2value[optional[1]]
+                lvl_cv = self.lvl2value[lvl]
+                bonus += 0.25 if lvl_of <= lvl_cv else 0.25 / (lvl_of - lvl_cv)
+
+        return score / len(essential) + bonus
+
+    def skillScore(self, essential: list, optional: list, cv: list):
+        pass
+
+    @staticmethod
+    def remove_null(a: list, b: list):
+        list_ = []
+        for lang, lvl in zip(a, b):
+            if lang != "-":
+                list_.append((lang, lvl))
+        return list_
+
+    @staticmethod
+    def filter(list_: list):
+        return [item for item in list_ if item != "-"]
+
+    def scoreFunction(self, offers: DataFrame, curricula: DataFrame, output_file: str = None):
+        for qId, offer in offers.iterrows():
+            curricula = curricula[curricula["qId"] == qId]
+
+            print(offer)
+            for kId, cv in curricula.iterrows():
+                print(cv)
+
+                cv_lang = self.remove_null([cv["Language0"], cv["Language1"], cv["Language2"]],
+                                           [cv["Language_level0"], cv["Language_level1"], cv["Language_level2"]])
+                of_lang = self.remove_null([offer["Language_essential0"], offer["Language_essential1"]],
+                                           [offer["Language_level0"], offer["Language_level1"]])
+
+                of_comp_ess = self.filter([offer[f"Competence_essential{i}"] for i in range(4)])
+                of_comp_opt = self.filter([offer[f"Competence_optional{i}"] for i in range(3)])
+                of_know_ess = self.filter([offer[f"Knowledge_essential{i}"] for i in range(4)])
+                of_know_opt = self.filter([offer[f"Knowledge_optional{i}"] for i in range(3)])
+                cv_comp = self.filter([cv[f"Competences{i}"] for i in range(6)])
+                cv_know = self.filter([cv[f"Knowledge{i}"] for i in range(6)])
+
+                fitness_edu = self.educationScore(offer["Edu_essential"],
+                                                  offer["Edu_optional"],
+                                                  cv["Education"])
+                fitness_city = self.cityScore(offer["City"], cv["City"], cv["JobRange"])
+                fitness_age = self.ageScore(cv["Age"], offer["AgeMin"], offer["AgeMax"])
+                fitness_exp = self.experienceScore(offer["Experience_essential"],
+                                                   offer["Experience_optional"],
+                                                   cv["Experience"])
+                fitness_lang = self.languageScore(of_lang, cv_lang,
+                                                  (offer["Language_optional0"], offer["Language_level2"]))
+
+            break
+
+
+"""
+    @staticmethod
+    def normalize_weights(weights: np.ndarray):
+        return weights / weights.sum()
+
+
 
     def skillScore(self, offer: list, cv: list) -> float:
 
@@ -85,66 +173,6 @@ class MatchingScore:
 
         return score + plus
 
-    @staticmethod
-    def softSkillScore(offer: list, cv: list) -> float:
-
-        offer = set([x for x in offer if x != "-"])
-        cv = set([x for x in cv if x != "-"])
-
-        if len(offer) == 0:
-            return 0
-        return len(offer & cv) / len(offer)
-
-    @staticmethod
-    def certificateScore(offer: list, cv: list) -> float:
-
-        offer = set([x for x in offer if x != "-"])
-        cv = set([x for x in cv if x != "-"])
-
-        if len(offer) == 0:
-            return 0
-        return len(offer & cv) / len(offer)
-
-    @staticmethod
-    def ageScore(cv: int, v_min: int, v_max: int, slope: int = 7) -> float:
-        # Piecewise function to score. Max 1 Min 0
-
-        if int(v_min <= cv <= v_max):
-            return 1
-        if cv > v_max:
-            return max((-cv + v_max) / slope + 1, 0)
-        return max((cv - v_min) / slope + 1, 0)
-
-    def languageScore(self, offer: list, cv: list) -> float:
-
-        offer_, cv_ = [], []
-        for i_ in offer:
-            if i_ != "-":
-                offer_.append(i_.split(" - "))
-
-        for i_ in cv:
-            if i_ != "-":
-                cv_.append(i_.split(" - "))
-
-        score = 0
-        for a, b in product(offer_, cv_):
-            if a[0] == b[0]:
-                lvl_of = self.lvl2value[a[1]]
-                lvl_cv = self.lvl2value[b[1]]
-                score += 1 if lvl_of <= lvl_cv else 1 / (lvl_of - lvl_cv)
-
-        return score / len(offer_)
-
-    @staticmethod
-    def experienceScore(offer: int, cv: int) -> float:
-        # Salary max 1, min 0
-        return 1 if cv >= offer else 0 if cv <= 0 else max((cv - offer) / 8 + 1, 0)
-
-    @staticmethod
-    def salaryScore(offer: int, cv: int) -> float:
-        # Salary max 1, min 0
-        return 1 if cv <= offer else max((offer - cv) / 500 + 1, 0)
-
     def scoreFunction(self, offers: DataFrame, curricula: DataFrame, output_file: str = None):
         combinations = list(product(offers.itertuples(), curricula.itertuples()))
         score = np.zeros((len(combinations), 13), dtype=np.float32)
@@ -163,17 +191,8 @@ class MatchingScore:
 
             score[idx, 0] = offer[0]
             score[idx, 1] = cv[0]
-            score[idx, 2] = self.educationScore(offer[2], cv[2])
-            score[idx, 3] = self.cityScore(offer[3], cv[3], cv[4])
+
             score[idx, 4] = self.skillScore(offer_skills, cv_skills)
-            score[idx, 5] = self.softSkillScore(offer_s_skills, cv_s_skills)
-            score[idx, 6] = self.ageScore(cv_age, age_min, age_max)
-            score[idx, 7] = self.languageScore(offer_languages, cv_languages)
-            score[idx, 8] = self.certificateScore(offer_cert, cv_cert)  # certificate no skill!!!!!
-            score[idx, 9] = self.experienceScore(offer[20], cv[20]) if cv[1] == offer[1] else 0
-            score[idx, 10] = self.salaryScore(offer[21], cv[21])
-            score[idx, 11] = (1 if cv_sm else 0) if offer_sm else 0  # SmartWork max 1, min 0
-            score[idx, 12] = (1 if cv_ea else 0) if offer_ea else 0  # Experience_abroad max 1, min 0
 
         score = DataFrame(data=score,
                           columns=["qId", "kId", "Education", "City", "Skills", "SoftSkills",
@@ -223,3 +242,4 @@ class MatchingScore:
             test.to_csv(f"../outputs/scores/{output_file}_ts.csv", index=False)
 
         return score
+"""

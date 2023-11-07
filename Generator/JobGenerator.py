@@ -1,3 +1,4 @@
+import csv
 import random
 
 import numpy as np
@@ -169,14 +170,14 @@ class JobGenerator:
             Competence_optional1=skills_op[1],  # 12
             Competence_optional2=skills_op[2],  # 13
 
-            Knoleadge_essential0=knowledge_es[0],  # 14
-            Knoleadge_essential1=knowledge_es[1],  # 15
-            Knoleadge_essential2=knowledge_es[2],  # 16
-            Knoleadge_essential3=knowledge_es[3],  # 17
+            Knowledge_essential0=knowledge_es[0],  # 14
+            Knowledge_essential1=knowledge_es[1],  # 15
+            Knowledge_essential2=knowledge_es[2],  # 16
+            Knowledge_essential3=knowledge_es[3],  # 17
 
-            Knoleadge_optional0=knowledge_op[0],  # 18
-            Knoleadge_optional1=knowledge_op[1],  # 19
-            Knoleadge_optional2=knowledge_op[2],  # 20
+            Knowledge_optional0=knowledge_op[0],  # 18
+            Knowledge_optional1=knowledge_op[1],  # 19
+            Knowledge_optional2=knowledge_op[2],  # 20
 
             Language_essential0=language_essential[0],  # 21
             Language_essential1=language_essential[1],  # 22
@@ -196,19 +197,19 @@ class JobGenerator:
         offers = pd.DataFrame(offers).set_index("qId")
 
         if path is not None:
-            offers.to_csv(path)
+            offers.to_csv(path, quoting=csv.QUOTE_ALL)
 
         return offers
 
-    def generate_cvs(self, job_offers: DataFrame, mu: int = 100, sig: int = 10):
+    def generate_cvs(self, job_offers: DataFrame, mu: int = 100, sig: int = 10, path: str = None):
         curricula = []
         bar = tqdm(job_offers.itertuples(), total=len(job_offers))
         for job_offer in bar:
 
             # select randomly the number of curricula to generate for this kind of occupation
-            n_cvs = int(np.random.normal(mu, sig))
+            n_cvs = max(1, int(np.random.normal(mu, sig)))
             # a certain percentage must be coherent with the job-offer requirement
-            n_consistent_job = int(n_cvs * 0.80)
+            n_consistent_job = int(n_cvs * 1)
 
             essential_competence = [job_offer[i] for i in range(7, 10 + 1) if job_offer[i] != "-"]
             essential_knowledge = [job_offer[i] for i in range(14, 17 + 1) if job_offer[i] != "-"]
@@ -244,12 +245,16 @@ class JobGenerator:
             for _ in range(n_cvs - n_consistent_job):
                 curricula.append(self.get_curriculum(job_offer[0]))
             bar.set_postfix(qId=job_offer[0])
-        return DataFrame(curricula)
+
+        curricula = DataFrame(curricula)
+        if path is not None:
+            curricula.to_csv(path, index=False, quoting=csv.QUOTE_ALL)
+
+        return curricula
 
     def generate_other_skill_from(self, id_occ: str,
                                   competences: list[str],
-                                  knowledge: list[str],
-                                  min_: int = 0):
+                                  knowledge: list[str]):
 
         competences_to_fill = 7 - len(competences)  # max 6 / min 3
         knowledge_to_fill = 7 - len(knowledge)  # max 6 / min 3
@@ -280,6 +285,10 @@ class JobGenerator:
         return new_competences, new_knowledge
 
     def generate_other_lang_from(self, languages: list, langs_level: list):
+
+        if len(languages) > 1 and random.random() >= 0.5:
+            languages.pop()
+
         language_to_fill = 3 - len(languages)
 
         prob = self.languages["Prob"].to_numpy().copy()  # distribution of probability of all languages
@@ -326,12 +335,10 @@ class JobGenerator:
         if languages is None:
             languages = []
 
-        min_ = 0  # minial competence and skills
         if id_occ is None:
             id_occ, _, group = self.job_graph.sample_occupation()
             min_edu = self.min_edu[group // 1000]
             edu_essential = self.education.loc[min_edu, "Education"]
-            min_ = 2  # if it's a random cv, at least it has to 3 skills
 
         edu_row = self.education[self.education["Education"] == edu_essential]
         min_edu = edu_row.index.values[0]
@@ -345,7 +352,7 @@ class JobGenerator:
             age = random.randint(edu_row["Min_age"].values[0], 40)
         # ------------------------------------------------------------------
 
-        new_competences, new_knowledge = self.generate_other_skill_from(id_occ, competences, knowledge, min_)
+        new_competences, new_knowledge = self.generate_other_skill_from(id_occ, competences, knowledge)
         new_competences += competences
         new_knowledge += knowledge
 
