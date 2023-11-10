@@ -130,9 +130,16 @@ class JobGenerator:
 
         language_essential.extend(["-" for _ in range(n_essential_lang, e_lang[1])])
         language_optional.extend(["-" for _ in range(n_optional_lang, e_lang[1])])
-        language_levels.extend(["-" for _ in range(n_languages, e_lang[1] + o_lang[1])])
 
-        return language_essential, language_optional, language_levels
+        idx, levels = 0, []
+        for lang in language_essential + language_optional:
+            if lang != "-":
+                levels.append(language_levels[idx])
+                idx += 1
+            else:
+                levels.append("-")
+
+        return language_essential, language_optional, levels
 
     def __jobOffer(self, qId: int) -> dict:
         # ------------------------------------------------------------------
@@ -209,7 +216,7 @@ class JobGenerator:
             # select randomly the number of curricula to generate for this kind of occupation
             n_cvs = max(1, int(np.random.normal(mu, sig)))
             # a certain percentage must be coherent with the job-offer requirement
-            n_consistent_job = int(n_cvs * 1)
+            n_consistent_job = int(n_cvs * 0.80)
 
             essential_competence = [job_offer[i] for i in range(7, 10 + 1) if job_offer[i] != "-"]
             essential_knowledge = [job_offer[i] for i in range(14, 17 + 1) if job_offer[i] != "-"]

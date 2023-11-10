@@ -24,6 +24,7 @@ class TypeNode(Enum):
 
 class JobGraph:
     OCCUPATION_GROUP_THRESHOLD = 4  # A constant for occupation group threshold
+    occ_weight = {0: 42, 1: 19, 2: 8, 3: 3, 4: 1}
 
     def __init__(self, occ2skill: str, occupation: str, skills: str):
         """
@@ -38,33 +39,50 @@ class JobGraph:
 
         # remove an occupation that hasn't "essential skills"
         self.occupation = self.occupation[self.occupation.index != "a580e79a-b752-49c1-b033-b5ab2b34bfba"]
-        self.occupation["group"] = self.occupation["group"].str[:self.OCCUPATION_GROUP_THRESHOLD].astype(int)
-
-        self.graph = nx.Graph()
+        self.occupation["group"] = self.occupation["group"].str[:self.OCCUPATION_GROUP_THRESHOLD]
 
         # Add occupation nodes to the graph
-        self.graph.add_nodes_from(
-            [(occupation[0], {"type": "occupation", "label": occupation[1], "isco_group": occupation[2]})
-             for occupation in self.occupation.itertuples()]
-        )
+        occupation_nodes = [
+            (occ[0], {"type": "occupation", "label": occ[1], "isco_group": occ[2]})
+            for occ in self.occupation.itertuples()
+        ]
 
         # Add skill nodes to the graph
-        self.graph.add_nodes_from(
-            [(skill[0], {"type": skill[2], "label": skill[1], "sector": skill[3]})
-             for skill in self.skills.itertuples()]
-        )
+        skill_nodes = [
+            (skill[0], {"type": skill[2], "label": skill[1], "sector": skill[3]})
+            for skill in self.skills.itertuples()
+        ]
 
         # Add edges for occ2skills relations
-        self.graph.add_edges_from(
-            [(row[1], row[3], {"relation": row[2]}) for row in self.occ2skills.itertuples()]
-        )
+        edges_occ2skills = [
+            (row[1], row[3], {"relation": row[2]})
+            for row in self.occ2skills.itertuples()
+        ]
 
         # Link together the occupation with the same group
-        for (occ1, occ2) in itertools.product(self.occupation.itertuples(), self.occupation.itertuples()):
-            if (occ1[0] != occ2[0]) and (occ1[2] == occ2[2]):
-                self.graph.add_edge(occ1[0], occ2[0], relation="same_group")
+        edges_group_nodes = [
+            (occ1[0], occ2[0], {"relation": "same_group", "weight": self.weight_group_node(occ1[2], occ2[2])})
+            for occ1, occ2 in itertools.product(self.occupation.itertuples(), repeat=2)
+            if occ1[0] != occ2[0]
+        ]
 
-        self.name2id_skill = {tuple_[1]: tuple_[0] for tuple_ in self.skills.itertuples()}
+        self.name2id = {}
+        self.name2id.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.skills.itertuples()))
+        self.name2id.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.occupation.itertuples()))
+
+        self.graph = nx.Graph()
+        self.graph.add_nodes_from(occupation_nodes + skill_nodes)
+        self.graph.add_edges_from(edges_occ2skills + edges_group_nodes)
+        self.graph.remove_nodes_from(self.remove_single_component())
+
+    def weight_group_node(self, groupA: str, groupB: str):
+        lvl = 0
+        while lvl <= 3:
+            if groupA[lvl] != groupB[lvl]:
+                return self.occ_weight[lvl]
+            else:
+                lvl += 1
+        return self.occ_weight[lvl]
 
     def return_neighbors(self, id_node: str,
                          relation: RelationNode,
@@ -117,7 +135,7 @@ class JobGraph:
         :return: A list of len "max_" with an "n" number of skill "min_" <= "n" <= "max_"
         """
         if exclude is not None:
-            exclude = [self.name2id_skill[e] for e in exclude]
+            exclude = [self.name2id[e] for e in exclude]
         list_ = self.return_neighbors(id_occ, relation, type_node, exclude, convert_ids)
 
         n = min(random.randint(min_, max_), len(list_))
@@ -134,23 +152,69 @@ class JobGraph:
         :return: id_occupation, label, isco group
         """
         id_occ = self.occupation.sample().index[0]
-        return id_occ, self.graph.nodes[id_occ]["label"], self.graph.nodes[id_occ]["isco_group"]
+        return id_occ, self.graph.nodes[id_occ]["label"], int(self.graph.nodes[id_occ]["isco_group"])
 
-    def get_job_with_skill(self, competences: list[str], knowledge: list[str]) -> list[str]:
+    def get_job_with_skill(self, competences=None, knowledge=None) -> list[str]:
         """
-        Give a list of competence & knowledge, return a list of occupation that has these skills
+        Give a list of competence & knowledge, return a list of occupation that has (at least) these skills
         :return:
         """
+        if competences is None:
+            competences = []
+        if knowledge is None:
+            knowledge = []
+
         skills = competences + knowledge
-        nodes = [set(self.graph.neighbors(self.name2id_skill[skill])) for skill in skills]
+        if len(skills) < 1:
+            return []
+
+        nodes = [set(self.graph.neighbors(self.name2id[skill])) for skill in skills]
         if nodes:
             similar_jobs = reduce(set.intersection, nodes)
             return list(similar_jobs)
         else:
             return []
 
-    def show_subgraph(self, id_occ: str, relation: RelationNode, type_node: TypeNode):
+    def get_path(self, nodeA: str, nodeB: str, ids: bool = False, convert_ids: bool = False) -> list[tuple]:
+        if not ids:
+            nodeA, nodeB = self.name2id[nodeA], self.name2id[nodeB]
 
+        nodes = nx.shortest_path(self.graph, source=nodeA, target=nodeB)
+
+        if convert_ids:
+            nodes = [(self.graph.nodes[node]["label"], self.graph.nodes[node]["type"]) for node in nodes]
+        else:
+            nodes = [(node, self.graph.nodes[node]["type"]) for node in nodes]
+
+        return nodes
+
+    def remove_single_component(self) -> list[str]:
+
+        return [node for component in nx.connected_components(self.graph)
+                if len(component) == 1 for node in component]
+
+    def node_similarity(self, nodesA: list[str], nodesB: list[str], ids: bool = False) -> float:
+
+        if len(nodesA) == 0 or len(nodesB) == 0:
+            return 0
+
+        if not ids:
+            nodesA = [self.name2id[node] for node in nodesA]
+            nodesB = [self.name2id[node] for node in nodesB]
+
+        list_ = [(nodeA, nodeB) for nodeA in nodesA for nodeB in nodesB]
+
+        avg_similarity = 0
+        for _, _, coeff in nx.jaccard_coefficient(self.graph, list_):
+            avg_similarity += coeff
+        return avg_similarity / len(list_)
+
+    def jaccard_coefficient(self, nodeA: str, nodeB: str, ids: bool = False):
+        if not ids:
+            nodeA, nodeB = self.name2id[nodeA], self.name2id[nodeB]
+        return nx.jaccard_coefficient(self.graph, [(nodeA, nodeB)])
+
+    def show_subgraph(self, id_occ: str, relation: RelationNode, type_node: TypeNode):
         nodes = list(self.return_neighbors(id_occ, relation, type_node))
         nodes.append(id_occ)
 
