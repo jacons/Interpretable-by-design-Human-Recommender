@@ -199,7 +199,7 @@ class JobGenerator:
         return offer
 
     def get_offers(self, size: int = 1, path: str = None) -> DataFrame:
-
+        print("Generating the job-offers...")
         offers = [self.__jobOffer(idx) for idx in tqdm(range(size))]
         offers = pd.DataFrame(offers).set_index("qId")
 
@@ -210,6 +210,7 @@ class JobGenerator:
 
     def generate_cvs(self, job_offers: DataFrame, mu: int = 100, sig: int = 10, path: str = None):
         curricula = []
+        print("Generating the curricula...")
         bar = tqdm(job_offers.itertuples(), total=len(job_offers))
         for job_offer in bar:
 

@@ -12,26 +12,27 @@ from tqdm import tqdm
 from Models.grid_search_utils import GridSearch
 
 
-class LMARTGridsearch(GridSearch):
+class LGBMRanker_class(GridSearch):
 
-    def __init__(self, train: str, valid: str, test: str, nDCG_at: int):
-
-        train, valid, test = read_csv(train), read_csv(valid), read_csv(test)
+    def __init__(self, name: str, path: str = None, nDCG_at: int = 15):
+        self.train = read_csv(f"{path}{name}_dataset_tr.csv")
+        self.valid = read_csv(f"{path}{name}_dataset_vl.csv")
+        self.test = read_csv(f"{path}{name}_dataset_ts.csv")
 
         # sorting after the splitting
-        self.train = train.sort_values(["qId", "kId"])
-        self.valid = valid.sort_values(["qId", "kId"])
-        self.test = test.sort_values(["qId", "kId"])
+        self.train.sort_values(["qId", "kId"], inplace=True)
+        self.valid.sort_values(["qId", "kId"], inplace=True)
+        self.test.sort_values(["qId", "kId"], inplace=True)
 
         # Preparing the datasets
         self.qIds_train = self.train.groupby("qId")["qId"].count().to_numpy()
-        self.X_train, self.y_train = self.train.iloc[:, 2:13], self.train[["qId", "kId", "relevance"]]
+        self.X_train, self.y_train = self.train.iloc[:, 5:], self.train[["qId", "kId", "relevance"]]
 
-        self.qIds_val = self.valid.groupby("qId")["qId"].count().to_numpy()
-        self.X_valid, self.y_valid = self.valid.iloc[:, 2:13], self.valid[["qId", "kId", "relevance"]]
+        self.qIds_valid = self.valid.groupby("qId")["qId"].count().to_numpy()
+        self.X_valid, self.y_valid = self.valid.iloc[:, 5:], self.valid[["qId", "kId", "relevance"]]
 
         self.qIds_test = self.test.groupby("qId")["qId"].count().to_numpy()
-        self.X_test, self.y_test = self.test.iloc[:, 2:13], self.test[["qId", "kId", "relevance"]]
+        self.X_test, self.y_test = self.test.iloc[:, 5:], self.test[["qId", "kId", "relevance"]]
 
         def log_output(r):
             # callback function (used to avoid logging during the grid-search)
@@ -51,44 +52,12 @@ class LMARTGridsearch(GridSearch):
             y=self.y_train["relevance"],
             group=self.qIds_train,
             eval_set=[(self.X_valid, self.y_valid["relevance"])],
-            eval_group=[self.qIds_val],
+            eval_group=[self.qIds_valid],
             eval_at=nDCG_at,
             callbacks=[log_output]
         )
         self.nDCG_at = nDCG_at
         return
-
-    def eval_model(self, model: LGBMRanker, df: DataFrame = None,
-                   qIds: ndarray = None, nDCG_at: list = None) -> dict:
-        """
-        Custom evaluation function: the function groups by the "job-offers" and foreach set, it predicts
-        the "lambdas" that it uses to sort (by relevance).
-        After obtained nDCGs apply the average.
-        """
-        df = self.valid if df is None else df
-        n_qIds = len(self.qIds_val) if qIds is None else len(qIds)
-        nDCG_at = [self.nDCG_at] if nDCG_at is None else nDCG_at
-        avg_nDCG = np.zeros((len(nDCG_at)))
-
-        for _, v in df.groupby("qId"):
-            v = v.sort_values("relevance", ascending=False)
-
-            features, target = v.iloc[:, 2:13], asarray([v["relevance"].to_numpy()])
-            lambdas = asarray([model.predict(features)])  # predict lambdas
-
-            # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG
-            for i, nDCG in enumerate(nDCG_at):
-                avg_nDCG[i] += ndcg_score(target, lambdas, k=nDCG)
-
-        # dived by the number of jobs-offer to obtain the average.
-        avg_nDCG /= n_qIds
-        results = {"nDCG@" + str(nDCG): round(avg_nDCG[i], 4) for i, nDCG in enumerate(nDCG_at)}
-        return results
-
-    def fit(self, **conf) -> LGBMRanker:
-        model = LGBMRanker(**self.default_par, **conf)
-        model.fit(**self.ranker_par)
-        return model
 
     def grid_search(self, hyperparameters: dict = None) -> Tuple:
 
@@ -108,3 +77,34 @@ class LMARTGridsearch(GridSearch):
 
             progress_bar.set_postfix(nDCG_15=best_model_[2])
         return best_model_
+
+    def fit(self, **conf) -> LGBMRanker:
+        model = LGBMRanker(**self.default_par, **conf)
+        model.fit(**self.ranker_par)
+        return model
+
+    def eval_model(self, model: LGBMRanker, dt: DataFrame = None,
+                   qIds: ndarray = None, nDCG_at: list = None) -> dict:
+        """
+        Custom evaluation function: the function groups by the "job-offers" and foreach set, it predicts
+        the "lambdas" that it uses to sort (by relevance).
+        After obtained nDCGs apply the average.
+        """
+        dt = self.valid if dt is None else dt
+        n_qIds = len(self.qIds_valid) if qIds is None else len(qIds)
+        nDCG_at = [self.nDCG_at] if nDCG_at is None else nDCG_at
+        avg_nDCG = np.zeros((len(nDCG_at)))
+
+        for _, v in dt.groupby("qId"):
+
+            features, target = v.iloc[:, 5:], asarray([v["relevance"].to_numpy()])
+            lambdas = asarray([model.predict(features)])  # predict lambdas
+
+            # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG
+            for i, nDCG in enumerate(nDCG_at):
+                avg_nDCG[i] += ndcg_score(target, lambdas, k=nDCG)
+
+        # dived by the number of jobs-offer to obtain the average.
+        avg_nDCG /= n_qIds
+        results = {"nDCG@" + str(nDCG): round(avg_nDCG[i], 4) for i, nDCG in enumerate(nDCG_at)}
+        return results

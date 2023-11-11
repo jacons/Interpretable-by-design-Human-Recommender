@@ -132,4 +132,3 @@ def prepare_datasets(raw_sources: str, output_dir: str):
 
 prepare_datasets(raw_sources="../raw_sources", output_dir="../sources/")
 # build_cities_distance(raw_sources="../raw_sources", output_dir="../sources/", sub_sample=0.15)
-# %%

@@ -33,7 +33,7 @@ class GridSearch:
         for _, v in df.groupby("qId"):
             v = v.sort_values("relevance", ascending=False)
 
-            _, y = v.iloc[:, 2:13], asarray([v["relevance"].to_numpy()])
+            _, y = v.iloc[:, 5:], asarray([v["relevance"].to_numpy()])
 
             random_lambdas = asarray([v.sample(frac=1)["relevance"].to_numpy()])
             perfect_lambdas = asarray([v.sort_values("relevance", ascending=False)["relevance"].to_numpy()])

@@ -13,21 +13,26 @@ from typing import Tuple
 from Models.grid_search_utils import GridSearch
 
 
-class EBMGridSearch(GridSearch):
-    def __init__(self, train: str, valid: str, test: str, task: str, nDCG_at: int):
+class EBM_class(GridSearch):
+    def __init__(self, name: str, path: str = None, nDCG_at: int = 15):
 
-        self.train, self.valid, self.test = read_csv(train), read_csv(valid), read_csv(test)
+        self.train = read_csv(f"{path}{name}_dataset_tr.csv")
+        self.valid = read_csv(f"{path}{name}_dataset_vl.csv")
+        self.test = read_csv(f"{path}{name}_dataset_ts.csv")
 
-        target = ["w_score"] if task == "Regression" else ["relevance"]
-        self.X_train, self.y_train = self.train.iloc[:, 2:13], self.train[target]
-        self.X_valid, self.y_valid = self.valid.iloc[:, 2:13], self.valid[target]
-        self.X_test, self.y_test = self.test.iloc[:, 2:13], self.test[target]
+        self.train["w_score"] = self.train["w_score"].apply(lambda x: max(0, x))
+        self.valid["w_score"] = self.valid["w_score"].apply(lambda x: max(0, x))
+        self.test["w_score"] = self.test["w_score"].apply(lambda x: max(0, x))
 
-        self.features_name = list(self.train.iloc[:, 2:13].columns)
+        self.X_train, self.y_train = self.train.iloc[:, 5:], self.train["w_score"]
+        self.X_valid, self.y_valid = self.valid.iloc[:, 5:], self.valid["w_score"]
+        self.X_test, self.y_test = self.test.iloc[:, 5:], self.test["w_score"]
+
+        self.features_name = list(self.train.iloc[:, 5:].columns)
         self.default_par = dict(
             feature_names=self.features_name,
             n_jobs=-1,
-            objective="rmse" if task == "Regression" else "log_loss",
+            objective="rmse",
             exclude=[],
             feature_types=None,
             max_bins=256,
@@ -54,9 +59,8 @@ class EBMGridSearch(GridSearch):
         n_groups = 0
 
         for _, v in df.groupby("qId"):
-            v = v.sort_values("relevance", ascending=False)
 
-            features, target = v.iloc[:, 2:13].values, asarray([v["relevance"].to_numpy()])
+            features, target = v.iloc[:, 5:].values, asarray([v["w_score"].to_numpy()])
             y_pred = asarray([model.predict(features)])
             # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG
             for i, nDCG in enumerate(nDCG_at):
