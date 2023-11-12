@@ -78,24 +78,25 @@ class MatchingScore:
         return dataset
 
     @staticmethod
-    def save_output(dataset: DataFrame, output_file: str) -> None:
-        if output_file is not None:
-            dataset.to_csv(f"../outputs/scores/{output_file}_dataset.csv", index=False)
+    def save_output(dataset: DataFrame, name: str) -> None:
+        if name is not None:
+            dataset.to_csv(f"../outputs/scores/{name}_dataset.csv", index=False)
 
-    def split_and_save_datasets(self, dataset: DataFrame, output_file: str) -> Tuple[DataFrame, DataFrame, DataFrame]:
+    def split_and_save_datasets(self, dataset: DataFrame, name: str) -> Tuple[DataFrame, DataFrame, DataFrame]:
         train, test = train_test_split(dataset, test_size=self.split_size[0], random_state=self.split_seed)
         train, valid = train_test_split(train, test_size=self.split_size[1], random_state=self.split_seed)
 
-        if output_file is not None:
-            train.to_csv(f"../outputs/scores/{output_file}_dataset_tr.csv", index=False)
-            valid.to_csv(f"../outputs/scores/{output_file}_dataset_vl.csv", index=False)
-            test.to_csv(f"../outputs/scores/{output_file}_dataset_ts.csv", index=False)
+        if name is not None:
+            train.to_csv(f"../outputs/scores/{name}_dataset_tr.csv", index=False)
+            valid.to_csv(f"../outputs/scores/{name}_dataset_vl.csv", index=False)
+            test.to_csv(f"../outputs/scores/{name}_dataset_ts.csv", index=False)
 
         return train, valid, test
 
-    def score_function(self, offers: DataFrame, curricula: DataFrame, output_file: str = None) -> DataFrame:
+    def score_function(self, offers: DataFrame, curricula: DataFrame, name: str = None) -> DataFrame:
         dataset = self.generate_fitness_score(offers, curricula)
         dataset = self.compute_score(dataset)
         dataset = self.create_relevance_labels(dataset)
-        self.save_output(dataset, output_file)
+        _ = self.split_and_save_datasets(dataset, name)
+        self.save_output(dataset, name)
         return dataset

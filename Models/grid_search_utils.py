@@ -1,9 +1,7 @@
 import os
 import pickle
-from typing import Tuple, Any
 
 import numpy as np
-from lightgbm import LGBMRanker
 from numpy import ndarray, asarray
 from pandas import DataFrame
 from sklearn.metrics import ndcg_score
@@ -12,14 +10,14 @@ from sklearn.metrics import ndcg_score
 class GridSearch:
 
     @staticmethod
-    def save_model(model: LGBMRanker, name: str = "model"):
+    def save_model(model, name: str = "model"):
         if not os.path.exists("saved_models"):
             os.makedirs("saved_models")
         with open('saved_models/' + name + ".pkl", 'wb') as file:
             pickle.dump(model, file)
 
     @staticmethod
-    def load_model(name: str = "model") -> Tuple[Any, dict]:
+    def load_model(name: str = "model"):
         with open(name + ".pkl", 'rb') as file:
             model = pickle.load(file)
         return model

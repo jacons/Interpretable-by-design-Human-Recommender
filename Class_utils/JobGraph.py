@@ -1,25 +1,12 @@
 import itertools
 import random
-from enum import Enum
 from functools import reduce
 
 import networkx as nx
 from matplotlib import pyplot as plt
 from pandas import read_csv
 
-
-class RelationNode(Enum):
-    ES = "essential"
-    OP = "optional"
-    JB = "same_group"
-    AL = "All"
-
-
-class TypeNode(Enum):
-    OC = "occupation"
-    KN = "knowledge"
-    SK = "skill/competence"
-    AL = "all"
+from Class_utils.parameters import RelationNode, TypeNode
 
 
 class JobGraph:

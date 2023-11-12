@@ -1,3 +1,5 @@
+from enum import Enum
+
 import numpy as np
 
 file_paths = dict(
@@ -18,12 +20,12 @@ file_paths = dict(
 
 curriculum_par = dict(
     mu=80,
-    path="../outputs/curricula.csv"
+    path="../outputs"
 )
 
 jobOffer_par = dict(
     size=120,
-    path="../outputs/jobOffers.csv"
+    path="../outputs"
 )
 
 matching_par = dict(
@@ -46,3 +48,26 @@ matching_par = dict(
         7,  # Knowledge optional
     ], dtype=np.float32)
 )
+
+
+class RelationNode(Enum):
+    ES = "essential"
+    OP = "optional"
+    JB = "same_group"
+    AL = "All"
+
+
+class TypeNode(Enum):
+    OC = "occupation"
+    KN = "knowledge"
+    SK = "skill/competence"
+    AL = "all"
+
+
+class EducationLevel(Enum):
+    A1 = 0
+    A2 = 1
+    B1 = 2
+    B2 = 3
+    C1 = 4
+    C2 = 5

@@ -193,17 +193,17 @@ class JobGenerator:
         )
         return offer
 
-    def get_offers(self, size: int = 1, path: str = None) -> DataFrame:
+    def get_offers(self, size: int = 1, path: str = None, name: str = None) -> DataFrame:
         print("Generating the job-offers...")
         offers = [self.__jobOffer(idx) for idx in tqdm(range(size))]
         offers = pd.DataFrame(offers).set_index("qId")
 
         if path is not None:
-            offers.to_csv(path, quoting=csv.QUOTE_ALL)
+            offers.to_csv(f"{path}/{name}_job_offers.csv", quoting=csv.QUOTE_ALL)
 
         return offers
 
-    def generate_cvs(self, job_offers: DataFrame, mu: int = 100, sig: int = 10, path: str = None):
+    def generate_cvs(self, job_offers: DataFrame, mu: int = 100, sig: int = 10, path: str = None, name: str = None):
         curricula = []
         print("Generating the curricula...")
         bar = tqdm(job_offers.itertuples(), total=len(job_offers))
@@ -251,7 +251,7 @@ class JobGenerator:
 
         curricula = DataFrame(curricula)
         if path is not None:
-            curricula.to_csv(path, index=False, quoting=csv.QUOTE_ALL)
+            curricula.to_csv(f"{path}/{name}_curricula.csv", index=False, quoting=csv.QUOTE_ALL)
 
         return curricula
 

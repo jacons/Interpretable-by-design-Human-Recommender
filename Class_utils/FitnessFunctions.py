@@ -1,19 +1,10 @@
 import sys
-from enum import Enum
 from itertools import product
 
 from pandas import read_csv
 
 from Class_utils import JobGraph
-
-
-class EducationLevel(Enum):
-    A1 = 0
-    A2 = 1
-    B1 = 2
-    B2 = 3
-    C1 = 4
-    C2 = 5
+from Class_utils.parameters import EducationLevel
 
 
 class FitnessFunctions:
