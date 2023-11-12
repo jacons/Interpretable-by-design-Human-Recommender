@@ -8,7 +8,7 @@ file_paths = dict(
     languages_level_path="../sources/languages_level.csv",  # All language levels
     languages_path="../sources/languages.csv",  # All language
     education_path="../sources/education.csv",  # Education hierarchy
-
+    cities_dist="../sources/cities_distance.csv",
     min_edu_occupation_path="../sources/min_education.csv",  # Minimal education for isco groups
     skill_synonyms_path="../sources/skills_synonyms.csv",  # Skills synonyms
 
@@ -22,14 +22,15 @@ curriculum_par = dict(
 )
 
 jobOffer_par = dict(
-    size=100,
+    size=120,
     path="../outputs/jobOffers.csv"
 )
 
 matching_par = dict(
-    cities_dist="../sources/cities_distance.csv",
-    bins=5,
-
+    bins=6,
+    noise=(0, 0.05),  # mean and stddev
+    split_size=(0.33, 0.33),  # Hold-out
+    split_seed=841,  # Reproducible splitting
     weight=np.array([
         8,  # Education essential
         4,  # Education optional
@@ -43,9 +44,5 @@ matching_par = dict(
         7,  # Competence optional
         10,  # Knowledge essential
         7,  # Knowledge optional
-    ], dtype=np.float32),
-    noise=(0, 0.01),  # mean and stddev
-
-    split_size=(0.33, 0.33),  # Hold-out
-    split_seed=841  # Reproducible splitting
+    ], dtype=np.float32)
 )

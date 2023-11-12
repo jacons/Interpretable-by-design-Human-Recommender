@@ -26,16 +26,13 @@ class JobGraph:
     OCCUPATION_GROUP_THRESHOLD = 4  # A constant for occupation group threshold
     occ_weight = {0: 42, 1: 19, 2: 8, 3: 3, 4: 1}
 
-    def __init__(self, occ2skill: str, occupation: str, skills: str):
+    def __init__(self, sources: dict):
         """
         Occupation/Skill/Knowledge Graph
-        :param occ2skill: occupations - skill relationship (many to many)
-        :param occupation: occupation list
-        :param skills: skill list
         """
-        self.occ2skills = read_csv(occ2skill)  # relation "many to many"
-        self.occupation = read_csv(occupation, index_col=0)  # all occupation
-        self.skills = read_csv(skills, index_col=0)  # all skill
+        self.occ2skills = read_csv(sources["job2skills_path"])  # relation "many to many"
+        self.occupation = read_csv(sources["occupation_path"], index_col=0)  # all occupation
+        self.skills = read_csv(sources["skills_path"], index_col=0)  # all skill
 
         # remove an occupation that hasn't "essential skills"
         self.occupation = self.occupation[self.occupation.index != "a580e79a-b752-49c1-b033-b5ab2b34bfba"]
@@ -146,13 +143,13 @@ class JobGraph:
             sampled.extend(["-" for _ in range(n, max_)])
         return sampled
 
-    def sample_occupation(self) -> tuple[str, str, int]:
+    def sample_occupation(self) -> tuple[str, str, str]:
         """
         Sample an occupation
         :return: id_occupation, label, isco group
         """
         id_occ = self.occupation.sample().index[0]
-        return id_occ, self.graph.nodes[id_occ]["label"], int(self.graph.nodes[id_occ]["isco_group"])
+        return id_occ, self.graph.nodes[id_occ]["label"], self.graph.nodes[id_occ]["isco_group"]
 
     def get_job_with_skill(self, competences=None, knowledge=None) -> list[str]:
         """

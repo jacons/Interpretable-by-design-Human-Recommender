@@ -7,7 +7,7 @@ from numpy import arange
 from pandas import DataFrame, read_csv
 from tqdm import tqdm
 
-from Generator.JobGraph import JobGraph, RelationNode, TypeNode
+from Class_utils.JobGraph import JobGraph, RelationNode, TypeNode
 
 
 def kid_generator():
@@ -18,7 +18,7 @@ def kid_generator():
 
 
 class JobGenerator:
-    def __init__(self, sources: dict):
+    def __init__(self, job_graph: JobGraph, sources: dict):
         # JobGenerator is a tool that allows us to generate synthetic data about the "curricula" and "job_offers"
 
         """
@@ -31,10 +31,7 @@ class JobGenerator:
         min_edu_occupation_path: Minimal education for isco group
         education_path: education level distribution
         """
-
-        self.job_graph = JobGraph(sources["job2skills_path"],
-                                  sources["occupation_path"],
-                                  sources["skills_path"])
+        self.job_graph = job_graph
 
         self.lang_level_dist = sources["lang_level_distribution"]
         self.kid_generator = kid_generator()
@@ -50,21 +47,19 @@ class JobGenerator:
 
         self.skills_synonyms = read_csv(sources["skill_synonyms_path"])
 
-        min_ed = read_csv(sources["min_edu_occupation_path"]).astype(
-            {"id_group": "int", "id_edu": "int"}
-        )
+        min_edu = pd.read_csv(sources["min_edu_occupation_path"]).astype({"code": "string"}).set_index("code")
+        min_edu.index = min_edu.index.str[1:]
+        self.min_edu = min_edu["min_edu"].to_dict()
 
-        # dictionary isco_group -> minimal edu
-        self.min_edu = {i[1]: i[2] for i in min_ed.itertuples()}
-        self.idx2language = {lang[0]: lang[1] for lang in self.languages.itertuples()}
-        self.language2idx = {lang[1]: lang[0] for lang in self.languages.itertuples()}
+        self.idx2language = self.languages["Languages"].to_dict()
+        self.language2idx = {v: k for k, v in self.idx2language.items()}
 
-    def generate_edu(self, isco_group: int) -> tuple[str, str, int]:
+    def generate_edu(self, isco_group: str) -> tuple[str, str, int]:
         """
         Give an isco group return an "essential" and "optional" education; and the minimal age
         """
         # retrieve minimal_education for this kind of group
-        min_edu = self.min_edu[isco_group // 1000]
+        min_edu = self.min_edu[isco_group[:3]]
 
         # Sample an "essential education"
         education = self.education[self.education.index >= min_edu]
@@ -345,7 +340,7 @@ class JobGenerator:
 
         if id_occ is None:
             id_occ, _, group = self.job_graph.sample_occupation()
-            min_edu = self.min_edu[group // 1000]
+            min_edu = self.min_edu[group[:3]]
             edu_essential = self.education.loc[min_edu, "Education"]
 
         edu_row = self.education[self.education["Education"] == edu_essential]

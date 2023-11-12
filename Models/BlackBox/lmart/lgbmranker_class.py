@@ -97,7 +97,7 @@ class LGBMRanker_class(GridSearch):
 
         for _, v in dt.groupby("qId"):
 
-            features, target = v.iloc[:, 5:], asarray([v["relevance"].to_numpy()])
+            features, target = v.iloc[:, 5:], asarray([v["w_score"].to_numpy()])
             lambdas = asarray([model.predict(features)])  # predict lambdas
 
             # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG
