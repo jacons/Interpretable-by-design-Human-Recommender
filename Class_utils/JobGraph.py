@@ -5,6 +5,7 @@ from functools import reduce
 import networkx as nx
 from matplotlib import pyplot as plt
 from pandas import read_csv
+from tqdm import tqdm
 
 from Class_utils.parameters import RelationNode, TypeNode
 
@@ -26,29 +27,34 @@ class JobGraph:
         self.occupation["group"] = self.occupation["group"].str[:self.OCCUPATION_GROUP_THRESHOLD]
 
         # Add occupation nodes to the graph
+        progress_bar = tqdm(self.occupation.itertuples(), total=len(self.occupation), desc="Loading occupations")
         occupation_nodes = [
             (occ[0], {"type": "occupation", "label": occ[1], "isco_group": occ[2]})
-            for occ in self.occupation.itertuples()
+            for occ in progress_bar
         ]
 
         # Add skill nodes to the graph
+        progress_bar = tqdm(self.skills.itertuples(), total=len(self.skills), desc="Loading skills")
         skill_nodes = [
             (skill[0], {"type": skill[2], "label": skill[1], "sector": skill[3]})
-            for skill in self.skills.itertuples()
+            for skill in progress_bar
         ]
 
         # Add edges for occ2skills relations
+        progress_bar = tqdm(self.occ2skills.itertuples(), total=len(self.occ2skills), desc="Add relations")
         edges_occ2skills = [
             (row[1], row[3], {"relation": row[2]})
-            for row in self.occ2skills.itertuples()
+            for row in progress_bar
         ]
 
         # Link together the occupation with the same group
-        edges_group_nodes = [
-            (occ1[0], occ2[0], {"relation": "same_group", "weight": self.weight_group_node(occ1[2], occ2[2])})
-            for occ1, occ2 in itertools.product(self.occupation.itertuples(), repeat=2)
-            if occ1[0] != occ2[0]
-        ]
+        # n_iters = len(self.occupation)**2
+        # bar = tqdm(itertools.product(self.occupation.itertuples(), repeat=2), total=n_iters)
+        # edges_group_nodes = [
+        #     (occ1[0], occ2[0], {"relation": "same_group", "weight": self.weight_group_node(occ1[2], occ2[2])})
+        #     for occ1, occ2 in bar
+        #     if occ1[0] != occ2[0]
+        # ]
 
         self.name2id = {}
         self.name2id.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.skills.itertuples()))
@@ -56,7 +62,7 @@ class JobGraph:
 
         self.graph = nx.Graph()
         self.graph.add_nodes_from(occupation_nodes + skill_nodes)
-        self.graph.add_edges_from(edges_occ2skills + edges_group_nodes)
+        self.graph.add_edges_from(edges_occ2skills)
         self.graph.remove_nodes_from(self.remove_single_component())
 
     def weight_group_node(self, groupA: str, groupB: str):
@@ -140,7 +146,7 @@ class JobGraph:
 
     def get_job_with_skill(self, competences=None, knowledge=None) -> list[str]:
         """
-        Give a list of competence & knowledge, return a list of occupation that has (at least) these skills
+        Give a list of competence & knowledge, return a list of id-occupation that has (at least) these skills
         :return:
         """
         if competences is None:

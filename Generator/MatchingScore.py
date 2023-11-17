@@ -16,24 +16,29 @@ class MatchingScore:
 
         self.job_graph = job_graph
         self.fitness = fitness_functions
-        self.weights = self.normalize_weights(weight)
+        self.weights = self._normalize_weights(weight)
         self.noise = noise  # mean and stddev
         self.bins = bins  # Number of relevance's levels
         self.split_size = split_size
         self.split_seed = split_seed
 
     @staticmethod
-    def normalize_weights(weights: np.ndarray) -> np.ndarray:
+    def _normalize_weights(weights: np.ndarray) -> np.ndarray:
         return weights / weights.sum()
 
-    def generate_fitness_score(self, offers: DataFrame, curricula: DataFrame) -> DataFrame:
+    def score_function(self, offers: DataFrame, curricula: DataFrame, name: str = None) -> DataFrame:
+        dataset = self._generate_fitness_score(offers, curricula)
+        dataset = self._compute_score(dataset)
+        dataset = self._create_relevance_labels(dataset)
+        _ = self._split_and_save_datasets(dataset, name)
+        self._save_output(dataset, name)
+        return dataset.set_index(keys=["qId", "kId"])
+
+    def _generate_fitness_score(self, offers: DataFrame, curricula: DataFrame) -> DataFrame:
         dataset = []
-
-        print("Generating the fitness score...")
-        bar = tqdm(offers.itertuples(), total=len(offers))
-
+        bar = tqdm(offers.itertuples(), total=len(offers), desc="Generating the fitness scores")
         for offer in bar:
-            curricula_ = curricula[curricula["qId"] == offer[0]]
+            curricula_ = curricula[curricula.index.get_level_values(0) == offer[0]]
             for cv in curricula_.itertuples():
                 dataset.append(self.fitness.fitness(offer, cv))
             bar.set_postfix(qId=offer[0])
@@ -41,7 +46,7 @@ class MatchingScore:
         dataset = DataFrame(data=dataset, dtype=np.float32).astype({"qId": "int", "kId": "int"})
         return dataset
 
-    def compute_score(self, dataset: DataFrame) -> DataFrame:
+    def _compute_score(self, dataset: DataFrame) -> DataFrame:
         features = dataset.iloc[:, 2:]
 
         # Simple sum
@@ -56,7 +61,7 @@ class MatchingScore:
 
         return dataset
 
-    def create_relevance_labels(self, dataset: DataFrame) -> DataFrame:
+    def _create_relevance_labels(self, dataset: DataFrame) -> DataFrame:
         intervals, edges = np.histogram(dataset.sort_values("w_score", ascending=False)["w_score"].to_numpy(),
                                         bins=self.bins)
         score2inter = {i: (edges[i], edges[i + 1]) for i in range(len(intervals))}
@@ -78,11 +83,11 @@ class MatchingScore:
         return dataset
 
     @staticmethod
-    def save_output(dataset: DataFrame, name: str) -> None:
+    def _save_output(dataset: DataFrame, name: str) -> None:
         if name is not None:
             dataset.to_csv(f"../outputs/scores/{name}_dataset.csv", index=False)
 
-    def split_and_save_datasets(self, dataset: DataFrame, name: str) -> Tuple[DataFrame, DataFrame, DataFrame]:
+    def _split_and_save_datasets(self, dataset: DataFrame, name: str) -> Tuple[DataFrame, DataFrame, DataFrame]:
         train, test = train_test_split(dataset, test_size=self.split_size[0], random_state=self.split_seed)
         train, valid = train_test_split(train, test_size=self.split_size[1], random_state=self.split_seed)
 
@@ -92,11 +97,3 @@ class MatchingScore:
             test.to_csv(f"../outputs/scores/{name}_dataset_ts.csv", index=False)
 
         return train, valid, test
-
-    def score_function(self, offers: DataFrame, curricula: DataFrame, name: str = None) -> DataFrame:
-        dataset = self.generate_fitness_score(offers, curricula)
-        dataset = self.compute_score(dataset)
-        dataset = self.create_relevance_labels(dataset)
-        _ = self.split_and_save_datasets(dataset, name)
-        self.save_output(dataset, name)
-        return dataset

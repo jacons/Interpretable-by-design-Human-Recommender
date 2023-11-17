@@ -1,4 +1,4 @@
-Importance,Education,Distribution,Min_age
+Importance,Education,Distribution,min_age
 0,"Less-than-degree",0.5846,16
 1,"Degree",0.3040,18
 2,"Bachelor-D".,0.0251,21

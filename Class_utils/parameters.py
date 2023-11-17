@@ -1,6 +1,7 @@
 from enum import Enum
 
 import numpy as np
+from pandas import read_csv
 
 file_paths = dict(
     job2skills_path="../sources/job2skills.csv",
@@ -11,11 +12,10 @@ file_paths = dict(
     languages_path="../sources/languages.csv",  # All language
     education_path="../sources/education.csv",  # Education hierarchy
     cities_dist="../sources/cities_distance.csv",
-    min_edu_occupation_path="../sources/min_education.csv",  # Minimal education for isco groups
+    min_max_edu_occupation_path="../sources/min_max_education.csv",  # Minimal/Maximal education for isco groups
     skill_synonyms_path="../sources/skills_synonyms.csv",  # Skills synonyms
 
-    lang_level_distribution=[0.65, 0.35],  # Distribution of extra languages that the candidate knows [0-1]
-    # certificates_distribution=[0.41, 0.28, 0.19, 0.12] # Distribution of certificates [0-1-2-3]
+    opt_lang_distribution=[0.65, 0.35],  # Distribution of extra languages that the candidate knows [0-1]
 )
 
 curriculum_par = dict(
@@ -53,21 +53,26 @@ matching_par = dict(
 class RelationNode(Enum):
     ES = "essential"
     OP = "optional"
-    JB = "same_group"
-    AL = "All"
 
 
 class TypeNode(Enum):
     OC = "occupation"
     KN = "knowledge"
     SK = "skill/competence"
-    AL = "all"
 
 
 class EducationLevel(Enum):
-    A1 = 0
-    A2 = 1
-    B1 = 2
-    B2 = 3
-    C1 = 4
-    C2 = 5
+    Null = 0
+    A1 = 1
+    A2 = 2
+    B1 = 3
+    B2 = 4
+    C1 = 5
+    C2 = 6
+
+
+class Language:
+
+    def __init__(self, name: str = "-", level: str = "-"):
+        self.name = name
+        self.level = level

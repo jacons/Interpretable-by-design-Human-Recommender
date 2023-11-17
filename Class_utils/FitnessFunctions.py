@@ -1,26 +1,34 @@
 import sys
-from itertools import product
 
 from pandas import read_csv
 
 from Class_utils import JobGraph
-from Class_utils.parameters import EducationLevel
+from Class_utils.parameters import EducationLevel, Language
 
 
 class FitnessFunctions:
     def __init__(self, job_graph: JobGraph, sources: dict):
 
+        # ------------------------ LOAD RESOURCES ------------------------
+        # --- Cities ---
         self.distance = read_csv(sources["cities_dist"], index_col=[0, 1], skipinitialspace=True)
+        self.max_distance = self.distance["Dist"].max()
+        # --- Cities ---
 
-        self.max_distance = self.distance["D"].max()
-
+        # --- Education ---
+        # Education dictionary: "education level" -> importance. E.g. Degree-> 1
         self.education = {i[1]: i[0] for i in read_csv(sources["education_path"], index_col=0).itertuples()}
-        self.lvl2value = {level.name: level.value for level in EducationLevel}
-        self.education["-"] = "-"
         self.len_ed_rank = len(self.education)
+        # --- Education ---
 
+        # --- Language and language levels ---
+        self.lvl2value = {level.name: level.value for level in EducationLevel}
+        # --- Language and language levels ---
+
+        # --- Skills and Occupations ---
         self.job_graph = job_graph
-
+        # --- Skills and Occupations ---
+        # ------------------------ LOAD RESOURCES ------------------------
         return
 
     @staticmethod
@@ -34,30 +42,20 @@ class FitnessFunctions:
         basic, bonus = 0, 0
         if offer_ess != "-":
             basic += 1 if int(offer_ess) <= cv else 0
-            bonus += 0.25 if offer_op and int(offer_ess) <= cv else 0
+            bonus += 0.50 if offer_op and int(offer_ess) < cv else 0
 
         return basic, bonus
 
-    @staticmethod
-    def remove_null(a: list, b: list):
-        list_ = []
-        for lang, lvl in zip(a, b):
-            if lang != "-":
-                list_.append((lang, lvl))
-        return list_
-
-    @staticmethod
-    def filter(list_: list):
-        return [item for item in list_ if item != "-"]
-
     def fitness_edu_function(self, offer_ess: str, offer_op: str, cv: str) -> tuple[float, float]:
-        # max 1,25 min 0
+        # max 1,50 min 0
         cv = self.education[cv]  # level of candidate's education
         offer_ess = self.education[offer_ess]  # essential education
-        offer_op = self.education[offer_op]  # optional education
+
+        if offer_op != "-":
+            offer_op = self.education[offer_op]  # optional education
 
         basic = 1 if offer_ess <= cv else 0
-        bonus = 0 if offer_op == "-" else 0.25 if offer_op <= cv else 0
+        bonus = 0 if offer_op == "-" else 0.50 if offer_op <= cv else 0
 
         return basic, bonus
 
@@ -71,21 +69,23 @@ class FitnessFunctions:
 
         return 1 if dist < range_ else 1 - (dist - range_) / self.max_distance
 
-    def fitness_lange_function(self, essential: list[tuple], cv: list[tuple], optional: tuple) -> tuple[float, float]:
+    def fitness_lange_function(self, essential: list[Language], cv: list[Language],
+                               optional: Language) -> tuple[float, float]:
 
         basic, bonus = 0, 0
-        for a, b in product(essential, cv):
-            if a[0] == b[0]:
-                lvl_of = self.lvl2value[a[1]]
-                lvl_cv = self.lvl2value[b[1]]
-                basic += 1 if lvl_of <= lvl_cv else 1 / (lvl_of - lvl_cv)
+        for cv_lang in cv:
+            cv_level = self.lvl2value[cv_lang.level]
 
-        if optional[0] != "-":
-            for lang, lvl in cv:
-                if lang == optional[0]:
-                    lvl_of = self.lvl2value[optional[1]]
-                    lvl_cv = self.lvl2value[lvl]
-                    bonus += 0.25 if lvl_of <= lvl_cv else 0.25 / (lvl_of - lvl_cv)
+            for ess_lang in essential:
+                if cv_lang.name == ess_lang.name:
+                    if ess_lang.level == "Any":
+                        basic += 1 if cv_level > 0 else 0.7
+                    else:
+                        jo_level = self.lvl2value[ess_lang.level]
+                        basic += 1 if jo_level <= cv_level else 1 / (2 * (jo_level - cv_level))
+
+                if cv_lang.name == optional.name:
+                    bonus += 0.5 if cv_level > 0 else 0.3
 
         return basic / len(essential), bonus
 
@@ -127,29 +127,42 @@ class FitnessFunctions:
 
         return basic, bonus
 
+    @staticmethod
+    def remove_null(a: list[str], b: list[str]) -> list[Language]:
+        list_ = []
+        for name, lvl in zip(a, b):
+            if name != "-":
+                list_.append(Language(name, lvl))
+        return list_
+
+    @staticmethod
+    def filter(list_: list):
+        return [item for item in list_ if item != "-"]
+
     def fitness(self, offer: tuple, cv: tuple) -> dict:
 
-        cv_lang = self.remove_null([cv[21], cv[22], cv[23]], [cv[24], cv[25], cv[26]])
-        of_lang = self.remove_null([offer[21], offer[22]], [offer[24], offer[25]])
-        of_comp_ess = self.filter([offer[i] for i in range(7, 10 + 1)])
-        of_comp_opt = self.filter([offer[i] for i in range(11, 13 + 1)])
-        of_know_ess = self.filter([offer[i] for i in range(14, 17 + 1)])
-        of_know_opt = self.filter([offer[i] for i in range(18, 20 + 1)])
-        cv_comp = self.filter([cv[i] for i in range(7, 13 + 1)])
-        cv_know = self.filter([cv[i] for i in range(14, 20 + 1)])
+        cv_lang = self.remove_null([cv[20], cv[21], cv[22]], [cv[23], cv[24], cv[25]])
+        of_lang = self.remove_null([offer[22], offer[23]], [offer[25], offer[26]])
+        of_comp_ess = self.filter([offer[i] for i in range(8, 11 + 1)])
+        of_comp_opt = self.filter([offer[i] for i in range(12, 14 + 1)])
+        of_know_ess = self.filter([offer[i] for i in range(15, 18 + 1)])
+        of_know_opt = self.filter([offer[i] for i in range(19, 21 + 1)])
+        cv_comp = self.filter([cv[i] for i in range(6, 12 + 1)])
+        cv_know = self.filter([cv[i] for i in range(13, 19 + 1)])
 
         fitness_competence = self.fitness_skills_function(of_comp_ess, of_comp_opt, cv_comp)
         fitness_knowledge = self.fitness_skills_function(of_know_ess, of_know_opt, cv_know)
-        fitness_edu = self.fitness_edu_function(offer[2], offer[3], cv[3])
-        fitness_exp = self.fitness_experience_function(offer[27], offer[28], cv[27])
-        fitness_lang = self.fitness_lange_function(of_lang, cv_lang, (offer[23], offer[26]))
+        fitness_edu = self.fitness_edu_function(offer[3], offer[4], cv[2])
+        fitness_exp = self.fitness_experience_function(offer[28], offer[29], cv[26])
+        fitness_lang = self.fitness_lange_function(of_lang, cv_lang, Language(offer[24], offer[27]))
+
         result = dict(
             qId=offer[0],
-            kId=cv[0],
+            kId=cv[0][1],
             fitness_edu_basic=fitness_edu[0],
             fitness_edu_bonus=fitness_edu[1],
-            fitness_city=self.fitness_city_function(offer[6], cv[5], cv[6]),
-            fitness_age=self.fitness_age_function(cv[4], offer[4], offer[5]),
+            fitness_city=self.fitness_city_function(offer[7], cv[4], cv[5]),
+            fitness_age=self.fitness_age_function(cv[3], offer[5], offer[6]),
             fitness_exp_basic=fitness_exp[0],
             fitness_exp_bonus=fitness_exp[1],
             fitness_lang_basic=fitness_lang[0],
