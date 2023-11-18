@@ -84,8 +84,8 @@ class FitnessFunctions:
                         jo_level = self.lvl2value[ess_lang.level]
                         basic += 1 if jo_level <= cv_level else 1 / (2 * (jo_level - cv_level))
 
-                if cv_lang.name == optional.name:
-                    bonus += 0.5 if cv_level > 0 else 0.3
+            if cv_lang.name == optional.name:
+                bonus += 0.5 if cv_level > 0 else 0.3
 
         return basic / len(essential), bonus
 

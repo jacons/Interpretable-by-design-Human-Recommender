@@ -16,14 +16,14 @@ class MatchingScore:
 
         self.job_graph = job_graph
         self.fitness = fitness_functions
-        self.weights = self._normalize_weights(weight)
+        self.weights = self.normalize_weights(weight)
         self.noise = noise  # mean and stddev
         self.bins = bins  # Number of relevance's levels
         self.split_size = split_size
         self.split_seed = split_seed
 
     @staticmethod
-    def _normalize_weights(weights: np.ndarray) -> np.ndarray:
+    def normalize_weights(weights: np.ndarray) -> np.ndarray:
         return weights / weights.sum()
 
     def score_function(self, offers: DataFrame, curricula: DataFrame, name: str = None) -> DataFrame:

@@ -1,10 +1,12 @@
-import itertools
+import json
+import os
 import random
 from functools import reduce
+from io import StringIO
 
 import networkx as nx
 from matplotlib import pyplot as plt
-from pandas import read_csv
+from pandas import read_csv, merge, read_json
 from tqdm import tqdm
 
 from Class_utils.parameters import RelationNode, TypeNode
@@ -14,18 +16,58 @@ class JobGraph:
     OCCUPATION_GROUP_THRESHOLD = 4  # A constant for occupation group threshold
     occ_weight = {0: 42, 1: 19, 2: 8, 3: 3, 4: 1}
 
-    def __init__(self, sources: dict):
+    def __init__(self, sources: dict, force_build: bool = False):
         """
         Occupation/Skill/Knowledge Graph
         """
-        self.occ2skills = read_csv(sources["job2skills_path"])  # relation "many to many"
-        self.occupation = read_csv(sources["occupation_path"], index_col=0)  # all occupation
-        self.skills = read_csv(sources["skills_path"], index_col=0)  # all skill
 
-        # remove an occupation that hasn't "essential skills"
-        self.occupation = self.occupation[self.occupation.index != "a580e79a-b752-49c1-b033-b5ab2b34bfba"]
+        self.graph = None
+        # -------- Load resources --------
+        if os.path.exists('cached_graph.json') and not force_build:
+
+            print("Cache found loading...", end="")
+            with open('cached_graph.json', 'r') as file:
+                json_data = json.load(file)
+
+            self.occupation = read_json(StringIO(json_data[0]))  # all occupation
+            self.skills = read_json(StringIO(json_data[1]))  # all skill
+            self.occ2skills = read_json(StringIO(json_data[2]))  # relation "many to many"
+            self.graph = nx.node_link_graph(json_data[3])
+            print("done")
+
+        else:
+            print("Cache not found, building th graph...")
+
+            self.occupation = read_csv(sources["occupation_path"], index_col=0)  # all occupation
+            self.skills = read_csv(sources["skills_path"], index_col=0)  # all skill
+            self.occ2skills = read_csv(sources["job2skills_path"])  # relation "many to many"
+            self.build_graph()
+        # -------- Load resources --------
+
+        self.name2id = {}
+        self.name2id.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.skills.itertuples()))
+        self.name2id.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.occupation.itertuples()))
+
+    def build_graph(self):
+
+        # ----- Data cleaning -----
+        print("Data cleaning...", end="")
         self.occupation["group"] = self.occupation["group"].str[:self.OCCUPATION_GROUP_THRESHOLD]
 
+        # First, we retrieve all occupations that have essential competence of knowledge minus than 1
+        t = self.occ2skills.merge(self.skills, on="id_skill")
+        counts = t[t['relation_type'] == 'essential'].groupby(['id_occupation', 'type']).size().unstack(fill_value=0)
+        filtered_occupations = counts[(counts['skill/competence'] <= 1) | (counts['knowledge'] <= 1)]
+        # We remove them
+        self.occupation.drop(filtered_occupations.index, inplace=True)
+        self.occ2skills = self.occ2skills[~self.occ2skills['id_occupation'].isin(filtered_occupations.index)]
+        # Then we remove all skills that are not used (Those skills that don't appear in occupations-skills relation)
+        unused_skills = merge(self.skills, self.occ2skills, on='id_skill', how='left', indicator=True)
+        self.skills.drop(unused_skills[unused_skills['_merge'] == 'left_only']["id_skill"])
+        print("done")
+        # ----- Data cleaning -----
+
+        # ----- Populate the graph -----
         # Add occupation nodes to the graph
         progress_bar = tqdm(self.occupation.itertuples(), total=len(self.occupation), desc="Loading occupations")
         occupation_nodes = [
@@ -47,23 +89,17 @@ class JobGraph:
             for row in progress_bar
         ]
 
-        # Link together the occupation with the same group
-        # n_iters = len(self.occupation)**2
-        # bar = tqdm(itertools.product(self.occupation.itertuples(), repeat=2), total=n_iters)
-        # edges_group_nodes = [
-        #     (occ1[0], occ2[0], {"relation": "same_group", "weight": self.weight_group_node(occ1[2], occ2[2])})
-        #     for occ1, occ2 in bar
-        #     if occ1[0] != occ2[0]
-        # ]
-
-        self.name2id = {}
-        self.name2id.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.skills.itertuples()))
-        self.name2id.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.occupation.itertuples()))
-
         self.graph = nx.Graph()
         self.graph.add_nodes_from(occupation_nodes + skill_nodes)
         self.graph.add_edges_from(edges_occ2skills)
-        self.graph.remove_nodes_from(self.remove_single_component())
+
+        # ----- Populate the graph -----
+        occupation = self.occupation.to_json()
+        skills = self.skills.to_json()
+        occ2skills = self.occ2skills.to_json()
+        graph = nx.node_link_data(self.graph)
+        with open('cached_graph.json', 'w') as file:
+            json.dump([occupation, skills, occ2skills, graph], file)
 
     def weight_group_node(self, groupA: str, groupB: str):
         lvl = 0
@@ -81,7 +117,7 @@ class JobGraph:
                          convert_ids: bool = False) -> list[str]:
         """
         Return a list of nodes that respect the requirement in the parameters
-        :param id_node: Id of occupation or skill/knowledge
+        :param id_node: Id-occupation or skill/knowledge
         :param relation: "essential", "optional" or "same_group" (only for occupation)
         :param type_node: "occupation", "skill" or "knowledge"
         :param exclude: list of id node to exclude
@@ -105,35 +141,37 @@ class JobGraph:
 
         return filtered_neighbors
 
-    def sample_skills(self,
-                      id_occ: str,
-                      relation: RelationNode,
-                      type_node: TypeNode,
-                      min_: int = 2, max_: int = 6,
-                      convert_ids: bool = False,
-                      exclude: list[str] = None):
+    def sample_skills(self, id_occ: str, relation: RelationNode, type_node: TypeNode, exact_number: int = None,
+                      min_: int = 2, max_: int = 4, convert_ids: bool = False, exclude: list[str] = None) -> list[str]:
         """
         Sample skill for a given occupation
         :param id_occ: id occupation
         :param relation: "essential", "optional" or "same_group" (only for occupation)
         :param type_node: "occupation", "skill" or "knowledge"
+        :param exact_number:
         :param min_: Min number of skills
         :param max_: Max number of skills
-        :param exclude: list of nodes to exclude
+        :param exclude: lists of nodes to exclude
         :param convert_ids: if true coverts ids into name
 
         :return: A list of len "max_" with an "n" number of skill "min_" <= "n" <= "max_"
         """
-        if exclude is not None:
-            exclude = [self.name2id[e] for e in exclude]
-        list_ = self.return_neighbors(id_occ, relation, type_node, exclude, convert_ids)
+        if exact_number is None:
+            exact_number = 0 if min_ > max_ or max_ == 0 else random.randint(min_, max_)
 
-        n = min(random.randint(min_, max_), len(list_))
+        if exact_number == 0:
+            sampled = []
+        else:
+            if exclude is not None:
+                exclude = [self.name2id[e] for e in exclude]
 
-        sampled = random.sample(list_, n)
+            list_ = self.return_neighbors(id_occ, relation, type_node, exclude, convert_ids)
+            exact_number = min(exact_number, len(list_))
+            sampled = random.sample(list_, exact_number)
 
-        if n < max_:
-            sampled.extend(["-" for _ in range(n, max_)])
+        if exact_number < max_:
+            sampled.extend(["-" for _ in range(exact_number, max_)])
+
         return sampled
 
     def sample_occupation(self) -> tuple[str, str, str]:
@@ -144,7 +182,7 @@ class JobGraph:
         id_occ = self.occupation.sample().index[0]
         return id_occ, self.graph.nodes[id_occ]["label"], self.graph.nodes[id_occ]["isco_group"]
 
-    def get_job_with_skill(self, competences=None, knowledge=None) -> list[str]:
+    def get_job_with_skill(self, competences: list[str] = None, knowledge: list[str] = None) -> list[str]:
         """
         Give a list of competence & knowledge, return a list of id-occupation that has (at least) these skills
         :return:

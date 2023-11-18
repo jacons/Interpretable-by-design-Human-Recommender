@@ -1,7 +1,6 @@
 from enum import Enum
 
 import numpy as np
-from pandas import read_csv
 
 file_paths = dict(
     job2skills_path="../sources/job2skills.csv",
