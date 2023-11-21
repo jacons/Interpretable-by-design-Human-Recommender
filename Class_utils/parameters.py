@@ -50,6 +50,7 @@ matching_par = dict(
 
 
 class RelationNode(Enum):
+    ALL = "All"
     ES = "essential"
     OP = "optional"
 
@@ -58,6 +59,7 @@ class TypeNode(Enum):
     OC = "occupation"
     KN = "knowledge"
     SK = "skill/competence"
+    ALL = "All"
 
 
 class EducationLevel(Enum):

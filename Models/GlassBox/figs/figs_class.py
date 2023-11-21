@@ -23,9 +23,9 @@ class FIGS_class(GridSearch):
         self.valid["w_score"] = self.valid["w_score"].apply(lambda x: max(0, x))
         self.test["w_score"] = self.test["w_score"].apply(lambda x: max(0, x))
 
-        self.X_train, self.y_train = self.train.iloc[:, 5:], self.train["w_score"]
-        self.X_valid, self.y_valid = self.valid.iloc[:, 5:], self.valid["w_score"]
-        self.X_test, self.y_test = self.test.iloc[:, 5:], self.test["w_score"]
+        self.X_train, self.y_train = self.train.iloc[:, 5:].to_numpy(), self.train["w_score"].to_numpy()
+        self.X_valid, self.y_valid = self.valid.iloc[:, 5:].to_numpy(), self.valid["w_score"].to_numpy()
+        self.X_test, self.y_test = self.test.iloc[:, 5:].to_numpy(), self.test["w_score"].to_numpy()
 
         # features for the decision trees
         self.feature_name = list(self.train.iloc[:, 5:].columns)

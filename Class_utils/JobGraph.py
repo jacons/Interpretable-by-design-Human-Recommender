@@ -110,11 +110,8 @@ class JobGraph:
                 lvl += 1
         return self.occ_weight[lvl]
 
-    def return_neighbors(self, id_node: str,
-                         relation: RelationNode,
-                         type_node: TypeNode,
-                         exclude: list[str] = None,
-                         convert_ids: bool = False) -> list[str]:
+    def return_neighbors(self, id_node: str, relation: RelationNode, type_node: TypeNode,
+                         exclude: list[str] = None, convert_ids: bool = False) -> list[str]:
         """
         Return a list of nodes that respect the requirement in the parameters
         :param id_node: Id-occupation or skill/knowledge
@@ -242,19 +239,34 @@ class JobGraph:
             nodeA, nodeB = self.name2id[nodeA], self.name2id[nodeB]
         return nx.jaccard_coefficient(self.graph, [(nodeA, nodeB)])
 
-    def show_subgraph(self, id_occ: str, relation: RelationNode, type_node: TypeNode):
-        nodes = list(self.return_neighbors(id_occ, relation, type_node))
-        nodes.append(id_occ)
+    def return_all_neighbors_info(self, id_node: str) -> list:
 
-        labels = {node: self.graph.nodes[node]["label"] for node in nodes}
+        def info(n):
+            return n, self.graph.nodes[n]["label"]
 
-        subgraph = self.graph.subgraph(nodes)
-        colors = ["#b35900" if node == id_occ else "#99ccff" for node in subgraph]
-        node_size = [500 if node == id_occ else 200 for node in subgraph]
+        filtered_neighbors = [info(n) for n in self.graph.neighbors(id_node)]
+        return filtered_neighbors
+
+    def show_subgraph(self, id_occ: str, max_nodes: int = 0):
+        color_node_map = {"occupation": "#3B8183", "knowledge": "#95a6df", "skill/competence": "#ffa500"}
+        color_edge_map = {"essential": 2, "optional": 1, "transversal": 1}
+
+        nodes = self.return_all_neighbors_info(id_occ)
+        random.shuffle(nodes)
+        if max_nodes > 0:
+            nodes = nodes[:max_nodes]
+        nodes.append((id_occ, self.graph.nodes[id_occ]["label"]))
+
+        subgraph = self.graph.subgraph([node[0] for node in nodes])
+        labels = {node[0]: node[1] for node in nodes}
+
+        node_color = [color_node_map[self.graph.nodes[node]["type"]] for node in subgraph]
+        edge_colors = [color_edge_map[self.graph.edges[edge]['relation']] for edge in subgraph.edges]
+
+        node_size = [600 if node == id_occ else 300 for node in subgraph]
 
         pos = nx.spring_layout(subgraph)
-        plt.figure(figsize=(15, 8))
-        nx.draw(subgraph, pos, with_labels=True,
-                labels=labels, node_color=colors,
-                node_size=node_size)
+        plt.figure(figsize=(15, 10))
+        nx.draw(subgraph, pos, with_labels=True, labels=labels, width=edge_colors,
+                node_color=node_color, node_size=node_size)
         plt.show()

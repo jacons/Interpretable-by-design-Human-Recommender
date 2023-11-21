@@ -319,7 +319,6 @@ class JobGenerator:
                                      competence,  # essential competences
                                      knowledge,  # essential knowledge
                                      copy.deepcopy(languages),  # essential language and level
-                                     job_offer[28],  # essential experience
                                      consistent=True)
             )
         return curricula
@@ -381,7 +380,7 @@ class JobGenerator:
     def _get_curriculum(self, qId: int, id_occ: str = None, edu_essential: str = "Less-than-degree",
                         min_age: int = 16, max_age: int = 60, competences: list[str] = None,
                         knowledge: list[str] = None, languages: list[Language] = None,
-                        experience: int | str = "-", consistent: bool = False):
+                        consistent: bool = False):
 
         # ------------------------------------------------------------------
         if competences is None:
@@ -417,7 +416,7 @@ class JobGenerator:
         languages = self._generate_other_lang_from(languages)
         languages = sorted(languages, key=lambda x: x.name, reverse=True)
         # ------------------------------------------------------------------
-        experience = int(np.random.poisson(1.5)) if experience == "-" else int(experience) + int(np.random.poisson(1.5))
+        experience = int(np.random.poisson(1.5))
         # ------------------------------------------------------------------
         cv = dict(
             qId=qId,  # 0
