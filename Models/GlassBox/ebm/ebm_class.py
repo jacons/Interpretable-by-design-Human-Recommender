@@ -1,6 +1,7 @@
 import sys
 
 import numpy as np
+from interpret.glassbox import ExplainableBoostingRegressor
 
 from numpy import ndarray
 from sklearn.metrics import ndcg_score
@@ -72,14 +73,14 @@ class EBM_class(GridSearch):
         results = {"nDCG@" + str(nDCG): round(avg_nDCG[i], 4) for i, nDCG in enumerate(nDCG_at)}
         return results
 
-    def grid_search(self, EBMModel, hyperparameters: dict = None):
+    def grid_search(self, hyperparameters: dict = None):
 
         best_model_: Tuple = (None, None, -sys.maxsize)
 
-        progress_bar = tqdm(ParameterGrid(hyperparameters), desc="Finding the best model..")
+        progress_bar = tqdm(ParameterGrid(hyperparameters), desc="Finding the best model")
         for conf in progress_bar:
 
-            model = EBMModel(**self.default_par, **conf)
+            model = ExplainableBoostingRegressor(**self.default_par, **conf)
             model.fit(self.X_train, self.y_train)
             avg_nDCG = self.eval_model(model)["nDCG@" + str(self.nDCG_at)]
 
@@ -99,7 +100,7 @@ class EBM_class(GridSearch):
         if value > cuts[-1]:
             return contribution[-1]
 
-    def explanation(self, model, index_feature: int, eps: float = 0.01):
+    def explanation(self, model:ExplainableBoostingRegressor, index_feature: int, eps: float = 0.01):
 
         min_, max_ = model.feature_bounds_[index_feature]
         cuts = model.bins_[index_feature][0]

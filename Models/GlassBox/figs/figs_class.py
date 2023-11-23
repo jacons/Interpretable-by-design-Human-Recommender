@@ -2,6 +2,7 @@ import sys
 from typing import Tuple
 
 import numpy as np
+from imodels import FIGSRegressor
 from numpy import asarray
 from pandas import read_csv, DataFrame
 from sklearn.metrics import ndcg_score
@@ -66,16 +67,16 @@ class FIGS_class(GridSearch):
         result = [all_configs[i:i + sublist_length] for i in range(0, len(all_configs), sublist_length)]
         return result
 
-    def grid_search(self, FIGSModel, hyperparameters: dict = None, ):
+    def grid_search(self, hyperparameters: dict = None, ):
 
         # keep the current: (best_model, best_params, best nDCG)
         best_model_: Tuple = (None, None, -sys.maxsize)
 
         # explore all possible combinations of hyperparameters
-        progress_bar = tqdm(ParameterGrid(hyperparameters), desc="Finding the best model..")
+        progress_bar = tqdm(ParameterGrid(hyperparameters), desc="Finding the best model")
         for conf in progress_bar:
 
-            model = FIGSModel(**conf)
+            model = FIGSRegressor(**conf)
             model.fit(self.X_train, self.y_train, self.feature_name)
             avg_nDCG = self.eval_model(model)["nDCG@" + str(self.nDCG_at)]
 
