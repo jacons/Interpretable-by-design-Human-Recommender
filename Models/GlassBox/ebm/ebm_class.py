@@ -36,7 +36,6 @@ class EBM_class(GridSearch):
             objective="rmse",
             exclude=[],
             feature_types=None,
-            max_bins=256,
             max_interaction_bins=32,
             validation_size=0.15,
             outer_bags=8,

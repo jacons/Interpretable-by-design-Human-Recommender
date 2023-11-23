@@ -54,5 +54,5 @@ class FIGSExplanation:
         fitness_matrix.sort_values("lambda", inplace=True, ascending=False)
         self.fitness_matrix = fitness_matrix.reset_index()
 
-    def get_position(self, kId: int)->int:
+    def get_position(self, kId: int) -> int:
         return self.fitness_matrix[self.fitness_matrix.kId == kId].index.values[0]

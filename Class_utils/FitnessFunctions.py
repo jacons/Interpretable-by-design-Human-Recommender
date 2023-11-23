@@ -5,6 +5,7 @@ from pandas import read_csv, DataFrame
 from tqdm import tqdm
 
 from Class_utils import JobGraph
+from Class_utils.FitnessClasses import FitnessCity, FitnessAge, FitnessExperience, FitnessEdu
 from Class_utils.parameters import EducationLevel, Language
 
 
@@ -12,16 +13,11 @@ class FitnessFunctions:
     def __init__(self, job_graph: JobGraph, sources: dict):
 
         # ------------------------ LOAD RESOURCES ------------------------
-        # --- Cities ---
-        self.distance = read_csv(sources["cities_dist"], index_col=[0, 1], skipinitialspace=True)
-        self.max_distance = self.distance["Dist"].max()
-        # --- Cities ---
 
-        # --- Education ---
-        # Education dictionary: "education level" -> importance. E.g. Degree-> 1
-        self.education = {i[1]: i[0] for i in read_csv(sources["education_path"], index_col=0).itertuples()}
-        self.len_ed_rank = len(self.education)
-        # --- Education ---
+        self.fitness_cities = FitnessCity(sources["cities_dist"])
+        self.fitness_age = FitnessAge()
+        self.fitness_experience = FitnessExperience()
+        self.fitness_edu = FitnessEdu(sources["education_path"])
 
         # --- Language and language levels ---
         self.lvl2value = {level.name: level.value for level in EducationLevel}
@@ -31,45 +27,8 @@ class FitnessFunctions:
         self.job_graph = job_graph
         # --- Skills and Occupations ---
         # ------------------------ LOAD RESOURCES ------------------------
+
         return
-
-    @staticmethod
-    def fitness_age_function(cv: int, v_min: int, v_max: int) -> float:
-        # max 1 min 0
-        return 1 if int(v_min <= cv <= v_max) else 0
-
-    @staticmethod
-    def fitness_experience_function(offer_ess: str, offer_op: bool, cv: int) -> tuple[float, float]:
-        # max 1,25 min 0
-        basic, bonus = 0, 0
-        if offer_ess != "-":
-            basic += 1 if int(offer_ess) <= cv else 0
-            bonus += 0.50 if offer_op and int(offer_ess) < cv else 0
-
-        return basic, bonus
-
-    def fitness_edu_function(self, offer_ess: str, offer_op: str, cv: str) -> tuple[float, float]:
-        # max 1,50 min 0
-        cv = self.education[cv]  # level of candidate's education
-        offer_ess = self.education[offer_ess]  # essential education
-
-        if offer_op != "-":
-            offer_op = self.education[offer_op]  # optional education
-
-        basic = 1 if offer_ess <= cv else 0
-        bonus = 0 if offer_op == "-" else 0.50 if offer_op <= cv else 0
-
-        return basic, bonus
-
-    def fitness_city_function(self, cityA: str, cityB: str, range_: int) -> float:
-        # max 1 min 0
-        if cityA == cityB:
-            return 1
-
-        s_cities = sorted([cityA, cityB])
-        dist = self.distance.loc[(s_cities[0], s_cities[1])].values[0]
-
-        return 1 if dist < range_ else 1 - (dist - range_) / self.max_distance
 
     def fitness_lange_function(self, essential: list[Language], cv: list[Language],
                                optional: Language) -> tuple[float, float]:
@@ -166,8 +125,8 @@ class FitnessFunctions:
 
         fitness_competence = self.fitness_skills_function(of_comp_ess, of_comp_opt, cv_comp)
         fitness_knowledge = self.fitness_skills_function(of_know_ess, of_know_opt, cv_know)
-        fitness_edu = self.fitness_edu_function(offer[3], offer[4], cv[2])
-        fitness_exp = self.fitness_experience_function(offer[28], offer[29], cv[26])
+        fitness_edu = self.fitness_edu.fitness(offer[3], offer[4], cv[2])
+        fitness_exp = self.fitness_experience.fitness(offer[28], offer[29], cv[26])
         fitness_lang = self.fitness_lange_function(of_lang, cv_lang, Language(offer[24], offer[27]))
 
         result = dict(
@@ -175,8 +134,8 @@ class FitnessFunctions:
             kId=cv[0][1],
             fitness_edu_basic=fitness_edu[0],
             fitness_edu_bonus=fitness_edu[1],
-            fitness_city=self.fitness_city_function(offer[7], cv[4], cv[5]),
-            fitness_age=self.fitness_age_function(cv[3], offer[5], offer[6]),
+            fitness_city=self.fitness_cities.fitness(offer[7], cv[4], cv[5]),
+            fitness_age=self.fitness_age.fitness(cv[3], offer[5], offer[6]),
             fitness_exp_basic=fitness_exp[0],
             fitness_exp_bonus=fitness_exp[1],
             fitness_lang_basic=fitness_lang[0],
