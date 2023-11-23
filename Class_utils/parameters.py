@@ -16,20 +16,24 @@ file_paths = dict(
 
     opt_lang_distribution=[0.65, 0.35],  # Distribution of extra languages that the candidate knows [0-1]
 )
-
+job_graph_par = dict(
+    force_build=False,
+    cache_path="../outputs"
+)
+match_score_par = dict(
+    path="../outputs/scores"
+)
 curriculum_par = dict(
     mu=80,
     path="../outputs"
 )
-
 jobOffer_par = dict(
     size=120,
     path="../outputs"
 )
-
 matching_par = dict(
     bins=6,
-    noise=(0, 0.05),  # mean and stddev
+    noise=(0, 0.00),  # mean and stddev
     split_size=(0.33, 0.33),  # Hold-out
     split_seed=841,  # Reproducible splitting
     weight=np.array([

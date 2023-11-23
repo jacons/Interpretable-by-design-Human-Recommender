@@ -1,5 +1,6 @@
 import copy
 import csv
+import os
 import random
 
 import numpy as np
@@ -80,6 +81,8 @@ class JobGenerator:
         offers = pd.DataFrame(offers).set_index("qId")
 
         if path is not None and name is not None:
+            if not os.path.exists(path):
+                os.makedirs(path)
             offers.to_csv(f"{path}/{name}_job_offers.csv", quoting=csv.QUOTE_MINIMAL)
 
         return offers
@@ -287,6 +290,8 @@ class JobGenerator:
 
         curricula = DataFrame(curricula).set_index(keys=["qId", "kId"])
         if path is not None and name is not None:
+            if not os.path.exists(path):
+                os.makedirs(path)
             curricula.to_csv(f"{path}/{name}_curricula.csv", index=True, quoting=csv.QUOTE_MINIMAL)
 
         return curricula

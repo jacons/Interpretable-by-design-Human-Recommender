@@ -1,10 +1,10 @@
+import os
 from typing import Tuple
 
 import numpy as np
 from numpy.random import normal
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
-from tqdm import tqdm
 
 from Class_utils import JobGraph, FitnessFunctions
 
@@ -26,25 +26,13 @@ class MatchingScore:
     def normalize_weights(weights: np.ndarray) -> np.ndarray:
         return weights / weights.sum()
 
-    def score_function(self, offers: DataFrame, curricula: DataFrame, name: str = None) -> DataFrame:
-        dataset = self._generate_fitness_score(offers, curricula)
+    def score_function(self, offers: DataFrame, curricula: DataFrame, path: str = None, name: str = None) -> DataFrame:
+        dataset = self.fitness.generate_fitness_score(offers, curricula)
         dataset = self._compute_score(dataset)
         dataset = self._create_relevance_labels(dataset)
-        _ = self._split_and_save_datasets(dataset, name)
-        self._save_output(dataset, name)
+        _ = self._split_and_save_datasets(dataset, path, name)
+        self._save_output(dataset, path, name)
         return dataset.set_index(keys=["qId", "kId"])
-
-    def _generate_fitness_score(self, offers: DataFrame, curricula: DataFrame) -> DataFrame:
-        dataset = []
-        bar = tqdm(offers.itertuples(), total=len(offers), desc="Generating the fitness scores")
-        for offer in bar:
-            curricula_ = curricula[curricula.index.get_level_values(0) == offer[0]]
-            for cv in curricula_.itertuples():
-                dataset.append(self.fitness.fitness(offer, cv))
-            bar.set_postfix(qId=offer[0])
-
-        dataset = DataFrame(data=dataset, dtype=np.float32).astype({"qId": "int", "kId": "int"})
-        return dataset
 
     def _compute_score(self, dataset: DataFrame) -> DataFrame:
         features = dataset.iloc[:, 2:]
@@ -83,17 +71,23 @@ class MatchingScore:
         return dataset
 
     @staticmethod
-    def _save_output(dataset: DataFrame, name: str) -> None:
-        if name is not None:
-            dataset.to_csv(f"../outputs/scores/{name}_dataset.csv", index=False)
+    def _save_output(dataset: DataFrame, path: str = None, name: str = None) -> None:
+        if name is not None and path is not None:
+            if not os.path.exists(path):
+                os.makedirs(path)
+            dataset.to_csv(f"{path}/{name}_dataset.csv", index=False)
 
-    def _split_and_save_datasets(self, dataset: DataFrame, name: str) -> Tuple[DataFrame, DataFrame, DataFrame]:
+    def _split_and_save_datasets(self, dataset: DataFrame, path: str = None,
+                                 name: str = None) -> Tuple[DataFrame, DataFrame, DataFrame]:
+
         train, test = train_test_split(dataset, test_size=self.split_size[0], random_state=self.split_seed)
         train, valid = train_test_split(train, test_size=self.split_size[1], random_state=self.split_seed)
 
-        if name is not None:
-            train.to_csv(f"../outputs/scores/{name}_dataset_tr.csv", index=False)
-            valid.to_csv(f"../outputs/scores/{name}_dataset_vl.csv", index=False)
-            test.to_csv(f"../outputs/scores/{name}_dataset_ts.csv", index=False)
+        if name is not None and path is not None:
+            if not os.path.exists(path):
+                os.makedirs(path)
+            train.to_csv(f"{path}/{name}_dataset_tr.csv", index=False)
+            valid.to_csv(f"{path}/{name}_dataset_vl.csv", index=False)
+            test.to_csv(f"{path}/{name}_dataset_ts.csv", index=False)
 
         return train, valid, test

@@ -1,6 +1,8 @@
 import sys
 
-from pandas import read_csv
+import numpy as np
+from pandas import read_csv, DataFrame
+from tqdm import tqdm
 
 from Class_utils import JobGraph
 from Class_utils.parameters import EducationLevel, Language
@@ -138,6 +140,18 @@ class FitnessFunctions:
     @staticmethod
     def filter(list_: list):
         return [item for item in list_ if item != "-"]
+
+    def generate_fitness_score(self, offers: DataFrame, curricula: DataFrame) -> DataFrame:
+        dataset = []
+        bar = tqdm(offers.itertuples(), total=len(offers), desc="Generating the fitness scores")
+        for offer in bar:
+            curricula_ = curricula[curricula.index.get_level_values(0) == offer[0]]
+            for cv in curricula_.itertuples():
+                dataset.append(self.fitness(offer, cv))
+            bar.set_postfix(qId=offer[0])
+
+        dataset = DataFrame(data=dataset, dtype=np.float32).astype({"qId": "int", "kId": "int"})
+        return dataset
 
     def fitness(self, offer: tuple, cv: tuple) -> dict:
 

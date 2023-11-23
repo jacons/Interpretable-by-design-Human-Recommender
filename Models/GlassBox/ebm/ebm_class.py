@@ -76,7 +76,7 @@ class EBM_class(GridSearch):
 
         best_model_: Tuple = (None, None, -sys.maxsize)
 
-        progress_bar = tqdm(ParameterGrid(hyperparameters))
+        progress_bar = tqdm(ParameterGrid(hyperparameters), desc="Finding the best model..")
         for conf in progress_bar:
 
             model = EBMModel(**self.default_par, **conf)

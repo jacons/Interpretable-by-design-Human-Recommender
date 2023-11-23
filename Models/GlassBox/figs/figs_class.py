@@ -72,7 +72,7 @@ class FIGS_class(GridSearch):
         best_model_: Tuple = (None, None, -sys.maxsize)
 
         # explore all possible combinations of hyperparameters
-        progress_bar = tqdm(ParameterGrid(hyperparameters))
+        progress_bar = tqdm(ParameterGrid(hyperparameters), desc="Finding the best model..")
         for conf in progress_bar:
 
             model = FIGSModel(**conf)

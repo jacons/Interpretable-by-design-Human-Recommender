@@ -16,17 +16,18 @@ class JobGraph:
     OCCUPATION_GROUP_THRESHOLD = 4  # A constant for occupation group threshold
     occ_weight = {0: 42, 1: 19, 2: 8, 3: 3, 4: 1}
 
-    def __init__(self, sources: dict, force_build: bool = False):
+    def __init__(self, sources: dict, force_build: bool = False,
+                 cache_path: str = None):
         """
         Occupation/Skill/Knowledge Graph
         """
-
+        self.cache_path = cache_path
         self.graph = None
         # -------- Load resources --------
-        if os.path.exists('cached_graph.json') and not force_build:
+        if os.path.exists(f"{self.cache_path}/graph_cache.json") and not force_build:
 
             print("Cache found loading...", end="")
-            with open('cached_graph.json', 'r') as file:
+            with open(f"{self.cache_path}/graph_cache.json", 'r') as file:
                 json_data = json.load(file)
 
             self.occupation = read_json(StringIO(json_data[0]))  # all occupation
@@ -98,7 +99,10 @@ class JobGraph:
         skills = self.skills.to_json()
         occ2skills = self.occ2skills.to_json()
         graph = nx.node_link_data(self.graph)
-        with open('cached_graph.json', 'w') as file:
+
+        if not os.path.exists(self.cache_path):
+            os.makedirs(self.cache_path)
+        with open(f"{self.cache_path}/graph_cache.json", 'w') as file:
             json.dump([occupation, skills, occ2skills, graph], file)
 
     def weight_group_node(self, groupA: str, groupB: str):
