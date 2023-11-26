@@ -18,7 +18,7 @@ class MatchingScore:
         self.fitness = fitness_functions
         self.weights = self.normalize_weights(weight)
         self.noise = noise  # mean and stddev
-        self.bins = bins  # Number of relevance's levels
+        self.bins = bins  # Number of binned_score's levels
         self.split_size = split_size
         self.split_seed = split_seed
 
@@ -29,7 +29,7 @@ class MatchingScore:
     def score_function(self, offers: DataFrame, curricula: DataFrame, path: str = None, name: str = None) -> DataFrame:
         dataset = self.fitness.generate_fitness_score(offers, curricula)
         dataset = self._compute_score(dataset)
-        dataset = self._create_relevance_labels(dataset)
+        dataset = self._create_binned_score_labels(dataset)
         _ = self._split_and_save_datasets(dataset, path, name)
         self._save_output(dataset, path, name)
         return dataset.set_index(keys=["qId", "kId"])
@@ -49,7 +49,7 @@ class MatchingScore:
 
         return dataset
 
-    def _create_relevance_labels(self, dataset: DataFrame) -> DataFrame:
+    def _create_binned_score_labels(self, dataset: DataFrame) -> DataFrame:
         intervals, edges = np.histogram(dataset.sort_values("w_score", ascending=False)["w_score"].to_numpy(),
                                         bins=self.bins)
         score2inter = {i: (edges[i], edges[i + 1]) for i in range(len(intervals))}
@@ -63,10 +63,10 @@ class MatchingScore:
             if score_value >= score2inter[self.bins - 1][1]:
                 return self.bins - 1
 
-        dataset["relevance"] = dataset['w_score'].apply(score2label)
+        dataset["binned_score"] = dataset['w_score'].apply(score2label)
 
-        rest_columns = [c for c in dataset.columns if c not in ["qId", "kId", "score", "w_score", "relevance"]]
-        dataset = dataset.loc[:, ["qId", "kId", "score", "w_score", "relevance"] + rest_columns]
+        rest_columns = [c for c in dataset.columns if c not in ["qId", "kId", "score", "w_score", "binned_score"]]
+        dataset = dataset.loc[:, ["qId", "kId", "score", "w_score", "binned_score"] + rest_columns]
 
         return dataset
 

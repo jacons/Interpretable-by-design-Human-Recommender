@@ -37,7 +37,7 @@ class FIGS_class(GridSearch):
                    nDCG_at: list = None) -> dict:
         """
         Custom evaluation function: the function groups by the "job-offers" and foreach set, it predicts
-        the "regression score" that it uses to sort (by relevance).
+        the "regression score" that it uses to sort (by binned_score).
         After obtained nDCGs apply the average.
         """
         df = self.valid if df is None else df

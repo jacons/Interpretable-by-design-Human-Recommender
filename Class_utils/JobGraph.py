@@ -222,7 +222,7 @@ class JobGraph:
         return [node for component in nx.connected_components(self.graph)
                 if len(component) == 1 for node in component]
 
-    def node_similarity(self, nodesA: list[str], nodesB: list[str], ids: bool = False) -> float:
+    def node_similarity(self, nodesA: list | set, nodesB: list | set, ids: bool = False) -> float:
 
         if len(nodesA) == 0 or len(nodesB) == 0:
             return 0
@@ -252,8 +252,9 @@ class JobGraph:
         return filtered_neighbors
 
     def show_subgraph(self, id_occ: str, max_nodes: int = 0):
-        color_node_map = {"occupation": "#3B8183", "knowledge": "#95a6df", "skill/competence": "#ffa500"}
-        color_edge_map = {"essential": 2, "optional": 1, "transversal": 1}
+
+        color_node_map = {"occupation": "Red", "knowledge": "#95a6df", "skill/competence": "#ffa500"}
+        color_edge_map = {"essential": 1, "optional": 1, "transversal": 1}
 
         nodes = self.return_all_neighbors_info(id_occ)
         random.shuffle(nodes)
@@ -266,11 +267,10 @@ class JobGraph:
 
         node_color = [color_node_map[self.graph.nodes[node]["type"]] for node in subgraph]
         edge_colors = [color_edge_map[self.graph.edges[edge]['relation']] for edge in subgraph.edges]
+        node_size = [1200 if node == id_occ else 300 for node in subgraph]
 
-        node_size = [600 if node == id_occ else 300 for node in subgraph]
-
-        pos = nx.spring_layout(subgraph)
-        plt.figure(figsize=(15, 10))
+        pos = nx.shell_layout(subgraph)
+        plt.figure(figsize=(20, 8))
         nx.draw(subgraph, pos, with_labels=True, labels=labels, width=edge_colors,
-                node_color=node_color, node_size=node_size)
+                node_color=node_color, node_size=node_size, font_size=20, font_family='Arial', edge_color='black')
         plt.show()

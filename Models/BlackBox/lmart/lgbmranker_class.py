@@ -26,13 +26,13 @@ class LGBMRanker_class(GridSearch):
 
         # Preparing the datasets
         self.qIds_train = self.train.groupby("qId")["qId"].count().to_numpy()
-        self.X_train, self.y_train = self.train.iloc[:, 5:], self.train[["qId", "kId", "relevance"]]
+        self.X_train, self.y_train = self.train.iloc[:, 5:], self.train[["qId", "kId", "binned_score"]]
 
         self.qIds_valid = self.valid.groupby("qId")["qId"].count().to_numpy()
-        self.X_valid, self.y_valid = self.valid.iloc[:, 5:], self.valid[["qId", "kId", "relevance"]]
+        self.X_valid, self.y_valid = self.valid.iloc[:, 5:], self.valid[["qId", "kId", "binned_score"]]
 
         self.qIds_test = self.test.groupby("qId")["qId"].count().to_numpy()
-        self.X_test, self.y_test = self.test.iloc[:, 5:], self.test[["qId", "kId", "relevance"]]
+        self.X_test, self.y_test = self.test.iloc[:, 5:], self.test[["qId", "kId", "binned_score"]]
 
         def log_output(r):
             # callback function (used to avoid logging during the grid-search)
@@ -49,9 +49,9 @@ class LGBMRanker_class(GridSearch):
         )
         self.ranker_par = dict(  # default ranker parameters (used in fitting) pt.2
             X=self.X_train,
-            y=self.y_train["relevance"],
+            y=self.y_train["binned_score"],
             group=self.qIds_train,
-            eval_set=[(self.X_valid, self.y_valid["relevance"])],
+            eval_set=[(self.X_valid, self.y_valid["binned_score"])],
             eval_group=[self.qIds_valid],
             eval_at=nDCG_at,
             callbacks=[log_output]
@@ -87,7 +87,7 @@ class LGBMRanker_class(GridSearch):
                    qIds: ndarray = None, nDCG_at: list = None) -> dict:
         """
         Custom evaluation function: the function groups by the "job-offers" and foreach set, it predicts
-        the "lambdas" that it uses to sort (by relevance).
+        the "lambdas" that it uses to sort (by binned_score).
         After obtained nDCGs apply the average.
         """
         dt = self.valid if dt is None else dt
