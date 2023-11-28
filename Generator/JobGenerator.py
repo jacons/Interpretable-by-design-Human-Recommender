@@ -2,6 +2,7 @@ import copy
 import csv
 import os
 import random
+from typing import Literal
 
 import numpy as np
 import pandas as pd
@@ -69,7 +70,7 @@ class JobGenerator:
             yield kid
             kid += 1
 
-    def get_job_offers(self, size: int = 1, path: str = None, name: str = None) -> DataFrame:
+    def get_job_offers(self, size: int = 1) -> DataFrame:
         """
         It returns a list of syntetic job-offers
         :param size: Number of jobs-offers
@@ -78,8 +79,10 @@ class JobGenerator:
         """
         progress_bar = tqdm(range(size), desc="Generating the job-offers")
         offers = [self._jobOffer(idx) for idx in progress_bar]
-        offers = pd.DataFrame(offers).set_index("qId")
+        return pd.DataFrame(offers).set_index("qId")
 
+    @staticmethod
+    def save_job_offers(offers: DataFrame, path: str = None, name: str = None):
         if path is not None and name is not None:
             if not os.path.exists(path):
                 os.makedirs(path)
@@ -264,7 +267,7 @@ class JobGenerator:
 
         return language_essential, language_optional
 
-    def generate_cvs(self, job_offers: DataFrame, mu: int = 100, std: int = 10, path: str = None, name: str = None):
+    def generate_cvs(self, job_offers: DataFrame, mu: int = 100, std: int = 10):
         """
         Given a list of job-offers it produces a number of curricula for each job-offer
         :param job_offers: job-offers dataframe
@@ -288,7 +291,10 @@ class JobGenerator:
 
             bar.set_postfix(qId=job_offer[0])
 
-        curricula = DataFrame(curricula).set_index(keys=["qId", "kId"])
+        return DataFrame(curricula).set_index(keys="kId")
+
+    @staticmethod
+    def save_curricula(curricula: DataFrame, path: str = None, name: str = None) -> DataFrame:
         if path is not None and name is not None:
             if not os.path.exists(path):
                 os.makedirs(path)
@@ -460,23 +466,26 @@ class JobGenerator:
 
         return cv
 
-    def upgrade_with_synonymous(self, cv: DataFrame, p: float):
+    def upgrade_with_synonymous(self, type_: Literal["cv", "offer"], df: DataFrame, p: float):
         """
-        Given a dataframe with the curricula, it's select a p% of the dataframe and
-        substitute the competences/knowledge with synonyms
-        :param cv: curricula dataframe
+        Given a dataframe, it's select a p% of the dataframe and substitute the competences/knowledge with synonyms
+        :param type_:
+        :param df:dataframe
         :param p: percentage of substitution
         """
-        synonyms = self.skills_synonyms
+        if df is None or p <= 0:
+            return None
 
-        progress_bar = tqdm(cv.sample(frac=p).index, desc="Updating with synonyms")
-        for i in progress_bar:
-            for pos_ in [7, 14]:  # index position of Competences0 and Knowledge0
-                for j in range(random.randint(1, 7)):
-                    skill = cv.iloc[i, pos_ + j]
-                    if skill == "-":
-                        break
-                    uri = synonyms[(synonyms["label"] == skill) & (synonyms["default"] == 1)]["id_skill"].values[0]
-                    sy = synonyms[synonyms["id_skill"] == uri].sample()["label"].values[0]
-                    cv.iloc[i, pos_ + j] = sy
-            progress_bar.set_postfix(kId=i[0])
+        if type_ == "cv":
+            start_ = 6
+            end_ = 19
+        elif type_ == "offer":
+            start_ = 7
+            end_ = 20
+        else:
+            raise ValueError("Invalid 'type_' value. Use 'cv' or 'offer'.")
+
+        progress_bar = tqdm(df.sample(frac=p).index, desc="Updating with synonyms...")
+        for index in progress_bar:
+            mask = [random.choice([True, False]) for _ in range(end_ - start_ + 1)]
+            df.iloc[index, start_:end_ + 1] = self.job_graph.substitute_skills(mask, df.iloc[index, start_:end_ + 1])

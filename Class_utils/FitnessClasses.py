@@ -7,16 +7,6 @@ from Class_utils.JobGraph import JobGraph
 from Class_utils.parameters import Language, EducationLevel
 
 
-class Features(Enum):
-    JobRange = 0
-    Age = 1
-    Experience = 2
-    Education = 3
-    Language = 4
-    Competence = 5
-    Knowledge = 6
-
-
 class FitnessFunction:
     max_value_basic: float = None
     max_value_bonus: float = None
@@ -138,51 +128,47 @@ class FitnessSkills(FitnessFunction):
     max_value_basic = 1.0
     max_value_bonus = 0.5
 
-    #  TO COMPLETEEEEEEEEEEEEEEEEEEEEEEE
-    #  TO COMPLETEEEEEEEEEEEEEEEEEEEEEEE
-    #  TO COMPLETEEEEEEEEEEEEEEEEEEEEEEE
-    #  TO COMPLETEEEEEEEEEEEEEEEEEEEEEEE
-    #  TO COMPLETEEEEEEEEEEEEEEEEEEEEEEE
-    #  TO COMPLETEEEEEEEEEEEEEEEEEEEEEEE
-    #  TO COMPLETEEEEEEEEEEEEEEEEEEEEEEE
-    #  TO COMPLETEEEEEEEEEEEEEEEEEEEEEEE
-    def __init__(self, job_graph: JobGraph):
+    def __init__(self, job_graph: JobGraph = None):
         self.job_graph = job_graph
 
-    def fitness(self, essential: list, optional: list, cv: list):
-        job_graph = self.job_graph
+    @staticmethod
+    def naive_score(offer: set, cv: set, weight: float) -> tuple[float, set]:
+        score = 0
+        sk_shared = offer & cv
+        len_ = len(offer)
 
-        basic, bonus, min_distance = 0, 0, sys.maxsize
-        essential, optional, cv = set(essential), set(optional), set(cv)
+        if len_ > 0:
+            score += weight * len(sk_shared) / len_
+        return score, sk_shared
+
+    def graph_score(self, offer: set, cv: set, weight: float) -> float:
+        score = 0
+        if len(offer) > 0:
+            score += weight * self.job_graph.node_similarity(offer, cv, ids=False)
+        return score
+
+    def fitness_basic(self, essential: list, cv: list):
+        essential, cv = set(essential), set(cv)
 
         # ------- Score without Knowledge base -------
-        sk_shared_es = essential & cv
-        if len(essential) > 0:
-            basic += 1 * len(sk_shared_es) / len(essential)
-
-        sk_shared_op = optional & cv
-        if len(optional) > 0:
-            bonus += 0.5 * (len(sk_shared_op) / len(optional))
+        basic, sk_shared = self.naive_score(essential, cv, self.max_value_basic)
         # ------- Score without Knowledge base -------
 
-        # ------- Score with Knowledge base (ALGO1)-------
-        # id_occ = job_graph.name2id[occupation]
-        # cv -= sk_shared_es
-        #
-        # for occ in job_graph.get_job_with_skill(cv):
-        #     dist_ = job_graph.graph.edges[id_occ, occ]["weight"]
-        #     min_distance = min_distance if dist_ > min_distance else dist_
-        # bonus += 1 / min_distance
-        # ------- Score with Knowledge base (ALGO1)-------
+        if self.job_graph is not None:
+            # ------- Score with Knowledge base -------
+            basic += self.graph_score(essential - sk_shared, cv - sk_shared, 0.50)
+            # ------- Score with Knowledge base -------
+        return basic
 
-        # ------- Score with Knowledge base (ALGO2)-------
-        if len(essential) > 0:
-            essential -= sk_shared_es
-            basic += 0.5 * job_graph.node_similarity(essential, cv - sk_shared_es, ids=False)
+    def fitness_bonus(self, optional: list, cv: list):
+        optional, cv = set(optional), set(cv)
 
-        if len(optional) > 0:
-            optional -= sk_shared_op
-            bonus += 0.25 * job_graph.node_similarity(optional, cv - sk_shared_op, ids=False)
-        # ------- Score with Knowledge base (ALGO2)-------
+        # ------- Score without Knowledge base -------
+        bonus, sk_shared = self.naive_score(optional, cv, self.max_value_bonus)
+        # ------- Score without Knowledge base -------
 
-        return basic, bonus
+        if self.job_graph is not None:
+            # ------- Score with Knowledge base -------
+            bonus += self.graph_score(optional - sk_shared, cv - sk_shared, 0.25)
+            # ------- Score with Knowledge base -------
+        return bonus

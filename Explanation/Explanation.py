@@ -1,10 +1,8 @@
 import pickle
-from enum import Enum
 
 from imodels import FIGSRegressor
 from pandas import DataFrame
 
-from Class_utils.FitnessClasses import Features
 from Class_utils.FitnessFunctions import FitnessFunctions
 from Class_utils.JobGraph import JobGraph
 
@@ -58,12 +56,3 @@ class FIGSExplanation:
 
     def get_position(self, kId: int) -> int:
         return self.fitness_matrix[self.fitness_matrix.kId == kId].index.values[0]
-
-    def get_max_position(self, kId: int, exclude: list[Features] = None):
-        if exclude is None:
-            exclude = []
-        fitness_vector = self.fitness_matrix[self.fitness_matrix.kId == kId]
-
-        idea_vector = []
-        for k, v in self.fit_functions.fitness_max_values.items():
-            pass

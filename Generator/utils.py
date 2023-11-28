@@ -62,7 +62,7 @@ def build_cities_distance(raw_sources: str, output_dir: str, sub_sample: float =
     return df
 
 
-def prepare_datasets(raw_sources: str, output_dir: str):
+def prepare_esco_datasets(raw_sources: str, output_dir: str):
     SKILL_PATH = "http://data.europa.eu/esco/skill/"
     OCCUPATION_PATH = "http://data.europa.eu/esco/occupation/"
 
@@ -100,18 +100,19 @@ def prepare_datasets(raw_sources: str, output_dir: str):
     # remove the link (to simply the notation)
     skills["conceptUri"] = skills["conceptUri"].str.replace(SKILL_PATH, "")
     skills.rename(
-        columns={"conceptUri": "id_skill", "preferredLabel": "Skill",
+        columns={"conceptUri": "id_skill", "preferredLabel": "skill",
                  "skillType": "type", "reuseLevel": "sector", "altLabels": "synonyms"}, inplace=True)
 
     skills["synonyms"] = skills["synonyms"].str.split("\n")
 
     skills_synonyms = []
     for row in skills.itertuples():
-        if isinstance(row[5], list):
-            for syn in row[5]:
-                if syn != row[2]:
-                    skills_synonyms.append(dict(label=syn, default=0, id_skill=row[1]))
-        skills_synonyms.append(dict(label=row[2], default=1, id_skill=row[1]))
+        alternative_labels, default_label, uri = row[5], row[2], row[1]
+        if isinstance(alternative_labels, list):
+            for syn in alternative_labels:
+                if syn != default_label:
+                    skills_synonyms.append(dict(label=syn, default=0, id_skill=uri))
+        skills_synonyms.append(dict(label=default_label, default=1, id_skill=uri))
     skills_synonyms = pd.DataFrame(skills_synonyms)
 
     # ---------------------------------------------------------------------
@@ -135,6 +136,5 @@ def prepare_datasets(raw_sources: str, output_dir: str):
 
     print("Completed")
 
-
-# prepare_datasets(raw_sources="../raw_sources", output_dir="../sources/")
-build_cities_distance(raw_sources="../raw_sources", output_dir="../sources/", sub_sample=0.20)
+# prepare_esco_datasets(raw_sources="../raw_sources", output_dir="../sources/")
+# build_cities_distance(raw_sources="../raw_sources", output_dir="../sources/", sub_sample=0.20)

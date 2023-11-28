@@ -5,6 +5,7 @@ from functools import reduce
 from io import StringIO
 
 import networkx as nx
+import pandas as pd
 from matplotlib import pyplot as plt
 from pandas import read_csv, merge, read_json
 from tqdm import tqdm
@@ -14,15 +15,18 @@ from Class_utils.parameters import RelationNode, TypeNode
 
 class JobGraph:
     OCCUPATION_GROUP_THRESHOLD = 4  # A constant for occupation group threshold
-    occ_weight = {0: 42, 1: 19, 2: 8, 3: 3, 4: 1}
 
     def __init__(self, sources: dict, force_build: bool = False,
                  cache_path: str = None):
         """
         Occupation/Skill/Knowledge Graph
         """
-        self.cache_path = cache_path
-        self.graph = None
+
+        self.cache_path = cache_path  # string path of graph cache (json)
+
+        self.synonyms_path = sources["skill_synonyms_path"]
+        self.synonyms = None  # Lazy loading (will be loaded at first use)
+
         # -------- Load resources --------
         if os.path.exists(f"{self.cache_path}/graph_cache.json") and not force_build:
 
@@ -104,15 +108,6 @@ class JobGraph:
             os.makedirs(self.cache_path)
         with open(f"{self.cache_path}/graph_cache.json", 'w') as file:
             json.dump([occupation, skills, occ2skills, graph], file)
-
-    def weight_group_node(self, groupA: str, groupB: str):
-        lvl = 0
-        while lvl <= 3:
-            if groupA[lvl] != groupB[lvl]:
-                return self.occ_weight[lvl]
-            else:
-                lvl += 1
-        return self.occ_weight[lvl]
 
     def return_neighbors(self, id_node: str, relation: RelationNode, type_node: TypeNode,
                          exclude: list[str] = None, convert_ids: bool = False) -> list[str]:
@@ -274,3 +269,15 @@ class JobGraph:
         nx.draw(subgraph, pos, with_labels=True, labels=labels, width=edge_colors,
                 node_color=node_color, node_size=node_size, font_size=20, font_family='Arial', edge_color='black')
         plt.show()
+
+    def substitute_skills(self, mask: list[bool], skills: pd.Series):
+        if self.synonyms is None:
+            self.synonyms = read_csv(self.synonyms_path)
+
+        def map_skill(m: bool, s: str) -> str:
+            if s == "-" or not m:
+                return s
+            synonyms_skills = self.synonyms.loc[self.synonyms["id_skill"] == self.name2id[s], "label"]
+            return synonyms_skills.sample().values[0] if not synonyms_skills.empty else s
+
+        return [map_skill(m, s) for m, s in zip(mask, skills)]

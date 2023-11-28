@@ -6,15 +6,13 @@ from numpy.random import normal
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
 
-from Class_utils import JobGraph, FitnessFunctions
+from Class_utils import FitnessFunctions
 
 
 class MatchingScore:
-    def __init__(self,
-                 job_graph: JobGraph, fitness_functions: FitnessFunctions, bins: int, weight: np.ndarray,
+    def __init__(self, fitness_functions: FitnessFunctions, bins: int, weight: np.ndarray,
                  noise: Tuple[float], split_size: Tuple[float], split_seed: int):
 
-        self.job_graph = job_graph
         self.fitness = fitness_functions
         self.weights = self.normalize_weights(weight)
         self.noise = noise  # mean and stddev

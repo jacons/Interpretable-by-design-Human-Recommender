@@ -16,22 +16,23 @@ file_paths = dict(
 
     opt_lang_distribution=[0.65, 0.35],  # Distribution of extra languages that the candidate knows [0-1]
 )
-job_graph_par = dict(
-    force_build=False,
-    cache_path="../outputs"
+job_graph_par = dict(  # parameter for "job-graph class"
+    force_build=False,  # If true, create always the graph from scratch
+    cache_path="../outputs"  # path of a graph cache (json file cache)
 )
-match_score_par = dict(
+match_score_par = dict(  # parameter for "matching score class"
     path="../outputs/scores"
 )
-curriculum_par = dict(
-    mu=80,
+curriculum_par = dict(  # parameters for "curricula generator"
+    mu=140,  # average of curricula for job-offer
+)
+jobOffer_par = dict(  # parameter for "job-offer generator"
+    size=200,  # number of job-offer
+)
+output_dir = dict(  # parameter for "saving" the synthetic data
     path="../outputs"
 )
-jobOffer_par = dict(
-    size=120,
-    path="../outputs"
-)
-matching_par = dict(
+matching_par = dict(  # parameter for label generator
     bins=6,
     noise=(0, 0.05),  # mean and stddev
     split_size=(0.33, 0.33),  # Hold-out
