@@ -24,10 +24,10 @@ match_score_par = dict(  # parameter for "matching score class"
     path="../outputs/scores"
 )
 curriculum_par = dict(  # parameters for "curricula generator"
-    mu=140,  # average of curricula for job-offer
+    mu=80,  # average of curricula for job-offer
 )
 jobOffer_par = dict(  # parameter for "job-offer generator"
-    size=200,  # number of job-offer
+    size=200,  # number of jobs-offer
 )
 output_dir = dict(  # parameter for "saving" the synthetic data
     path="../outputs"

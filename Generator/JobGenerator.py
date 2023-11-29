@@ -88,8 +88,6 @@ class JobGenerator:
                 os.makedirs(path)
             offers.to_csv(f"{path}/{name}_job_offers.csv", quoting=csv.QUOTE_MINIMAL)
 
-        return offers
-
     def _jobOffer(self, qId: int) -> dict:
         """
         Return a synthetic job-offer
@@ -299,8 +297,6 @@ class JobGenerator:
             if not os.path.exists(path):
                 os.makedirs(path)
             curricula.to_csv(f"{path}/{name}_curricula.csv", index=True, quoting=csv.QUOTE_MINIMAL)
-
-        return curricula
 
     def _generate_consistent_cv(self, job_offer: tuple, n_consistent_cv: int) -> list[dict]:
 

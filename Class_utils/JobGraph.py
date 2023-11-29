@@ -3,9 +3,10 @@ import os
 import random
 from functools import reduce
 from io import StringIO
+from typing import Iterable
 
 import networkx as nx
-import pandas as pd
+import numpy as np
 from matplotlib import pyplot as plt
 from pandas import read_csv, merge, read_json
 from tqdm import tqdm
@@ -14,20 +15,21 @@ from Class_utils.parameters import RelationNode, TypeNode
 
 
 class JobGraph:
-    OCCUPATION_GROUP_THRESHOLD = 4  # A constant for occupation group threshold
+    OCCUPATION_GROUP_THRESHOLD = 4  # A constant for occupation (ISCO)group threshold
 
     def __init__(self, sources: dict, force_build: bool = False,
                  cache_path: str = None):
         """
         Occupation/Skill/Knowledge Graph
+        :param sources: dictionary of paths used to load the resources
+        :param force_build: if true, will be built the graph each time
+        :param cache_path: path to save the cache of a graph
         """
 
         self.cache_path = cache_path  # string path of graph cache (json)
 
-        self.synonyms_path = sources["skill_synonyms_path"]
-        self.synonyms = None  # Lazy loading (will be loaded at first use)
-
         # -------- Load resources --------
+        # if there is the cache file then the resources will be loaded from it
         if os.path.exists(f"{self.cache_path}/graph_cache.json") and not force_build:
 
             print("Cache found loading...", end="")
@@ -37,38 +39,60 @@ class JobGraph:
             self.occupation = read_json(StringIO(json_data[0]))  # all occupation
             self.skills = read_json(StringIO(json_data[1]))  # all skill
             self.occ2skills = read_json(StringIO(json_data[2]))  # relation "many to many"
-            self.graph = nx.node_link_graph(json_data[3])
+            self.graph = nx.node_link_graph(json_data[3])  # graph
             print("done")
 
         else:
+            # if the cache file is not found, then we load all the resources and pre-process them
             print("Cache not found, building th graph...")
-
             self.occupation = read_csv(sources["occupation_path"], index_col=0)  # all occupation
             self.skills = read_csv(sources["skills_path"], index_col=0)  # all skill
             self.occ2skills = read_csv(sources["job2skills_path"])  # relation "many to many"
-            self.build_graph()
+            self.build_graph()  # pre-process the resources and build the graph
         # -------- Load resources --------
 
+        # -------- name to id dictionary --------
+        # We build a dictionary that maps the "name" (which can be "competence/knowledge" or "occupation" names)
+        # into a unique (ESCO) uri (called id)
         self.name2id = {}
         self.name2id.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.skills.itertuples()))
         self.name2id.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.occupation.itertuples()))
+        # -------- name to id dictionary --------
+
+        # -------- Synonyms dictionary --------
+        # After some experiment we concluded that the most efficient way to handle with synonyms
+        # is to create two types of dictionaries:
+
+        # "label2id_skills": dictionary that maps all skill labels (including all synonyms) into a standard uri (called
+        # skill id). There are some "situations" in which we have two distinct skills that have the same synonym.
+        # When we want to "standardize" a synonym, we encounter two "uri", with "attention mechanism" (see below
+        # method) we select the appropriate uri (id_skill).
+
+        # "id_skill2labels": dictionary that maps the (unique id_skill/uri) into a list of synonyms
+        synonyms = read_csv(sources["skill_synonyms_path"])
+        self.label2id_skills = synonyms.groupby('label')['id_skill'].apply(list).to_dict()
+        self.id_skill2labels = synonyms.groupby('id_skill')['label'].apply(list).to_dict()
+        # -------- Synonyms dictionary --------
 
     def build_graph(self):
 
         # ----- Data cleaning -----
         print("Data cleaning...", end="")
+        # we truncate the ISCO group with max OCCUPATION_GROUP_THRESHOLD digits
         self.occupation["group"] = self.occupation["group"].str[:self.OCCUPATION_GROUP_THRESHOLD]
 
         # First, we retrieve all occupations that have essential competence of knowledge minus than 1
         t = self.occ2skills.merge(self.skills, on="id_skill")
         counts = t[t['relation_type'] == 'essential'].groupby(['id_occupation', 'type']).size().unstack(fill_value=0)
         filtered_occupations = counts[(counts['skill/competence'] <= 1) | (counts['knowledge'] <= 1)]
-        # We remove them
+        # then we remove them
         self.occupation.drop(filtered_occupations.index, inplace=True)
         self.occ2skills = self.occ2skills[~self.occ2skills['id_occupation'].isin(filtered_occupations.index)]
-        # Then we remove all skills that are not used (Those skills that don't appear in occupations-skills relation)
+
+        # Second, we remove all skills that are not used (Those skills that don't appear in occupations-skills relation)
         unused_skills = merge(self.skills, self.occ2skills, on='id_skill', how='left', indicator=True)
         self.skills.drop(unused_skills[unused_skills['_merge'] == 'left_only']["id_skill"])
+
         print("done")
         # ----- Data cleaning -----
 
@@ -97,8 +121,14 @@ class JobGraph:
         self.graph = nx.Graph()
         self.graph.add_nodes_from(occupation_nodes + skill_nodes)
         self.graph.add_edges_from(edges_occ2skills)
-
         # ----- Populate the graph -----
+
+        self.save_to_cache()
+
+    def save_to_cache(self):
+        if not os.path.exists(self.cache_path):
+            os.makedirs(self.cache_path)
+
         occupation = self.occupation.to_json()
         skills = self.skills.to_json()
         occ2skills = self.occ2skills.to_json()
@@ -106,7 +136,7 @@ class JobGraph:
 
         if not os.path.exists(self.cache_path):
             os.makedirs(self.cache_path)
-        with open(f"{self.cache_path}/graph_cache.json", 'w') as file:
+        with open(os.path.join(self.cache_path, "graph_cache.json"), 'w') as file:
             json.dump([occupation, skills, occ2skills, graph], file)
 
     def return_neighbors(self, id_node: str, relation: RelationNode, type_node: TypeNode,
@@ -123,14 +153,14 @@ class JobGraph:
         if exclude is None:
             exclude = []
 
-        def filter_condition(n):
+        def filter_conditions(n):
             return (
                     self.graph.edges[id_node, n]["relation"] == relation.value and
                     self.graph.nodes[n]["type"] == type_node.value and
                     n not in exclude
             )
 
-        filtered_neighbors = [n for n in self.graph.neighbors(id_node) if filter_condition(n)]
+        filtered_neighbors = [n for n in self.graph.neighbors(id_node) if filter_conditions(n)]
 
         if convert_ids:
             filtered_neighbors = [self.graph.nodes[n]["label"] for n in filtered_neighbors]
@@ -142,10 +172,10 @@ class JobGraph:
         """
         Sample skill for a given occupation
         :param id_occ: id occupation
-        :param relation: "essential", "optional" or "same_group" (only for occupation)
+        :param relation: "essential", "optional"
         :param type_node: "occupation", "skill" or "knowledge"
-        :param exact_number:
-        :param min_: Min number of skills
+        :param exact_number: if not None, the method provide an exact_number of skills
+        :param min_: Min number of skills (used if exact_number is None)
         :param max_: Max number of skills
         :param exclude: lists of nodes to exclude
         :param convert_ids: if true coverts ids into name
@@ -199,39 +229,38 @@ class JobGraph:
         else:
             return []
 
-    def get_path(self, nodeA: str, nodeB: str, ids: bool = False, convert_ids: bool = False) -> list[tuple]:
-        if not ids:
-            nodeA, nodeB = self.name2id[nodeA], self.name2id[nodeB]
-
-        nodes = nx.shortest_path(self.graph, source=nodeA, target=nodeB)
-
-        if convert_ids:
-            nodes = [(self.graph.nodes[node]["label"], self.graph.nodes[node]["type"]) for node in nodes]
-        else:
-            nodes = [(node, self.graph.nodes[node]["type"]) for node in nodes]
-
-        return nodes
-
-    def remove_single_component(self) -> list[str]:
-
+    def get_single_component(self) -> list[str]:
+        """
+        Returns a list of single component in the graph
+        """
         return [node for component in nx.connected_components(self.graph)
                 if len(component) == 1 for node in component]
 
-    def node_similarity(self, nodesA: list | set, nodesB: list | set, ids: bool = False) -> float:
-
+    def node_similarity(self, nodesA: list | set, nodesB: list | set, ids: bool = False) -> list[float]:
+        """
+        Give a set/list of nodes "A" and a set/list of nodes B, returns a list of jaccard coefficients.
+        The length of the list is equal to the length of nodesA. The one jaccard coefficient represents the
+         sum of jaccard similarity between a node A and all nodes in B.
+        :param nodesA: set/list of nodes
+        :param nodesB: set/list of nodes
+        :param ids: True is the nodes are already (skill_id)
+        :return: a list of jaccard coefficients
+        """
         if len(nodesA) == 0 or len(nodesB) == 0:
-            return 0
+            return [0]
 
         if not ids:
             nodesA = [self.name2id[node] for node in nodesA]
             nodesB = [self.name2id[node] for node in nodesB]
 
-        list_ = [(nodeA, nodeB) for nodeA in nodesA for nodeB in nodesB]
+        list_ = [(nodeA, nodesB) for nodeA in nodesA]  # for one node in A => all nodes in B
 
-        avg_similarity = 0
-        for _, _, coeff in nx.jaccard_coefficient(self.graph, list_):
-            avg_similarity += coeff
-        return avg_similarity / len(list_)
+        similarity = []
+        for nodeA, nodesB in list_:  # nodeA (single node) , nodesB (all nodes)
+            tuples = [(nodeA, nodeB) for nodeB in nodesB]
+            sim_ = sum(coeff for _, _, coeff in nx.jaccard_coefficient(self.graph, tuples))
+            similarity.append(sim_)
+        return similarity
 
     def jaccard_coefficient(self, nodeA: str, nodeB: str, ids: bool = False):
         if not ids:
@@ -270,14 +299,43 @@ class JobGraph:
                 node_color=node_color, node_size=node_size, font_size=20, font_family='Arial', edge_color='black')
         plt.show()
 
-    def substitute_skills(self, mask: list[bool], skills: pd.Series):
-        if self.synonyms is None:
-            self.synonyms = read_csv(self.synonyms_path)
-
+    def substitute_skills(self, mask: list[bool], skills: Iterable[str], ids: bool = False) -> list[str]:
+        """
+        Given an iterable skills and a mask of booleans with equal length, returns a list of synonyms.
+        """
         def map_skill(m: bool, s: str) -> str:
             if s == "-" or not m:
                 return s
-            synonyms_skills = self.synonyms.loc[self.synonyms["id_skill"] == self.name2id[s], "label"]
-            return synonyms_skills.sample().values[0] if not synonyms_skills.empty else s
+            if not ids:
+                s = self.name2id[s]
+
+            # given an uri, we return a list of synonyms
+            synonyms_skills = self.id_skill2labels[s]
+            # if there exist, we sample one synonym
+            return random.choice(synonyms_skills) if len(synonyms_skills) > 0 else s
 
         return [map_skill(m, s) for m, s in zip(mask, skills)]
+
+    def skill_standardize(self, skills: Iterable[str]) -> set:
+        """
+        Given a list of skills, we return a correspondent standard uri. If there is "ambiguous" situation
+        in which one synonym can be associated with multiple standard uri. We apply the "attention" mechanism
+        to understand which is the appropriate uri.
+        """
+
+        # map the skill into standard uri, if there is "ambiguation", the dictionary returns a list of possible uri
+        skills = [self.label2id_skills[skill] for skill in skills]
+
+        # "unique_uri" represent a list of non-ambiguous synonyms (that can be associated only to one "standard" label)
+        unique_uri = [skill[0] for skill in skills if len(skill) == 1]
+        # "ambiguous_uri" is a list of "ambiguous" uri, list[list[str]]
+        ambiguous_uri = [skill for skill in skills if len(skill) > 1]
+
+        # ---- attention mechanism base on the contex ----
+        # for all ambiguous synonyms we have a list of possible id_skills. We perform the "node similarity" between
+        # the id_skill and the all unique_uri. The id_skill that achieves the higher result is the most appropriate one.
+        de_ambiguous_uri = [ambiguous[np.argmax(self.node_similarity(ambiguous, unique_uri, True))]
+                            for ambiguous in ambiguous_uri]
+        # ---- attention mechanism base on the contex ----
+
+        return set(unique_uri + de_ambiguous_uri)

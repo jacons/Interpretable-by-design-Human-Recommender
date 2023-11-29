@@ -1,6 +1,4 @@
-import sys
-from enum import Enum
-
+from numpy import mean
 from pandas import read_csv
 
 from Class_utils.JobGraph import JobGraph
@@ -130,6 +128,7 @@ class FitnessSkills(FitnessFunction):
 
     def __init__(self, job_graph: JobGraph = None):
         self.job_graph = job_graph
+        self.cache_offer = (None, None)
 
     @staticmethod
     def naive_score(offer: set, cv: set, weight: float) -> tuple[float, set]:
@@ -143,8 +142,12 @@ class FitnessSkills(FitnessFunction):
 
     def graph_score(self, offer: set, cv: set, weight: float) -> float:
         score = 0
+
+        offer_uri = self.job_graph.skill_standardize(offer)
+        cv_uri = self.job_graph.skill_standardize(cv)
+
         if len(offer) > 0:
-            score += weight * self.job_graph.node_similarity(offer, cv, ids=False)
+            score += weight * mean(self.job_graph.node_similarity(offer_uri, cv_uri, ids=True))
         return score
 
     def fitness_basic(self, essential: list, cv: list):
