@@ -47,7 +47,8 @@ class EBM_class(GridSearch):
             early_stopping_tolerance=0.0001)
 
         self.nDCG_at = nDCG_at
-        return
+
+        self.piecewise_functions = []
 
     def eval_model(self, model, df: DataFrame = None,
                    nDCG_at: list = None) -> dict:
@@ -99,12 +100,57 @@ class EBM_class(GridSearch):
         if value > cuts[-1]:
             return contribution[-1]
 
-    def explanation(self, model:ExplainableBoostingRegressor, index_feature: int, eps: float = 0.01):
+    def build_piecewise_functions(self, model: ExplainableBoostingRegressor):
 
-        min_, max_ = model.feature_bounds_[index_feature]
-        cuts = model.bins_[index_feature][0]
-        contrib = model.term_scores_[index_feature][1:-1]
+        for idx, feature in enumerate(model.feature_names):
+            min_, max_ = model.feature_bounds_[idx]
+            fun = PiecewiseFunction(feature,
+                                    model.bins_[idx][0],
+                                    model.term_scores_[idx][1:-1],
+                                    model.standard_deviations_[idx][1:-1],
+                                    min_, max_)
+            self.piecewise_functions.append(fun)
 
-        x = np.arange(min_, max_, eps)
-        y = [self.pairwise_function(cuts, contrib, v_) for v_ in x]
-        return x, y
+    def show_piecewise_functions(self, model: ExplainableBoostingRegressor) -> list[DataFrame]:
+        return [self.piecewise_functions[idx].show_function() for idx, _ in enumerate(model.feature_names)]
+
+
+class PiecewiseFunction:
+    def __init__(self, name: str, cuts: np.ndarray, contrib: np.ndarray, std_dev: np.ndarray,
+                 min_: float, max_: float):
+        self.name = name
+        self.cuts = cuts.tolist()
+        self.contrib = contrib.tolist()
+        self.std_dev = std_dev.tolist()
+        self.min_ = min_
+        self.max_ = max_
+
+    def get_result(self, x: float) -> Tuple[float, float]:
+        output = None
+
+        if x <= self.cuts[0]:
+            output = self.contrib[0], self.std_dev[0]
+        elif x >= self.cuts[-1]:
+            output = self.contrib[-1], self.std_dev[-1]
+        else:
+            for i in range(len(self.cuts) - 1):
+                if self.cuts[i] <= x <= self.cuts[i + 1]:
+                    output = self.contrib[i + 1], self.std_dev[i + 1]
+                    break
+
+        return output
+
+    def show_function(self) -> DataFrame:
+        line_space = np.arange(self.min_, self.max_, 0.01)
+
+        x, y_lowers, y, y_uppers = [], [], [], []
+
+        for x_ in line_space:
+            y_, y_std = self.get_result(x_)
+
+            x.append(x_)
+            y_lowers.append(y_ - y_std)
+            y.append(y_)
+            y_uppers.append(y_ + y_std)
+
+        return DataFrame({"x": x, "lower": y_lowers, "y": y, "upper": y_uppers})

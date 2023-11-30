@@ -34,7 +34,7 @@ output_dir = dict(  # parameter for "saving" the synthetic data
 )
 matching_par = dict(  # parameter for label generator
     bins=6,
-    noise=(0, 0.05),  # mean and stddev
+    noise=(0, 5),  # mean and stddev
     split_size=(0.33, 0.33),  # Hold-out
     split_seed=841,  # Reproducible splitting
     weight={

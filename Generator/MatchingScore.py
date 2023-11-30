@@ -23,7 +23,7 @@ class MatchingScore:
     @staticmethod
     def normalize_weights(weights: dict) -> np.ndarray:
         ground_truth = np.asarray(list(weights.values()))
-        return ground_truth / ground_truth.sum()
+        return ground_truth
 
     def score_function(self, offers: DataFrame, curricula: DataFrame, path: str = None, name: str = None) -> DataFrame:
         dataset = self.fitness.generate_fitness_score(offers, curricula)
