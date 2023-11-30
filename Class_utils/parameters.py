@@ -37,20 +37,22 @@ matching_par = dict(  # parameter for label generator
     noise=(0, 0.05),  # mean and stddev
     split_size=(0.33, 0.33),  # Hold-out
     split_seed=841,  # Reproducible splitting
-    weight=np.array([
-        8,  # Education essential
-        4,  # Education optional
-        1,  # City
-        2,  # Age
-        3,  # Experience essential
-        1,  # Experience optional
-        8,  # Language essential
-        5,  # Language optional
-        10,  # Competence essential
-        7,  # Competence optional
-        10,  # Knowledge essential
-        7,  # Knowledge optional
-    ], dtype=np.float32)
+    weight={
+        "Education essential": 8,
+        "Education optional": 4,
+        "City": 1,
+        "Age": 2,
+        "Experience essential": 3,
+        "Experience optional": 1,
+        "Language essential": 8,
+        "Language optional": 5,
+        "Competence essential": 10,
+        "Competence optional": 7,
+        "Knowledge essential": 10,
+        "Knowledge optional": 7,
+        "Judgment expertize": 10,
+        "Judgment education": 10,
+    }
 )
 
 

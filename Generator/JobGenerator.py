@@ -408,12 +408,12 @@ class JobGenerator:
         id_educational = random.choices(educations.index, weights=educations["Distribution"])[0]
         education = self.education.loc[id_educational, "Education"]
         # ------------------------------------------------------------------
+        # With a certain percentage the age is random
         if random.random() <= 0.80:
             age = random.randint(min_age, max_age)
         else:
             age = random.randint(edu_row["min_age"].values[0], 40)
         # ------------------------------------------------------------------
-
         new_comp_ess, new_comp_opt, new_know_ess, new_know_opt = self._generate_skills(id_occ, competences, knowledge)
         competences += new_comp_ess + new_comp_opt
         knowledge += new_know_ess + new_know_opt

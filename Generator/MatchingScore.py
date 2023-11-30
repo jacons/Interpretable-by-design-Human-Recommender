@@ -10,7 +10,7 @@ from Class_utils import FitnessFunctions
 
 
 class MatchingScore:
-    def __init__(self, fitness_functions: FitnessFunctions, bins: int, weight: np.ndarray,
+    def __init__(self, fitness_functions: FitnessFunctions, bins: int, weight: dict,
                  noise: Tuple[float], split_size: Tuple[float], split_seed: int):
 
         self.fitness = fitness_functions
@@ -21,8 +21,9 @@ class MatchingScore:
         self.split_seed = split_seed
 
     @staticmethod
-    def normalize_weights(weights: np.ndarray) -> np.ndarray:
-        return weights / weights.sum()
+    def normalize_weights(weights: dict) -> np.ndarray:
+        ground_truth = np.asarray(list(weights.values()))
+        return ground_truth / ground_truth.sum()
 
     def score_function(self, offers: DataFrame, curricula: DataFrame, path: str = None, name: str = None) -> DataFrame:
         dataset = self.fitness.generate_fitness_score(offers, curricula)
@@ -40,10 +41,11 @@ class MatchingScore:
 
         def target_fun(fitness_vector):
             result = np.dot(fitness_vector, self.weights) + normal(self.noise[0], self.noise[1])
-            return max(0, result)
+            return result
 
         # Weighted sum
         dataset['w_score'] = features.apply(target_fun, axis=1)
+        dataset['w_score'] += abs(dataset['w_score'].min())
 
         return dataset
 

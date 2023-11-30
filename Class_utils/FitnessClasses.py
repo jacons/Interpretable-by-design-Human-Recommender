@@ -1,3 +1,4 @@
+import numpy as np
 from numpy import mean
 from pandas import read_csv
 
@@ -128,7 +129,6 @@ class FitnessSkills(FitnessFunction):
 
     def __init__(self, job_graph: JobGraph = None):
         self.job_graph = job_graph
-        self.cache_offer = (None, None)
 
     @staticmethod
     def naive_score(offer: set, cv: set, weight: float) -> tuple[float, set]:
@@ -150,7 +150,7 @@ class FitnessSkills(FitnessFunction):
             score += weight * mean(self.job_graph.node_similarity(offer_uri, cv_uri, ids=True))
         return score
 
-    def fitness_basic(self, essential: list, cv: list):
+    def fitness_basic(self, essential: list, cv: list) -> float:
         essential, cv = set(essential), set(cv)
 
         # ------- Score without Knowledge base -------
@@ -163,7 +163,7 @@ class FitnessSkills(FitnessFunction):
             # ------- Score with Knowledge base -------
         return basic
 
-    def fitness_bonus(self, optional: list, cv: list):
+    def fitness_bonus(self, optional: list, cv: list) -> float:
         optional, cv = set(optional), set(cv)
 
         # ------- Score without Knowledge base -------
@@ -175,3 +175,10 @@ class FitnessSkills(FitnessFunction):
             bonus += self.graph_score(optional - sk_shared, cv - sk_shared, 0.25)
             # ------- Score with Knowledge base -------
         return bonus
+
+
+class FitnessJudgment(FitnessFunction):
+
+    @staticmethod
+    def fitness_basic(*args) -> float:
+        return np.log1p(np.log1p(np.power(sum(args), 3)))
