@@ -89,17 +89,6 @@ class EBM_class(GridSearch):
             progress_bar.set_postfix(nDCG_15_at=best_model_[2])
         return best_model_
 
-    @staticmethod
-    def pairwise_function(cuts: ndarray, contribution: ndarray, value: float):
-
-        if value < cuts[0]:
-            return contribution[0]
-        for i in range(len(cuts) - 1):
-            if cuts[i] <= value <= cuts[i + 1]:
-                return contribution[i + 1]
-        if value > cuts[-1]:
-            return contribution[-1]
-
     def build_piecewise_functions(self, model: ExplainableBoostingRegressor):
 
         for idx, feature in enumerate(model.feature_names):
