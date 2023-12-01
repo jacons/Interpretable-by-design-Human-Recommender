@@ -180,5 +180,5 @@ class FitnessSkills(FitnessFunction):
 class FitnessJudgment(FitnessFunction):
 
     @staticmethod
-    def fitness_basic(*args) -> float:
-        return np.log1p(np.log1p(np.power(sum(args), 3)))
+    def fitness_basic(features: list[float]) -> float:
+        return np.log1p(np.log1p(np.power(sum(features), 3)))

@@ -1,4 +1,3 @@
-import numpy as np
 from pandas import DataFrame
 from tqdm import tqdm
 
@@ -56,11 +55,11 @@ class FitnessFunctions:
         fit_competence_basic = self.fitness_skills.fitness_basic(of_comp_ess, cv_comp)
         fit_competence_bonus = self.fitness_skills.fitness_bonus(of_comp_opt, cv_comp)
         fit_knowledge_basic = self.fitness_skills.fitness_basic(of_know_ess, cv_know)
-        fit_knowledge_bonus = self.fitness_skills.fitness_basic(of_know_opt, cv_know)
+        fit_knowledge_bonus = self.fitness_skills.fitness_bonus(of_know_opt, cv_know)
 
-        fit_expertize = self.fitness_judgment.fitness_basic(fit_exp_bonus, fit_competence_bonus,
-                                                            fit_knowledge_bonus)
-        fit_edu_judgment = self.fitness_judgment.fitness_basic(fit_edu_bonus, fit_lang_bonus)
+        fit_expertize = self.fitness_judgment.fitness_basic([fit_exp_bonus, fit_competence_bonus, fit_knowledge_bonus])
+        fit_edu_judgment = self.fitness_judgment.fitness_basic([fit_edu_bonus, fit_lang_bonus])
+
         result = dict(
             qId=offer[0],
             kId=cv[0],
