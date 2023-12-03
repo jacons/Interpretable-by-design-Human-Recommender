@@ -70,8 +70,8 @@ class JobGraph:
 
         # "id_skill2labels": dictionary that maps the (unique id_skill/uri) into a list of synonyms
         synonyms = read_csv(sources["skill_synonyms_path"])
-        self.label2id_skills = synonyms.groupby('label')['id_skill'].apply(list).to_dict()
-        self.id_skill2labels = synonyms.groupby('id_skill')['label'].apply(list).to_dict()
+        self.sys_label2id = synonyms.groupby('label')['id_skill'].apply(list).to_dict()
+        self.sys_id2labels = synonyms.groupby('id_skill')['label'].apply(list).to_dict()
         # -------- Synonyms dictionary --------
 
     def build_graph(self):
@@ -303,6 +303,7 @@ class JobGraph:
         """
         Given an iterable skills and a mask of booleans with equal length, returns a list of synonyms.
         """
+
         def map_skill(m: bool, s: str) -> str:
             if s == "-" or not m:
                 return s
@@ -310,13 +311,13 @@ class JobGraph:
                 s = self.name2id[s]
 
             # given an uri, we return a list of synonyms
-            synonyms_skills = self.id_skill2labels[s]
+            synonyms_skills = self.sys_id2labels[s]
             # if there exist, we sample one synonym
             return random.choice(synonyms_skills) if len(synonyms_skills) > 0 else s
 
         return [map_skill(m, s) for m, s in zip(mask, skills)]
 
-    def skill_standardize(self, skills: Iterable[str]) -> set:
+    def skill_standardize(self, skills: Iterable[str], to_ids: bool = True) -> set:
         """
         Given a list of skills, we return a correspondent standard uri. If there is "ambiguous" situation
         in which one synonym can be associated with multiple standard uri. We apply the "attention" mechanism
@@ -324,7 +325,7 @@ class JobGraph:
         """
 
         # map the skill into standard uri, if there is "ambiguation", the dictionary returns a list of possible uri
-        skills = [self.label2id_skills[skill] for skill in skills]
+        skills = [self.sys_label2id[skill] for skill in skills]
 
         # "unique_uri" represent a list of non-ambiguous synonyms (that can be associated only to one "standard" label)
         unique_uri = [skill[0] for skill in skills if len(skill) == 1]
@@ -337,5 +338,9 @@ class JobGraph:
         de_ambiguous_uri = [ambiguous[np.argmax(self.node_similarity(ambiguous, unique_uri, True))]
                             for ambiguous in ambiguous_uri]
         # ---- attention mechanism base on the contex ----
+
+        if not to_ids:
+            unique_uri = [self.graph.nodes[i]["label"] for i in unique_uri]
+            de_ambiguous_uri = [self.graph.nodes[i]["label"] for i in de_ambiguous_uri]
 
         return set(unique_uri + de_ambiguous_uri)

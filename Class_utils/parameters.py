@@ -34,24 +34,30 @@ output_dir = dict(  # parameter for "saving" the synthetic data
 )
 matching_par = dict(  # parameter for label generator
     bins=6,
-    noise=(0, 5),  # mean and stddev
+    noise=(0, 6),  # mean and stddev
     split_size=(0.33, 0.33),  # Hold-out
-    split_seed=841,  # Reproducible splitting
+    split_seed=718,  # Reproducible splitting
     weight={
         "Education essential": 8,
         "Education optional": 4,
+
         "City": 1,
         "Age": 2,
+
         "Experience essential": 3,
         "Experience optional": 1,
+
         "Language essential": 8,
         "Language optional": 5,
+
         "Competence essential": 10,
         "Competence optional": 7,
+
         "Knowledge essential": 10,
         "Knowledge optional": 7,
+
         "Judgment expertize": 10,
-        "Judgment education": 10,
+        "Judgment education": 9,
     }
 )
 

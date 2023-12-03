@@ -52,10 +52,10 @@ class FitnessFunctions:
         fit_exp_bonus = self.fitness_experience.fitness_bonus(offer[28], offer[29], cv[27])
         fit_lang_basic = self.fitness_languages.fitness_basic(of_lang, cv_lang)
         fit_lang_bonus = self.fitness_languages.fitness_bonus(cv_lang, Language(offer[24], offer[27]))
-        fit_competence_basic = self.fitness_skills.fitness_basic(of_comp_ess, cv_comp)
-        fit_competence_bonus = self.fitness_skills.fitness_bonus(of_comp_opt, cv_comp)
-        fit_knowledge_basic = self.fitness_skills.fitness_basic(of_know_ess, cv_know)
-        fit_knowledge_bonus = self.fitness_skills.fitness_bonus(of_know_opt, cv_know)
+        fit_competence_basic = self.fitness_skills.fitness(of_comp_ess, cv_comp)
+        fit_competence_bonus = self.fitness_skills.fitness(of_comp_opt, cv_comp)
+        fit_knowledge_basic = self.fitness_skills.fitness(of_know_ess, cv_know)
+        fit_knowledge_bonus = self.fitness_skills.fitness(of_know_opt, cv_know)
 
         fit_expertize = self.fitness_judgment.fitness_basic([fit_exp_bonus, fit_competence_bonus, fit_knowledge_bonus])
         fit_edu_judgment = self.fitness_judgment.fitness_basic([fit_edu_bonus, fit_lang_bonus])
@@ -65,7 +65,7 @@ class FitnessFunctions:
             kId=cv[0],
             fitness_edu_basic=fit_edu_basic,
             fitness_edu_bonus=fit_edu_bonus,
-            fitness_city=self.fitness_cities.fitness_basic(offer[7], cv[5], cv[6]),
+            fitness_city=self.fitness_cities.fitness(offer[7], cv[5], cv[6]),
             fitness_age=self.fitness_age.fitness_basic(cv[4], offer[5], offer[6]),
             fitness_exp_basic=fit_exp_basic,
             fitness_exp_bonus=fit_exp_bonus,
