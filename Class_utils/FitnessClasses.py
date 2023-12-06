@@ -61,7 +61,6 @@ class FitnessEdu:
 class FitnessCity:
     def __init__(self, distance_path: str):
         self.distance = read_csv(distance_path, index_col=[0, 1], skipinitialspace=True)
-        self.max_distance = self.distance["Dist"].max()
 
     def find_distance(self, cityA: str, cityB: str):
         if cityA == cityB:
@@ -70,13 +69,18 @@ class FitnessCity:
         s_cities = sorted([cityA, cityB])
         return self.distance.loc[(s_cities[0], s_cities[1])].values[0]
 
-    def distance_scoring(self, dist: float, range_: int):
+    @staticmethod
+    def distance_scoring(dist: float, range_: int):
         diff = dist - range_
+
         if diff <= 0:
             return 1
-        score = int(diff / 20) * 260
-
-        return max(1 - score / self.max_distance, 0)
+        if diff <= range_/3:
+            return 0.6
+        if diff <= 2*range_/3:
+            return 0.3
+        else:
+            return 0
 
     def fitness(self, cityA: str, cityB: str, range_: int) -> float:
         # max 1 min 0
@@ -168,14 +172,54 @@ class FitnessSkills:
         if self.job_graph is not None and len(essential) > 0:
             # ------- Score with Knowledge base -------
             imperfect_shared, sim_score = self.graph_score(essential, cv)
-
+            # discretize the sim_score? better explainability?
             shared += imperfect_shared
+            sub_score = shared / total
+            score = sub_score + (1-sub_score) * sim_score
+            # ------- Score with Knowledge base -------
+        else:
+            score = shared / total
+        return score
+
+    def debug_score(self, essential: list, cv: list):
+        essential, cv = set(essential), set(cv)
+
+        total = len(essential)
+        if total <= 0:
+            return 0
+        # ------- Score without Knowledge base -------
+        perfect_shared = self.naive_match(essential, cv)
+        # ------- Score without Knowledge base -------
+        print("The shared skills are:", perfect_shared)
+
+        print("Remaining skill for cv", cv)
+        print("Remaining skill for job", essential)
+
+        shared = len(perfect_shared)
+        if self.job_graph is not None and len(essential) > 0:
+            # ------- Score with Knowledge base -------
+
+            # Make the "name" of skill invariant respect to their synonyms
+            offer_uri = self.job_graph.skill_standardize(essential)
+            cv_uri = self.job_graph.skill_standardize(cv)
+            print("The standardize skill for cv", cv_uri)
+            print("The standardize skill for job", offer_uri)
+
+            # then try again to do the "perfect" match (after mapped all synonyms)
+            imperfect_shared = self.naive_match(offer_uri, cv_uri)
+            print("The shared skills are:", imperfect_shared)
+
+            # with the remain skill in the both lists, we apply the similarity score
+            sim_score = mean(self.job_graph.node_similarity(offer_uri, cv_uri, ids=True))
+            print("The similarity score is ", sim_score)
+
+            shared += len(imperfect_shared)
             max_sim_score = 1 - (shared / total)
             score = shared / total + max_sim_score * sim_score
             # ------- Score with Knowledge base -------
         else:
             score = shared / total
-        return score
+        print("The final score is", score)
 
 
 class FitnessJudgment:

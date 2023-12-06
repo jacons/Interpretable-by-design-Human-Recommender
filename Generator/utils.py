@@ -89,7 +89,7 @@ def prepare_esco_datasets(raw_sources: str, output_dir: str):
     occ2skills["skillUri"] = occ2skills["skillUri"].str.replace(SKILL_PATH, "")
 
     occ2skills.rename(
-        columns={"occupationUri": "id_occupation", "skillUri": "id_skill",
+        columns={"occupationUri": "id_occupation", "skillUri": "uri_skill",
                  "relationType": "relation_type"}, inplace=True)
     occupation.dropna(inplace=True)
     # ---------------------------------------------------------------------
@@ -100,7 +100,7 @@ def prepare_esco_datasets(raw_sources: str, output_dir: str):
     # remove the link (to simply the notation)
     skills["conceptUri"] = skills["conceptUri"].str.replace(SKILL_PATH, "")
     skills.rename(
-        columns={"conceptUri": "id_skill", "preferredLabel": "skill",
+        columns={"conceptUri": "uri_skill", "preferredLabel": "skill",
                  "skillType": "type", "reuseLevel": "sector", "altLabels": "synonyms"}, inplace=True)
 
     skills["synonyms"] = skills["synonyms"].str.split("\n")
@@ -111,8 +111,8 @@ def prepare_esco_datasets(raw_sources: str, output_dir: str):
         if isinstance(alternative_labels, list):
             for syn in alternative_labels:
                 if syn != default_label:
-                    skills_synonyms.append(dict(label=syn, default=0, id_skill=uri))
-        skills_synonyms.append(dict(label=default_label, default=1, id_skill=uri))
+                    skills_synonyms.append(dict(label=syn, default=0, uri_skill=uri))
+        skills_synonyms.append(dict(label=default_label, default=1, uri_skill=uri))
     skills_synonyms = pd.DataFrame(skills_synonyms)
 
     # ---------------------------------------------------------------------
@@ -129,8 +129,8 @@ def prepare_esco_datasets(raw_sources: str, output_dir: str):
     occupation.drop(["group"], axis=1, inplace=True)
     skills.drop(["type", "sector"], axis=1, inplace=True)
 
-    job_library = occupation.merge(occ2skills.merge(skills, on="id_skill"), on="id_occupation")
-    job_library = job_library[["id_occupation", "relation_type", "id_skill"]]
+    job_library = occupation.merge(occ2skills.merge(skills, on="uri_skill"), on="id_occupation")
+    job_library = job_library[["id_occupation", "relation_type", "uri_skill"]]
 
     job_library.to_csv(output_dir + "/job2skills.csv", index=False)
 

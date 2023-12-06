@@ -57,7 +57,7 @@ class JobGenerator:
             {"A1": "float", "A2": "float", "B1": "float", "B2": "float", "C1": "float", "C2": "float"})
         self.lang_prob = languages["Prob"].to_numpy()
         self.idx2language = languages["Languages"].to_dict()
-        self.language2idx = {v: k for k, v in self.idx2language.items()}
+        self.language2urix = {v: k for k, v in self.idx2language.items()}
         self.lang_level_dist = sources["opt_lang_distribution"]
         # --- Languages and levels  ---
 
@@ -94,13 +94,16 @@ class JobGenerator:
         """
         # ------------------------------------------------------------------
         # randomly select one Job (id Occupation, Occupation name)
-        id_occ, job_Name, isco_group = self.job_graph.sample_occupation()
+        uri_occ, job_Name, isco_group = self.job_graph.sample_occupation()
         # ------------------------------------------------------------------
         edu_essential, edu_optional, min_age = self._generate_edu(isco_group=isco_group)
         # ------------------------------------------------------------------
-        skills_es, skills_op, knowledge_es, knowledge_op = self._generate_skills(id_occ=id_occ)
+        skills_es, skills_op, knowledge_es, knowledge_op = self._generate_skills(uri_occ=uri_occ)
         skills_es, skills_op = sorted(skills_es, reverse=True), sorted(skills_op, reverse=True)
         knowledge_es, knowledge_op = sorted(knowledge_es, reverse=True), sorted(knowledge_op, reverse=True)
+
+        uri_comp_es, uri_comp_op = self.job_graph.map_names2uri(skills_es), self.job_graph.map_names2uri(skills_op)
+        uri_know_es, uri_know_op = self.job_graph.map_names2uri(knowledge_es), self.job_graph.map_names2uri(knowledge_op)
         # ------------------------------------------------------------------
         min_age += random.randint(0, 5)
         max_age = min_age + random.randint(5, 20)
@@ -115,8 +118,11 @@ class JobGenerator:
         offer = dict(
             qId=qId,  # 0
             Job=job_Name,  # 1
-            metadata=dict(group=isco_group),  # 2
-
+            metadata=dict(group=isco_group,
+                          uri_competence_essential=uri_comp_es,
+                          uri_competence_optional=uri_comp_op,
+                          uri_knowledge_essential=uri_know_es,
+                          uri_knowledge_optional=uri_know_op),  # 2
             Edu_essential=edu_essential,  # 3
             Edu_optional=edu_optional,  # 4
             AgeMin=min_age,  # 5
@@ -175,7 +181,7 @@ class JobGenerator:
         min_age = self.education.loc[id_educational, "min_age"]
         return edu_essential, edu_optional, min_age
 
-    def _generate_skills(self, id_occ: str, exclude_competence: list[str] = None,
+    def _generate_skills(self, uri_occ: str, exclude_competence: list[str] = None,
                          exclude_knowledge: list[str] = None) -> tuple[list[str], list[str], list[str], list[str]]:
         """
         Given the id_occupation, it samples competences and knowledge
@@ -198,21 +204,21 @@ class JobGenerator:
         max_opt_comp = competences_to_fill - essential_competences
         max_opt_know = knowledge_to_fill - essential_knowledge
 
-        competence_es = self.job_graph.sample_skills(id_occ,
+        competence_es = self.job_graph.sample_skills(uri_occ,
                                                      RelationNode.ES, TypeNode.SK,
                                                      exact_number=essential_competences, convert_ids=True,
                                                      exclude=exclude_competence)
 
-        competence_op = self.job_graph.sample_skills(id_occ,
+        competence_op = self.job_graph.sample_skills(uri_occ,
                                                      RelationNode.OP, TypeNode.SK,
                                                      min_=0, max_=max_opt_comp, convert_ids=True)
 
-        knowledge_es = self.job_graph.sample_skills(id_occ,
+        knowledge_es = self.job_graph.sample_skills(uri_occ,
                                                     RelationNode.ES, TypeNode.KN,
                                                     exact_number=essential_knowledge, convert_ids=True,
                                                     exclude=exclude_knowledge)
 
-        knowledge_op = self.job_graph.sample_skills(id_occ,
+        knowledge_op = self.job_graph.sample_skills(uri_occ,
                                                     RelationNode.OP, TypeNode.KN,
                                                     min_=0, max_=max_opt_know, convert_ids=True)
 
@@ -352,7 +358,7 @@ class JobGenerator:
 
         for lang in languages:
             #  Delete the probability to pick a language already sampled
-            prob[self.language2idx[lang.name]] = 0
+            prob[self.language2urix[lang.name]] = 0
 
             # The candidate must satisfy the language. With a probability, the candidate
             # has a certification.
@@ -384,7 +390,7 @@ class JobGenerator:
 
         return languages
 
-    def _get_curriculum(self, qId: int, id_occ: str = None, edu_essential: str = "Less-than-degree",
+    def _get_curriculum(self, qId: int, uri_occ: str = None, edu_essential: str = "Less-than-degree",
                         min_age: int = 16, max_age: int = 60, competences: list[str] = None,
                         knowledge: list[str] = None, languages: list[Language] = None,
                         consistent: bool = False):
@@ -397,8 +403,8 @@ class JobGenerator:
         if languages is None:
             languages = []
 
-        if id_occ is None:
-            id_occ, _, group = self.job_graph.sample_occupation()
+        if uri_occ is None:
+            uri_occ, _, group = self.job_graph.sample_occupation()
             min_edu = self.min_max_edu[group[:3]]["min_edu"]
             edu_essential = self.education.loc[min_edu, "Education"]
 
@@ -414,11 +420,12 @@ class JobGenerator:
         else:
             age = random.randint(edu_row["min_age"].values[0], 40)
         # ------------------------------------------------------------------
-        new_comp_ess, new_comp_opt, new_know_ess, new_know_opt = self._generate_skills(id_occ, competences, knowledge)
+        new_comp_ess, new_comp_opt, new_know_ess, new_know_opt = self._generate_skills(uri_occ, competences, knowledge)
         competences += new_comp_ess + new_comp_opt
         knowledge += new_know_ess + new_know_opt
         competences = sorted(competences, reverse=True)
         knowledge = sorted(knowledge, reverse=True)
+        uri_comp, uri_know = self.job_graph.map_names2uri(competences), self.job_graph.map_names2uri(knowledge)
         # ------------------------------------------------------------------
         languages = self._generate_other_lang_from(languages)
         languages = sorted(languages, key=lambda x: x.name, reverse=True)
@@ -428,7 +435,10 @@ class JobGenerator:
         cv = dict(
             qId=qId,  # 0
             kId=next(self.kid_generator),  # 0
-            metadata=dict(occ=id_occ, consistent=consistent),  # 1
+            metadata=dict(occ=uri_occ,
+                          consistent=consistent,
+                          uri_competences=uri_comp,
+                          uri_knowledge=uri_know),  # 1
             Education=education,  # 2
             Age=age,  # 3
             City=self.all_cities.sample(n=1, weights="P")["city"].values[0],  # 4

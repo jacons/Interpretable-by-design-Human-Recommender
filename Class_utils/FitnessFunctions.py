@@ -1,3 +1,5 @@
+from typing import Iterable
+
 from pandas import DataFrame
 from tqdm import tqdm
 
@@ -14,14 +16,14 @@ class FitnessFunctions:
         self.fitness_edu = FitnessEdu(sources["education_path"])
         self.fitness_languages = FitnessLanguages()
         self.fitness_skills = FitnessSkills(job_graph)
-        self.fitness_judgment = FitnessJudgment()
+        # self.fitness_judgment = FitnessJudgment()
 
     @staticmethod
     def remove_null(a: list[str], b: list[str]) -> list[Language]:
         return [Language(name, lvl) for name, lvl in zip(a, b) if name != "-"]
 
     @staticmethod
-    def filter(list_: list):
+    def filter(list_: Iterable[str]) -> list[str]:
         return [item for item in list_ if item != "-"]
 
     def generate_fitness_score(self, offers: DataFrame, curricula: DataFrame) -> DataFrame:
@@ -57,8 +59,9 @@ class FitnessFunctions:
         fit_knowledge_basic = self.fitness_skills.fitness(of_know_ess, cv_know)
         fit_knowledge_bonus = self.fitness_skills.fitness(of_know_opt, cv_know)
 
-        fit_expertize = self.fitness_judgment.fitness_basic([fit_exp_bonus, fit_competence_bonus, fit_knowledge_bonus])
-        fit_edu_judgment = self.fitness_judgment.fitness_basic([fit_edu_bonus, fit_lang_bonus])
+        # fit_expertize = self.fitness_judgment.fitness_basic([fit_exp_bonus,
+        #                                                     fit_competence_bonus, fit_knowledge_bonus])
+        # fit_edu_judgment = self.fitness_judgment.fitness_basic([fit_edu_bonus, fit_lang_bonus])
 
         result = dict(
             qId=offer[0],
@@ -75,7 +78,7 @@ class FitnessFunctions:
             fitness_comp_bonus=fit_competence_bonus,
             fitness_know_basic=fit_knowledge_basic,
             fitness_knowl_bonus=fit_knowledge_bonus,
-            fit_expertize=fit_expertize,
-            fit_edu_judgment=fit_edu_judgment
+            # fit_expertize=fit_expertize,
+            # fit_edu_judgment=fit_edu_judgment
         )
         return result

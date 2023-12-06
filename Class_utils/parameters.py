@@ -24,10 +24,10 @@ match_score_par = dict(  # parameter for "matching score class"
     path="../outputs/scores"
 )
 curriculum_par = dict(  # parameters for "curricula generator"
-    mu=80,  # average of curricula for job-offer
+    mu=90,  # average of curricula for job-offer
 )
 jobOffer_par = dict(  # parameter for "job-offer generator"
-    size=200,  # number of jobs-offer
+    size=220,  # number of jobs-offer
 )
 output_dir = dict(  # parameter for "saving" the synthetic data
     path="../outputs"
@@ -39,13 +39,13 @@ matching_par = dict(  # parameter for label generator
     split_seed=718,  # Reproducible splitting
     weight={
         "Education essential": 8,
-        "Education optional": 4,
+        "Education optional": 5,
 
-        "City": 1,
-        "Age": 2,
+        "City": 2,
+        "Age": 3,
 
-        "Experience essential": 3,
-        "Experience optional": 1,
+        "Experience essential": 8,
+        "Experience optional": 3,
 
         "Language essential": 8,
         "Language optional": 5,
@@ -56,8 +56,8 @@ matching_par = dict(  # parameter for label generator
         "Knowledge essential": 10,
         "Knowledge optional": 7,
 
-        "Judgment expertize": 10,
-        "Judgment education": 9,
+        # "Judgment expertize": 10,
+        # "Judgment education": 9,
     }
 )
 

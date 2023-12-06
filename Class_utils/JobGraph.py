@@ -54,24 +54,24 @@ class JobGraph:
         # -------- name to id dictionary --------
         # We build a dictionary that maps the "name" (which can be "competence/knowledge" or "occupation" names)
         # into a unique (ESCO) uri (called id)
-        self.name2id = {}
-        self.name2id.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.skills.itertuples()))
-        self.name2id.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.occupation.itertuples()))
+        self.name2uri = {}
+        self.name2uri.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.skills.itertuples()))
+        self.name2uri.update(dict((tuple_[1], tuple_[0]) for tuple_ in self.occupation.itertuples()))
         # -------- name to id dictionary --------
 
         # -------- Synonyms dictionary --------
         # After some experiment we concluded that the most efficient way to handle with synonyms
         # is to create two types of dictionaries:
 
-        # "label2id_skills": dictionary that maps all skill labels (including all synonyms) into a standard uri (called
+        # "label2uri_skills": dictionary that maps all skill labels (including all synonyms) into a standard uri (called
         # skill id). There are some "situations" in which we have two distinct skills that have the same synonym.
-        # When we want to "standardize" a synonym, we encounter two "uri", with "attention mechanism" (see below
-        # method) we select the appropriate uri (id_skill).
+        # When we want to "standardize" a synonym, we encounter two "uri", with "contex mechanism" (see below
+        # method) we select the appropriate uri (uri_skill).
 
-        # "id_skill2labels": dictionary that maps the (unique id_skill/uri) into a list of synonyms
+        # "uri_skill2labels": dictionary that maps the (unique uri_skill/uri) into a list of synonyms
         synonyms = read_csv(sources["skill_synonyms_path"])
-        self.sys_label2id = synonyms.groupby('label')['id_skill'].apply(list).to_dict()
-        self.sys_id2labels = synonyms.groupby('id_skill')['label'].apply(list).to_dict()
+        self.sys_label2uri = synonyms.groupby('label')['uri_skill'].apply(list).to_dict()
+        self.sys_uri2labels = synonyms.groupby('uri_skill')['label'].apply(list).to_dict()
         # -------- Synonyms dictionary --------
 
     def build_graph(self):
@@ -82,7 +82,7 @@ class JobGraph:
         self.occupation["group"] = self.occupation["group"].str[:self.OCCUPATION_GROUP_THRESHOLD]
 
         # First, we retrieve all occupations that have essential competence of knowledge minus than 1
-        t = self.occ2skills.merge(self.skills, on="id_skill")
+        t = self.occ2skills.merge(self.skills, on="uri_skill")
         counts = t[t['relation_type'] == 'essential'].groupby(['id_occupation', 'type']).size().unstack(fill_value=0)
         filtered_occupations = counts[(counts['skill/competence'] <= 1) | (counts['knowledge'] <= 1)]
         # then we remove them
@@ -90,8 +90,8 @@ class JobGraph:
         self.occ2skills = self.occ2skills[~self.occ2skills['id_occupation'].isin(filtered_occupations.index)]
 
         # Second, we remove all skills that are not used (Those skills that don't appear in occupations-skills relation)
-        unused_skills = merge(self.skills, self.occ2skills, on='id_skill', how='left', indicator=True)
-        self.skills.drop(unused_skills[unused_skills['_merge'] == 'left_only']["id_skill"])
+        unused_skills = merge(self.skills, self.occ2skills, on='uri_skill', how='left', indicator=True)
+        self.skills.drop(unused_skills[unused_skills['_merge'] == 'left_only']["uri_skill"])
 
         print("done")
         # ----- Data cleaning -----
@@ -167,11 +167,11 @@ class JobGraph:
 
         return filtered_neighbors
 
-    def sample_skills(self, id_occ: str, relation: RelationNode, type_node: TypeNode, exact_number: int = None,
+    def sample_skills(self, uri_occ: str, relation: RelationNode, type_node: TypeNode, exact_number: int = None,
                       min_: int = 2, max_: int = 4, convert_ids: bool = False, exclude: list[str] = None) -> list[str]:
         """
         Sample skill for a given occupation
-        :param id_occ: id occupation
+        :param uri_occ: id occupation
         :param relation: "essential", "optional"
         :param type_node: "occupation", "skill" or "knowledge"
         :param exact_number: if not None, the method provide an exact_number of skills
@@ -189,9 +189,9 @@ class JobGraph:
             sampled = []
         else:
             if exclude is not None:
-                exclude = [self.name2id[e] for e in exclude]
+                exclude = [self.name2uri[e] for e in exclude]
 
-            list_ = self.return_neighbors(id_occ, relation, type_node, exclude, convert_ids)
+            list_ = self.return_neighbors(uri_occ, relation, type_node, exclude, convert_ids)
             exact_number = min(exact_number, len(list_))
             sampled = random.sample(list_, exact_number)
 
@@ -205,8 +205,8 @@ class JobGraph:
         Sample an occupation
         :return: id_occupation, label, isco group
         """
-        id_occ = self.occupation.sample().index[0]
-        return id_occ, self.graph.nodes[id_occ]["label"], self.graph.nodes[id_occ]["isco_group"]
+        uri_occ = self.occupation.sample().index[0]
+        return uri_occ, self.graph.nodes[uri_occ]["label"], self.graph.nodes[uri_occ]["isco_group"]
 
     def get_job_with_skill(self, competences: list[str] = None, knowledge: list[str] = None) -> list[str]:
         """
@@ -222,7 +222,7 @@ class JobGraph:
         if len(skills) < 1:
             return []
 
-        nodes = [set(self.graph.neighbors(self.name2id[skill])) for skill in skills]
+        nodes = [set(self.graph.neighbors(self.name2uri[skill])) for skill in skills]
         if nodes:
             similar_jobs = reduce(set.intersection, nodes)
             return list(similar_jobs)
@@ -250,21 +250,21 @@ class JobGraph:
             return [0]
 
         if not ids:
-            nodesA = [self.name2id[node] for node in nodesA]
-            nodesB = [self.name2id[node] for node in nodesB]
+            nodesA = [self.name2uri[node] for node in nodesA]
+            nodesB = [self.name2uri[node] for node in nodesB]
 
         list_ = [(nodeA, nodesB) for nodeA in nodesA]  # for one node in A => all nodes in B
 
         similarity = []
         for nodeA, nodesB in list_:  # nodeA (single node) , nodesB (all nodes)
             tuples = [(nodeA, nodeB) for nodeB in nodesB]
-            sim_ = sum(coeff for _, _, coeff in nx.jaccard_coefficient(self.graph, tuples))
+            sim_ = sum(coeff for _, _, coeff in nx.jaccard_coefficient(self.graph, tuples)) / len(nodesB)
             similarity.append(sim_)
         return similarity
 
     def jaccard_coefficient(self, nodeA: str, nodeB: str, ids: bool = False):
         if not ids:
-            nodeA, nodeB = self.name2id[nodeA], self.name2id[nodeB]
+            nodeA, nodeB = self.name2uri[nodeA], self.name2uri[nodeB]
         return nx.jaccard_coefficient(self.graph, [(nodeA, nodeB)])
 
     def return_all_neighbors_info(self, id_node: str) -> list:
@@ -275,23 +275,23 @@ class JobGraph:
         filtered_neighbors = [info(n) for n in self.graph.neighbors(id_node)]
         return filtered_neighbors
 
-    def show_subgraph(self, id_occ: str, max_nodes: int = 0):
+    def show_subgraph(self, uri_occ: str, max_nodes: int = 0):
 
         color_node_map = {"occupation": "Red", "knowledge": "#95a6df", "skill/competence": "#ffa500"}
         color_edge_map = {"essential": 1, "optional": 1, "transversal": 1}
 
-        nodes = self.return_all_neighbors_info(id_occ)
+        nodes = self.return_all_neighbors_info(uri_occ)
         random.shuffle(nodes)
         if max_nodes > 0:
             nodes = nodes[:max_nodes]
-        nodes.append((id_occ, self.graph.nodes[id_occ]["label"]))
+        nodes.append((uri_occ, self.graph.nodes[uri_occ]["label"]))
 
         subgraph = self.graph.subgraph([node[0] for node in nodes])
         labels = {node[0]: node[1] for node in nodes}
 
         node_color = [color_node_map[self.graph.nodes[node]["type"]] for node in subgraph]
         edge_colors = [color_edge_map[self.graph.edges[edge]['relation']] for edge in subgraph.edges]
-        node_size = [1200 if node == id_occ else 300 for node in subgraph]
+        node_size = [1200 if node == uri_occ else 300 for node in subgraph]
 
         pos = nx.shell_layout(subgraph)
         plt.figure(figsize=(20, 8))
@@ -308,39 +308,40 @@ class JobGraph:
             if s == "-" or not m:
                 return s
             if not ids:
-                s = self.name2id[s]
+                s = self.name2uri[s]
 
             # given an uri, we return a list of synonyms
-            synonyms_skills = self.sys_id2labels[s]
+            synonyms_skills = self.sys_uri2labels[s]
             # if there exist, we sample one synonym
             return random.choice(synonyms_skills) if len(synonyms_skills) > 0 else s
 
         return [map_skill(m, s) for m, s in zip(mask, skills)]
 
-    def skill_standardize(self, skills: Iterable[str], to_ids: bool = True) -> set:
-        """
-        Given a list of skills, we return a correspondent standard uri. If there is "ambiguous" situation
-        in which one synonym can be associated with multiple standard uri. We apply the "attention" mechanism
-        to understand which is the appropriate uri.
-        """
+    def skill_standardize(self, skills: Iterable[str]) -> tuple[list[str], list[str]]:
 
         # map the skill into standard uri, if there is "ambiguation", the dictionary returns a list of possible uri
-        skills = [self.sys_label2id[skill] for skill in skills]
+        skills = [self.sys_label2uri[skill] for skill in skills]
 
         # "unique_uri" represent a list of non-ambiguous synonyms (that can be associated only to one "standard" label)
         unique_uri = [skill[0] for skill in skills if len(skill) == 1]
         # "ambiguous_uri" is a list of "ambiguous" uri, list[list[str]]
         ambiguous_uri = [skill for skill in skills if len(skill) > 1]
 
-        # ---- attention mechanism base on the contex ----
-        # for all ambiguous synonyms we have a list of possible id_skills. We perform the "node similarity" between
-        # the id_skill and the all unique_uri. The id_skill that achieves the higher result is the most appropriate one.
-        de_ambiguous_uri = [ambiguous[np.argmax(self.node_similarity(ambiguous, unique_uri, True))]
+        return unique_uri, ambiguous_uri
+
+    def solve_ambiguation(self, ambiguous_uri: list[list[str]], contex_uri: list[str], to_ids: bool = True):
+
+        # ---- contex mechanism base on the contex ----
+        # for all ambiguous synonyms we have a list of possible uri_skills.
+        # We perform the "node similarity" between the uri_skill and the all unique_uri.
+        # The uri_skill that achieves the higher result is the most appropriate one.
+        de_ambiguous_uri = [ambiguous[np.argmax(self.node_similarity(ambiguous, contex_uri, True))]
                             for ambiguous in ambiguous_uri]
-        # ---- attention mechanism base on the contex ----
+        # ---- contex mechanism base on the contex ----
 
         if not to_ids:
-            unique_uri = [self.graph.nodes[i]["label"] for i in unique_uri]
             de_ambiguous_uri = [self.graph.nodes[i]["label"] for i in de_ambiguous_uri]
+        return de_ambiguous_uri
 
-        return set(unique_uri + de_ambiguous_uri)
+    def map_names2uri(self, names: Iterable[str]) -> list[str]:
+        return [self.name2uri[skill] for skill in names if skill != "-"]
