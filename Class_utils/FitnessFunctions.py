@@ -54,10 +54,8 @@ class FitnessFunctions:
         fit_exp_bonus = self.fitness_experience.fitness_bonus(offer[28], offer[29], cv[27])
         fit_lang_basic = self.fitness_languages.fitness_basic(of_lang, cv_lang)
         fit_lang_bonus = self.fitness_languages.fitness_bonus(cv_lang, Language(offer[24], offer[27]))
-        fit_competence_basic = self.fitness_skills.fitness(of_comp_ess, cv_comp)
-        fit_competence_bonus = self.fitness_skills.fitness(of_comp_opt, cv_comp)
-        fit_knowledge_basic = self.fitness_skills.fitness(of_know_ess, cv_know)
-        fit_knowledge_bonus = self.fitness_skills.fitness(of_know_opt, cv_know)
+        fit_competence = self.fitness_skills.fitness(of_comp_ess, of_comp_opt, cv_comp)
+        fit_knowledge = self.fitness_skills.fitness(of_know_ess, of_know_opt, cv_know)
 
         # fit_expertize = self.fitness_judgment.fitness_basic([fit_exp_bonus,
         #                                                     fit_competence_bonus, fit_knowledge_bonus])
@@ -74,10 +72,10 @@ class FitnessFunctions:
             fitness_exp_bonus=fit_exp_bonus,
             fitness_lang_basic=fit_lang_basic,
             fitness_lang_bonus=fit_lang_bonus,
-            fitness_comp_basic=fit_competence_basic,
-            fitness_comp_bonus=fit_competence_bonus,
-            fitness_know_basic=fit_knowledge_basic,
-            fitness_knowl_bonus=fit_knowledge_bonus,
+            fitness_comp_basic=fit_competence[0],
+            fitness_comp_bonus=fit_competence[1],
+            fitness_know_basic=fit_knowledge[0],
+            fitness_knowl_bonus=fit_knowledge[1],
             # fit_expertize=fit_expertize,
             # fit_edu_judgment=fit_edu_judgment
         )

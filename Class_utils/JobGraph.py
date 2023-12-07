@@ -167,36 +167,28 @@ class JobGraph:
 
         return filtered_neighbors
 
-    def sample_skills(self, uri_occ: str, relation: RelationNode, type_node: TypeNode, exact_number: int = None,
-                      min_: int = 2, max_: int = 4, convert_ids: bool = False, exclude: list[str] = None) -> list[str]:
+    def sample_skills(self, uri_occ: str, relation: RelationNode, type_node: TypeNode, num: int,
+                      convert_ids: bool = False, exclude: list[str] = None) -> list[str]:
         """
         Sample skill for a given occupation
         :param uri_occ: id occupation
         :param relation: "essential", "optional"
         :param type_node: "occupation", "skill" or "knowledge"
-        :param exact_number: if not None, the method provide an exact_number of skills
-        :param min_: Min number of skills (used if exact_number is None)
-        :param max_: Max number of skills
+        :param num: number of skills (at max) to sample
         :param exclude: lists of nodes to exclude
         :param convert_ids: if true coverts ids into name
 
-        :return: A list of len "max_" with an "n" number of skill "min_" <= "n" <= "max_"
+        :return: A list of "n" number of skills "min_" <= "n" <= "max_"
         """
-        if exact_number is None:
-            exact_number = 0 if min_ > max_ or max_ == 0 else random.randint(min_, max_)
-
-        if exact_number == 0:
+        if num == 0:
             sampled = []
         else:
             if exclude is not None:
                 exclude = [self.name2uri[e] for e in exclude]
 
             list_ = self.return_neighbors(uri_occ, relation, type_node, exclude, convert_ids)
-            exact_number = min(exact_number, len(list_))
+            exact_number = min(num, len(list_))
             sampled = random.sample(list_, exact_number)
-
-        if exact_number < max_:
-            sampled.extend(["-" for _ in range(exact_number, max_)])
 
         return sampled
 
@@ -317,7 +309,7 @@ class JobGraph:
 
         return [map_skill(m, s) for m, s in zip(mask, skills)]
 
-    def skill_standardize(self, skills: Iterable[str]) -> tuple[list[str], list[str]]:
+    def skill_standardize(self, skills: Iterable[str]) -> tuple[list[str], list[list[str]]]:
 
         # map the skill into standard uri, if there is "ambiguation", the dictionary returns a list of possible uri
         skills = [self.sys_label2uri[skill] for skill in skills]
@@ -329,7 +321,7 @@ class JobGraph:
 
         return unique_uri, ambiguous_uri
 
-    def solve_ambiguation(self, ambiguous_uri: list[list[str]], contex_uri: list[str], to_ids: bool = True):
+    def solve_ambiguous(self, ambiguous_uri: Iterable[list[str]], contex_uri: list[str], to_ids: bool = True):
 
         # ---- contex mechanism base on the contex ----
         # for all ambiguous synonyms we have a list of possible uri_skills.
@@ -343,5 +335,8 @@ class JobGraph:
             de_ambiguous_uri = [self.graph.nodes[i]["label"] for i in de_ambiguous_uri]
         return de_ambiguous_uri
 
-    def map_names2uri(self, names: Iterable[str]) -> list[str]:
-        return [self.name2uri[skill] for skill in names if skill != "-"]
+    def map_names2uri(self, names: Iterable[str], set_: bool = False) -> list[str] | set[str]:
+        output = [self.name2uri[skill] for skill in names if skill != "-"]
+        if set_:
+            output = set(output)
+        return output

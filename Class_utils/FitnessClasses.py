@@ -1,5 +1,3 @@
-from typing import Literal, Tuple
-
 import numpy as np
 from numpy import mean
 from pandas import read_csv
@@ -75,9 +73,9 @@ class FitnessCity:
 
         if diff <= 0:
             return 1
-        if diff <= range_/3:
+        if diff <= range_ / 3:
             return 0.6
-        if diff <= 2*range_/3:
+        if diff <= 2 * range_ / 3:
             return 0.3
         else:
             return 0
@@ -125,101 +123,69 @@ class FitnessSkills:
         self.job_graph = job_graph
 
     @staticmethod
-    def naive_match(offer: set, cv: set) -> set:
+    def naive_match(offer: set, cv: set) -> tuple[set, float]:
         """
         Get a list of job-offer's skills and curriculum's skills and return the
         shared skills. In the input parameter will be removed the shared skills.
         """
         sk_shared = offer & cv
         offer -= sk_shared
-        cv -= sk_shared
+        return sk_shared, len(sk_shared)
 
-        return sk_shared
+    def fitness(self, essential: list, optional: list, cv: list) -> tuple[float, float]:
+        essential, optional, cv = set(essential), set(optional), set(cv)
+        total_es, total_op = len(essential), len(optional)
 
-    def graph_score(self, offer: set, cv: set) -> Tuple[int, float]:
-        """
-        Get a list of job-offer's skills and curriculum's skills and return the
-        shared skills and the simirity score with the remaining.
-        In the input parameter will be removed the shared skills.
-        :param offer:
-        :param cv:
-        :return:
-        """
+        if self.job_graph is None:
+            # ------- Score without Knowledge base -------
+            es_shared = self.naive_match(essential, cv)[1]
+            op_shared = self.naive_match(optional, cv)[1]
 
-        # Make the "name" of skill invariant respect to their synonyms
-        offer_uri = self.job_graph.skill_standardize(offer)
-        cv_uri = self.job_graph.skill_standardize(cv)
-        # then try again to do the "perfect" match (after mapped all synonyms)
-        imperfect_shared = len(self.naive_match(offer_uri, cv_uri))
-
-        # with the remain skill in the both lists, we apply the similarity score
-        sim_score = mean(self.job_graph.node_similarity(offer_uri, cv_uri, ids=True))
-
-        return imperfect_shared, sim_score
-
-    def fitness(self, essential: list, cv: list) -> float:
-        essential, cv = set(essential), set(cv)
-
-        total = len(essential)
-        if total <= 0:
-            return 0
-
-        # ------- Score without Knowledge base -------
-        perfect_shared = len(self.naive_match(essential, cv))
-        # ------- Score without Knowledge base -------
-
-        shared = perfect_shared
-        if self.job_graph is not None and len(essential) > 0:
-            # ------- Score with Knowledge base -------
-            imperfect_shared, sim_score = self.graph_score(essential, cv)
-            # discretize the sim_score? better explainability?
-            shared += imperfect_shared
-            sub_score = shared / total
-            score = sub_score + (1-sub_score) * sim_score
-            # ------- Score with Knowledge base -------
+            score_es = es_shared / total_es if total_es > 0 else 0
+            score_op = op_shared / total_op if total_op > 0 else 0
+            # ------- Score without Knowledge base -------
         else:
-            score = shared / total
-        return score
-
-    def debug_score(self, essential: list, cv: list):
-        essential, cv = set(essential), set(cv)
-
-        total = len(essential)
-        if total <= 0:
-            return 0
-        # ------- Score without Knowledge base -------
-        perfect_shared = self.naive_match(essential, cv)
-        # ------- Score without Knowledge base -------
-        print("The shared skills are:", perfect_shared)
-
-        print("Remaining skill for cv", cv)
-        print("Remaining skill for job", essential)
-
-        shared = len(perfect_shared)
-        if self.job_graph is not None and len(essential) > 0:
             # ------- Score with Knowledge base -------
+            perfect_es_shared, n_per_es_shared = self.naive_match(essential, cv)
+            perfect_op_shared, n_per_op_shared = self.naive_match(optional, cv)
 
-            # Make the "name" of skill invariant respect to their synonyms
-            offer_uri = self.job_graph.skill_standardize(essential)
-            cv_uri = self.job_graph.skill_standardize(cv)
-            print("The standardize skill for cv", cv_uri)
-            print("The standardize skill for job", offer_uri)
+            # ----------- standardize cv -----------
+            unique_cv, amb_cv = self.job_graph.skill_standardize(cv)
+            amb_cv = self.job_graph.solve_ambiguous(amb_cv, unique_cv)
+            cv = unique_cv + amb_cv
+            # ----------- standardize cv -----------
 
-            # then try again to do the "perfect" match (after mapped all synonyms)
-            imperfect_shared = self.naive_match(offer_uri, cv_uri)
-            print("The shared skills are:", imperfect_shared)
+            unique_es_uri, amb_es_uri = self.job_graph.skill_standardize(essential)
+            perfect_es_shared, _ = self.job_graph.skill_standardize(perfect_es_shared)
+
+            unique_op_uri, amb_op_uri = self.job_graph.skill_standardize(optional)
+            perfect_op_shared, _ = self.job_graph.skill_standardize(perfect_op_shared)
+
+            contex = unique_es_uri + unique_op_uri + perfect_es_shared + perfect_op_shared
+
+            amb_es = self.job_graph.solve_ambiguous(amb_es_uri, contex)
+            essential = unique_es_uri + amb_es
+
+            amb_op = self.job_graph.solve_ambiguous(amb_op_uri, contex)
+            optional = unique_op_uri + amb_op
+
+            essential, optional, cv = set(essential), set(optional), set(cv)
+            imperfect_es_shared, n_imper_es_shared = self.naive_match(essential, cv)
+            imperfect_op_shared, n_imper_op_shared = self.naive_match(optional, cv)
 
             # with the remain skill in the both lists, we apply the similarity score
-            sim_score = mean(self.job_graph.node_similarity(offer_uri, cv_uri, ids=True))
-            print("The similarity score is ", sim_score)
+            sim_score_es = mean(self.job_graph.node_similarity(essential, cv, ids=True))
+            sim_score_op = mean(self.job_graph.node_similarity(optional, cv, ids=True))
 
-            shared += len(imperfect_shared)
-            max_sim_score = 1 - (shared / total)
-            score = shared / total + max_sim_score * sim_score
+            es_shared = n_per_es_shared + n_imper_es_shared
+            op_shared = n_per_op_shared + n_imper_op_shared
+            sub_score_es = es_shared / total_es if total_es > 0 else 0
+            sub_score_op = op_shared / total_op if total_op > 0 else 0
+
+            score_es = sub_score_es + (1 - sub_score_es) * sim_score_es
+            score_op = sub_score_op + (1 - sub_score_op) * sim_score_op
             # ------- Score with Knowledge base -------
-        else:
-            score = shared / total
-        print("The final score is", score)
+        return score_es, score_op
 
 
 class FitnessJudgment:
