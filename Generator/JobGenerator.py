@@ -252,9 +252,9 @@ class JobGenerator:
             name_language = self.idx2language[id_language]
 
             # with a certain probability, it's required at least a specific language level
-            lang_level = "Any"
+            lang_level = "Null"
             if random.random() < 0.60 and ess:
-                # Choose the level of language base on language
+                # Choose the level of language basen on language
                 lang_level = self.languages_level.T.sample().index.values[0]
 
             languages.append(Language(name_language, lang_level))
@@ -356,7 +356,7 @@ class JobGenerator:
 
             # The candidate must satisfy the language. With a probability, the candidate
             # has a certification.
-            if lang.level == "Any":
+            if lang.level == "Null":
                 if random.random() < 0.3:
                     lang.level = self.languages_level.T.sample(weights=lang.name).index.values[0]
                 else:

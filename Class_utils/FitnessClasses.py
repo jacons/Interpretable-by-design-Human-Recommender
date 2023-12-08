@@ -73,10 +73,8 @@ class FitnessCity:
 
         if diff <= 0:
             return 1
-        if diff <= range_ / 3:
-            return 0.6
-        if diff <= 2 * range_ / 3:
-            return 0.3
+        if diff <= range_ / 2:
+            return 0.5
         else:
             return 0
 
@@ -89,31 +87,29 @@ class FitnessCity:
 class FitnessLanguages:
     lvl2value = {level.name: level.value for level in EducationLevel}
 
-    def fitness_basic(self, essential: list[Language], cv: list[Language]) -> float:
-        # max 1 min 0
-        basic = 0
+    def fitness_basic(self, essential: list[Language], cv: list[Language]) -> tuple[float, float]:
+        basic_language, basic_level = 0, 0
+
         for cv_lang in cv:
             cv_level = self.lvl2value[cv_lang.level]
 
             for ess_lang in essential:
                 if cv_lang.name == ess_lang.name:
-                    if ess_lang.level == "Any":
-                        basic += 1 if cv_level > 0 else 0.7
-                    else:
-                        jo_level = self.lvl2value[ess_lang.level]
-                        basic += 1 if jo_level <= cv_level else 1 / (2 * (jo_level - cv_level))
+                    basic_language += 1
+                    ess_level = self.lvl2value[ess_lang.level]
+                    basic_level += 1 if ess_level <= cv_level else 0
 
-        return basic / len(essential)
+        score_language = basic_language / len(essential)
+        score_level = basic_level / len(essential)
+        return score_language, score_level
 
     def fitness_bonus(self, cv: list[Language], optional: Language) -> float:
         # max 1 min 0
         bonus = 0
         for cv_lang in cv:
             cv_level = self.lvl2value[cv_lang.level]
-
             if cv_lang.name == optional.name:
-                bonus += 1 if cv_level > 0 else 0.7
-
+                bonus += 1 if cv_level > 0 else 0.5
         return bonus
 
 
@@ -132,7 +128,7 @@ class FitnessSkills:
         offer -= sk_shared
         return sk_shared, len(sk_shared)
 
-    def fitness(self, essential: list, optional: list, cv: list) -> tuple[float, float]:
+    def fitness(self, essential: list, optional: list, cv: list) -> tuple[tuple[float, float], tuple[float, float]]:
         essential, optional, cv = set(essential), set(optional), set(cv)
         total_es, total_op = len(essential), len(optional)
 
@@ -143,6 +139,7 @@ class FitnessSkills:
 
             score_es = es_shared / total_es if total_es > 0 else 0
             score_op = op_shared / total_op if total_op > 0 else 0
+            sim_score_es, sim_score_op = 0, 0
             # ------- Score without Knowledge base -------
         else:
             # ------- Score with Knowledge base -------
@@ -179,13 +176,27 @@ class FitnessSkills:
 
             es_shared = n_per_es_shared + n_imper_es_shared
             op_shared = n_per_op_shared + n_imper_op_shared
-            sub_score_es = es_shared / total_es if total_es > 0 else 0
-            sub_score_op = op_shared / total_op if total_op > 0 else 0
 
-            score_es = sub_score_es + (1 - sub_score_es) * sim_score_es
-            score_op = sub_score_op + (1 - sub_score_op) * sim_score_op
+            score_es = es_shared / total_es if total_es > 0 else 0
+            score_op = op_shared / total_op if total_op > 0 else 0
+
+            sim_score_es = self.discretize_similarity(sim_score_es)
+            sim_score_op = self.discretize_similarity(sim_score_op)
             # ------- Score with Knowledge base -------
-        return score_es, score_op
+        return (score_es, sim_score_es), (score_op, sim_score_op)
+
+    @staticmethod
+    def discretize_similarity(number: float) -> float:
+        if number <= 0:
+            return 0
+        elif 0 < number < 0.25:
+            return 0.25
+        elif 0.25 <= number < 0.50:
+            return 0.50
+        elif 0.5 <= number < 0.75:
+            return 0.75
+        elif 0.75 <= number:
+            return 1
 
 
 class FitnessJudgment:

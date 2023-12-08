@@ -1,7 +1,5 @@
 from enum import Enum
 
-import numpy as np
-
 file_paths = dict(
     job2skills_path="../sources/job2skills.csv",
     occupation_path="../sources/occupations.csv",
@@ -24,10 +22,10 @@ match_score_par = dict(  # parameter for "matching score class"
     path="../outputs/scores"
 )
 curriculum_par = dict(  # parameters for "curricula generator"
-    mu=90,  # average of curricula for job-offer
+    mu=80,  # average of curricula for job-offer
 )
 jobOffer_par = dict(  # parameter for "job-offer generator"
-    size=220,  # number of jobs-offer
+    size=200,  # number of jobs-offer
 )
 output_dir = dict(  # parameter for "saving" the synthetic data
     path="../outputs"
@@ -48,13 +46,17 @@ matching_par = dict(  # parameter for label generator
         "Experience optional": 3,
 
         "Language essential": 8,
+        "Language_level_essential": 6,
         "Language optional": 5,
 
         "Competence essential": 10,
+        "Competence essential(sim)": 8,
         "Competence optional": 7,
-
+        "Competence optional(sim)": 5,
         "Knowledge essential": 10,
+        "Knowledge essential(sim)": 8,
         "Knowledge optional": 7,
+        "Knowledge optional(sim)": 5,
 
         # "Judgment expertize": 10,
         # "Judgment education": 9,
