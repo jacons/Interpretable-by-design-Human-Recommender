@@ -2,15 +2,16 @@ import pickle
 from typing import Tuple
 
 import numpy as np
+import pandas as pd
 from pandas import DataFrame
 
 
 class EBMExplanator:
-    def __init__(self, model_path: str):
+    def __init__(self, model_path: str, dataset_path: str):
         self.model = self.load_model(model_path)
 
         self.piecewise_functions = dict()
-        self.build_piecewise_functions()
+        self.build_piecewise_functions(dataset_path)
 
     @staticmethod
     def load_model(name: str = "model"):
@@ -18,14 +19,17 @@ class EBMExplanator:
             model = pickle.load(file)
         return model
 
-    def build_piecewise_functions(self):
+    def build_piecewise_functions(self, dataset_path: str):
+        dataset = pd.read_csv(dataset_path)
+
         for idx, feature in enumerate(self.model.feature_names):
             min_, max_ = self.model.feature_bounds_[idx]
-            fun = PiecewiseFunction(feature,
-                                    self.model.bins_[idx][0],
-                                    self.model.term_scores_[idx][1:-1],
-                                    self.model.standard_deviations_[idx][1:-1],
-                                    min_, max_)
+            fun = PiecewiseFunction(name=feature,
+                                    cuts=self.model.bins_[idx][0],
+                                    contrib=self.model.term_scores_[idx][1:-1],
+                                    std_dev=self.model.standard_deviations_[idx][1:-1],
+                                    min_=min_, max_=max_,
+                                    unique_values=dataset[feature].unique())
             self.piecewise_functions[feature] = fun
 
     def show_piecewise_functions(self):
@@ -35,13 +39,17 @@ class EBMExplanator:
 
 class PiecewiseFunction:
     def __init__(self, name: str, cuts: np.ndarray, contrib: np.ndarray, std_dev: np.ndarray,
-                 min_: float, max_: float):
+                 min_: float, max_: float, unique_values):
         self.name = name
         self.cuts = cuts.tolist()
         self.contrib = contrib.tolist()
         self.std_dev = std_dev.tolist()
         self.min_ = min_
         self.max_ = max_
+        self.unique_values = unique_values.tolist()
+
+        self.points = pd.DataFrame({"x": unique_values})
+        self.points["y"] = self.points["x"].apply(lambda  x: self.get_result(x)[0])
 
     def get_result(self, x: float) -> Tuple[float, float]:
         output = None
