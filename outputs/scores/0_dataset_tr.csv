@@ -1,4 +1,4 @@
-qId,kId,score,w_score,binned_score,fitness_edu_basic,fitness_edu_bonus,fitness_city,fitness_age,fitness_exp_basic,fitness_exp_bonus,fitness_lang_basic,fitness_lang_lvl_basic,fitness_lang_bonus,fitness_comp_basic,fitness_comp_sim_basic,fitness_comp_bonus,fitness_comp_sim_bonus,fitness_know_basic,fitness_know_sim_basic,fitness_knowl_bonus,fitness_knowl_sim_bonus
+qId,kId,score,w_score,binned_score,fitness_edu_basic,fitness_edu_bonus,fitness_city,fitness_age,fitness_exp_basic,fitness_exp_bonus,fitness_lang_basic,fitness_lang_lvl_basic,fitness_lang_bonus,fitness_comp_basic,fitness_comp_sim_basic,fitness_comp_bonus,fitness_comp_sim_bonus,fitness_know_basic,fitness_know_sim_basic,fitness_know_bonus,fitness_know_sim_bonus
 29,2244,7.5,65.19956419508215,4,1.0,0.0,0.0,1.0,1.0,0.0,1.0,1.0,0.5,1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0
 160,12567,5.3333335,55.02256754617131,3,1.0,0.0,0.0,0.0,0.0,0.0,0.5,0.5,0.0,0.5,0.5,0.0,0.5,0.75,0.25,0.33333334,0.5
 195,15310,5.3333335,52.46955754640507,3,1.0,0.0,0.0,1.0,0.0,0.0,1.0,1.0,0.0,0.33333334,0.25,0.0,0.25,0.25,0.25,0.0,0.0

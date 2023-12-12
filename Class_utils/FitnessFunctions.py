@@ -85,8 +85,8 @@ class FitnessFunctions:
             fitness_know_basic=fit_knowledge[0][0],
             fitness_know_sim_basic=fit_knowledge[0][1],
 
-            fitness_knowl_bonus=fit_knowledge[1][0],
-            fitness_knowl_sim_bonus=fit_knowledge[1][1],
+            fitness_know_bonus=fit_knowledge[1][0],
+            fitness_know_sim_bonus=fit_knowledge[1][1],
             # fit_expertize=fit_expertize,
             # fit_edu_judgment=fit_edu_judgment
         )
