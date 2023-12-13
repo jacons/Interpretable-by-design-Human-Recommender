@@ -31,7 +31,7 @@ class PiecewiseFunction:
         return output[0] if only_output else output
 
     def build_function(self, esp: float = 0.01) -> DataFrame:
-        line_space = np.arange(self.min_, self.max_, esp)
+        line_space = np.arange(self.min_ - 0.1, self.max_ + 0.1, esp)
 
         x, y_lowers, y, y_uppers = [], [], [], []
 
