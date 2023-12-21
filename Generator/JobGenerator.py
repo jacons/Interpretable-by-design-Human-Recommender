@@ -104,21 +104,15 @@ class JobGenerator:
         comp_es, comp_op = self._generate_skills(uri_occ=uri_occ, skill_type="competence", how="job")
         know_es, know_op = self._generate_skills(uri_occ=uri_occ, skill_type="knowledge", how="job")
 
-        comp_es, comp_op = sorted(comp_es, reverse=True), sorted(comp_op, reverse=True)
-        know_es, know_op = sorted(know_es, reverse=True), sorted(know_op, reverse=True)
-
         uri_comp_es = self.job_graph.map_names2uri(comp_es)
         uri_comp_op = self.job_graph.map_names2uri(comp_op)
         uri_know_es = self.job_graph.map_names2uri(know_es)
         uri_know_op = self.job_graph.map_names2uri(know_op)
-
-        self.fill([comp_es, comp_op, know_es, know_op], [4, 3, 4, 3])
         # ------------------------------------------------------------------
         min_age += random.randint(0, 5)
         max_age = min_age + random.randint(5, 20)
         # ------------------------------------------------------------------
         language_essential, language_optional = self._generate_languages()
-        language_essential = sorted(language_essential, key=lambda x: x.name, reverse=True)
         # ------------------------------------------------------------------
         exp_essential = int(np.random.poisson(1.5))
         exp_essential = "-" if exp_essential == 0 else exp_essential
@@ -128,43 +122,23 @@ class JobGenerator:
             qId=qId,  # 0
             Job=job_Name,  # 1
             metadata=dict(group=isco_group,
-                          uri_competence_essential=uri_comp_es,
-                          uri_competence_optional=uri_comp_op,
-                          uri_knowledge_essential=uri_know_es,
-                          uri_knowledge_optional=uri_know_op),  # 2
+                          uri_comp_ess=uri_comp_es,
+                          uri_comp_opt=uri_comp_op,
+                          uri_know_ess=uri_know_es,
+                          uri_know_opt=uri_know_op),  # 2
             Edu_essential=edu_essential,  # 3
             Edu_optional=edu_optional,  # 4
             AgeMin=min_age,  # 5
             AgeMax=max_age,  # 6
             City=self.all_cities.sample(n=1, weights="P")["city"].values[0],  # 7
-
-            Competence_essential0=comp_es[0],  # 8
-            Competence_essential1=comp_es[1],  # 9
-            Competence_essential2=comp_es[2],  # 10
-            Competence_essential3=comp_es[3],  # 11
-
-            Competence_optional0=comp_op[0],  # 12
-            Competence_optional1=comp_op[1],  # 13
-            Competence_optional2=comp_op[2],  # 14
-
-            Knowledge_essential0=know_es[0],  # 15
-            Knowledge_essential1=know_es[1],  # 16
-            Knowledge_essential2=know_es[2],  # 17
-            Knowledge_essential3=know_es[3],  # 18
-
-            Knowledge_optional0=know_op[0],  # 19
-            Knowledge_optional1=know_op[1],  # 20
-            Knowledge_optional2=know_op[2],  # 21
-
-            Language_essential0=language_essential[0].name,  # 22
-            Language_essential1=language_essential[1].name,  # 23
-            Language_optional0=language_optional[0].name,  # 24
-
-            Language_level0=language_essential[0].level,  # 25
-            Language_level1=language_essential[1].level,  # 26
-            Language_level2=language_optional[0].level,  # 27
-            Experience_essential=exp_essential,  # 28
-            Experience_optional=exp_optional  # 29
+            Competence_essential=comp_es,  # 8
+            Competence_optional=comp_op,  # 9
+            Knowledge_essential=know_es,  # 10
+            Knowledge_optional=know_op,  # 11
+            Language_essential=[lang.print() for lang in language_essential],  # 12
+            Language_optional=[lang.print() for lang in language_optional],  # 13
+            Experience_essential=exp_essential,  # 14
+            Experience_optional=exp_optional  # 15
         )
         return offer
 
@@ -218,6 +192,8 @@ class JobGenerator:
         optional = self.job_graph.sample_skills(uri_occ,
                                                 RelationNode.OP, type_node,
                                                 num=optional, convert_ids=True)
+
+        essential, optional = sorted(essential, reverse=True), sorted(optional, reverse=True)
         return essential, optional
 
     def _generate_languages(self, e_lang=(1, 2), o_lang=(0, 1)) -> tuple[list[Language], list[Language]]:
@@ -262,9 +238,7 @@ class JobGenerator:
         language_essential = languages[0:n_essential_lang]
         language_optional = languages[n_essential_lang:]
 
-        language_essential.extend([Language() for _ in range(n_essential_lang, e_lang[1])])
-        language_optional.extend([Language() for _ in range(n_optional_lang, o_lang[1])])
-
+        language_essential = sorted(language_essential, key=lambda x: x.name, reverse=True)
         return language_essential, language_optional
 
     def generate_cvs(self, job_offers: DataFrame, mu: int = 100, std: int = 10):
@@ -300,20 +274,17 @@ class JobGenerator:
 
     def _generate_consistent_cv(self, job_offer: tuple, n_consistent_cv: int) -> list[dict]:
 
-        essential_competence = [job_offer[i] for i in range(8, 11 + 1) if job_offer[i] != "-"]
-        essential_knowledge = [job_offer[i] for i in range(15, 18 + 1) if job_offer[i] != "-"]
+        comp_ess, know_ess = job_offer[8], job_offer[10]
+        languages = [Language(*lang) for lang in job_offer[12]]
 
-        languages = [Language(job_offer[id_lang], job_offer[id_level])
-                     for id_lang, id_level in zip([22, 23], [25, 26]) if job_offer[id_lang] != "-"]
-
-        if len(essential_competence) == 0 or len(essential_knowledge) == 0:
+        if len(comp_ess) == 0 or len(know_ess) == 0:
             print(job_offer[0])
 
         curricula = []
         for _ in range(n_consistent_cv):
             # select a subsample of essential skills (competence and knowledge)
-            competence = random.sample(essential_competence, k=random.randint(1, len(essential_competence)))
-            knowledge = random.sample(essential_knowledge, k=random.randint(1, len(essential_knowledge)))
+            competence = random.sample(comp_ess, k=random.randint(1, len(comp_ess)))
+            knowledge = random.sample(know_ess, k=random.randint(1, len(know_ess)))
 
             # retrieve all jobs that have there skills
             similar_jobs = self.job_graph.get_job_with_skill(competence, knowledge)
@@ -380,8 +351,7 @@ class JobGenerator:
                 lang_level = self.languages_level.T.sample(weights=name_lang).index.values[0]
             languages.append(Language(name_lang, lang_level))
 
-        languages.extend([Language() for _ in range(len(languages), 3)])
-
+        languages = sorted(languages, key=lambda x: x.name, reverse=True)
         return languages
 
     def _get_curriculum(self, qId: int, uri_occ: str = None, edu_essential: str = "Less-than-degree",
@@ -420,15 +390,11 @@ class JobGenerator:
                                                            skill_type="knowledge", exclude=knowledge)
         competences += new_comp_ess + new_comp_opt
         knowledge += new_know_ess + new_know_opt
-        competences = sorted(competences, reverse=True)
-        knowledge = sorted(knowledge, reverse=True)
+        competences, knowledge = sorted(competences, reverse=True), sorted(knowledge, reverse=True)
 
         uri_comp, uri_know = self.job_graph.map_names2uri(competences), self.job_graph.map_names2uri(knowledge)
-
-        self.fill([competences, knowledge], [7, 7])
         # ------------------------------------------------------------------
         languages = self._generate_other_lang_from(languages)
-        languages = sorted(languages, key=lambda x: x.name, reverse=True)
         # ------------------------------------------------------------------
         experience = int(np.random.poisson(1.5))
         # ------------------------------------------------------------------
@@ -443,31 +409,10 @@ class JobGenerator:
             Age=age,  # 3
             City=self.all_cities.sample(n=1, weights="P")["city"].values[0],  # 4
             JobRange=int(np.random.randint(30, 100) / 10) * 10,  # 5
-
-            Competences0=competences[0],  # 6
-            Competences1=competences[1],  # 7
-            Competences2=competences[2],  # 8
-            Competences3=competences[3],  # 9
-            Competences4=competences[4],  # 10
-            Competences5=competences[5],  # 11
-            Competences6=competences[6],  # 12
-
-            Knowledge0=knowledge[0],  # 13
-            Knowledge1=knowledge[1],  # 14
-            Knowledge2=knowledge[2],  # 15
-            Knowledge3=knowledge[3],  # 16
-            Knowledge4=knowledge[4],  # 17
-            Knowledge5=knowledge[5],  # 18
-            Knowledge6=knowledge[6],  # 19
-
-            Language0=languages[0].name,  # 20
-            Language1=languages[1].name,  # 21
-            Language2=languages[2].name,  # 22
-
-            Language_level0=languages[0].level,  # 23
-            Language_level1=languages[1].level,  # 24
-            Language_level2=languages[2].level,  # 25
-            Experience=experience  # 26
+            Competences=competences,  # 6
+            Knowledge=knowledge,  # 7
+            Languages=[lang.print() for lang in languages],  # 8
+            Experience=experience  # 9
         )
 
         return cv
@@ -483,15 +428,15 @@ class JobGenerator:
             return None
 
         if type_ == "cv":
-            start_ = 6
-            end_ = 19
+            columns = ["Competences", "Knowledge"]
         elif type_ == "offer":
-            start_ = 7
-            end_ = 20
+            columns = ["Competence_essential", "Competence_optional", "Knowledge_essential", "Knowledge_optional"]
         else:
             raise ValueError("Invalid 'type_' value. Use 'cv' or 'offer'.")
 
         progress_bar = tqdm(df.sample(frac=p).index, desc="Updating with synonyms...")
         for index in progress_bar:
-            mask = [random.choice([True, False]) for _ in range(end_ - start_ + 1)]
-            df.iloc[index, start_:end_ + 1] = self.job_graph.substitute_skills(mask, df.iloc[index, start_:end_ + 1])
+            for col in columns:
+                skills = df.at[index, col]
+                mask = [random.choice([True, False]) for _ in range(len(skills))]
+                df.at[index, col] = self.job_graph.substitute_skills(mask, skills)

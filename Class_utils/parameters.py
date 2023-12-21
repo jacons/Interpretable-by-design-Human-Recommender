@@ -92,3 +92,6 @@ class Language:
     def __init__(self, name: str = "-", level: str = "-"):
         self.name = name
         self.level = level
+
+    def print(self):
+        return self.name, self.level

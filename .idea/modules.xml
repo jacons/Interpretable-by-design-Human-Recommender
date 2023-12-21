@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ExplenableLtR.iml" filepath="$PROJECT_DIR$/.idea/ExplenableLtR.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/InterpretableLtR.iml" filepath="$PROJECT_DIR$/.idea/InterpretableLtR.iml" />
     </modules>
   </component>
 </project>

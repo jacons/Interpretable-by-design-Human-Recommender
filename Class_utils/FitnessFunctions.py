@@ -19,10 +19,6 @@ class FitnessFunctions:
         # self.fitness_judgment = FitnessJudgment()
 
     @staticmethod
-    def remove_null(a: list[str], b: list[str]) -> list[Language]:
-        return [Language(name, lvl) for name, lvl in zip(a, b) if name != "-"]
-
-    @staticmethod
     def filter(list_: Iterable[str]) -> list[str]:
         return [item for item in list_ if item != "-"]
 
@@ -39,22 +35,22 @@ class FitnessFunctions:
 
     def fitness(self, offer: tuple, cv: tuple) -> dict:
 
-        cv_lang = self.remove_null([cv[21], cv[22], cv[23]], [cv[24], cv[25], cv[26]])
-        of_lang = self.remove_null([offer[22], offer[23]], [offer[25], offer[26]])
-        of_comp_ess = self.filter([offer[i] for i in range(8, 11 + 1)])
-        of_comp_opt = self.filter([offer[i] for i in range(12, 14 + 1)])
-        of_know_ess = self.filter([offer[i] for i in range(15, 18 + 1)])
-        of_know_opt = self.filter([offer[i] for i in range(19, 21 + 1)])
-        cv_comp = self.filter([cv[i] for i in range(7, 13 + 1)])
-        cv_know = self.filter([cv[i] for i in range(14, 20 + 1)])
+        cv_lang = [Language(*lang) for lang in cv[9]]
+        of_lang_ess = [Language(*lang) for lang in offer[12]]
+        of_lang_opt = [Language(*lang) for lang in offer[13]]
+        of_lang_opt = Language() if len(of_lang_opt) == 0 else of_lang_opt[0]
+
+        of_comp_ess, of_comp_opt = offer[8], offer[9]
+        of_know_ess, of_know_opt = offer[10], offer[11]
+        cv_comp, cv_know = cv[7], cv[8]
 
         fit_edu_basic = self.fitness_edu.fitness_basic(offer[3], cv[3])
         fit_edu_bonus = self.fitness_edu.fitness_bonus(offer[4], cv[3])
-        fit_exp_basic = self.fitness_experience.fitness_basic(offer[28], cv[27])
-        fit_exp_bonus = self.fitness_experience.fitness_bonus(offer[28], offer[29], cv[27])
+        fit_exp_basic = self.fitness_experience.fitness_basic(offer[14], cv[10])
+        fit_exp_bonus = self.fitness_experience.fitness_bonus(offer[14], offer[15], cv[10])
 
-        fit_lang_basic = self.fitness_languages.fitness_basic(of_lang, cv_lang)
-        fit_lang_bonus = self.fitness_languages.fitness_bonus(cv_lang, Language(offer[24], offer[27]))
+        fit_lang_basic = self.fitness_languages.fitness_basic(of_lang_ess, cv_lang)
+        fit_lang_bonus = self.fitness_languages.fitness_bonus(cv_lang, of_lang_opt)
 
         fit_competence = self.fitness_skills.fitness(of_comp_ess, of_comp_opt, cv_comp)
         fit_knowledge = self.fitness_skills.fitness(of_know_ess, of_know_opt, cv_know)

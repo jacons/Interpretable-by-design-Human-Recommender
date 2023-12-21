@@ -85,7 +85,7 @@ class ExplainableBMInterpreter:
         return self.piecewise_functions[feature_name].build_function()
 
     def get_contribute(self, X: np.ndarray):
-        score, contribute = self.model.predict_and_contrib(X)
+        score, contribute = self.model.predict(X), self.model.eval_terms(X)
 
         columns = [f"Candidate{i}" for i in range(contribute.shape[0])]
         contribute = pd.DataFrame(contribute.T, index=self.features_name, columns=columns)
