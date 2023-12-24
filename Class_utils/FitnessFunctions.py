@@ -16,7 +16,6 @@ class FitnessFunctions:
         self.fitness_edu = FitnessEdu(sources["education_path"])
         self.fitness_languages = FitnessLanguages()
         self.fitness_skills = FitnessSkills(job_graph)
-        # self.fitness_judgment = FitnessJudgment()
 
     @staticmethod
     def filter(list_: Iterable[str]) -> list[str]:
@@ -31,7 +30,7 @@ class FitnessFunctions:
                 dataset.append(self.fitness(offer, cv))
             bar.set_postfix(qId=offer[0])
 
-        return DataFrame(data=dataset, dtype=np.float32).astype({"qId": "int", "kId": "int"})
+        return DataFrame(data=dataset).astype({"qId": "int", "kId": "int"})
 
     def fitness(self, offer: tuple, cv: tuple) -> dict:
 
@@ -48,42 +47,31 @@ class FitnessFunctions:
         fit_edu_bonus = self.fitness_edu.fitness_bonus(offer[4], cv[3])
         fit_exp_basic = self.fitness_experience.fitness_basic(offer[14], cv[10])
         fit_exp_bonus = self.fitness_experience.fitness_bonus(offer[14], offer[15], cv[10])
-
         fit_lang_basic = self.fitness_languages.fitness_basic(of_lang_ess, cv_lang)
         fit_lang_bonus = self.fitness_languages.fitness_bonus(cv_lang, of_lang_opt)
-
         fit_competence = self.fitness_skills.fitness(of_comp_ess, of_comp_opt, cv_comp)
         fit_knowledge = self.fitness_skills.fitness(of_know_ess, of_know_opt, cv_know)
-
-        # fit_expertize = self.fitness_judgment.fitness_basic([fit_exp_bonus,
-        #                                                     fit_competence_bonus, fit_knowledge_bonus])
-        # fit_edu_judgment = self.fitness_judgment.fitness_basic([fit_edu_bonus, fit_lang_bonus])
 
         result = dict(
             qId=offer[0],
             kId=cv[0],
+            info="",
             fitness_edu_basic=fit_edu_basic,
             fitness_edu_bonus=fit_edu_bonus,
             fitness_city=self.fitness_cities.fitness(offer[7], cv[5], cv[6]),
             fitness_age=self.fitness_age.fitness_basic(cv[4], offer[5], offer[6]),
             fitness_exp_basic=fit_exp_basic,
             fitness_exp_bonus=fit_exp_bonus,
-            fitness_lang_basic=fit_lang_basic[0],
-            fitness_lang_lvl_basic=fit_lang_basic[1],
+            fitness_lang_basic=fit_lang_basic["score_language"],
+            fitness_lang_lvl_basic=fit_lang_basic["score_level"],
             fitness_lang_bonus=fit_lang_bonus,
-
-            fitness_comp_basic=fit_competence[0][0],
-            fitness_comp_sim_basic=fit_competence[0][1],
-
-            fitness_comp_bonus=fit_competence[1][0],
-            fitness_comp_sim_bonus=fit_competence[1][1],
-
-            fitness_know_basic=fit_knowledge[0][0],
-            fitness_know_sim_basic=fit_knowledge[0][1],
-
-            fitness_know_bonus=fit_knowledge[1][0],
-            fitness_know_sim_bonus=fit_knowledge[1][1],
-            # fit_expertize=fit_expertize,
-            # fit_edu_judgment=fit_edu_judgment
+            fitness_comp_essential=fit_competence["score_essential"],
+            fitness_comp_sim_essential=fit_competence["score_similarity_essential"],
+            fitness_comp_optional=fit_competence["score_optional"],
+            fitness_comp_sim_bonus=fit_competence["score_similarity_optional"],
+            fitness_know_essential=fit_knowledge["score_essential"],
+            fitness_know_sim_essential=fit_knowledge["score_similarity_essential"],
+            fitness_know_optional=fit_knowledge["score_optional"],
+            fitness_know_sim_optional=fit_knowledge["score_similarity_optional"],
         )
         return result

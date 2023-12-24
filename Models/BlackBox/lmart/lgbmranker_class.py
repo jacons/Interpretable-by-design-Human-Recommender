@@ -26,13 +26,13 @@ class LGBMRanker_class(GridSearch):
 
         # Preparing the datasets
         self.qIds_train = self.train.groupby("qId")["qId"].count().to_numpy()
-        self.X_train, self.y_train = self.train.iloc[:, 5:], self.train[["qId", "kId", "binned_score"]]
+        self.X_train, self.y_train = self.train.iloc[:, 5:], self.train[["qId", "kId", "binned_relevance"]]
 
         self.qIds_valid = self.valid.groupby("qId")["qId"].count().to_numpy()
-        self.X_valid, self.y_valid = self.valid.iloc[:, 5:], self.valid[["qId", "kId", "binned_score"]]
+        self.X_valid, self.y_valid = self.valid.iloc[:, 5:], self.valid[["qId", "kId", "binned_relevance"]]
 
         self.qIds_test = self.test.groupby("qId")["qId"].count().to_numpy()
-        self.X_test, self.y_test = self.test.iloc[:, 5:], self.test[["qId", "kId", "binned_score"]]
+        self.X_test, self.y_test = self.test.iloc[:, 5:], self.test[["qId", "kId", "binned_relevance"]]
 
         def log_output(r):
             # callback function (used to avoid logging during the grid-search)
@@ -49,9 +49,9 @@ class LGBMRanker_class(GridSearch):
         )
         self.ranker_par = dict(  # default ranker parameters (used in fitting) pt.2
             X=self.X_train,
-            y=self.y_train["binned_score"],
+            y=self.y_train["binned_relevance"],
             group=self.qIds_train,
-            eval_set=[(self.X_valid, self.y_valid["binned_score"])],
+            eval_set=[(self.X_valid, self.y_valid["binned_relevance"])],
             eval_group=[self.qIds_valid],
             eval_at=nDCG_at,
             callbacks=[log_output]
@@ -87,7 +87,7 @@ class LGBMRanker_class(GridSearch):
                    qIds: ndarray = None, nDCG_at: list = None) -> dict:
         """
         Custom evaluation function: the function groups by the "job-offers" and foreach set, it predicts
-        the "lambdas" that it uses to sort (by binned_score).
+        the "lambdas" that it uses to sort (by binned_relevance).
         After obtained nDCGs apply the average.
         """
         dt = self.valid if dt is None else dt
@@ -97,7 +97,7 @@ class LGBMRanker_class(GridSearch):
 
         for _, v in dt.groupby("qId"):
 
-            features, target = v.iloc[:, 5:], asarray([v["w_score"].to_numpy()])
+            features, target = v.iloc[:, 5:], asarray([v["relevance"].to_numpy()])
             lambdas = asarray([model.predict(features)])  # predict lambdas
 
             # Perform the nDCG for a specific job-offer and then sum it into cumulative nDCG

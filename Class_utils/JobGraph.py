@@ -267,30 +267,6 @@ class JobGraph:
         filtered_neighbors = [info(n) for n in self.graph.neighbors(id_node)]
         return filtered_neighbors
 
-    def show_subgraph(self, uri_occ: str, max_nodes: int = 0):
-
-        color_node_map = {"occupation": "Red", "knowledge": "#95a6df", "skill/competence": "#ffa500"}
-        color_edge_map = {"essential": 1, "optional": 1, "transversal": 1}
-
-        nodes = self.return_all_neighbors_info(uri_occ)
-        random.shuffle(nodes)
-        if max_nodes > 0:
-            nodes = nodes[:max_nodes]
-        nodes.append((uri_occ, self.graph.nodes[uri_occ]["label"]))
-
-        subgraph = self.graph.subgraph([node[0] for node in nodes])
-        labels = {node[0]: node[1] for node in nodes}
-
-        node_color = [color_node_map[self.graph.nodes[node]["type"]] for node in subgraph]
-        edge_colors = [color_edge_map[self.graph.edges[edge]['relation']] for edge in subgraph.edges]
-        node_size = [1200 if node == uri_occ else 300 for node in subgraph]
-
-        pos = nx.shell_layout(subgraph)
-        plt.figure(figsize=(20, 8))
-        nx.draw(subgraph, pos, with_labels=True, labels=labels, width=edge_colors,
-                node_color=node_color, node_size=node_size, font_size=20, font_family='Arial', edge_color='black')
-        plt.show()
-
     def substitute_skills(self, mask: list[bool], skills: Iterable[str], ids: bool = False) -> list[str]:
         """
         Given an iterable skills and a mask of booleans with equal length, returns a list of synonyms.
@@ -340,3 +316,28 @@ class JobGraph:
         if set_:
             output = set(output)
         return output
+
+    def show_subgraph(self, uri_occ: str, max_nodes: int = 0):
+
+        color_node_map = {"occupation": "Red", "knowledge": "#95a6df", "skill/competence": "#ffa500"}
+        color_edge_map = {"essential": 1, "optional": 1, "transversal": 1}
+
+        nodes = self.return_all_neighbors_info(uri_occ)
+        random.shuffle(nodes)
+        if max_nodes > 0:
+            nodes = nodes[:max_nodes]
+        nodes.append((uri_occ, self.graph.nodes[uri_occ]["label"]))
+
+        subgraph = self.graph.subgraph([node[0] for node in nodes])
+        labels = {node[0]: node[1] for node in nodes}
+
+        node_color = [color_node_map[self.graph.nodes[node]["type"]] for node in subgraph]
+        edge_colors = [color_edge_map[self.graph.edges[edge]['relation']] for edge in subgraph.edges]
+        node_size = [1200 if node == uri_occ else 300 for node in subgraph]
+
+        pos = nx.spring_layout(subgraph, seed=42, k=0.9)
+        plt.figure(figsize=(20, 8))
+        nx.draw(subgraph, pos, with_labels=True, labels=labels, width=edge_colors,
+                node_color=node_color,  node_size=node_size, font_size=20, font_family='Arial',
+                edge_color='black', alpha=0.1)
+        plt.show()

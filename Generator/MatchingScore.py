@@ -16,7 +16,7 @@ class MatchingScore:
         self.fitness = fitness_functions
         self.weights = self.normalize_weights(weight)
         self.noise = noise  # mean and stddev
-        self.bins = bins  # Number of binned_score's levels
+        self.bins = bins  # Number of binned_relevance's levels
         self.split_size = split_size
         self.split_seed = split_seed
 
@@ -34,23 +34,20 @@ class MatchingScore:
         return dataset.set_index(keys=["qId", "kId"])
 
     def _compute_score(self, dataset: DataFrame) -> DataFrame:
-        features = dataset.iloc[:, 2:]
-
-        # Simple sum
-        dataset["score"] = features.sum(axis=1)
+        features = dataset.iloc[:, 3:]
 
         def target_fun(fitness_vector):
             result = np.dot(fitness_vector, self.weights) + normal(self.noise[0], self.noise[1])
             return result
 
         # Weighted sum
-        dataset['w_score'] = features.apply(target_fun, axis=1)
-        dataset['w_score'] += abs(dataset['w_score'].min())
+        dataset['relevance'] = features.apply(target_fun, axis=1)
+        dataset['relevance'] += abs(dataset['relevance'].min())
 
         return dataset
 
     def _create_binned_score_labels(self, dataset: DataFrame) -> DataFrame:
-        intervals, edges = np.histogram(dataset.sort_values("w_score", ascending=False)["w_score"].to_numpy(),
+        intervals, edges = np.histogram(dataset.sort_values("relevance", ascending=False)["relevance"].to_numpy(),
                                         bins=self.bins)
         score2inter = {i: (edges[i], edges[i + 1]) for i in range(len(intervals))}
 
@@ -63,10 +60,10 @@ class MatchingScore:
             if score_value >= score2inter[self.bins - 1][1]:
                 return self.bins - 1
 
-        dataset["binned_score"] = dataset['w_score'].apply(score2label)
+        dataset["binned_relevance"] = dataset['relevance'].apply(score2label)
 
-        rest_columns = [c for c in dataset.columns if c not in ["qId", "kId", "score", "w_score", "binned_score"]]
-        dataset = dataset.loc[:, ["qId", "kId", "score", "w_score", "binned_score"] + rest_columns]
+        rest_columns = [c for c in dataset.columns if c not in ["qId", "kId", "relevance", "binned_relevance"]]
+        dataset = dataset.loc[:, ["qId", "kId", "relevance", "binned_relevance"] + rest_columns]
 
         return dataset
 
