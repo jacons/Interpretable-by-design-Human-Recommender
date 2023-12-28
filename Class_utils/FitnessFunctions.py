@@ -5,6 +5,7 @@ from tqdm import tqdm
 
 from Class_utils.FitnessClasses import *
 from Class_utils.parameters import Language
+from KnowledgeBase.JobGraph import JobGraph
 
 
 class FitnessFunctions:

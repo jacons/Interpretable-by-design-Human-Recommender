@@ -4,7 +4,7 @@ from typing import Tuple
 import numpy as np
 from interpret.glassbox import ExplainableBoostingRegressor
 from numpy import asarray
-from pandas import read_csv, DataFrame
+from pandas import DataFrame, read_json
 from sklearn.metrics import ndcg_score
 from sklearn.model_selection import ParameterGrid
 from tqdm import tqdm
@@ -15,9 +15,9 @@ from Models.grid_search_utils import GridSearch
 class EBM_class(GridSearch):
     def __init__(self, name: str, path: str = None, nDCG_at: int = 15):
 
-        self.train = read_csv(f"{path}{name}_dataset_tr.csv")
-        self.valid = read_csv(f"{path}{name}_dataset_vl.csv")
-        self.test = read_csv(f"{path}{name}_dataset_ts.csv")
+        self.train = read_json(f"{path}{name}_dataset_tr.json")
+        self.valid = read_json(f"{path}{name}_dataset_vl.json")
+        self.test = read_json(f"{path}{name}_dataset_ts.json")
 
         self.train["relevance"] = self.train["relevance"].apply(lambda x: max(0, x))
         self.valid["relevance"] = self.valid["relevance"].apply(lambda x: max(0, x))

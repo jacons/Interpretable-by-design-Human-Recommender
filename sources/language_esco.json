@@ -1,0 +1,4435 @@
+[
+  {
+    "langUri":"01f10952-cb59-4347-9aee-d4fbc51c870a",
+    "skillType":"skill\/competence",
+    "skill":"write Hungarian",
+    "synonyms":[
+      "writing Hungarian",
+      "write Hungarian",
+      "correspond in written Hungarian",
+      "show competency in written Hungarian"
+    ]
+  },
+  {
+    "langUri":"02d68c2b-1722-4440-8e25-376650e123c8",
+    "skillType":"skill\/competence",
+    "skill":"understand written Korean",
+    "synonyms":[
+      "understanding written Korean",
+      "read Korean",
+      "interpret written Korean",
+      "understand Korean writing",
+      "comprehend written Korean",
+      "understand written Korean",
+      "make sense of written Korean"
+    ]
+  },
+  {
+    "langUri":"037b5e5f-db3c-40cd-864e-5b9b9a3a080d",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Hungarian",
+    "synonyms":[
+      "understanding spoken Hungarian",
+      "make sense of spoken Hungarian",
+      "understand spoken Hungarian",
+      "interpret spoken Hungarian",
+      "understand Hungarian speech",
+      "listen to Hungarian",
+      "comprehend spoken Hungarian"
+    ]
+  },
+  {
+    "langUri":"03a53283-d3ee-41c1-ab3e-eb806616440e",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Welsh",
+    "synonyms":[
+      "understand Welsh speech",
+      "make sense of spoken Welsh",
+      "understanding spoken Welsh",
+      "listen to Welsh",
+      "comprehend spoken Welsh",
+      "interpret spoken Welsh",
+      "understand spoken Welsh"
+    ]
+  },
+  {
+    "langUri":"047218cf-3974-4148-86f8-31464253aa08",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Bosnian",
+    "synonyms":[
+      "communicate verbally in Bosnian",
+      "interact verbally in Bosnian",
+      "be fluent in Bosnian",
+      "interacting verbally in Bosnian",
+      "verbally interact in Bosnian",
+      "speak Bosnian"
+    ]
+  },
+  {
+    "langUri":"049b5d37-aab3-4b6a-a505-bf254a434b5d",
+    "skillType":"skill\/competence",
+    "skill":"understand written Latvian",
+    "synonyms":[
+      "understand written Latvian",
+      "interpret written Latvian",
+      "understanding written Latvian",
+      "read Latvian",
+      "comprehend written Latvian",
+      "make sense of written Latvian",
+      "understand Latvian writing"
+    ]
+  },
+  {
+    "langUri":"049de1f6-34ec-46f9-a0b1-8fc6f0199413",
+    "skillType":"skill\/competence",
+    "skill":"write Finnish",
+    "synonyms":[
+      "correspond in written Finnish",
+      "write Finnish",
+      "writing Finnish",
+      "show competency in written Finnish"
+    ]
+  },
+  {
+    "langUri":"04bd6e5b-9f81-4c3d-a81f-d7ac2c08dfd9",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Punjabi",
+    "synonyms":[
+      "make sense of spoken Punjabi",
+      "comprehend spoken Punjabi",
+      "listen to Panjabi",
+      "understanding spoken Punjabi",
+      "interpret spoken Punjabi",
+      "listen to Punjabi",
+      "understand Punjabi speech",
+      "understand spoken Punjabi",
+      "comprehend spoken Panjabi"
+    ]
+  },
+  {
+    "langUri":"078a25a4-1ac2-4c83-b0ed-8f8573c4633a",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Occitan",
+    "synonyms":[
+      "speak Proven\u00e7al",
+      "communicate verbally in Occitan",
+      "interact verbally in Occitan",
+      "speak Occitan",
+      "verbally interact in Occitan",
+      "speak Languedoc",
+      "be fluent in Occitan",
+      "interacting verbally in Occitan"
+    ]
+  },
+  {
+    "langUri":"0799a646-288c-4fcd-a6fd-d97a41c1bf5b",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Czech",
+    "synonyms":[
+      "be fluent in Czech",
+      "communicate verbally in Czech",
+      "interact verbally in Czech",
+      "verbally interact in Czech",
+      "speak Czech",
+      "interacting verbally in Czech"
+    ]
+  },
+  {
+    "langUri":"07cacd8e-6aaf-4cab-abeb-28319f454606",
+    "skillType":"skill\/competence",
+    "skill":"understand written Ukrainian",
+    "synonyms":[
+      "understanding written Ukrainian",
+      "read Ukrainian",
+      "understand Ukrainian writing",
+      "comprehend written Ukrainian",
+      "understand written Ukrainian",
+      "make sense of written Ukrainian",
+      "interpret written Ukrainian"
+    ]
+  },
+  {
+    "langUri":"08759658-fffc-4951-bea0-1fb51d06eb89",
+    "skillType":"skill\/competence",
+    "skill":"understand written Spanish",
+    "synonyms":[
+      "understanding written Spanish",
+      "read Spanish",
+      "understand written Spanish",
+      "understand Spanish writing",
+      "read Castilian",
+      "make sense of written Spanish",
+      "interpret written Spanish",
+      "comprehend written Spanish"
+    ]
+  },
+  {
+    "langUri":"08ee9a78-5eb5-426c-b34e-9ef0e0f88cc5",
+    "skillType":"skill\/competence",
+    "skill":"understand written Armenian",
+    "synonyms":[
+      "interpret written Armenian",
+      "understand written Armenian",
+      "make sense of written Armenian",
+      "read Armenian",
+      "comprehend written Armenian",
+      "understand Armenian writing",
+      "understanding written Armenian"
+    ]
+  },
+  {
+    "langUri":"0a1e6554-1c6b-42c6-970b-8d9a307cdb5e",
+    "skillType":"skill\/competence",
+    "skill":"write Javanese",
+    "synonyms":[
+      "correspond in written basa jawa",
+      "correspond in written cara jawa",
+      "writing Javanese",
+      "show competency in written Javanese",
+      "correspond in written Javanese",
+      "write Javanese"
+    ]
+  },
+  {
+    "langUri":"0a35de65-e51d-4862-a425-2f4dd5c4a982",
+    "skillType":"skill\/competence",
+    "skill":"write Bosnian",
+    "synonyms":[
+      "show competency in written Bosnian",
+      "writing Bosnian",
+      "write Bosnian",
+      "correspond in written Bosnian"
+    ]
+  },
+  {
+    "langUri":"0dc4ee3d-3e51-4765-bc1c-996707beeea1",
+    "skillType":"skill\/competence",
+    "skill":"understand written Sardinian",
+    "synonyms":[
+      "interpret written Sardinian",
+      "comprehend written Sard",
+      "make sense of written Sardinian",
+      "comprehend written Sardinian",
+      "understand Sardinian writing",
+      "read Sardinian",
+      "understand written Sardinian",
+      "understanding written Sardinian",
+      "comprehend written Sardu"
+    ]
+  },
+  {
+    "langUri":"0e3493f4-0cad-4fbc-8e02-025f169b8114",
+    "skillType":"knowledge",
+    "skill":"Finnish",
+    "synonyms":[
+      "Finnish",
+      "ability to comprehend spoken and written Finnish and to speak and write in Finnish",
+      "competent in Finnish"
+    ]
+  },
+  {
+    "langUri":"0e91219a-e74a-46e6-bcf9-9e14da031343",
+    "skillType":"skill\/competence",
+    "skill":"write Ukrainian",
+    "synonyms":[
+      "write Ukrainian",
+      "show competency in written Ukrainian",
+      "writing Ukrainian",
+      "correspond in written Ukrainian"
+    ]
+  },
+  {
+    "langUri":"0ee9e985-0ee5-4a73-8a12-78b53b261bb2",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in English",
+    "synonyms":[
+      "interacting verbally in English",
+      "speak English",
+      "be fluent in English",
+      "verbally interact in English",
+      "interact verbally in English",
+      "communicate verbally in English"
+    ]
+  },
+  {
+    "langUri":"0efbd0a0-0272-445d-90a8-ebb2a9b5058b",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Bosnian",
+    "synonyms":[
+      "interpret spoken Bosnian",
+      "understand spoken Bosnian",
+      "make sense of spoken Bosnian",
+      "understanding spoken Bosnian",
+      "comprehend spoken Bosnian",
+      "understand Bosnian speech",
+      "listen to Bosnian"
+    ]
+  },
+  {
+    "langUri":"0f58a178-1382-4df2-95e8-2b3f90e80e24",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Spanish",
+    "synonyms":[
+      "communicate verbally in Spanish",
+      "speak Spanish",
+      "verbally interact in Spanish",
+      "interact verbally in Spanish",
+      "interacting verbally in Spanish",
+      "be fluent in Spanish"
+    ]
+  },
+  {
+    "langUri":"0f775d62-d543-40dd-aaaf-56195c2bfd80",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Persian",
+    "synonyms":[
+      "interpret spoken Persian",
+      "make sense of spoken Persian",
+      "understand spoken Persian",
+      "comprehend spoken Farsi",
+      "listen to Farsi",
+      "understanding spoken Persian",
+      "comprehend spoken Persian",
+      "understand Persian speech",
+      "listen to Persian"
+    ]
+  },
+  {
+    "langUri":"10323914-77bf-41f2-b081-42b6e972d08d",
+    "skillType":"skill\/competence",
+    "skill":"understand written Icelandic",
+    "synonyms":[
+      "understanding written Icelandic",
+      "understand Icelandic writing",
+      "understand written Icelandic",
+      "read Icelandic",
+      "make sense of written Icelandic",
+      "comprehend written Icelandic",
+      "interpret written Icelandic"
+    ]
+  },
+  {
+    "langUri":"10b306ae-6a1b-4e62-b06d-8702cfc6814c",
+    "skillType":"skill\/competence",
+    "skill":"understand written Tamil",
+    "synonyms":[
+      "understand Tamil writing",
+      "understanding written Tamil",
+      "make sense of written Tamil",
+      "understand written Tamil",
+      "comprehend written Tamil",
+      "read Tamil",
+      "interpret written Tamil"
+    ]
+  },
+  {
+    "langUri":"1299a59c-8b90-4838-8bef-0065cdfc8bdf",
+    "skillType":"skill\/competence",
+    "skill":"write Punjabi",
+    "synonyms":[
+      "show competency in written Punjabi",
+      "write Panjabi",
+      "write Punjabi",
+      "correspond in written Punjabi",
+      "writing Punjabi"
+    ]
+  },
+  {
+    "langUri":"13fc11d0-d35f-4a2c-9115-b0e2ed372523",
+    "skillType":"skill\/competence",
+    "skill":"understand written Basque",
+    "synonyms":[
+      "comprehend written Basque",
+      "interpret written Basque",
+      "make sense of written Basque",
+      "understand written Basque",
+      "understanding written Basque",
+      "understand Basque  writing",
+      "read Basque"
+    ]
+  },
+  {
+    "langUri":"1408a267-21e1-479e-bd40-197fa14b3024",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Estonian",
+    "synonyms":[
+      "understand Estonian speech",
+      "understand spoken Estonian",
+      "make sense of spoken Estonian",
+      "listen to Estonian",
+      "interpret spoken Estonian",
+      "comprehend spoken Estonian",
+      "understanding spoken Estonian"
+    ]
+  },
+  {
+    "langUri":"1495fc80-05c1-4f5b-82ae-9abc612364cc",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Montenegrin",
+    "synonyms":[
+      "understand Montenegrin speech",
+      "understand spoken Montenegrin",
+      "listen to Montenegrin",
+      "interpret spoken Montenegrin",
+      "understanding spoken Montenegrin",
+      "comprehend spoken Montenegrin",
+      "make sense of spoken Montenegrin"
+    ]
+  },
+  {
+    "langUri":"14ee9f76-3524-43d5-8a1a-5ba8283f8bd7",
+    "skillType":"knowledge",
+    "skill":"Spanish",
+    "synonyms":[
+      "Castilian",
+      "Spanish"
+    ]
+  },
+  {
+    "langUri":"14fc9b06-bf35-4b35-8f07-c53856ef18bc",
+    "skillType":"skill\/competence",
+    "skill":"write Russian",
+    "synonyms":[
+      "writing Russian",
+      "show competency in written Russian",
+      "write Russian",
+      "correspond in written Russian"
+    ]
+  },
+  {
+    "langUri":"1500f1a7-d348-4d9e-b0a0-5792645f6c7a",
+    "skillType":"skill\/competence",
+    "skill":"understand written Javanese",
+    "synonyms":[
+      "understand written Javanese",
+      "comprehend written basa jawa",
+      "comprehend written cara jawa",
+      "comprehend written Javanese",
+      "make sense of written Javanese",
+      "read Javanese",
+      "understand Javanese writing",
+      "interpret written Javanese",
+      "understanding written Javanese"
+    ]
+  },
+  {
+    "langUri":"15db81bb-7ee6-4a5f-838f-0e8a731b1fb7",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Montenegrin",
+    "synonyms":[
+      "speak Montenegrin",
+      "interact verbally in Montenegrin",
+      "be fluent in Montenegrin",
+      "communicate verbally in Montenegrin",
+      "verbally interact in Montenegrin",
+      "interacting verbally in Montenegrin"
+    ]
+  },
+  {
+    "langUri":"15ea7b6b-1b93-4ed8-b58a-5c54777e0832",
+    "skillType":"knowledge",
+    "skill":"Bihari",
+    "synonyms":[
+      "Bihari",
+      "ability to comprehend spoken and written Bihari and to speak and write in Bihari",
+      "competent in Bihari"
+    ]
+  },
+  {
+    "langUri":"15f261e6-4379-437e-b137-b0c473ae3e74",
+    "skillType":"skill\/competence",
+    "skill":"Macedonian",
+    "synonyms":[
+      "ability to comprehend spoken and written Macedonian and to speak and write in Macedonian",
+      "Macedonian",
+      "competent in Macedonian"
+    ]
+  },
+  {
+    "langUri":"1627c1b9-31e1-4742-bf5c-cfec2ce33cfc",
+    "skillType":"knowledge",
+    "skill":"Sardinian",
+    "synonyms":[
+      "Sardinian",
+      "competent in Sardinian",
+      "Sardu",
+      "Sard",
+      "ability to comprehend spoken and written Sardinian and to speak and write in Sardinian"
+    ]
+  },
+  {
+    "langUri":"1658c54a-05f7-4bde-a2f0-be67bfbda596",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Icelandic",
+    "synonyms":[
+      "be fluent in Icelandic",
+      "verbally interact in Icelandic",
+      "speak Icelandic",
+      "interact verbally in Icelandic",
+      "interacting verbally in Icelandic",
+      "communicate verbally in Icelandic"
+    ]
+  },
+  {
+    "langUri":"16af0cae-57a8-478b-9095-13d3a170c9e7",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Japanese",
+    "synonyms":[
+      "listen to Japanese",
+      "make sense of spoken Japanese",
+      "understand spoken Japanese",
+      "comprehend spoken Japanese",
+      "understand Japanese speech",
+      "understanding spoken Japanese",
+      "interpret spoken Japanese"
+    ]
+  },
+  {
+    "langUri":"16c86dd8-00fa-4fbd-a0a9-bb59f83ebc85",
+    "skillType":"skill\/competence",
+    "skill":"write Czech",
+    "synonyms":[
+      "writing Czech",
+      "correspond in written Czech",
+      "write Czech",
+      "show competency in written Czech"
+    ]
+  },
+  {
+    "langUri":"1778faed-42eb-4aba-a41a-83989cb6bc6b",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Croatian",
+    "synonyms":[
+      "understand spoken Croatian",
+      "understand Croatian speech",
+      "make sense of spoken Croatian",
+      "interpret spoken Croatian",
+      "understanding spoken Croatian",
+      "listen to Croatian",
+      "comprehend spoken Croatian"
+    ]
+  },
+  {
+    "langUri":"185647bf-e101-4080-9a40-09173d7eefd0",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Welsh",
+    "synonyms":[
+      "communicate verbally in Welsh",
+      "interacting verbally in Welsh",
+      "speak Welsh",
+      "verbally interact in Welsh",
+      "be fluent in Welsh",
+      "interact verbally in Welsh"
+    ]
+  },
+  {
+    "langUri":"18e55722-e209-49a4-9f2c-ff0a789b3a68",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Tamil",
+    "synonyms":[
+      "interact verbally in Tamil",
+      "communicate verbally in Tamil",
+      "speak Tamil",
+      "be fluent in Tamil",
+      "verbally interact in Tamil",
+      "interacting verbally in Tamil"
+    ]
+  },
+  {
+    "langUri":"1988ce17-ce7a-44b9-9fce-5aaea5f811f5",
+    "skillType":"skill\/competence",
+    "skill":"write Armenian",
+    "synonyms":[
+      "write Armenian",
+      "correspond in written Armenian",
+      "writing Armenian",
+      "show competency in written Armenian"
+    ]
+  },
+  {
+    "langUri":"19b04a30-2e1d-4893-a86c-bde277765c7f",
+    "skillType":"skill\/competence",
+    "skill":"write Lithuanian",
+    "synonyms":[
+      "show competency in written Lithuanian",
+      "writing Lithuanian",
+      "write Lithuanian",
+      "correspond in written Lithuanian"
+    ]
+  },
+  {
+    "langUri":"1a61a520-f4a5-48fe-9087-3d0e46943d8e",
+    "skillType":"skill\/competence",
+    "skill":"understand written Irish",
+    "synonyms":[
+      "interpret written Irish",
+      "comprehend written Irish Gaelic",
+      "read Irish",
+      "understanding written Irish",
+      "understand Irish writing",
+      "comprehend written Irish",
+      "understand written Irish",
+      "make sense of written Irish",
+      "comprehend written Gaelic"
+    ]
+  },
+  {
+    "langUri":"1b7e6f56-bc73-4bcc-81ae-09252175d418",
+    "skillType":"knowledge",
+    "skill":"Estonian",
+    "synonyms":[
+      "ability to comprehend spoken and written Estonian and to speak and write in Estonian",
+      "competent in Estonian",
+      "Estonian"
+    ]
+  },
+  {
+    "langUri":"1d3c5ca3-e154-4a43-883e-7496e8886cd6",
+    "skillType":"skill\/competence",
+    "skill":"write Romanian",
+    "synonyms":[
+      "correspond in written Romanian",
+      "show competency in written Romanian",
+      "write Moldavian",
+      "write Moldovan",
+      "write Romanian",
+      "writing Romanian"
+    ]
+  },
+  {
+    "langUri":"1d5526b3-f17b-46fc-ba7d-f4a32d908a7e",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken German",
+    "synonyms":[
+      "interpret spoken German",
+      "understanding spoken German",
+      "understand spoken German",
+      "understand German speech",
+      "comprehend spoken German",
+      "listen to German",
+      "make sense of spoken German"
+    ]
+  },
+  {
+    "langUri":"1f90c205-f869-4dcf-a374-c4fdeded9cbc",
+    "skillType":"knowledge",
+    "skill":"Malay",
+    "synonyms":[
+      "ability to comprehend spoken and written Malay and to speak and write in Malay",
+      "Malaysian",
+      "competent in Malay",
+      "Malay"
+    ]
+  },
+  {
+    "langUri":"1fe42b38-cd42-4fc7-ae77-14e4c9e96295",
+    "skillType":"skill\/competence",
+    "skill":"Chinese",
+    "synonyms":[
+      "Standard Chinese",
+      "Chinese",
+      "Cantonese",
+      "ability to comprehend spoken and written Chinese and to speak and write in Chinese",
+      "competent in Chinese"
+    ]
+  },
+  {
+    "langUri":"2080075c-0488-4fbf-a786-734dbbef31ce",
+    "skillType":"skill\/competence",
+    "skill":"Marathi",
+    "synonyms":[
+      "Marathi",
+      "competent in Marathi",
+      "ability to comprehend spoken and written Marathi and to speak and write in Marathi"
+    ]
+  },
+  {
+    "langUri":"20d51474-58e1-4fb3-aec3-57bdc187c5ce",
+    "skillType":"skill\/competence",
+    "skill":"write Turkish",
+    "synonyms":[
+      "write Turkish",
+      "writing Turkish",
+      "show competency in written Turkish",
+      "correspond in written Turkish"
+    ]
+  },
+  {
+    "langUri":"214da014-b85e-4bb5-961d-1198a05e6b67",
+    "skillType":"skill\/competence",
+    "skill":"understand written Macedonian",
+    "synonyms":[
+      "understanding written Macedonian",
+      "comprehend written Macedonian",
+      "understand Macedonian writing",
+      "make sense of written Macedonian",
+      "interpret written Macedonian",
+      "understand written Macedonian",
+      "read Macedonian"
+    ]
+  },
+  {
+    "langUri":"2203ac44-f4a7-4d34-a55f-1af107415988",
+    "skillType":"skill\/competence",
+    "skill":"understand written Punjabi",
+    "synonyms":[
+      "understand written Punjabi",
+      "read Panjabi",
+      "comprehend written Punjabi",
+      "understand written Panjabi",
+      "interpret written Punjabi",
+      "understanding written Punjabi",
+      "make sense of written Punjabi",
+      "read Punjabi",
+      "understand Punjabi writing",
+      "comprehend written Panjabi"
+    ]
+  },
+  {
+    "langUri":"222bf50b-6739-48b1-a655-658306c3529f",
+    "skillType":"skill\/competence",
+    "skill":"write Romani",
+    "synonyms":[
+      "show competency in written Romani",
+      "correspond in written Romani",
+      "write Romani",
+      "writing Romani",
+      "correspond in written Romany"
+    ]
+  },
+  {
+    "langUri":"227accd5-5e70-4cc3-8f1c-3f7b52eb6848",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Arabic",
+    "synonyms":[
+      "interact verbally in Arabic",
+      "interacting verbally in Arabic",
+      "verbally interact in Arabic",
+      "speak Arabic",
+      "communicate verbally in Arabic",
+      "be fluent in Arabic"
+    ]
+  },
+  {
+    "langUri":"2358a146-6e8f-43cb-872f-a12ac9c57d60",
+    "skillType":"knowledge",
+    "skill":"Montenegrin",
+    "synonyms":[
+      "ability to comprehend spoken and written Montenegrin and to speak and write in Montenegrin",
+      "Montenegrin",
+      "competent in Montenegrin"
+    ]
+  },
+  {
+    "langUri":"237420c1-1882-4ce0-aa48-41a8e61977e5",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Vietnamese",
+    "synonyms":[
+      "listen to Vietnamese",
+      "understanding spoken Vietnamese",
+      "comprehend spoken Vietnamese",
+      "understand spoken Vietnamese",
+      "interpret spoken Vietnamese",
+      "understand Vietnamese speech",
+      "make sense of spoken Vietnamese"
+    ]
+  },
+  {
+    "langUri":"246980fe-6222-4852-ade8-b372f7e0fd20",
+    "skillType":"knowledge",
+    "skill":"Slovak",
+    "synonyms":[
+      "competent in Slovak",
+      "ability to comprehend spoken and written Slovak and to speak and write in Slovak",
+      "Slovak"
+    ]
+  },
+  {
+    "langUri":"25fcf0ff-1615-44b8-a81a-e6e8ce9deed7",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Hindi",
+    "synonyms":[
+      "communicate verbally in Hindi",
+      "speak Hindi",
+      "be fluent in Hindi",
+      "interact verbally in Hindi",
+      "interacting verbally in Hindi",
+      "verbally interact in Hindi"
+    ]
+  },
+  {
+    "langUri":"2704b00a-5d70-40ad-997d-212b323fb32d",
+    "skillType":"skill\/competence",
+    "skill":"understand written Turkish",
+    "synonyms":[
+      "comprehend written Turkish",
+      "read Turkish",
+      "make sense of written Turkish",
+      "understand Turkish writing",
+      "interpret written Turkish",
+      "understand written Turkish",
+      "understanding written Turkish"
+    ]
+  },
+  {
+    "langUri":"273a28d6-1bd3-4d13-a906-3d75c1cfdfc1",
+    "skillType":"knowledge",
+    "skill":"Danish",
+    "synonyms":[
+      "ability to comprehend spoken and written Danish and to speak and write in Danish",
+      "competent in Danish",
+      "Danish"
+    ]
+  },
+  {
+    "langUri":"2874065e-6ca3-430c-912a-467da3c23704",
+    "skillType":"knowledge",
+    "skill":"Kurdish",
+    "synonyms":[
+      "ability to comprehend spoken and written Kurdish and to speak and write in Kurdish",
+      "competent in Kurdish",
+      "Kurdish"
+    ]
+  },
+  {
+    "langUri":"29c954f2-ed17-4900-bba5-4cfd294f3680",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Turkish",
+    "synonyms":[
+      "verbally interact in Turkish",
+      "communicate verbally in Turkish",
+      "be fluent in Turkish",
+      "speak Turkish",
+      "interacting verbally in Turkish",
+      "interact verbally in Turkish"
+    ]
+  },
+  {
+    "langUri":"2abb9db5-350c-444c-8292-0e0b2ce00f9a",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in German",
+    "synonyms":[
+      "communicate verbally in German",
+      "interact verbally in German",
+      "speak German",
+      "verbally interact in German",
+      "interacting verbally in German",
+      "be fluent in German"
+    ]
+  },
+  {
+    "langUri":"2ac8e77b-6441-4337-b9a7-ba3d8e270cba",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Kazakh",
+    "synonyms":[
+      "communicate verbally in Kazakh",
+      "be fluent in Kazakh",
+      "interacting verbally in Kazakh",
+      "speak Kazakh",
+      "interact verbally in Kazakh",
+      "verbally interact in Kazakh"
+    ]
+  },
+  {
+    "langUri":"2adb5796-fe66-4971-a57b-b9936a7cab68",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Malay",
+    "synonyms":[
+      "make sense of spoken Malay",
+      "comprehend spoken Malay",
+      "understanding spoken Malay",
+      "understand spoken Malay",
+      "interpret spoken Malay",
+      "understand Malay speech",
+      "listen to Malay"
+    ]
+  },
+  {
+    "langUri":"2b7b97d3-9d77-45d4-a254-bb6c3047de78",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Persian",
+    "synonyms":[
+      "speak Persian",
+      "verbally interact in Persian",
+      "interacting verbally in Persian",
+      "interact verbally in Persian",
+      "speak Farsi",
+      "be fluent in Persian",
+      "communicate verbally in Persian"
+    ]
+  },
+  {
+    "langUri":"2ba106ed-4b44-45cf-8626-ff9a952b24ce",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Telugu",
+    "synonyms":[
+      "understand Telugu speech",
+      "make sense of spoken Telugu",
+      "understanding spoken Telugu",
+      "listen to Telugu",
+      "comprehend spoken Telugu",
+      "interpret spoken Telugu",
+      "understand spoken Telugu"
+    ]
+  },
+  {
+    "langUri":"2ce713f2-c684-4fa3-8e56-939e4bfbf4a2",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken French",
+    "synonyms":[
+      "listen to French",
+      "understand spoken French",
+      "understanding spoken French",
+      "interpret spoken French",
+      "make sense of spoken French",
+      "comprehend spoken French",
+      "understand French speech"
+    ]
+  },
+  {
+    "langUri":"2eac15c1-fe9a-4b53-9f4e-b74747d665e5",
+    "skillType":"skill\/competence",
+    "skill":"understand written Malay",
+    "synonyms":[
+      "make sense of written Malay",
+      "comprehend written Malay",
+      "understand written Malay",
+      "interpret written Malay",
+      "understanding written Malay",
+      "read Malay",
+      "understand Malay writing",
+      "comprehend written Malaysian"
+    ]
+  },
+  {
+    "langUri":"2edc3686-dc8b-498d-a174-a1f91917f86d",
+    "skillType":"skill\/competence",
+    "skill":"understand written Maltese",
+    "synonyms":[
+      "make sense of written Maltese",
+      "read Maltese",
+      "understanding written Maltese",
+      "understand Maltese writing",
+      "interpret written Maltese",
+      "understand written Maltese",
+      "comprehend written Maltese"
+    ]
+  },
+  {
+    "langUri":"2f566fb0-89f0-4d15-bd20-e00c93adff35",
+    "skillType":"skill\/competence",
+    "skill":"understand written Georgian",
+    "synonyms":[
+      "read Georgian",
+      "understanding written Georgian",
+      "understand Georgian writing",
+      "comprehend written Georgian",
+      "make sense of written Georgian",
+      "interpret written Georgian",
+      "understand written Georgian"
+    ]
+  },
+  {
+    "langUri":"2f7f7a05-88ec-4c8a-937f-381dce6b00fd",
+    "skillType":"skill\/competence",
+    "skill":"write Korean",
+    "synonyms":[
+      "correspond in written Korean",
+      "show competency in written Korean",
+      "writing Korean",
+      "write Korean"
+    ]
+  },
+  {
+    "langUri":"3048bf6d-27c7-4dc6-ae4b-e55094cec090",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Finnish",
+    "synonyms":[
+      "communicate verbally in Finnish",
+      "interacting verbally in Finnish",
+      "interact verbally in Finnish",
+      "be fluent in Finnish",
+      "verbally interact in Finnish",
+      "speak Finnish"
+    ]
+  },
+  {
+    "langUri":"33859d93-987c-4caa-a0a9-6159ea7bbc2a",
+    "skillType":"knowledge",
+    "skill":"Arabic",
+    "synonyms":[
+      "competent in Arabic",
+      "Arabic",
+      "ability to comprehend spoken and written Arabic and to speak and write in Arabic"
+    ]
+  },
+  {
+    "langUri":"34085657-5d64-4a68-abef-e5b7df3b3d46",
+    "skillType":"skill\/competence",
+    "skill":"understand written Catalan",
+    "synonyms":[
+      "make sense of written Catalan",
+      "understand Catalan writing",
+      "understand written Catalan",
+      "read Catalan",
+      "understanding written Catalan",
+      "comprehend written Catalan",
+      "read Valencian",
+      "interpret written Catalan"
+    ]
+  },
+  {
+    "langUri":"347d33a8-3698-4549-a7de-722a0216ee40",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Dutch",
+    "synonyms":[
+      "understand spoken Dutch",
+      "listen to Dutch",
+      "understand Dutch speech",
+      "make sense of spoken Dutch",
+      "comprehend spoken Dutch",
+      "listen to Flemish",
+      "interpret spoken Dutch",
+      "understanding spoken Dutch"
+    ]
+  },
+  {
+    "langUri":"354b948c-7eef-4ebc-bfd6-f60d7d5acb62",
+    "skillType":"knowledge",
+    "skill":"Ukrainian",
+    "synonyms":[
+      "Ukrainian",
+      "ability to comprehend spoken and written Ukrainian and to speak and write in Ukrainian",
+      "competent in Ukrainian"
+    ]
+  },
+  {
+    "langUri":"37992d18-8d7e-4122-ad52-fa5d2d52ebde",
+    "skillType":"skill\/competence",
+    "skill":"understand written Urdu",
+    "synonyms":[
+      "make sense of written Urdu",
+      "comprehend written Urdu",
+      "understanding written Urdu",
+      "understand written Urdu",
+      "interpret written Urdu",
+      "read Urdu",
+      "understand Urdu writing"
+    ]
+  },
+  {
+    "langUri":"3993c87c-7719-4186-811b-8ddfb40e76be",
+    "skillType":"skill\/competence",
+    "skill":"write English",
+    "synonyms":[
+      "show competency in written English",
+      "write English",
+      "writing English",
+      "correspond in written English"
+    ]
+  },
+  {
+    "langUri":"39a7d447-5a30-41b1-967d-bdcde3288c9e",
+    "skillType":"skill\/competence",
+    "skill":"write Slovak",
+    "synonyms":[
+      "writing Slovak",
+      "show competency in written Slovak",
+      "correspond in written Slovak",
+      "write Slovak"
+    ]
+  },
+  {
+    "langUri":"39c675c4-af13-49db-bbed-cf762102f85e",
+    "skillType":"knowledge",
+    "skill":"Japanese",
+    "synonyms":[
+      "Japanese",
+      "ability to comprehend spoken and written Japanese and to speak and write in Japanese",
+      "competent in Japanese"
+    ]
+  },
+  {
+    "langUri":"3a0814b1-5851-43f9-b886-1e496fefcf9c",
+    "skillType":"skill\/competence",
+    "skill":"understand written Finnish",
+    "synonyms":[
+      "comprehend written Finnish",
+      "make sense of written Finnish",
+      "interpret written Finnish",
+      "understand Finnish writing",
+      "understanding written Finnish",
+      "understand written Finnish"
+    ]
+  },
+  {
+    "langUri":"3a660148-e0d6-4b07-b107-10200ebb1b23",
+    "skillType":"skill\/competence",
+    "skill":"write Azerbaijani",
+    "synonyms":[
+      "writing Azerbaijani",
+      "correspond in written Azeri Turkish",
+      "correspond in written Azeri",
+      "correspond in written Azerbaijani Turkish",
+      "correspond in written Azerbaijani",
+      "write Azerbaijani",
+      "show competency in written Azerbaijani"
+    ]
+  },
+  {
+    "langUri":"3c98d1d7-52cd-44e7-8083-c02a981e3872",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Georgian",
+    "synonyms":[
+      "speak Georgian",
+      "communicate verbally in Georgian",
+      "verbally interact in Georgian",
+      "be fluent in Georgian",
+      "interacting verbally in Georgian",
+      "interact verbally in Georgian"
+    ]
+  },
+  {
+    "langUri":"3cb08443-192d-475b-89ce-15901ed1a900",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Slovak",
+    "synonyms":[
+      "interacting verbally in Slovak",
+      "speak Slovak",
+      "verbally interact in Slovak",
+      "be fluent in Slovak",
+      "interact verbally in Slovak",
+      "communicate verbally in Slovak"
+    ]
+  },
+  {
+    "langUri":"3cc1fa63-1b28-44df-a93c-d09b12389a2f",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Basque",
+    "synonyms":[
+      "speak Basque",
+      "communicate verbally in Basque",
+      "interacting verbally in Basque",
+      "be fluent in Basque",
+      "verbally interact in Basque",
+      "interact verbally in Basque"
+    ]
+  },
+  {
+    "langUri":"3cccda28-82cc-4e47-9442-af0cb4d64016",
+    "skillType":"skill\/competence",
+    "skill":"write Serbian",
+    "synonyms":[
+      "show competency in written Serbian",
+      "writing Serbian",
+      "write Serbian",
+      "correspond in written Serbian"
+    ]
+  },
+  {
+    "langUri":"40842478-ad09-4be9-a889-97299b013609",
+    "skillType":"skill\/competence",
+    "skill":"write Hebrew",
+    "synonyms":[
+      "show competency in written Hebrew",
+      "write Hebrew",
+      "writing Hebrew",
+      "correspond in written Hebrew"
+    ]
+  },
+  {
+    "langUri":"41253322-dc32-4d79-941c-3a8c230a1d85",
+    "skillType":"skill\/competence",
+    "skill":"write Berber",
+    "synonyms":[
+      "correspond in written Berber",
+      "write Berber",
+      "correspond in written Tamazight",
+      "show competency in written Berber",
+      "writing Berber"
+    ]
+  },
+  {
+    "langUri":"416ca9da-3a58-4522-89a2-5746576feddd",
+    "skillType":"skill\/competence",
+    "skill":"write Vietnamese",
+    "synonyms":[
+      "correspond in written Vietnamese",
+      "show competency in written Vietnamese",
+      "writing Vietnamese",
+      "write Vietnamese"
+    ]
+  },
+  {
+    "langUri":"421910b5-70e1-429e-8b32-0df5518b7ddd",
+    "skillType":"skill\/competence",
+    "skill":"understand written Czech",
+    "synonyms":[
+      "comprehend written Czech",
+      "understanding written Czech",
+      "understand Czech writing",
+      "interpret written Czech",
+      "read Czech",
+      "understand written Czech",
+      "make sense of written Czech"
+    ]
+  },
+  {
+    "langUri":"4264f3aa-037e-44f4-bb08-90d2337953ee",
+    "skillType":"skill\/competence",
+    "skill":"write Portuguese",
+    "synonyms":[
+      "writing Portuguese",
+      "correspond in written Portuguese",
+      "show competency in written Portuguese",
+      "write Portuguese"
+    ]
+  },
+  {
+    "langUri":"42b7c03a-3ed5-4dc1-adc0-ff1fb8d4d697",
+    "skillType":"skill\/competence",
+    "skill":"write Danish",
+    "synonyms":[
+      "correspond in written Danish",
+      "write Danish",
+      "writing Danish",
+      "show competency in written Danish"
+    ]
+  },
+  {
+    "langUri":"450e047f-bb60-4eaa-bbcf-5e7af43e7f2a",
+    "skillType":"skill\/competence",
+    "skill":"write Bulgarian",
+    "synonyms":[
+      "show competency in written Bulgarian",
+      "writing Bulgarian",
+      "correspond in written Bulgarian",
+      "write Bulgarian"
+    ]
+  },
+  {
+    "langUri":"45289df8-d02d-4f08-9802-2c7deae944ad",
+    "skillType":"knowledge",
+    "skill":"Sanskrit",
+    "synonyms":[
+      "sanskrit language",
+      "sanskrit alphabet, pronunciation and language",
+      "Sanskrit"
+    ]
+  },
+  {
+    "langUri":"45ab3524-935d-4bc0-a7f3-1cf3be7e5987",
+    "skillType":"skill\/competence",
+    "skill":"write Georgian",
+    "synonyms":[
+      "correspond in written Georgian",
+      "writing Georgian",
+      "show competency in written Georgian",
+      "write Georgian"
+    ]
+  },
+  {
+    "langUri":"46d20520-381c-40c9-9de5-f635d0755923",
+    "skillType":"skill\/competence",
+    "skill":"understand written Bulgarian",
+    "synonyms":[
+      "read Bulgarian",
+      "interpret written Bulgarian",
+      "make sense of written Bulgarian",
+      "comprehend written Bulgarian",
+      "understand written Bulgarian",
+      "understanding written Bulgarian",
+      "understand Bulgarian writing"
+    ]
+  },
+  {
+    "langUri":"4812a4ea-dc55-4dc6-b9b0-4a59bba2c647",
+    "skillType":"knowledge",
+    "skill":"German",
+    "synonyms":[
+      "German",
+      "ability to comprehend spoken and written German and to speak and write in German",
+      "competent in German"
+    ]
+  },
+  {
+    "langUri":"486e4f39-e968-41f4-955e-56e9eba96ef5",
+    "skillType":"skill\/competence",
+    "skill":"understand written German",
+    "synonyms":[
+      "comprehend written German",
+      "understand German writing",
+      "interpret written German",
+      "understanding written German",
+      "understand written German",
+      "make sense of written German",
+      "read German"
+    ]
+  },
+  {
+    "langUri":"49edb5ac-b80c-4c02-8509-d0e05889031e",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Kurdish",
+    "synonyms":[
+      "comprehend spoken Kurdish",
+      "listen to Kurdish",
+      "make sense of spoken Kurdish",
+      "understand Kurdish speech",
+      "interpret spoken Kurdish",
+      "understand spoken Kurdish",
+      "understanding spoken Kurdish"
+    ]
+  },
+  {
+    "langUri":"4aaa3e87-2b29-4a83-bdff-cbe51db03fc5",
+    "skillType":"skill\/competence",
+    "skill":"write Montenegrin",
+    "synonyms":[
+      "write Montenegrin",
+      "show competency in written Montenegrin",
+      "correspond in written Montenegrin",
+      "writing Montenegrin"
+    ]
+  },
+  {
+    "langUri":"4b873879-6d5e-46b6-80e2-1ef313b4e0ac",
+    "skillType":"skill\/competence",
+    "skill":"write Japanese",
+    "synonyms":[
+      "write Japanese",
+      "writing Japanese",
+      "correspond in written Japanese",
+      "show competency in written Japanese"
+    ]
+  },
+  {
+    "langUri":"4b9f1ae5-0ee6-4738-8999-9b8191fba808",
+    "skillType":"knowledge",
+    "skill":"Romanian",
+    "synonyms":[
+      "ability to comprehend spoken and written Romanian and to speak and write in Romanian",
+      "Romanian",
+      "competent in Romanian"
+    ]
+  },
+  {
+    "langUri":"4c5a2793-c18d-40b9-832d-af8e07f0f171",
+    "skillType":"skill\/competence",
+    "skill":"write Icelandic",
+    "synonyms":[
+      "show competency in written Icelandic",
+      "writing Icelandic",
+      "correspond in written Icelandic",
+      "write Icelandic"
+    ]
+  },
+  {
+    "langUri":"4c6fe11c-f912-4c81-b74c-2e72943abeb6",
+    "skillType":"skill\/competence",
+    "skill":"understand written Lithuanian",
+    "synonyms":[
+      "interpret written Lithuanian",
+      "read Lithuanian",
+      "comprehend written Lithuanian",
+      "understand Lithuanian writing",
+      "make sense of written Lithuanian",
+      "understanding written Lithuanian",
+      "understand written Lithuanian"
+    ]
+  },
+  {
+    "langUri":"4c92020a-110b-4daf-b1ec-c4e17c3b9b2c",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Chinese",
+    "synonyms":[
+      "understand Chinese speech",
+      "understand spoken Chinese",
+      "comprehend spoken Chinese",
+      "interpret spoken Chinese",
+      "make sense of spoken Chinese",
+      "comprehend spoken Cantonese",
+      "listen to Mandarin",
+      "comprehend spoken Standard Chinese",
+      "understand spoken Mandarin",
+      "understanding spoken Chinese",
+      "listen to Chinese"
+    ]
+  },
+  {
+    "langUri":"4ddf697a-b1e9-4ae6-931e-920de761f9df",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Walloon",
+    "synonyms":[
+      "interacting verbally in Walloon",
+      "interact verbally in Walloon",
+      "be fluent in Walloon",
+      "verbally interact in Walloon",
+      "communicate verbally in Walloon",
+      "speak Walloon"
+    ]
+  },
+  {
+    "langUri":"4dfda994-f9a2-4cbd-b224-0ab036e69d6e",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Romanian",
+    "synonyms":[
+      "interact verbally in Romanian",
+      "interacting verbally in Romanian",
+      "be fluent in Romanian",
+      "verbally interact in Romanian",
+      "speak Moldavian",
+      "speak Romanian",
+      "communicate verbally in Romanian",
+      "interact verbally in Moldavian",
+      "speak Moldovan"
+    ]
+  },
+  {
+    "langUri":"4ff6df71-6988-4300-8966-9fabb2b59186",
+    "skillType":"skill\/competence",
+    "skill":"understand written French",
+    "synonyms":[
+      "understand French writing",
+      "make sense of written French",
+      "read French",
+      "understand written French",
+      "interpret written French",
+      "comprehend written French",
+      "understanding written French"
+    ]
+  },
+  {
+    "langUri":"50d8a1ff-659a-4671-be48-369242b2a3be",
+    "skillType":"skill\/competence",
+    "skill":"write Bihari",
+    "synonyms":[
+      "correspond in written Bihari",
+      "write Bihari",
+      "show competency in written Bihari",
+      "writing Bihari"
+    ]
+  },
+  {
+    "langUri":"520b5278-eb9a-4c7d-a80d-a129ffb103da",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Hungarian",
+    "synonyms":[
+      "interacting verbally in Hungarian",
+      "communicate verbally in Hungarian",
+      "speak Hungarian",
+      "be fluent in Hungarian",
+      "verbally interact in Hungarian",
+      "interact verbally in Hungarian"
+    ]
+  },
+  {
+    "langUri":"52894650-9077-40f0-96d6-6f07d1a6cafa",
+    "skillType":"skill\/competence",
+    "skill":"write German",
+    "synonyms":[
+      "writing German",
+      "correspond in written German",
+      "show competency in written German",
+      "write German"
+    ]
+  },
+  {
+    "langUri":"529d9a4f-5b96-4952-b9e6-114213366565",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Georgian",
+    "synonyms":[
+      "understand spoken Georgian",
+      "understanding spoken Georgian",
+      "comprehend spoken Georgian",
+      "understand Georgian speech",
+      "interpret spoken Georgian",
+      "make sense of spoken Georgian",
+      "listen to Georgian"
+    ]
+  },
+  {
+    "langUri":"562c4f04-4f58-4c28-bcc4-49307786067b",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Danish",
+    "synonyms":[
+      "speak Danish",
+      "communicate verbally in Danish",
+      "verbally interact in Danish",
+      "interacting verbally in Danish",
+      "be fluent in Danish",
+      "interact verbally in Danish"
+    ]
+  },
+  {
+    "langUri":"57cc6587-7efe-4ba5-982f-ac15ce1617ac",
+    "skillType":"knowledge",
+    "skill":"Occitan",
+    "synonyms":[
+      "Languedoc",
+      "competent in Occitan",
+      "Occitan",
+      "Proven\u00e7al",
+      "ability to comprehend spoken and written Occitan and to speak and write in Occitan"
+    ]
+  },
+  {
+    "langUri":"584c13e8-fd06-4ca3-a45b-cca5b2f147a7",
+    "skillType":"knowledge",
+    "skill":"Portuguese",
+    "synonyms":[
+      "Portuguese"
+    ]
+  },
+  {
+    "langUri":"585824c4-ef01-49fd-9b14-be00162a2387",
+    "skillType":"skill\/competence",
+    "skill":"understand written Persian",
+    "synonyms":[
+      "understand Persian writing",
+      "understanding written Persian",
+      "understand written Farsi",
+      "interpret written Persian",
+      "comprehend written Farsi",
+      "make sense of written Persian",
+      "understand written Persian",
+      "comprehend written Persian"
+    ]
+  },
+  {
+    "langUri":"5885fe45-0fd8-4eea-ac55-f46d46a44e6c",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Albanian",
+    "synonyms":[
+      "be fluent in Albanian",
+      "verbally interact in Albanian",
+      "interact verbally in Albanian",
+      "interacting verbally in Albanian",
+      "communicate verbally in Albanian",
+      "speak Albanian"
+    ]
+  },
+  {
+    "langUri":"58cabf75-2520-4358-a210-2cbc628f4aa2",
+    "skillType":"knowledge",
+    "skill":"Persian",
+    "synonyms":[
+      "competent in Persian",
+      "ability to comprehend spoken and written Persian and to speak and write in Persian",
+      "Farsi",
+      "Persian"
+    ]
+  },
+  {
+    "langUri":"59ac89d7-12bb-470d-818b-222963d1c357",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Gujarati",
+    "synonyms":[
+      "speak Gujarati",
+      "be fluent in Gujarati",
+      "interacting verbally in Gujarati",
+      "communicate verbally in Gujarati",
+      "interact verbally in Gujarati",
+      "verbally interact in Gujarati"
+    ]
+  },
+  {
+    "langUri":"5a6ac2a6-6aa3-4b68-b2ef-b2491fb146c1",
+    "skillType":"skill\/competence",
+    "skill":"write Welsh",
+    "synonyms":[
+      "writing Welsh",
+      "write Welsh",
+      "correspond in written Welsh",
+      "show competency in written Welsh"
+    ]
+  },
+  {
+    "langUri":"5b9694a6-58b0-4179-a1bd-4bcda0352ca1",
+    "skillType":"skill\/competence",
+    "skill":"write Macedonian",
+    "synonyms":[
+      "correspond in written Macedonian",
+      "writing Macedonian",
+      "show competency in written Macedonian",
+      "write Macedonian"
+    ]
+  },
+  {
+    "langUri":"5bfce8e7-6f22-4e67-9018-0e4161620f3a",
+    "skillType":"knowledge",
+    "skill":"Azerbaijani",
+    "synonyms":[
+      "Azeri",
+      "competent in Azerbaijani",
+      "Azeri Turkish",
+      "ability to comprehend spoken and written Azerbaijani and to speak and write in Azerbaijani",
+      "Azerbaijani Turkish",
+      "Azerbaijani"
+    ]
+  },
+  {
+    "langUri":"5de39924-769c-4301-82a5-525358dffe50",
+    "skillType":"knowledge",
+    "skill":"Latvian",
+    "synonyms":[
+      "Latvian",
+      "ability to comprehend spoken and written Latvian and to speak and write in Latvian",
+      "competent in Latvian"
+    ]
+  },
+  {
+    "langUri":"5dfc81aa-c395-4e88-a0e0-a2fbb681ecc0",
+    "skillType":"skill\/competence",
+    "skill":"write French",
+    "synonyms":[
+      "show competency in written French",
+      "writing French",
+      "correspond in written French",
+      "write French"
+    ]
+  },
+  {
+    "langUri":"5ec5c4f7-1b6d-4642-8470-567e666952a8",
+    "skillType":"skill\/competence",
+    "skill":"write Galician",
+    "synonyms":[
+      "correspond in written Galician",
+      "write Galician",
+      "writing Galician",
+      "show competency in written Galician"
+    ]
+  },
+  {
+    "langUri":"5f1e9642-588c-4882-8c90-20c33cc78bc1",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Italian",
+    "synonyms":[
+      "make sense of spoken Italian",
+      "understanding spoken Italian",
+      "understand Italian speech",
+      "comprehend spoken Italian",
+      "interpret spoken Italian",
+      "understand spoken Italian",
+      "listen to Italian"
+    ]
+  },
+  {
+    "langUri":"5f81f163-7c84-4254-962f-69257cfa9ef5",
+    "skillType":"skill\/competence",
+    "skill":"understand written Gujarati",
+    "synonyms":[
+      "comprehend written Gujarati",
+      "understand written Gujarati",
+      "understand Gujarati writing",
+      "make sense of written Gujarati",
+      "interpret written Gujarati",
+      "read Gujarati",
+      "understanding written Gujarati"
+    ]
+  },
+  {
+    "langUri":"5fd4e27b-49de-4609-ae44-91e47ee3d168",
+    "skillType":"skill\/competence",
+    "skill":"write Telugu",
+    "synonyms":[
+      "writing Telugu",
+      "correspond in written Telugu",
+      "write Telugu",
+      "show competency in written Telugu"
+    ]
+  },
+  {
+    "langUri":"60bb7483-e0a1-4016-a6f3-6b95261ab615",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Azerbaijani",
+    "synonyms":[
+      "comprehend spoken Azerbaijani Turkish",
+      "comprehend spoken Azeri Turkish",
+      "make sense of spoken Azerbaijani",
+      "comprehend spoken Azerbaijani",
+      "understand Azerbaijani speech",
+      "comprehend spoken Azeri",
+      "understand spoken Azerbaijani",
+      "interpret spoken Azerbaijani",
+      "listen to Azerbaijani",
+      "understanding spoken Azerbaijani"
+    ]
+  },
+  {
+    "langUri":"614dcf69-dc56-4cab-bcb1-5bed1b389516",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Armenian",
+    "synonyms":[
+      "comprehend spoken Armenian",
+      "make sense of spoken Armenian",
+      "understand Armenian speech",
+      "listen to Armenian",
+      "interpret spoken Armenian",
+      "understanding spoken Armenian",
+      "understand spoken Armenian"
+    ]
+  },
+  {
+    "langUri":"61809be5-6787-46f0-9583-ac3287e17bd6",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Marathi",
+    "synonyms":[
+      "interacting verbally in Marathi",
+      "verbally interact in Marathi",
+      "speak Marathi",
+      "be fluent in Marathi",
+      "communicate verbally in Marathi",
+      "interact verbally in Marathi"
+    ]
+  },
+  {
+    "langUri":"61c14f06-9edf-44c3-96af-dcecda598853",
+    "skillType":"skill\/competence",
+    "skill":"write Latvian",
+    "synonyms":[
+      "correspond in written Latvian",
+      "writing Latvian",
+      "show competency in written Latvian",
+      "write Latvian"
+    ]
+  },
+  {
+    "langUri":"61ea50d7-db19-4160-8da4-1d7bec68bec3",
+    "skillType":"skill\/competence",
+    "skill":"write Slovenian",
+    "synonyms":[
+      "write Slovenian",
+      "correspond in written Slovenian",
+      "show competency in written Slovenian",
+      "writing Slovenian",
+      "write Slovene"
+    ]
+  },
+  {
+    "langUri":"633b72c4-1da1-45ae-b989-4d1a5bcab1a7",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Catalan",
+    "synonyms":[
+      "listen to Catalan",
+      "understanding spoken Catalan",
+      "understand spoken Catalan",
+      "understand spoken Valencian",
+      "listen to Valencian",
+      "comprehend spoken Catalan",
+      "understand Catalan speech",
+      "interpret spoken Catalan",
+      "make sense of spoken Catalan"
+    ]
+  },
+  {
+    "langUri":"64fe09ac-f419-4c04-8997-d1dde2e31bfc",
+    "skillType":"knowledge",
+    "skill":"Telugu",
+    "synonyms":[
+      "ability to comprehend spoken and written Telugu and to speak and write in Telugu",
+      "Telugu",
+      "competent in Telugu"
+    ]
+  },
+  {
+    "langUri":"64ff8d5f-58a8-4efb-af5a-e161854b3e9a",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken English",
+    "synonyms":[
+      "listen to English",
+      "understanding spoken English",
+      "comprehend spoken English",
+      "understand English speech",
+      "make sense of spoken English",
+      "understand spoken English",
+      "interpret spoken English"
+    ]
+  },
+  {
+    "langUri":"65a24ec1-e173-4bd6-b160-270346e0f4bf",
+    "skillType":"skill\/competence",
+    "skill":"write Irish",
+    "synonyms":[
+      "write Gaelic",
+      "write Irish Gaelic",
+      "write Irish",
+      "writing Irish",
+      "correspond in written Irish",
+      "show competency in written Irish"
+    ]
+  },
+  {
+    "langUri":"66120d64-6f0f-4b89-8c4f-cd271f8cb7ca",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Romani",
+    "synonyms":[
+      "understand Romani speech",
+      "listen to Romani",
+      "interpret spoken Romani",
+      "comprehend spoken Romani",
+      "make sense of spoken Romani",
+      "understanding spoken Romani",
+      "understand spoken Romani"
+    ]
+  },
+  {
+    "langUri":"66212ff2-34b9-4812-be58-f53a0b751863",
+    "skillType":"knowledge",
+    "skill":"Galician",
+    "synonyms":[
+      "Galician",
+      "ability to comprehend spoken and written Galician and to speak and write in Galician",
+      "competent in Galician"
+    ]
+  },
+  {
+    "langUri":"67e9583d-621a-42bd-8381-4e85c9e0923a",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Norwegian",
+    "synonyms":[
+      "be fluent in Norwegian",
+      "communicate verbally in Norwegian",
+      "interact verbally in Norwegian",
+      "interacting verbally in Norwegian",
+      "verbally interact in Norwegian",
+      "speak Norwegian"
+    ]
+  },
+  {
+    "langUri":"6891bbce-20bf-4afc-bd5e-75bdf54c0165",
+    "skillType":"knowledge",
+    "skill":"Russian",
+    "synonyms":[
+      "ability to comprehend spoken and written Russian and to speak and write in Russian",
+      "competent in Russian",
+      "Russian"
+    ]
+  },
+  {
+    "langUri":"69eb9999-814b-4293-8d6c-633e49f64de4",
+    "skillType":"skill\/competence",
+    "skill":"write Swedish",
+    "synonyms":[
+      "show competency in written Swedish",
+      "writing Swedish",
+      "write Swedish",
+      "correspond in written Swedish"
+    ]
+  },
+  {
+    "langUri":"6b7968ae-34fc-44cf-bbe4-28bded032004",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Portuguese",
+    "synonyms":[
+      "listen to Portuguese",
+      "interpret spoken Portuguese",
+      "make sense of spoken Portuguese",
+      "understanding spoken Portuguese",
+      "understand spoken Portuguese",
+      "understand Portuguese speech",
+      "comprehend spoken Portuguese"
+    ]
+  },
+  {
+    "langUri":"6b99d4ad-f0aa-44bb-a75e-a65c32fc5d2f",
+    "skillType":"skill\/competence",
+    "skill":"understand written Romani",
+    "synonyms":[
+      "interpret written Romani",
+      "understanding written Romani",
+      "comprehend written Romany",
+      "understand Romani writing",
+      "read Romani",
+      "comprehend written Romani",
+      "understand written Romani",
+      "make sense of written Romani"
+    ]
+  },
+  {
+    "langUri":"6bc58e91-1827-4dc7-a9cf-2311edcba0ec",
+    "skillType":"knowledge",
+    "skill":"Croatian",
+    "synonyms":[
+      "ability to comprehend spoken and written Croatian and to speak and write in Croatian",
+      "competent in Croatian",
+      "Croatian"
+    ]
+  },
+  {
+    "langUri":"6be5f174-9b46-4b76-9aa1-177f3845b615",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Latvian",
+    "synonyms":[
+      "communicate verbally in Latvian",
+      "speak Latvian",
+      "interact verbally in Latvian",
+      "be fluent in Latvian",
+      "verbally interact in Latvian",
+      "interacting verbally in Latvian"
+    ]
+  },
+  {
+    "langUri":"6d3edede-8951-4621-a835-e04323300fa0",
+    "skillType":"knowledge",
+    "skill":"English",
+    "synonyms":[
+      "competent in English",
+      "ability to comprehend spoken and written English and to speak and write in English",
+      "English"
+    ]
+  },
+  {
+    "langUri":"6d4feb44-401c-480d-a05b-02ca8b38d7cd",
+    "skillType":"skill\/competence",
+    "skill":"write Malay",
+    "synonyms":[
+      "correspond in written Malay",
+      "writing Malay",
+      "show competency in written Malay",
+      "write Malaysian",
+      "write Malay"
+    ]
+  },
+  {
+    "langUri":"6f34bd05-1297-4913-92ff-85a604242b2f",
+    "skillType":"knowledge",
+    "skill":"Berber",
+    "synonyms":[
+      "Berber",
+      "ability to comprehend spoken and written Berber and to speak and write in Berber",
+      "Tamazight",
+      "competent in Berber"
+    ]
+  },
+  {
+    "langUri":"6f55e44d-4494-4079-9b8d-01ac6912529e",
+    "skillType":"knowledge",
+    "skill":"Belarusian",
+    "synonyms":[
+      "ability to comprehend spoken and written Belarusian and to speak and write in Belarusian",
+      "competent in Belarusian",
+      "Belarusian"
+    ]
+  },
+  {
+    "langUri":"702d3840-308a-4d4a-ab61-f40f87d47fff",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Chinese",
+    "synonyms":[
+      "interacting verbally in Chinese",
+      "be fluent in Chinese",
+      "interact verbally in Mandarin",
+      "speak Standard Chinese",
+      "speak Chinese",
+      "speak Mandarin",
+      "verbally interact in Chinese",
+      "interact verbally in Chinese",
+      "speak Cantonese",
+      "communicate verbally in Chinese"
+    ]
+  },
+  {
+    "langUri":"7077db13-08c2-4482-918c-e6291e04f82b",
+    "skillType":"skill\/competence",
+    "skill":"understand written Japanese",
+    "synonyms":[
+      "interpret written Japanese",
+      "understanding written Japanese",
+      "understand Japanese writing",
+      "comprehend written Japanese",
+      "understand written Japanese",
+      "make sense of written Japanese",
+      "read Japanese"
+    ]
+  },
+  {
+    "langUri":"741ef95e-f1cf-4cf4-a021-b293e25eb005",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Maltese",
+    "synonyms":[
+      "interacting verbally in Maltese",
+      "communicate verbally in Maltese",
+      "be fluent in Maltese",
+      "interact verbally in Maltese",
+      "verbally interact in Maltese",
+      "speak Maltese"
+    ]
+  },
+  {
+    "langUri":"74e261bb-9a84-438b-9c6c-42e2a46613dc",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Bulgarian",
+    "synonyms":[
+      "speak Bulgarian",
+      "interacting verbally in Bulgarian",
+      "communicate verbally in Bulgarian",
+      "be fluent in Bulgarian",
+      "verbally interact in Bulgarian",
+      "interact verbally in Bulgarian"
+    ]
+  },
+  {
+    "langUri":"7629db63-5922-42fa-8c80-9575526f7326",
+    "skillType":"skill\/competence",
+    "skill":"write Greek",
+    "synonyms":[
+      "show competency in written Greek",
+      "correspond in written Greek",
+      "write Greek",
+      "writing Greek"
+    ]
+  },
+  {
+    "langUri":"76506870-aeac-4bc2-96b2-cbc6702601ea",
+    "skillType":"skill\/competence",
+    "skill":"write Norwegian",
+    "synonyms":[
+      "show competency in written Norwegian",
+      "correspond in written Norwegian",
+      "write Bokmal",
+      "write Norwegian",
+      "writing Norwegian",
+      "write Nynorsk"
+    ]
+  },
+  {
+    "langUri":"767f8edf-372a-490b-9346-54de0ba8c654",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Slovenian",
+    "synonyms":[
+      "understanding spoken Slovenian",
+      "understand spoken Slovenian",
+      "make sense of spoken Slovenian",
+      "listen to Slovenian",
+      "comprehend spoken Slovene",
+      "comprehend spoken Slovenian",
+      "interpret spoken Slovenian",
+      "understand Slovenian speech"
+    ]
+  },
+  {
+    "langUri":"768e19df-be76-4e55-9120-8d1b07306293",
+    "skillType":"skill\/competence",
+    "skill":"understand written Telugu",
+    "synonyms":[
+      "understand written Telugu",
+      "understanding written Telugu",
+      "interpret written Telugu",
+      "make sense of written Telugu",
+      "understand Telugu writing",
+      "read Telugu",
+      "comprehend written Telugu"
+    ]
+  },
+  {
+    "langUri":"78001945-0117-4dc7-ae8e-6c6800f1ffd8",
+    "skillType":"skill\/competence",
+    "skill":"understand written Berber",
+    "synonyms":[
+      "comprehend written Berber",
+      "read Berber",
+      "understanding written Berber",
+      "interpret written Berber",
+      "make sense of written Berber",
+      "understand written Berber",
+      "understand Berber writing",
+      "comprehend written Tamazight"
+    ]
+  },
+  {
+    "langUri":"7866045d-4d36-45e6-aa60-a8107f43e5b1",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Irish",
+    "synonyms":[
+      "be fluent in Irish",
+      "communicate verbally in Irish",
+      "interact verbally in Irish",
+      "verbally interact in Irish",
+      "speak Irish Gaelic",
+      "interacting verbally in Irish",
+      "speak Irish",
+      "speak Gaelic"
+    ]
+  },
+  {
+    "langUri":"790a0f2a-5250-4b6b-a013-c23160fcea65",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Punjabi",
+    "synonyms":[
+      "be fluent in Punjabi",
+      "interacting verbally in Punjabi",
+      "interact verbally in Punjabi",
+      "communicate verbally in Punjabi",
+      "verbally interact in Punjabi",
+      "speak Punjabi",
+      "speak Panjabi"
+    ]
+  },
+  {
+    "langUri":"79444b07-be9c-4cf9-ac91-04e52b2ac1a0",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Slovak",
+    "synonyms":[
+      "make sense of spoken Slovak",
+      "listen to Slovak",
+      "understanding spoken Slovak",
+      "understand spoken Slovak",
+      "understand Slovak speech",
+      "comprehend spoken Slovak",
+      "interpret spoken Slovak"
+    ]
+  },
+  {
+    "langUri":"7a86907d-1fd5-4e8f-b0f1-f366a14f6f6d",
+    "skillType":"knowledge",
+    "skill":"Javanese",
+    "synonyms":[
+      "basa jawa",
+      "ability to comprehend spoken and written Javanese and to speak and write in Javanese",
+      "Javanese",
+      "cara jawa",
+      "competent in Javanese"
+    ]
+  },
+  {
+    "langUri":"7bd84008-afc2-4f72-8b49-a1dc4723d479",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Finnish",
+    "synonyms":[
+      "comprehend spoken Finnish",
+      "understand spoken Finnish",
+      "listen to Finnish",
+      "understand Finnish speech",
+      "understanding spoken Finnish",
+      "interpret spoken Finnish",
+      "make sense of spoken Finnish"
+    ]
+  },
+  {
+    "langUri":"7c16e933-2a3f-40e8-855c-f9e5c5a56199",
+    "skillType":"skill\/competence",
+    "skill":"understand written Walloon",
+    "synonyms":[
+      "interpret written Walloon",
+      "understand Walloon writing",
+      "read Walloon",
+      "understand written Walloon",
+      "comprehend written Walloon",
+      "make sense of written Walloon",
+      "understanding written Walloon"
+    ]
+  },
+  {
+    "langUri":"7c2e97a5-ac3d-4c01-9a3b-2e395f45d34a",
+    "skillType":"skill\/competence",
+    "skill":"write Croatian",
+    "synonyms":[
+      "write Croatian",
+      "correspond in written Croatian",
+      "show competency in written Croatian",
+      "writing Croatian"
+    ]
+  },
+  {
+    "langUri":"7c946ebd-21de-4b08-af66-dff0356b5ad1",
+    "skillType":"skill\/competence",
+    "skill":"understand written Belarusian",
+    "synonyms":[
+      "understand written Belarusian",
+      "understanding written Belarusian",
+      "understand Belarusian writing",
+      "make sense of written Belarusian",
+      "read Belarusian",
+      "comprehend written Belarusian",
+      "interpret written Belarusian"
+    ]
+  },
+  {
+    "langUri":"7da256db-ea36-43e3-ba4c-286b598628d5",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Belarusian",
+    "synonyms":[
+      "be fluent in Belarusian",
+      "verbally interact in Belarusian",
+      "interacting verbally in Belarusian",
+      "communicate verbally in Belarusian",
+      "interact verbally in Belarusian",
+      "speak Belarusian"
+    ]
+  },
+  {
+    "langUri":"7e2c0de4-240d-4c6f-9336-56c0ac349212",
+    "skillType":"skill\/competence",
+    "skill":"understand written Polish",
+    "synonyms":[
+      "comprehend written Polish",
+      "read Polish",
+      "interpret written Polish",
+      "understand Polish writing",
+      "understanding written Polish",
+      "make sense of written Polish",
+      "understand written Polish"
+    ]
+  },
+  {
+    "langUri":"7ed08054-550c-4206-a991-1718dcb68658",
+    "skillType":"skill\/competence",
+    "skill":"understand written Bihari",
+    "synonyms":[
+      "comprehend written Bihari",
+      "interpret written Bihari",
+      "make sense of written Bihari",
+      "read Bihari",
+      "understand written Bihari",
+      "understand Bihari writing",
+      "understanding written Bihari"
+    ]
+  },
+  {
+    "langUri":"7ee20fe2-facd-4cc5-837b-927429e0e7ac",
+    "skillType":"skill\/competence",
+    "skill":"understand written English",
+    "synonyms":[
+      "read English",
+      "understanding written English",
+      "interpret written English",
+      "make sense of written English",
+      "understand written English",
+      "understand English writing",
+      "comprehend written English"
+    ]
+  },
+  {
+    "langUri":"7ee51257-8947-4b69-9bdf-322baf0a6398",
+    "skillType":"knowledge",
+    "skill":"Swedish",
+    "synonyms":[
+      "competent in Swedish",
+      "Swedish",
+      "ability to comprehend spoken and written Swedish and to speak and write in Swedish"
+    ]
+  },
+  {
+    "langUri":"7f030a50-030e-429e-8f50-02186b27f7ea",
+    "skillType":"skill\/competence",
+    "skill":"understand written Montenegrin",
+    "synonyms":[
+      "make sense of written Montenegrin",
+      "understanding written Montenegrin",
+      "read Montenegrin",
+      "comprehend written Montenegrin",
+      "understand Montenegrin writing",
+      "interpret written Montenegrin",
+      "understand written Montenegrin"
+    ]
+  },
+  {
+    "langUri":"8024130b-1359-485d-b40f-9b31e25d7c17",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Bengali",
+    "synonyms":[
+      "interpret spoken Bengali",
+      "understand Bengali speech",
+      "comprehend spoken Bengia",
+      "comprehend spoken Bengali",
+      "listen to Bengali",
+      "understanding spoken Bengali",
+      "understand spoken Bengali",
+      "make sense of spoken Bengali"
+    ]
+  },
+  {
+    "langUri":"81192ed1-cabc-48c5-bbc3-9ff06d3f2958",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Korean",
+    "synonyms":[
+      "understand Korean speech",
+      "interpret spoken Korean",
+      "comprehend spoken Korean",
+      "understanding spoken Korean",
+      "understand spoken Korean",
+      "make sense of spoken Korean",
+      "listen to Korean"
+    ]
+  },
+  {
+    "langUri":"829f6eb5-0b26-4152-8eb3-82dd32b2b6f2",
+    "skillType":"knowledge",
+    "skill":"Norwegian",
+    "synonyms":[
+      "competent in Norwegian",
+      "Norwegian",
+      "ability to comprehend spoken and written Norwegian and to speak and write in Norwegian"
+    ]
+  },
+  {
+    "langUri":"84e1df68-529a-4dbf-9557-5c50de5b27c3",
+    "skillType":"skill\/competence",
+    "skill":"understand written Hindi",
+    "synonyms":[
+      "understand written Hindi",
+      "understanding written Hindi",
+      "comprehend written Hindi",
+      "make sense of written Hindi",
+      "read Hindi",
+      "interpret written Hindi",
+      "understand Hindi writing"
+    ]
+  },
+  {
+    "langUri":"87087740-89b7-4d0c-a3a1-99c573c81b62",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Marathi",
+    "synonyms":[
+      "make sense of spoken Marathi",
+      "comprehend spoken Marathi",
+      "interpret spoken Marathi",
+      "understanding spoken Marathi",
+      "listen to Marathi",
+      "understand Marathi speech",
+      "understand spoken Marathi"
+    ]
+  },
+  {
+    "langUri":"87219dfe-a21c-4160-8cc8-1eabf9b16b44",
+    "skillType":"knowledge",
+    "skill":"Italian",
+    "synonyms":[
+      "competent in Italian",
+      "Italian",
+      "ability to comprehend spoken and written Italian and to speak and write in Italian"
+    ]
+  },
+  {
+    "langUri":"88778b48-d8dd-4c7e-8154-6f45fab4b0e9",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Maltese",
+    "synonyms":[
+      "listen to Maltese",
+      "comprehend spoken Maltese",
+      "make sense of spoken Maltese",
+      "understand Maltese speech",
+      "understand spoken Maltese",
+      "interpret spoken Maltese",
+      "understanding spoken Maltese"
+    ]
+  },
+  {
+    "langUri":"894f3286-ae58-4a13-a8ed-9aa7c5c77c18",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Romani",
+    "synonyms":[
+      "communicate verbally in Romani",
+      "be fluent in Romani",
+      "interacting verbally in Romani",
+      "verbally interact in Romani",
+      "speak Romany",
+      "interact verbally in Romani",
+      "speak Romani"
+    ]
+  },
+  {
+    "langUri":"895b3eab-d1e7-443d-8ba3-745f67462207",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Russian",
+    "synonyms":[
+      "interact verbally in Russian",
+      "verbally interact in Russian",
+      "speak Russian",
+      "communicate verbally in Russian",
+      "interacting verbally in Russian",
+      "be fluent in Russian"
+    ]
+  },
+  {
+    "langUri":"8a45f04a-cd28-4ac1-8e8b-ecfd21be0b18",
+    "skillType":"knowledge",
+    "skill":"Hebrew",
+    "synonyms":[
+      "Hebrew",
+      "ability to comprehend spoken and written Hebrew and to speak and write in Hebrew",
+      "competent in Hebrew"
+    ]
+  },
+  {
+    "langUri":"8d09f7c2-d10c-4818-a91d-d2f1b8ec7973",
+    "skillType":"skill\/competence",
+    "skill":"write Gujarati",
+    "synonyms":[
+      "show competency in written Gujarati",
+      "writing Gujarati",
+      "correspond in written Gujarati",
+      "write Gujarati"
+    ]
+  },
+  {
+    "langUri":"8dbd15c6-ecf0-468c-8ae1-f6eb360743dd",
+    "skillType":"knowledge",
+    "skill":"Welsh",
+    "synonyms":[
+      "competent in Welsh",
+      "Welsh",
+      "ability to comprehend spoken and written Welsh and to speak and write in Welsh"
+    ]
+  },
+  {
+    "langUri":"8e12171c-d2b4-4a79-a3ff-ebe18913cc9f",
+    "skillType":"skill\/competence",
+    "skill":"understand written Kazakh",
+    "synonyms":[
+      "understand written Kazakh",
+      "comprehend written Kazakh",
+      "understand Kazakh writing",
+      "read Kazakh",
+      "interpret written Kazakh",
+      "understanding written Kazakh",
+      "make sense of written Kazakh"
+    ]
+  },
+  {
+    "langUri":"8e46288c-025c-4d28-8316-13a21f25f964",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Serbian",
+    "synonyms":[
+      "comprehend spoken Serbian",
+      "interpret spoken Serbian",
+      "understanding spoken Serbian",
+      "listen to Serbian",
+      "understand spoken Serbian",
+      "understand Serbian speech",
+      "make sense of spoken Serbian"
+    ]
+  },
+  {
+    "langUri":"8ee2b6f2-7017-4b9a-9de2-4dedf0711394",
+    "skillType":"knowledge",
+    "skill":"Catalan",
+    "synonyms":[
+      "competent in Catalan",
+      "Catalan",
+      "ability to comprehend spoken and written Catalan and to speak and write in Catalan"
+    ]
+  },
+  {
+    "langUri":"8ef3eccc-a847-430e-b828-cf178803b8c1",
+    "skillType":"knowledge",
+    "skill":"Romani",
+    "synonyms":[
+      "Romany",
+      "Romani",
+      "competent in Romani",
+      "ability to comprehend spoken and written Romani and to speak and write in Romani"
+    ]
+  },
+  {
+    "langUri":"8f1efe4e-5f92-43b0-a329-3c17c1460a37",
+    "skillType":"skill\/competence",
+    "skill":"understand written Azerbaijani",
+    "synonyms":[
+      "comprehend written Azeri Turkish",
+      "comprehend written Azerbaijani",
+      "read Azerbaijani",
+      "understand written Azerbaijani",
+      "understanding written Azerbaijani",
+      "make sense of written Azerbaijani",
+      "interpret written Azerbaijani",
+      "comprehend written Azerbaijani Turkish",
+      "comprehend written Azeri",
+      "understand Azerbaijani writing"
+    ]
+  },
+  {
+    "langUri":"8f4c0fe6-10c7-409e-92d6-245f46728209",
+    "skillType":"skill\/competence",
+    "skill":"Irish",
+    "synonyms":[
+      "competent in Irish",
+      "ability to comprehend spoken and written Irish and to speak and write in Irish",
+      "Irish",
+      "Gaelic",
+      "Irish Gaelic"
+    ]
+  },
+  {
+    "langUri":"8ff32017-9a19-400c-8de5-8a93198864be",
+    "skillType":"skill\/competence",
+    "skill":"write Maltese",
+    "synonyms":[
+      "show competency in written Maltese",
+      "correspond in written Maltese",
+      "writing Maltese",
+      "write Maltese"
+    ]
+  },
+  {
+    "langUri":"91161335-8adf-4567-8fa5-62fb37948664",
+    "skillType":"skill\/competence",
+    "skill":"write Walloon",
+    "synonyms":[
+      "show competency in written Walloon",
+      "write Walloon",
+      "correspond in written Walloon",
+      "writing Walloon"
+    ]
+  },
+  {
+    "langUri":"9273eec7-e9ce-4860-88fb-9f30faeea34d",
+    "skillType":"skill\/competence",
+    "skill":"understand written Serbian",
+    "synonyms":[
+      "understand Serbian writing",
+      "read Serbian",
+      "comprehend written Serbian",
+      "interpret written Serbian",
+      "understanding written Serbian",
+      "understand written Serbian",
+      "make sense of written Serbian"
+    ]
+  },
+  {
+    "langUri":"92ca09cb-e827-4c49-b318-8f540de4debb",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Hebrew",
+    "synonyms":[
+      "understanding spoken Hebrew",
+      "listen to Hebrew",
+      "understand spoken Hebrew",
+      "make sense of spoken Hebrew",
+      "comprehend spoken Hebrew",
+      "interpret spoken Hebrew",
+      "understand Hebrew speech"
+    ]
+  },
+  {
+    "langUri":"943fe908-c465-4e91-944c-20e2242fd03a",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Bulgarian",
+    "synonyms":[
+      "comprehend spoken Bulgarian",
+      "understand Bulgarian speech",
+      "understanding spoken Bulgarian",
+      "listen to Bulgarian",
+      "understand spoken Bulgarian",
+      "make sense of spoken Bulgarian",
+      "interpret spoken Bulgarian"
+    ]
+  },
+  {
+    "langUri":"96ab25a3-c89b-43ea-833b-26b637c3b6ed",
+    "skillType":"skill\/competence",
+    "skill":"understand written Dutch",
+    "synonyms":[
+      "understand Dutch writing",
+      "understanding written Dutch",
+      "make sense of written Dutch",
+      "understand written Flemish",
+      "understand written Dutch",
+      "comprehend written Dutch",
+      "read Dutch",
+      "interpret written Dutch",
+      "read Flemish"
+    ]
+  },
+  {
+    "langUri":"97ca0f19-c53f-4c38-b983-398345cba227",
+    "skillType":"skill\/competence",
+    "skill":"write Albanian",
+    "synonyms":[
+      "write Albanian",
+      "show competency in written Albanian",
+      "correspond in written Albanian",
+      "writing Albanian"
+    ]
+  },
+  {
+    "langUri":"98d31888-bb47-4f54-b339-bd0b9c289048",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Slovenian",
+    "synonyms":[
+      "verbally interact in Slovenian",
+      "speak Slovenian",
+      "interacting verbally in Slovenian",
+      "be fluent in Slovenian",
+      "communicate verbally in Slovenian",
+      "interact verbally in Slovenian",
+      "speak Slovene"
+    ]
+  },
+  {
+    "langUri":"99933cd7-7868-4f83-8bb3-d747433159d3",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Lithuanian",
+    "synonyms":[
+      "understanding spoken Lithuanian",
+      "understand Lithuanian speech",
+      "comprehend spoken Lithuanian",
+      "interpret spoken Lithuanian",
+      "listen to Lithuanian",
+      "make sense of spoken Lithuanian",
+      "understand spoken Lithuanian"
+    ]
+  },
+  {
+    "langUri":"9996836f-788c-4f04-a792-c831b2e94e2f",
+    "skillType":"skill\/competence",
+    "skill":"understand written Marathi",
+    "synonyms":[
+      "make sense of written Marathi",
+      "understand written Marathi",
+      "understand Marathi writing",
+      "interpret written Marathi",
+      "read Marathi",
+      "comprehend written Marathi",
+      "understanding written Marathi"
+    ]
+  },
+  {
+    "langUri":"99b3532b-2f47-47f5-b194-708957acf0a8",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Basque",
+    "synonyms":[
+      "listen to Basque",
+      "make sense of spoken Basque",
+      "interpret spoken Basque",
+      "understand Basque  speech",
+      "comprehend spoken Basque",
+      "understanding spoken Basque",
+      "understand spoken Basque"
+    ]
+  },
+  {
+    "langUri":"9a42bdc6-8496-4874-b9f5-b48207a85282",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Greek",
+    "synonyms":[
+      "interacting verbally in Greek",
+      "be fluent in Greek",
+      "speak Greek",
+      "communicate verbally in Greek",
+      "verbally interact in Greek",
+      "interact verbally in Greek"
+    ]
+  },
+  {
+    "langUri":"9ace3aae-aeae-4ed6-b625-26bc58345554",
+    "skillType":"knowledge",
+    "skill":"Slovenian",
+    "synonyms":[
+      "Slovene",
+      "ability to comprehend spoken and written Slovenian and to speak and write in Slovenian",
+      "competent in Slovenian",
+      "Slovenian"
+    ]
+  },
+  {
+    "langUri":"9b0baaa7-fed3-41b7-b74e-9d459f11acfe",
+    "skillType":"knowledge",
+    "skill":"Gujarati",
+    "synonyms":[
+      "ability to comprehend spoken and written Gujarati and to speak and write in Gujarati",
+      "Gujarati",
+      "competent in Gujarati"
+    ]
+  },
+  {
+    "langUri":"9bccf172-587b-489b-84b7-5e1c8cc91520",
+    "skillType":"skill\/competence",
+    "skill":"understand written Swedish",
+    "synonyms":[
+      "comprehend written Swedish",
+      "understand Swedish writing",
+      "make sense of written Swedish",
+      "interpret written Swedish",
+      "understanding written Swedish",
+      "read Swedish",
+      "understand written Swedish"
+    ]
+  },
+  {
+    "langUri":"9ce34147-6618-4f1b-bbe3-f46e9aa17211",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Limburgish",
+    "synonyms":[
+      "interacting verbally in Limburgish",
+      "speak Limburgian",
+      "speak Limburgic",
+      "communicate verbally in Limburgish",
+      "speak Limburgish",
+      "verbally interact in Limburgish",
+      "interact verbally in Limburgish",
+      "be fluent in Limburgish"
+    ]
+  },
+  {
+    "langUri":"9ef06b7c-991c-46a5-9dbc-82506031e8f9",
+    "skillType":"skill\/competence",
+    "skill":"understand written Portuguese",
+    "synonyms":[
+      "understand written Portuguese",
+      "interpret written Portuguese",
+      "understand Portuguese writing",
+      "make sense of written Portuguese",
+      "comprehend written Portuguese",
+      "read Portuguese",
+      "understanding written Portuguese"
+    ]
+  },
+  {
+    "langUri":"9f3e3f27-1f27-4b77-9bc8-4ec33e33b8b1",
+    "skillType":"skill\/competence",
+    "skill":"write Bengali",
+    "synonyms":[
+      "correspond in written Bengia",
+      "show competency in written Bengali",
+      "write Bengali",
+      "writing Bengali",
+      "correspond in written Bengali"
+    ]
+  },
+  {
+    "langUri":"a0ccc96f-edec-4641-b053-12159ebe5b13",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Spanish",
+    "synonyms":[
+      "understanding spoken Spanish",
+      "comprehend spoken Spanish",
+      "understand spoken Spanish",
+      "understand Spanish speech",
+      "make sense of spoken Spanish",
+      "listen to Spanish",
+      "interpret spoken Spanish",
+      "listen to Castilian"
+    ]
+  },
+  {
+    "langUri":"a18e3090-6afb-4afb-a055-1f83bbe498e3",
+    "skillType":"knowledge",
+    "skill":"Icelandic",
+    "synonyms":[
+      "ability to comprehend spoken and written Icelandic and to speak and write in Icelandic",
+      "Icelandic",
+      "competent in Icelandic"
+    ]
+  },
+  {
+    "langUri":"a2358129-ba05-49bb-914f-03420a8be102",
+    "skillType":"skill\/competence",
+    "skill":"understand written Hebrew",
+    "synonyms":[
+      "understand written Hebrew",
+      "read Hebrew",
+      "make sense of written Hebrew",
+      "understanding written Hebrew",
+      "understand Hebrew writing",
+      "comprehend written Hebrew",
+      "interpret written Hebrew"
+    ]
+  },
+  {
+    "langUri":"a28c2024-0fa6-43fd-a848-1a7ec7fe28b0",
+    "skillType":"skill\/competence",
+    "skill":"understand written Albanian",
+    "synonyms":[
+      "understanding written Albanian",
+      "understand written Albanian",
+      "read Albanian",
+      "understand Albanian writing",
+      "interpret written Albanian",
+      "make sense of written Albanian",
+      "comprehend written Albanian"
+    ]
+  },
+  {
+    "langUri":"a28fa5f1-be5b-4608-8376-acea8c2f8cb1",
+    "skillType":"knowledge",
+    "skill":"Basque",
+    "synonyms":[
+      "ability to comprehend spoken and written Basque and to speak and write in Basque",
+      "competent in Basque",
+      "Basque"
+    ]
+  },
+  {
+    "langUri":"a3e0c23e-db44-43f5-af4b-7e1b60deb6d8",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Galician",
+    "synonyms":[
+      "interpret spoken Galician",
+      "understanding spoken Galician",
+      "understand spoken Galician",
+      "understand Galician speech",
+      "listen to Galician",
+      "make sense of spoken Galician",
+      "comprehend spoken Galician"
+    ]
+  },
+  {
+    "langUri":"a61e9686-7e8f-44ec-967b-d6445f90230b",
+    "skillType":"skill\/competence",
+    "skill":"understand written Galician",
+    "synonyms":[
+      "understanding written Galician",
+      "interpret written Galician",
+      "read Galician",
+      "make sense of written Galician",
+      "understand written Galician",
+      "comprehend written Galician",
+      "understand Galician writing"
+    ]
+  },
+  {
+    "langUri":"a6aa3c44-b4d7-4db6-9a84-329e5ca9c64d",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Albanian",
+    "synonyms":[
+      "understand spoken Albanian",
+      "understanding spoken Albanian",
+      "comprehend spoken Albanian",
+      "interpret spoken Albanian",
+      "understand Albanian speech",
+      "listen to Albanian",
+      "make sense of spoken Albanian"
+    ]
+  },
+  {
+    "langUri":"a7e1201f-bc9c-4dd9-aa82-271273f94595",
+    "skillType":"skill\/competence",
+    "skill":"understand written Yiddish",
+    "synonyms":[
+      "understand Yiddish writing",
+      "understanding written Yiddish",
+      "understand written Yiddish",
+      "read Yiddish",
+      "comprehend written Yiddish",
+      "interpret written Yiddish",
+      "make sense of written Yiddish"
+    ]
+  },
+  {
+    "langUri":"a88e4c9e-5a40-4da7-acf1-02e4a9e46da2",
+    "skillType":"skill\/competence",
+    "skill":"understand written Hungarian",
+    "synonyms":[
+      "read Hungarian",
+      "interpret written Hungarian",
+      "comprehend written Hungarian",
+      "understanding written Hungarian",
+      "understand Hungarian writing",
+      "understand written Hungarian",
+      "make sense of written Hungarian"
+    ]
+  },
+  {
+    "langUri":"a9170bca-28d9-4bb5-b950-0d0f712d1cd2",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Danish",
+    "synonyms":[
+      "comprehend spoken Danish",
+      "understanding spoken Danish",
+      "listen to Danish",
+      "understand spoken Danish",
+      "make sense of spoken Danish",
+      "interpret spoken Danish",
+      "understand Danish speech"
+    ]
+  },
+  {
+    "langUri":"a9fdd2c9-4295-4407-ba3c-1547cbce40a2",
+    "skillType":"knowledge",
+    "skill":"Bosnian",
+    "synonyms":[
+      "Bosnian",
+      "competent in Bosnian",
+      "ability to comprehend spoken and written Bosnian and to speak and write in Bosnian"
+    ]
+  },
+  {
+    "langUri":"aa66a033-8522-40e9-a5c0-ff2593e2669c",
+    "skillType":"knowledge",
+    "skill":"Turkish",
+    "synonyms":[
+      "Turkish",
+      "ability to comprehend spoken and written Turkish and to speak and write in Turkish",
+      "competent in Turkish"
+    ]
+  },
+  {
+    "langUri":"aaf57e19-0d41-4361-8de9-bcd858e3f10d",
+    "skillType":"skill\/competence",
+    "skill":"write Catalan",
+    "synonyms":[
+      "writing Catalan",
+      "correspond in written Catalan",
+      "write Catalan",
+      "show competency in written Catalan",
+      "write Valencian"
+    ]
+  },
+  {
+    "langUri":"abadaacb-5751-4f52-96b7-c9bbc070f9de",
+    "skillType":"skill\/competence",
+    "skill":"write Estonian",
+    "synonyms":[
+      "show competency in written Estonian",
+      "writing Estonian",
+      "correspond in written Estonian",
+      "write Estonian"
+    ]
+  },
+  {
+    "langUri":"ad3711f4-f4d9-41e0-b26d-030247cecde4",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Azerbaijani",
+    "synonyms":[
+      "speak Azerbaijani Turkish",
+      "interact verbally in Azerbaijani",
+      "interacting verbally in Azerbaijani",
+      "communicate verbally in Azerbaijani",
+      "verbally interact in Azerbaijani",
+      "speak Azerbaijani",
+      "be fluent in Azerbaijani",
+      "speak Azeri Turkish",
+      "speak Azeri"
+    ]
+  },
+  {
+    "langUri":"ae5d27b1-7298-4dce-836c-3bb26c2fafda",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Lithuanian",
+    "synonyms":[
+      "be fluent in Lithuanian",
+      "interacting verbally in Lithuanian",
+      "verbally interact in Lithuanian",
+      "interact verbally in Lithuanian",
+      "communicate verbally in Lithuanian",
+      "speak Lithuanian"
+    ]
+  },
+  {
+    "langUri":"ae72f370-469d-44fa-9f09-408b1c994d2e",
+    "skillType":"skill\/competence",
+    "skill":"understand written Romanian",
+    "synonyms":[
+      "understand written Moldovan",
+      "understand written Moldavian",
+      "read Romanian",
+      "understand written Romanian",
+      "make sense of written Romanian",
+      "understand Romanian writing",
+      "understanding written Romanian",
+      "read Moldavian",
+      "interpret written Romanian",
+      "read Moldovan",
+      "comprehend written Romanian"
+    ]
+  },
+  {
+    "langUri":"b0964159-d7b2-4f1e-a0d1-5d100445fcdb",
+    "skillType":"skill\/competence",
+    "skill":"understand written Arabic",
+    "synonyms":[
+      "understand written Arabic",
+      "understand Arabic writing",
+      "read Arabic",
+      "understanding written Arabic",
+      "make sense of written Arabic",
+      "comprehend written Arabic",
+      "interpret written Arabic"
+    ]
+  },
+  {
+    "langUri":"b22ab5e7-11e1-435e-bdab-0f8decd6a6f4",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Arabic",
+    "synonyms":[
+      "make sense of spoken Arabic",
+      "listen to Arabic",
+      "understand Arabic speech",
+      "understand spoken Arabic",
+      "understanding spoken Arabic",
+      "interpret spoken Arabic",
+      "comprehend spoken Arabic"
+    ]
+  },
+  {
+    "langUri":"b2c1f90a-72ce-4499-ab9a-a9a5c9355d5b",
+    "skillType":"knowledge",
+    "skill":"Georgian",
+    "synonyms":[
+      "competent in Georgian",
+      "Georgian",
+      "ability to comprehend spoken and written Georgian and to speak and write in Georgian"
+    ]
+  },
+  {
+    "langUri":"b2cd801d-803d-41bc-bef3-dea4ddd94bbc",
+    "skillType":"skill\/competence",
+    "skill":"write Hindi",
+    "synonyms":[
+      "write Hindi",
+      "correspond in written Hindi",
+      "writing Hindi",
+      "show competency in written Hindi"
+    ]
+  },
+  {
+    "langUri":"b3950b87-a980-4cd4-a795-be8a9b63661d",
+    "skillType":"knowledge",
+    "skill":"Lithuanian",
+    "synonyms":[
+      "ability to comprehend spoken and written Lithuanian and to speak and write in Lithuanian",
+      "Lithuanian",
+      "competent in Lithuanian"
+    ]
+  },
+  {
+    "langUri":"b45f87e9-66ce-4212-82eb-3a55765bc512",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Italian",
+    "synonyms":[
+      "interacting verbally in Italian",
+      "verbally interact in Italian",
+      "be fluent in Italian",
+      "speak Italian",
+      "communicate verbally in Italian",
+      "interact verbally in Italian"
+    ]
+  },
+  {
+    "langUri":"b4a5d258-4fe7-4fa5-b58f-d2f8769eb15b",
+    "skillType":"skill\/competence",
+    "skill":"write Sardinian",
+    "synonyms":[
+      "correspond in written Sardinian",
+      "writing Sardinian",
+      "show competency in written Sardinian",
+      "write Sard",
+      "write Sardu",
+      "write Sardinian"
+    ]
+  },
+  {
+    "langUri":"b4d8c494-4318-42e4-ba6e-0039390a2d7a",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Bihari",
+    "synonyms":[
+      "communicate verbally in Bihari",
+      "interacting verbally in Bihari",
+      "speak Bihari",
+      "verbally interact in Bihari",
+      "interact verbally in Bihari",
+      "be fluent in Bihari"
+    ]
+  },
+  {
+    "langUri":"b5ff2ded-a91d-468b-afed-f9737f929e86",
+    "skillType":"skill\/competence",
+    "skill":"write Chinese",
+    "synonyms":[
+      "read Standard Chinese",
+      "interpret written Chinese",
+      "reading Chinese",
+      "make sense of written Chinese",
+      "read Mandarin",
+      "read Cantonese",
+      "write Chinese",
+      "comprehend written Chinese"
+    ]
+  },
+  {
+    "langUri":"b6422189-45f6-4e87-8a9e-7e4aabddf069",
+    "skillType":"skill\/competence",
+    "skill":"write Urdu",
+    "synonyms":[
+      "write Urdu",
+      "correspond in written Urdu",
+      "show competency in written Urdu",
+      "writing Urdu"
+    ]
+  },
+  {
+    "langUri":"b694bab7-6ece-48a8-8a65-2f6d8fd62df2",
+    "skillType":"skill\/competence",
+    "skill":"understand written Norwegian",
+    "synonyms":[
+      "understand Norwegian writing",
+      "read Nynorsk",
+      "comprehend written Norwegian",
+      "understand written Norwegian",
+      "understanding written Norwegian",
+      "make sense of written Norwegian",
+      "read Norwegian",
+      "read Bokmal",
+      "understand written Nynorsk",
+      "interpret written Norwegian",
+      "understand written Bokmal"
+    ]
+  },
+  {
+    "langUri":"b6c39ec1-7da2-46dc-9cec-2f7204066cf3",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Irish",
+    "synonyms":[
+      "understand spoken Irish",
+      "comprehend spoken Irish",
+      "understand Irish speech",
+      "comprehend spoken Gaelic",
+      "make sense of spoken Irish",
+      "comprehend spoken Irish Gaelic",
+      "interpret spoken Irish",
+      "listen to Irish",
+      "understanding spoken Irish"
+    ]
+  },
+  {
+    "langUri":"b7385197-5481-4b91-9628-56dadb648f69",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Gujarati",
+    "synonyms":[
+      "listen to Gujarati",
+      "make sense of spoken Gujarati",
+      "understanding spoken Gujarati",
+      "interpret spoken Gujarati",
+      "comprehend spoken Gujarati",
+      "understand spoken Gujarati",
+      "understand Gujarati speech"
+    ]
+  },
+  {
+    "langUri":"b895feef-e869-48ac-a853-6c31a636721f",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Javanese",
+    "synonyms":[
+      "interpret spoken Javanese",
+      "understand Javanese speech",
+      "understand spoken Javanese",
+      "comprehend spoken Javanese",
+      "comprehend spoken basa jawa",
+      "understanding spoken Javanese",
+      "comprehend spoken cara jawa",
+      "make sense of spoken Javanese",
+      "listen to Javanese"
+    ]
+  },
+  {
+    "langUri":"ba002311-da5a-4795-933b-1c7d1f0f2f25",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Kazakh",
+    "synonyms":[
+      "understanding spoken Kazakh",
+      "listen to Kazakh",
+      "interpret spoken Kazakh",
+      "make sense of spoken Kazakh",
+      "understand Kazakh speech",
+      "comprehend spoken Kazakh",
+      "understand spoken Kazakh"
+    ]
+  },
+  {
+    "langUri":"bad8da46-ec16-48da-b717-e9b9616e3c91",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Macedonian",
+    "synonyms":[
+      "comprehend spoken Macedonian",
+      "listen to Macedonian",
+      "understand spoken Macedonian",
+      "interpret spoken Macedonian",
+      "understand Macedonian speech",
+      "understanding spoken Macedonian",
+      "make sense of spoken Macedonian"
+    ]
+  },
+  {
+    "langUri":"bb691baa-c7c2-41c3-af69-4dc901d22d2f",
+    "skillType":"skill\/competence",
+    "skill":"understand written Italian",
+    "synonyms":[
+      "make sense of written Italian",
+      "read Italian",
+      "understanding written Italian",
+      "interpret written Italian",
+      "understand written Italian",
+      "understand Italian writing",
+      "comprehend written Italian"
+    ]
+  },
+  {
+    "langUri":"bbe65f99-72a8-43a2-b227-9ce1457a8a20",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Catalan",
+    "synonyms":[
+      "be fluent in Catalan",
+      "interacting verbally in Catalan",
+      "speak Catalan",
+      "communicate verbally in Catalan",
+      "verbally interact in Catalan",
+      "interact verbally in Catalan"
+    ]
+  },
+  {
+    "langUri":"bc112354-758e-40eb-930e-9ebdbd5a2f34",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Greek",
+    "synonyms":[
+      "understand Greek speech",
+      "make sense of spoken Greek",
+      "comprehend spoken Greek",
+      "understand spoken Greek",
+      "interpret spoken Greek",
+      "understanding spoken Greek",
+      "listen to Greek"
+    ]
+  },
+  {
+    "langUri":"bc546a09-1103-4184-b757-3508ef5f8490",
+    "skillType":"knowledge",
+    "skill":"Urdu",
+    "synonyms":[
+      "competent in Urdu",
+      "ability to comprehend spoken and written Urdu and to speak and write in Urdu",
+      "Urdu"
+    ]
+  },
+  {
+    "langUri":"bc65ec0c-cdf0-4af3-b79e-c9bfa5abd758",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Latvian",
+    "synonyms":[
+      "understand spoken Latvian",
+      "make sense of spoken Latvian",
+      "interpret spoken Latvian",
+      "understand Latvian speech",
+      "comprehend spoken Latvian",
+      "understanding spoken Latvian",
+      "listen to Latvian"
+    ]
+  },
+  {
+    "langUri":"bdf14dfe-437d-4fb6-95f4-72da1a593384",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Swedish",
+    "synonyms":[
+      "speak Swedish",
+      "be fluent in Swedish",
+      "communicate verbally in Swedish",
+      "interacting verbally in Swedish",
+      "verbally interact in Swedish",
+      "interact verbally in Swedish"
+    ]
+  },
+  {
+    "langUri":"be5c6fb4-d257-4c98-b5e2-d3866fd0f2c2",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Korean",
+    "synonyms":[
+      "interacting verbally in Korean",
+      "verbally interact in Korean",
+      "speak Korean",
+      "communicate verbally in Korean",
+      "interact verbally in Korean",
+      "be fluent in Korean"
+    ]
+  },
+  {
+    "langUri":"befd434f-bb74-4144-8aa6-28b903b792a0",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Portuguese",
+    "synonyms":[
+      "be fluent in Portuguese",
+      "communicate verbally in Portuguese",
+      "interact verbally in Portuguese",
+      "interacting verbally in Portuguese",
+      "verbally interact in Portuguese",
+      "speak Portuguese"
+    ]
+  },
+  {
+    "langUri":"bf60009d-8afb-4306-9b0d-cfe2f66ab08f",
+    "skillType":"knowledge",
+    "skill":"Vietnamese",
+    "synonyms":[
+      "Vietnamese",
+      "ability to comprehend spoken and written Vietnamese and to speak and write in Vietnamese",
+      "competent in Vietnamese"
+    ]
+  },
+  {
+    "langUri":"bfb5f0b8-0ea0-4e44-a48d-7d876f966758",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in French",
+    "synonyms":[
+      "communicate verbally in French",
+      "interacting verbally in French",
+      "interact verbally in French",
+      "speak French",
+      "be fluent in French",
+      "verbally interact in French"
+    ]
+  },
+  {
+    "langUri":"c0d6eb4a-636c-43d8-9bec-69f6586c415a",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Estonian",
+    "synonyms":[
+      "speak Estonian",
+      "verbally interact in Estonian",
+      "communicate verbally in Estonian",
+      "be fluent in Estonian",
+      "interact verbally in Estonian",
+      "interacting verbally in Estonian"
+    ]
+  },
+  {
+    "langUri":"c2cc1a0a-356e-4634-bfd8-94c5d84324ba",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Berber",
+    "synonyms":[
+      "interact verbally in Berber",
+      "speak Tamazight",
+      "speak Berber",
+      "interacting verbally in Berber",
+      "be fluent in Berber",
+      "communicate verbally in Berber",
+      "verbally interact in Berber"
+    ]
+  },
+  {
+    "langUri":"c34a8faa-b543-45eb-b088-39baf21c5146",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Urdu",
+    "synonyms":[
+      "be fluent in Urdu",
+      "interact verbally in Urdu",
+      "verbally interact in Urdu",
+      "interacting verbally in Urdu",
+      "speak Urdu",
+      "communicate verbally in Urdu"
+    ]
+  },
+  {
+    "langUri":"c445a2f0-9f97-432d-a1be-f2b54a53576e",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Berber",
+    "synonyms":[
+      "understand Berber speech",
+      "comprehend spoken Berber",
+      "listen to Berber",
+      "understanding spoken Berber",
+      "interpret spoken Berber",
+      "understand spoken Berber",
+      "make sense of spoken Berber",
+      "comprehend spoken Tamazight"
+    ]
+  },
+  {
+    "langUri":"c44b765b-76fb-4a16-be7e-9925beee072c",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Dutch",
+    "synonyms":[
+      "be fluent in Dutch",
+      "interacting verbally in Dutch",
+      "speak Dutch",
+      "interact verbally in Dutch",
+      "verbally interact in Dutch",
+      "communicate verbally in Dutch",
+      "speak Flemish"
+    ]
+  },
+  {
+    "langUri":"c551614f-5542-460e-9a86-bfcdf160e230",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Telugu",
+    "synonyms":[
+      "speak Telugu",
+      "be fluent in Telugu",
+      "verbally interact in Telugu",
+      "interacting verbally in Telugu",
+      "communicate verbally in Telugu",
+      "interact verbally in Telugu"
+    ]
+  },
+  {
+    "langUri":"c5cb0cc1-c40b-4544-a21c-8472f0b5c14a",
+    "skillType":"knowledge",
+    "skill":"Serbian",
+    "synonyms":[
+      "competent in Serbian",
+      "Serbian",
+      "ability to comprehend spoken and written Serbian and to speak and write in Serbian"
+    ]
+  },
+  {
+    "langUri":"c5ef5813-ef1d-4a22-8fce-16b1dcf93ea1",
+    "skillType":"skill\/competence",
+    "skill":"write Belarusian",
+    "synonyms":[
+      "show competency in written Belarusian",
+      "correspond in written Belarusian",
+      "writing Belarusian",
+      "write Belarusian"
+    ]
+  },
+  {
+    "langUri":"c6b70785-fce7-4089-8250-21c97ca0ad8f",
+    "skillType":"skill\/competence",
+    "skill":"understand written Estonian",
+    "synonyms":[
+      "understand written Estonian",
+      "understanding written Estonian",
+      "make sense of written Estonian",
+      "read Estonian",
+      "interpret written Estonian",
+      "comprehend written Estonian",
+      "understand Estonian writing"
+    ]
+  },
+  {
+    "langUri":"c73e355b-89c8-4831-968e-f146f2ae970c",
+    "skillType":"skill\/competence",
+    "skill":"write Marathi",
+    "synonyms":[
+      "write Marathi",
+      "show competency in written Marathi",
+      "writing Marathi",
+      "correspond in written Marathi"
+    ]
+  },
+  {
+    "langUri":"c8c283af-3d77-4212-93ab-1b3de6a79e96",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Romanian",
+    "synonyms":[
+      "understanding spoken Romanian",
+      "understand spoken Moldavian",
+      "listen to Moldovan",
+      "interpret spoken Romanian",
+      "comprehend spoken Romanian",
+      "understand spoken Romanian",
+      "listen to Moldavian",
+      "listen to Romanian",
+      "make sense of spoken Romanian",
+      "understand spoken Moldovan",
+      "understand Romanian speech"
+    ]
+  },
+  {
+    "langUri":"c8d2416e-7db3-4f63-bce3-075f1fea66ea",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Icelandic",
+    "synonyms":[
+      "understanding spoken Icelandic",
+      "make sense of spoken Icelandic",
+      "understand Icelandic speech",
+      "interpret spoken Icelandic",
+      "listen to Icelandic",
+      "comprehend spoken Icelandic",
+      "understand spoken Icelandic"
+    ]
+  },
+  {
+    "langUri":"c98c8578-6654-4d76-8391-ecfe59abce22",
+    "skillType":"skill\/competence",
+    "skill":"understand written Danish",
+    "synonyms":[
+      "interpret written Danish",
+      "read Danish",
+      "understanding written Danish",
+      "comprehend written Danish",
+      "understand Danish writing",
+      "make sense of written Danish",
+      "understand written Danish"
+    ]
+  },
+  {
+    "langUri":"c9ba0570-f751-4023-9851-5a0826e722cc",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Javanese",
+    "synonyms":[
+      "communicate verbally in Javanese",
+      "speak basa jawa",
+      "speak cara jawa",
+      "speak Javanese",
+      "verbally interact in Javanese",
+      "interact verbally in Javanese",
+      "interacting verbally in Javanese",
+      "be fluent in Javanese"
+    ]
+  },
+  {
+    "langUri":"ca58a2d3-b901-42b2-b85f-b2b83aeadbea",
+    "skillType":"skill\/competence",
+    "skill":"understand written Russian",
+    "synonyms":[
+      "interpret written Russian",
+      "comprehend written Russian",
+      "understand Russian writing",
+      "understand written Russian",
+      "make sense of written Russian",
+      "understanding written Russian",
+      "read Russian"
+    ]
+  },
+  {
+    "langUri":"ca81a475-f76c-4318-bdd7-4f1f3605e798",
+    "skillType":"skill\/competence",
+    "skill":"write Italian",
+    "synonyms":[
+      "correspond in written Italian",
+      "write Italian",
+      "show competency in written Italian",
+      "writing Italian"
+    ]
+  },
+  {
+    "langUri":"caac02b1-ab96-477e-a7a7-295c9d9e037f",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Yiddish",
+    "synonyms":[
+      "speak Yiddish",
+      "interact verbally in Yiddish",
+      "be fluent in Yiddish",
+      "interacting verbally in Yiddish",
+      "verbally interact in Yiddish",
+      "communicate verbally in Yiddish"
+    ]
+  },
+  {
+    "langUri":"cad4f44b-28a8-4448-86e5-7389e5ebf3eb",
+    "skillType":"knowledge",
+    "skill":"Dutch",
+    "synonyms":[
+      "from Holland",
+      "Dutch",
+      "from the Netherlands"
+    ]
+  },
+  {
+    "langUri":"cb50f9cd-3638-409b-8f93-befaf17d313e",
+    "skillType":"knowledge",
+    "skill":"Maltese",
+    "synonyms":[
+      "Maltese",
+      "competent in Maltese",
+      "ability to comprehend spoken and written Maltese and to speak and write in Maltese"
+    ]
+  },
+  {
+    "langUri":"cba8e108-dd50-43ab-8100-13690408a69c",
+    "skillType":"skill\/competence",
+    "skill":"understand written Occitan",
+    "synonyms":[
+      "make sense of written Occitan",
+      "read Occitan",
+      "understand written Occitan",
+      "understand Occitan writing",
+      "interpret written Occitan",
+      "comprehend written Occitan",
+      "understanding written Occitan",
+      "comprehend written Languedoc",
+      "comprehend written Proven\u00e7al"
+    ]
+  },
+  {
+    "langUri":"cd6484a2-bfa2-4371-8e2f-1ffa2a22dac4",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Swedish",
+    "synonyms":[
+      "interpret spoken Swedish",
+      "comprehend spoken Swedish",
+      "understanding spoken Swedish",
+      "understand Swedish speech",
+      "understand spoken Swedish",
+      "make sense of spoken Swedish",
+      "listen to Swedish"
+    ]
+  },
+  {
+    "langUri":"cda53197-9c99-404a-ac8a-d8c8550ca98d",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Ukrainian",
+    "synonyms":[
+      "verbally interact in Ukrainian",
+      "communicate verbally in Ukrainian",
+      "interact verbally in Ukrainian",
+      "speak Ukrainian",
+      "interacting verbally in Ukrainian",
+      "be fluent in Ukrainian"
+    ]
+  },
+  {
+    "langUri":"cec6cd92-d709-42cc-9a6e-6a7dd48b9e08",
+    "skillType":"skill\/competence",
+    "skill":"write Spanish",
+    "synonyms":[
+      "write Castilian",
+      "correspond in written Spanish",
+      "show competency in written Spanish",
+      "write Spanish",
+      "writing Spanish"
+    ]
+  },
+  {
+    "langUri":"cf5b3ca0-a844-42b9-b9cd-bd15465b9cac",
+    "skillType":"knowledge",
+    "skill":"Limburgish",
+    "synonyms":[
+      "competent in Limburgish",
+      "Limburgish",
+      "ability to comprehend spoken and written Limburgish and to speak and write in Limburgish Limburgian",
+      "Limburgic"
+    ]
+  },
+  {
+    "langUri":"cf9e867f-08d7-48a8-8d11-c63bd8a65f89",
+    "skillType":"skill\/competence",
+    "skill":"write Arabic",
+    "synonyms":[
+      "correspond in written Arabic",
+      "writing Arabic",
+      "write Arabic",
+      "show competency in written Arabic"
+    ]
+  },
+  {
+    "langUri":"d0898934-7335-480f-a986-b9b05b54c718",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Russian",
+    "synonyms":[
+      "understand Russian speech",
+      "interpret spoken Russian",
+      "make sense of spoken Russian",
+      "comprehend spoken Russian",
+      "understanding spoken Russian",
+      "understand spoken Russian",
+      "listen to Russian"
+    ]
+  },
+  {
+    "langUri":"d10fe458-ceb5-4a40-83f4-b8ef318bf566",
+    "skillType":"skill\/competence",
+    "skill":"write Yiddish",
+    "synonyms":[
+      "show competency in written Yiddish",
+      "write Yiddish",
+      "writing Yiddish",
+      "correspond in written Yiddish"
+    ]
+  },
+  {
+    "langUri":"d16bc537-ede5-440e-a921-7e9c5e995633",
+    "skillType":"skill\/competence",
+    "skill":"understand written Chinese",
+    "synonyms":[
+      "comprehend written Standard Chinese",
+      "make sense of written Chinese",
+      "understand written Mandarin",
+      "understand Chinese writing",
+      "understand written Chinese",
+      "read Chinese",
+      "read Mandarin",
+      "interpret written Chinese",
+      "comprehend written Chinese",
+      "comprehend written Cantonese",
+      "understanding written Chinese"
+    ]
+  },
+  {
+    "langUri":"d21bcba8-ecf5-4ac3-9a6c-25a5afa42ea2",
+    "skillType":"skill\/competence",
+    "skill":"write Basque",
+    "synonyms":[
+      "show competency in written Basque",
+      "write Basque",
+      "correspond in written Basque",
+      "writing Basque"
+    ]
+  },
+  {
+    "langUri":"d4956f26-d8e3-4cca-9114-a3098f4fafbf",
+    "skillType":"skill\/competence",
+    "skill":"understand written Vietnamese",
+    "synonyms":[
+      "interpret written Vietnamese",
+      "understanding written Vietnamese",
+      "comprehend written Vietnamese",
+      "read Vietnamese",
+      "understand written Vietnamese",
+      "understand Vietnamese writing",
+      "make sense of written Vietnamese"
+    ]
+  },
+  {
+    "langUri":"d54d7c00-87c4-4f78-af8d-e84577372974",
+    "skillType":"knowledge",
+    "skill":"Walloon",
+    "synonyms":[
+      "ability to comprehend spoken and written Walloon and to speak and write in Walloon",
+      "competent in Walloon",
+      "Walloon"
+    ]
+  },
+  {
+    "langUri":"d59ef10f-ad20-4791-957d-b315196ecdc2",
+    "skillType":"knowledge",
+    "skill":"Yiddish",
+    "synonyms":[
+      "ability to comprehend spoken and written Yiddish and to speak and write in Yiddish",
+      "competent in Yiddish",
+      "Yiddish"
+    ]
+  },
+  {
+    "langUri":"d5fd4958-4ca6-4d06-845f-713e2c459612",
+    "skillType":"knowledge",
+    "skill":"Bulgarian",
+    "synonyms":[
+      "competent in Bulgarian",
+      "Bulgarian",
+      "ability to comprehend spoken and written Bulgarian and to speak and write in Bulgarian"
+    ]
+  },
+  {
+    "langUri":"d687187f-9f8f-4c3f-b0a0-230595b7f3af",
+    "skillType":"skill\/competence",
+    "skill":"understand written Kurdish",
+    "synonyms":[
+      "understand written Kurdish",
+      "understand Kurdish writing",
+      "comprehend written Kurdish",
+      "make sense of written Kurdish",
+      "read Kurdish",
+      "interpret written Kurdish",
+      "understanding written Kurdish"
+    ]
+  },
+  {
+    "langUri":"d6dbc6ea-9bb6-4a8f-9bc2-e9299d74fff9",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Vietnamese",
+    "synonyms":[
+      "be fluent in Vietnamese",
+      "interacting verbally in Vietnamese",
+      "interact verbally in Vietnamese",
+      "speak Vietnamese",
+      "verbally interact in Vietnamese",
+      "communicate verbally in Vietnamese"
+    ]
+  },
+  {
+    "langUri":"d88d546f-c06d-40f0-9810-3a914abb5444",
+    "skillType":"skill\/competence",
+    "skill":"understand written Bosnian",
+    "synonyms":[
+      "comprehend written Bosnian",
+      "read Bosnian",
+      "understand written Bosnian",
+      "understand Bosnian writing",
+      "understanding written Bosnian",
+      "interpret written Bosnian",
+      "make sense of written Bosnian"
+    ]
+  },
+  {
+    "langUri":"d937b5aa-8337-4d47-8281-6a67c905569a",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Yiddish",
+    "synonyms":[
+      "comprehend spoken Yiddish",
+      "understanding spoken Yiddish",
+      "understand Yiddish speech",
+      "interpret spoken Yiddish",
+      "listen to Yiddish",
+      "understand spoken Yiddish",
+      "make sense of spoken Yiddish"
+    ]
+  },
+  {
+    "langUri":"d93a7370-bf56-43f5-be54-e108f8ec3107",
+    "skillType":"knowledge",
+    "skill":"Hindi",
+    "synonyms":[
+      "Hindi",
+      "ability to comprehend spoken and written Hindi and to speak and write in Hindi",
+      "competent in Hindi"
+    ]
+  },
+  {
+    "langUri":"d974d81a-a8db-430d-a3fe-b064bd6a374f",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Turkish",
+    "synonyms":[
+      "comprehend spoken Turkish",
+      "understand Turkish speech",
+      "understand spoken Turkish",
+      "listen to Turkish",
+      "interpret spoken Turkish",
+      "understanding spoken Turkish",
+      "make sense of spoken Turkish"
+    ]
+  },
+  {
+    "langUri":"d9916072-47e1-4466-9908-e7d8f654adc9",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Ukrainian",
+    "synonyms":[
+      "comprehend spoken Ukrainian",
+      "understanding spoken Ukrainian",
+      "interpret spoken Ukrainian",
+      "listen to Ukrainian",
+      "make sense of spoken Ukrainian",
+      "understand spoken Ukrainian",
+      "understand Ukrainian speech"
+    ]
+  },
+  {
+    "langUri":"da0795a7-6866-4afc-81ed-5e3aa398f058",
+    "skillType":"knowledge",
+    "skill":"Czech",
+    "synonyms":[
+      "Czech",
+      "competent in Czech",
+      "ability to comprehend spoken and written Czech and to speak and write in Czech"
+    ]
+  },
+  {
+    "langUri":"da4fed26-1991-45bd-b7e0-4eded5dcee10",
+    "skillType":"skill\/competence",
+    "skill":"understand written Slovenian",
+    "synonyms":[
+      "read Slovenian",
+      "understand written Slovenian",
+      "comprehend written Slovene",
+      "make sense of written Slovenian",
+      "comprehend written Slovenian",
+      "interpret written Slovenian",
+      "understanding written Slovenian",
+      "understand Slovenian writing"
+    ]
+  },
+  {
+    "langUri":"db751c12-2062-477b-b2b2-6be80daa1ff8",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Kurdish",
+    "synonyms":[
+      "interacting verbally in Kurdish",
+      "interact verbally in Kurdish",
+      "communicate verbally in Kurdish",
+      "speak Kurdish",
+      "verbally interact in Kurdish",
+      "be fluent in Kurdish"
+    ]
+  },
+  {
+    "langUri":"dc052a4f-fb8e-4edb-a575-3a63ddd5b94b",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Polish",
+    "synonyms":[
+      "verbally interact in Polish",
+      "interacting verbally in Polish",
+      "speak Polish",
+      "be fluent in Polish",
+      "interact verbally in Polish",
+      "communicate verbally in Polish"
+    ]
+  },
+  {
+    "langUri":"dcdff38c-01b1-4e44-bc2f-f69b889d45bb",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Macedonian",
+    "synonyms":[
+      "verbally interact in Macedonian",
+      "communicate verbally in Macedonian",
+      "interact verbally in Macedonian",
+      "speak Macedonian",
+      "be fluent in Macedonian",
+      "interacting verbally in Macedonian"
+    ]
+  },
+  {
+    "langUri":"dd5cb6ea-3818-4734-816d-821a67a3684e",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Japanese",
+    "synonyms":[
+      "verbally interact in Japanese",
+      "interact verbally in Japanese",
+      "interacting verbally in Japanese",
+      "be fluent in Japanese",
+      "communicate verbally in Japanese",
+      "speak Japanese"
+    ]
+  },
+  {
+    "langUri":"ddd3596a-43f3-402e-960a-5f79362a8609",
+    "skillType":"knowledge",
+    "skill":"Hungarian",
+    "synonyms":[
+      "competent in Hungarian",
+      "Hungarian",
+      "ability to comprehend spoken and written Hungarian and to speak and write in Hungarian"
+    ]
+  },
+  {
+    "langUri":"df794a74-0392-4178-918b-e38e68487325",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Tamil",
+    "synonyms":[
+      "understanding spoken Tamil",
+      "listen to Tamil",
+      "interpret spoken Tamil",
+      "understand spoken Tamil",
+      "understand Tamil speech",
+      "make sense of spoken Tamil",
+      "comprehend spoken Tamil"
+    ]
+  },
+  {
+    "langUri":"e05b9e06-d298-4646-b762-acbd485a20e9",
+    "skillType":"knowledge",
+    "skill":"Punjabi",
+    "synonyms":[
+      "Panjabi",
+      "ability to comprehend spoken and written Punjabi and to speak and write in Punjabi",
+      "competent in Punjabi",
+      "Punjabi"
+    ]
+  },
+  {
+    "langUri":"e0f20875-de6a-4795-9788-6a32be41512f",
+    "skillType":"skill\/competence",
+    "skill":"understand written Croatian",
+    "synonyms":[
+      "understand written Croatian",
+      "understanding written Croatian",
+      "understand Croatian writing",
+      "read Croatian",
+      "comprehend written Croatian",
+      "make sense of written Croatian",
+      "interpret written Croatian"
+    ]
+  },
+  {
+    "langUri":"e18ee06c-7a0f-47d5-8143-345b8a6f4739",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Occitan",
+    "synonyms":[
+      "comprehend spoken Occitan",
+      "interpret spoken Occitan",
+      "understand Occitan speech",
+      "comprehend spoken Languedoc",
+      "listen to Occitan",
+      "comprehend spoken Proven\u00e7al",
+      "make sense of spoken Occitan",
+      "understand spoken Occitan",
+      "understanding spoken Occitan"
+    ]
+  },
+  {
+    "langUri":"e1ebf53c-8800-402c-9e61-e19ac072c52d",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Hindi",
+    "synonyms":[
+      "listen to Hindi",
+      "understand Hindi speech",
+      "understand spoken Hindi",
+      "interpret spoken Hindi",
+      "comprehend spoken Hindi",
+      "understanding spoken Hindi",
+      "make sense of spoken Hindi"
+    ]
+  },
+  {
+    "langUri":"e29c14e1-60c7-444c-b3d0-43d6bee04340",
+    "skillType":"skill\/competence",
+    "skill":"write Limburgish",
+    "synonyms":[
+      "writing Limburgish",
+      "write Limburgian",
+      "correspond in written Limburgish",
+      "show competency in written Limburgish",
+      "write Limburgish",
+      "write Limburgic"
+    ]
+  },
+  {
+    "langUri":"e3332a83-c688-4838-bd19-e66f6da2201e",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Bihari",
+    "synonyms":[
+      "understanding spoken Bihari",
+      "understand Bihari speech",
+      "make sense of spoken Bihari",
+      "understand spoken Bihari",
+      "interpret spoken Bihari",
+      "comprehend spoken Bihari",
+      "listen to Bihari"
+    ]
+  },
+  {
+    "langUri":"e35cfb6e-ea8e-4aef-aab9-3cbc7d79647b",
+    "skillType":"skill\/competence",
+    "skill":"write Dutch",
+    "synonyms":[
+      "write Dutch",
+      "write Flemish",
+      "show competency in written Dutch",
+      "correspond in written Dutch",
+      "writing Dutch"
+    ]
+  },
+  {
+    "langUri":"e396053a-7820-4c4d-9ba9-20d66753f50e",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Sardinian",
+    "synonyms":[
+      "comprehend spoken Sardinian",
+      "comprehend spoken Sard",
+      "interpret spoken Sardinian",
+      "understand Sardinian speech",
+      "listen to Sardinian",
+      "understand spoken Sardinian",
+      "understanding spoken Sardinian",
+      "make sense of spoken Sardinian",
+      "comprehend spoken Sardu"
+    ]
+  },
+  {
+    "langUri":"e39c8636-6bbc-44c3-88ba-de059ac2396c",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Serbian",
+    "synonyms":[
+      "be fluent in Serbian",
+      "interact verbally in Serbian",
+      "speak Serbian",
+      "interacting verbally in Serbian",
+      "verbally interact in Serbian",
+      "communicate verbally in Serbian"
+    ]
+  },
+  {
+    "langUri":"e3a22d2c-2b2e-4eda-b756-2a1908be79b7",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Limburgish",
+    "synonyms":[
+      "understand spoken Limburgish",
+      "comprehend spoken Limburgish",
+      "comprehend spoken Limburgian",
+      "interpret spoken Limburgish",
+      "make sense of spoken Limburgish",
+      "comprehend spoken Limburgic",
+      "understanding spoken Limburgish",
+      "understand Limburgish speech"
+    ]
+  },
+  {
+    "langUri":"e58ea17c-1442-4b34-8ec6-0587a5fb55a6",
+    "skillType":"skill\/competence",
+    "skill":"understand written Greek",
+    "synonyms":[
+      "understand Greek writing",
+      "comprehend written Greek",
+      "read Greek",
+      "interpret written Greek",
+      "make sense of written Greek",
+      "understanding written Greek",
+      "understand written Greek"
+    ]
+  },
+  {
+    "langUri":"e5dbcfcf-3139-40e2-87ed-f7154a0a70a4",
+    "skillType":"skill\/competence",
+    "skill":"understand written Bengali",
+    "synonyms":[
+      "comprehend written Bengia",
+      "make sense of written Bengali",
+      "comprehend written Bengali",
+      "understanding written Bengali",
+      "understand written Bengali",
+      "read Bengali",
+      "understand Bengali writing",
+      "interpret written Bengali"
+    ]
+  },
+  {
+    "langUri":"e747e77e-0ea1-4001-8b07-1d11946b5f1b",
+    "skillType":"knowledge",
+    "skill":"French",
+    "synonyms":[
+      "ability to comprehend spoken and written French and to speak and write in French",
+      "competent in French",
+      "French"
+    ]
+  },
+  {
+    "langUri":"e832f8d8-d627-4b0d-b1a5-b52f3917bb63",
+    "skillType":"skill\/competence",
+    "skill":"understand written Slovak",
+    "synonyms":[
+      "understand written Slovak",
+      "interpret written Slovak",
+      "make sense of written Slovak",
+      "comprehend written Slovak",
+      "understand Slovak writing",
+      "understanding written Slovak",
+      "read Slovak"
+    ]
+  },
+  {
+    "langUri":"e9e9b625-f59f-4bda-952d-1f9831e6dfda",
+    "skillType":"knowledge",
+    "skill":"Tamil",
+    "synonyms":[
+      "Tamil",
+      "competent in Tamil",
+      "ability to comprehend spoken and written Tamil and to speak and write in Tamil"
+    ]
+  },
+  {
+    "langUri":"ea4d26de-df11-464f-940f-d63f0f5848f1",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Sardinian",
+    "synonyms":[
+      "interact verbally in Sardinian",
+      "speak Sardu",
+      "speak Sardinian",
+      "be fluent in Sardinian",
+      "communicate verbally in Sardinian",
+      "speak Sard",
+      "verbally interact in Sardinian",
+      "interacting verbally in Sardinian"
+    ]
+  },
+  {
+    "langUri":"ea4ebfa1-e17a-4416-ac54-955f33e6ade7",
+    "skillType":"knowledge",
+    "skill":"Greek",
+    "synonyms":[
+      "ability to comprehend spoken and written Greek and to speak and write in Greek",
+      "Greek",
+      "competent in Greek"
+    ]
+  },
+  {
+    "langUri":"eb19f00b-62c1-493b-bd75-1e90718ac04a",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Bengali",
+    "synonyms":[
+      "communicate verbally in Bengali",
+      "speak Bengali",
+      "verbally interact in Bengali",
+      "interacting verbally in Bengali",
+      "interact verbally in Bengali",
+      "be fluent in Bengali"
+    ]
+  },
+  {
+    "langUri":"ec4855b5-84a5-4c59-812e-8e4319d7bf8d",
+    "skillType":"skill\/competence",
+    "skill":"write Persian",
+    "synonyms":[
+      "correspond in written Farsi",
+      "writing Persian",
+      "show competency in written Persian",
+      "write Persian",
+      "correspond in written Persian",
+      "write Farsi"
+    ]
+  },
+  {
+    "langUri":"ecb6d4ea-5693-453b-8c9a-d6c68589319a",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Czech",
+    "synonyms":[
+      "comprehend spoken Czech",
+      "understand Czech speech",
+      "understand spoken Czech",
+      "make sense of spoken Czech",
+      "understanding spoken Czech",
+      "listen to Czech",
+      "interpret spoken Czech"
+    ]
+  },
+  {
+    "langUri":"ed1614dd-5a66-4a95-968f-a0d46ecdce92",
+    "skillType":"skill\/competence",
+    "skill":"write Tamil",
+    "synonyms":[
+      "writing Tamil",
+      "correspond in written Tamil",
+      "write Tamil",
+      "show competency in written Tamil"
+    ]
+  },
+  {
+    "langUri":"edd82d34-0ab5-45cb-9997-360e177ced27",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Armenian",
+    "synonyms":[
+      "interact verbally in Armenian",
+      "speak Armenian",
+      "interacting verbally in Armenian",
+      "be fluent in Armenian",
+      "verbally interact in Armenian",
+      "communicate verbally in Armenian"
+    ]
+  },
+  {
+    "langUri":"ede98e07-f07d-41bc-99b0-f88bf0dad438",
+    "skillType":"knowledge",
+    "skill":"Bengali",
+    "synonyms":[
+      "ability to comprehend spoken and written Bengali and to speak and write in Bengali",
+      "Bengali",
+      "competent in Bengali",
+      "Bangla"
+    ]
+  },
+  {
+    "langUri":"efa7943e-28b8-4657-bccb-f04e86ba058b",
+    "skillType":"skill\/competence",
+    "skill":"write Kurdish",
+    "synonyms":[
+      "writing Kurdish",
+      "correspond in written Kurdish",
+      "show competency in written Kurdish",
+      "write Kurdish"
+    ]
+  },
+  {
+    "langUri":"f018c29a-e837-4c4e-ac7c-aea212e0fc48",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Urdu",
+    "synonyms":[
+      "listen to Urdu",
+      "understand spoken Urdu",
+      "interpret spoken Urdu",
+      "understanding spoken Urdu",
+      "make sense of spoken Urdu",
+      "understand Urdu speech",
+      "comprehend spoken Urdu"
+    ]
+  },
+  {
+    "langUri":"f16e242e-a0e1-4d3a-b8bc-0fc6eca50354",
+    "skillType":"skill\/competence",
+    "skill":"write Kazakh",
+    "synonyms":[
+      "correspond in written Kazakh",
+      "write Kazakh",
+      "show competency in written Kazakh",
+      "writing Kazakh"
+    ]
+  },
+  {
+    "langUri":"f1a08ec9-32d2-4e52-ba4a-66e049019be8",
+    "skillType":"knowledge",
+    "skill":"Albanian",
+    "synonyms":[
+      "competent in Albanian",
+      "Albanian",
+      "ability to comprehend spoken and written Albanian and to speak and write in Albanian"
+    ]
+  },
+  {
+    "langUri":"f2d14962-e378-4df4-87ce-f1786df2b015",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Belarusian",
+    "synonyms":[
+      "make sense of spoken Belarusian",
+      "understand Belarusian speech",
+      "listen to Belarusian",
+      "understanding spoken Belarusian",
+      "comprehend spoken Belarusian",
+      "understand spoken Belarusian",
+      "interpret spoken Belarusian"
+    ]
+  },
+  {
+    "langUri":"f37dbb3c-dafc-4835-86d1-de9615626f9b",
+    "skillType":"knowledge",
+    "skill":"Kazakh",
+    "synonyms":[
+      "Kazakh",
+      "competent in Kazakh",
+      "ability to comprehend spoken and written Kazakh and to speak and write in Kazakh"
+    ]
+  },
+  {
+    "langUri":"f3e9b964-0c2d-46c4-a895-8b3583054d69",
+    "skillType":"knowledge",
+    "skill":"Polish",
+    "synonyms":[
+      "Polish",
+      "ability to comprehend spoken and written Polish and to speak and write in Polish",
+      "competent in Polish"
+    ]
+  },
+  {
+    "langUri":"f58e2088-08c5-4680-83a1-18ba01299d4c",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Hebrew",
+    "synonyms":[
+      "interacting verbally in Hebrew",
+      "interact verbally in Hebrew",
+      "communicate verbally in Hebrew",
+      "verbally interact in Hebrew",
+      "be fluent in Hebrew",
+      "speak Hebrew"
+    ]
+  },
+  {
+    "langUri":"f5e51369-45c6-42b1-8ccc-d1826112e555",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Polish",
+    "synonyms":[
+      "understand spoken Polish",
+      "interpret spoken Polish",
+      "understand Polish speech",
+      "listen to Polish",
+      "comprehend spoken Polish",
+      "make sense of spoken Polish",
+      "understanding spoken Polish"
+    ]
+  },
+  {
+    "langUri":"f61a0a31-5b6b-4129-b5c2-99e10a5d7794",
+    "skillType":"skill\/competence",
+    "skill":"understand written Welsh",
+    "synonyms":[
+      "interpret written Welsh",
+      "understand Welsh writing",
+      "read Welsh",
+      "understand written Welsh",
+      "understanding written Welsh",
+      "make sense of written Welsh",
+      "comprehend written Welsh"
+    ]
+  },
+  {
+    "langUri":"f739ca36-437c-4f87-83bb-7a1933768d26",
+    "skillType":"skill\/competence",
+    "skill":"understand written Limburgish",
+    "synonyms":[
+      "make sense of written Limburgish",
+      "understand Limburgish writing",
+      "comprehend written Limburgian",
+      "read Limburgic",
+      "understanding written Limburgish",
+      "comprehend written Limburgic",
+      "understand written Limburgish",
+      "read Limburgish",
+      "interpret written Limburgish",
+      "comprehend written Limburgish"
+    ]
+  },
+  {
+    "langUri":"f7d66f52-6ea4-4ed4-a5b1-318c8eff6f47",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Galician",
+    "synonyms":[
+      "speak Galician",
+      "interacting verbally in Galician",
+      "be fluent in Galician",
+      "communicate verbally in Galician",
+      "verbally interact in Galician",
+      "interact verbally in Galician"
+    ]
+  },
+  {
+    "langUri":"f9bc2890-d1f2-4a83-bd7b-b150a7679c79",
+    "skillType":"knowledge",
+    "skill":"Korean",
+    "synonyms":[
+      "competent in Korean",
+      "ability to comprehend spoken and written Korean and to speak and write in Korean",
+      "Korean"
+    ]
+  },
+  {
+    "langUri":"fa8ee260-64dc-42db-a5c7-9d3b232767df",
+    "skillType":"skill\/competence",
+    "skill":"write Polish",
+    "synonyms":[
+      "writing Polish",
+      "correspond in written Polish",
+      "write Polish",
+      "show competency in written Polish"
+    ]
+  },
+  {
+    "langUri":"fb299aca-b999-4829-9a40-f8379ac006f4",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Malay",
+    "synonyms":[
+      "verbally interact in Malay",
+      "be fluent in Malay",
+      "interacting verbally in Malay",
+      "interact verbally in Malay",
+      "speak Malaysian",
+      "speak Malay",
+      "communicate verbally in Malay"
+    ]
+  },
+  {
+    "langUri":"fbe75fa4-4f78-459b-858a-a30b29e7591e",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Walloon",
+    "synonyms":[
+      "understand Walloon speech",
+      "understand spoken Walloon",
+      "listen to Walloon",
+      "make sense of spoken Walloon",
+      "understanding spoken Walloon",
+      "interpret spoken Walloon",
+      "comprehend spoken Walloon"
+    ]
+  },
+  {
+    "langUri":"fcbcdf4c-d079-4010-ab4b-8356fbfa5096",
+    "skillType":"knowledge",
+    "skill":"Armenian",
+    "synonyms":[
+      "Armenian",
+      "ability to comprehend spoken and written Armenian and to speak and write in Armenian",
+      "competent in Armenian"
+    ]
+  },
+  {
+    "langUri":"fcd4892f-486f-4e86-b78b-146a95c546a1",
+    "skillType":"skill\/competence",
+    "skill":"interact verbally in Croatian",
+    "synonyms":[
+      "be fluent in Croatian",
+      "communicate verbally in Croatian",
+      "interacting verbally in Croatian",
+      "speak Croatian",
+      "verbally interact in Croatian",
+      "interact verbally in Croatian"
+    ]
+  },
+  {
+    "langUri":"ff52e69a-8873-4827-b140-958dee5a62bb",
+    "skillType":"skill\/competence",
+    "skill":"understand spoken Norwegian",
+    "synonyms":[
+      "comprehend spoken Norwegian",
+      "interpret spoken Norwegian",
+      "understand Norwegian speech",
+      "understanding spoken Norwegian",
+      "make sense of spoken Norwegian",
+      "understand spoken Norwegian"
+    ]
+  },
+  {
+    "langUri":"ff7f57d7-084b-4ec2-8e2d-2637b1ab3931",
+    "skillType":"skill\/competence",
+    "skill":"write Occitan",
+    "synonyms":[
+      "correspond in written Proven\u00e7al",
+      "writing Occitan",
+      "correspond in written Languedoc",
+      "write Occitan",
+      "show competency in written Occitan",
+      "correspond in written Occitan"
+    ]
+  }
+]

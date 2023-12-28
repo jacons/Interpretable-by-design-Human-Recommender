@@ -72,7 +72,7 @@ class MatchingScore:
         if name is not None and path is not None:
             if not os.path.exists(path):
                 os.makedirs(path)
-            dataset.to_csv(f"{path}/{name}_dataset.csv", index=False)
+            dataset.to_json(f"{path}/{name}_dataset.json", indent=2, orient="records")
 
     def _split_and_save_datasets(self, dataset: DataFrame, path: str = None,
                                  name: str = None) -> Tuple[DataFrame, DataFrame, DataFrame]:
@@ -83,8 +83,8 @@ class MatchingScore:
         if name is not None and path is not None:
             if not os.path.exists(path):
                 os.makedirs(path)
-            train.to_csv(f"{path}/{name}_dataset_tr.csv", index=False)
-            valid.to_csv(f"{path}/{name}_dataset_vl.csv", index=False)
-            test.to_csv(f"{path}/{name}_dataset_ts.csv", index=False)
+            train.to_json(f"{path}/{name}_dataset_tr.json", indent=2, orient="records")
+            valid.to_json(f"{path}/{name}_dataset_vl.json", indent=2, orient="records")
+            test.to_json(f"{path}/{name}_dataset_ts.json", indent=2, orient="records")
 
         return train, valid, test

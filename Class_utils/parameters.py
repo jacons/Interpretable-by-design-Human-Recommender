@@ -1,16 +1,17 @@
 from enum import Enum
 
 file_paths = dict(
-    job2skills_path="../sources/job2skills.csv",
-    occupation_path="../sources/occupations.csv",
-    skills_path="../sources/skills.csv",
+    occupation_path="../sources/occupations.json",
+    skills_path="../sources/skills.json",
+    occ2skills_path="../sources/occ2skills.json",
+    skillUri2sys_path="../sources/skillUri2sys.json",
+    sys2skillUri_path="../sources/sys2skillUri.json",
     cities_path="../sources/all_cities.csv",  # All cites used
     languages_level_path="../sources/languages_level.csv",  # All language levels
     languages_path="../sources/languages.csv",  # All language
     education_path="../sources/education.csv",  # Education hierarchy
     cities_dist="../sources/cities_distance.csv",
     min_max_edu_occupation_path="../sources/min_max_education.csv",  # Minimal/Maximal education for isco groups
-    skill_synonyms_path="../sources/skills_synonyms.csv",  # Skills synonyms
 
     opt_lang_distribution=[0.65, 0.35],  # Distribution of extra languages that the candidate knows [0-1]
 )

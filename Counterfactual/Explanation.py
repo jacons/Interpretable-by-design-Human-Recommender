@@ -4,7 +4,7 @@ from imodels import FIGSRegressor
 from pandas import DataFrame
 
 from Class_utils.FitnessFunctions import FitnessFunctions
-from Class_utils.JobGraph import JobGraph
+from KnowledgeBase.JobGraph import JobGraph
 
 
 class FIGSExplanation:

@@ -1,8 +1,7 @@
-import numpy as np
 from numpy import mean
 from pandas import read_csv
 
-from Class_utils.JobGraph import JobGraph
+from KnowledgeBase.JobGraph import JobGraph
 from Class_utils.parameters import Language, EducationLevel
 
 """

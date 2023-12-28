@@ -4,7 +4,7 @@ from typing import Tuple
 import numpy as np
 from lightgbm import LGBMRanker
 from numpy import asarray, ndarray
-from pandas import read_csv, DataFrame
+from pandas import DataFrame, read_json
 from sklearn.metrics import ndcg_score
 from sklearn.model_selection import ParameterGrid
 from tqdm import tqdm
@@ -15,9 +15,10 @@ from Models.grid_search_utils import GridSearch
 class LGBMRanker_class(GridSearch):
 
     def __init__(self, name: str, path: str = None, nDCG_at: int = 15):
-        self.train = read_csv(f"{path}{name}_dataset_tr.csv")
-        self.valid = read_csv(f"{path}{name}_dataset_vl.csv")
-        self.test = read_csv(f"{path}{name}_dataset_ts.csv")
+
+        self.train = read_json(f"{path}{name}_dataset_tr.json")
+        self.valid = read_json(f"{path}{name}_dataset_vl.json")
+        self.test = read_json(f"{path}{name}_dataset_ts.json")
 
         # sorting after the splitting
         self.train.sort_values(["qId", "kId"], inplace=True)

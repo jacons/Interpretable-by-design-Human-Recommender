@@ -10,8 +10,8 @@ from numpy import arange
 from pandas import DataFrame, read_csv
 from tqdm import tqdm
 
-from Class_utils.JobGraph import JobGraph, RelationNode, TypeNode
-from Class_utils.parameters import Language
+from KnowledgeBase.JobGraph import JobGraph
+from Class_utils.parameters import Language, RelationNode, TypeNode
 
 
 class JobGenerator:
@@ -37,7 +37,6 @@ class JobGenerator:
 
         # --- Skills and Occupations ---
         self.job_graph = job_graph
-        self.skills_synonyms = read_csv(sources["skill_synonyms_path"])
 
         # --- Cities ---
         self.all_cities = read_csv(sources["cities_path"], usecols=[0, 2]).astype({'city': 'string', 'P': 'float'})
@@ -47,7 +46,6 @@ class JobGenerator:
         self.education = read_csv(sources["education_path"], index_col=0).astype(
             {'Education': 'string', 'Distribution': 'float', 'min_age': 'int'})
         min_max_edu = pd.read_csv(sources["min_max_edu_occupation_path"]).set_index("code")
-        min_max_edu.index = min_max_edu.index.str[1:]
         self.min_max_edu = min_max_edu.to_dict("index")
         # --- Education  ---
 
@@ -84,12 +82,8 @@ class JobGenerator:
         if path is not None and name is not None:
             if not os.path.exists(path):
                 os.makedirs(path)
-            offers.to_csv(f"{path}/{name}_job_offers.csv", quoting=csv.QUOTE_MINIMAL)
-
-    @staticmethod
-    def fill(lists_: list[list[str]], n: list[int]):
-        for idx, list_ in enumerate(lists_):
-            list_.extend(["-" for _ in range(len(list_), n[idx])])
+            offers.reset_index().to_json(f"{path}/{name}_job_offers.json",
+                                         indent=2, orient="records")
 
     def _jobOffer(self, qId: int) -> dict:
         """
@@ -121,11 +115,11 @@ class JobGenerator:
         offer = dict(
             qId=qId,  # 0
             Job=job_Name,  # 1
-            metadata=dict(group=isco_group,
-                          uri_comp_ess=uri_comp_es,
-                          uri_comp_opt=uri_comp_op,
-                          uri_know_ess=uri_know_es,
-                          uri_know_opt=uri_know_op),  # 2
+            info=dict(group=isco_group,
+                      uri_comp_ess=uri_comp_es,
+                      uri_comp_opt=uri_comp_op,
+                      uri_know_ess=uri_know_es,
+                      uri_know_opt=uri_know_op),  # 2
             Edu_essential=edu_essential,  # 3
             Edu_optional=edu_optional,  # 4
             AgeMin=min_age,  # 5
@@ -147,8 +141,8 @@ class JobGenerator:
         Give an isco group return an "essential" and "optional" education and the minimal age
         """
         # retrieve minimal/maximal education for this kind of group
-        min_edu = self.min_max_edu[isco_group[:3]]["min_edu"]  # minimal education
-        max_edu = self.min_max_edu[isco_group[:3]]["max_edu"]  # maximal education
+        min_edu = self.min_max_edu[isco_group[:4]]["min_edu"]  # minimal education
+        max_edu = self.min_max_edu[isco_group[:4]]["max_edu"]  # maximal education
 
         # Sample an "essential education"
         education = self.education[(self.education.index >= min_edu) & (self.education.index <= max_edu)]
@@ -270,7 +264,8 @@ class JobGenerator:
         if path is not None and name is not None:
             if not os.path.exists(path):
                 os.makedirs(path)
-            curricula.to_csv(f"{path}/{name}_curricula.csv", index=True, quoting=csv.QUOTE_MINIMAL)
+            curricula.reset_index().to_json(f"{path}/{name}_curricula.json", indent=2,
+                                           orient="records")
 
     def _generate_consistent_cv(self, job_offer: tuple, n_consistent_cv: int) -> list[dict]:
 
@@ -369,7 +364,7 @@ class JobGenerator:
 
         if uri_occ is None:
             uri_occ, _, group = self.job_graph.sample_occupation()
-            min_edu = self.min_max_edu[group[:3]]["min_edu"]
+            min_edu = self.min_max_edu[group[:4]]["min_edu"]
             edu_essential = self.education.loc[min_edu, "Education"]
 
         edu_row = self.education[self.education["Education"] == edu_essential]
@@ -401,10 +396,10 @@ class JobGenerator:
         cv = dict(
             qId=qId,  # 0
             kId=next(self.kid_generator),  # 0
-            metadata=dict(occ=uri_occ,
-                          consistent=consistent,
-                          uri_competences=uri_comp,
-                          uri_knowledge=uri_know),  # 1
+            info=dict(occ=uri_occ,
+                      consistent=consistent,
+                      uri_competences=uri_comp,
+                      uri_knowledge=uri_know),  # 1
             Education=education,  # 2
             Age=age,  # 3
             City=self.all_cities.sample(n=1, weights="P")["city"].values[0],  # 4
