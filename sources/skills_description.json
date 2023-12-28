@@ -1293,7 +1293,7 @@
   },
   {
     "skillUri":"06f33d6a-f7a7-4a2b-baa5-8c3c53bd1a9c",
-    "description":"The digital tools to conduct keyword research. The information retrieval systems identify the content of a document guided by keywords and info."
+    "description":"The digital tools to conduct keyword research. The information retrieval systems identify the content of a document guided by keywords and metadata."
   },
   {
     "skillUri":"06f3473a-0057-4992-b6f2-3bf606462ed0",
@@ -27489,7 +27489,7 @@
   },
   {
     "skillUri":"8096627b-c5a5-4235-b1ee-eca8be976eb2",
-    "description":"Keep track of the phone calls made. Record the caller's personal data, the content of the call and other info in accordance with company policies and legal regulations."
+    "description":"Keep track of the phone calls made. Record the caller's personal data, the content of the call and other metadata in accordance with company policies and legal regulations."
   },
   {
     "skillUri":"80a8eafd-8827-4e63-93f5-8ab91550a75d",
@@ -32329,7 +32329,7 @@
   },
   {
     "skillUri":"9710092c-f174-4e84-95bf-2064d39ad7a0",
-    "description":"Apply content management methods and procedures to define and use info concepts, such as the data of creation, in order to describe, organise and archive content such as documents, video and audio files, applications and images."
+    "description":"Apply content management methods and procedures to define and use metadata concepts, such as the data of creation, in order to describe, organise and archive content such as documents, video and audio files, applications and images."
   },
   {
     "skillUri":"9710209e-d80f-4459-aaa4-28aafadb008d",
@@ -32885,7 +32885,7 @@
   },
   {
     "skillUri":"99b163e8-7815-43e2-83f3-a47f3076354c",
-    "description":"The financial transactions recorded in accounting systems or books of a company together with the info linked to the entry such as the date, the amount, the accounts affected, and a description of the transaction."
+    "description":"The financial transactions recorded in accounting systems or books of a company together with the metadata linked to the entry such as the date, the amount, the accounts affected, and a description of the transaction."
   },
   {
     "skillUri":"99b95aca-221d-415c-9de5-564e1a273701",
@@ -45045,7 +45045,7 @@
   },
   {
     "skillUri":"d523d7bf-cb3d-4310-9bf3-5670659c9b83",
-    "description":"The study of textual news stories expressed as numbers and info in order to gain insight into the relevance of the story, sentiment, and novelty."
+    "description":"The study of textual news stories expressed as numbers and metadata in order to gain insight into the relevance of the story, sentiment, and novelty."
   },
   {
     "skillUri":"d52426a8-e84f-4652-a655-7a6195381fcd",
@@ -52561,7 +52561,7 @@
   },
   {
     "skillUri":"f8bf9a84-d60b-4edc-bfa0-b0ece9bf8954",
-    "description":"Create and document procedures and info definitions."
+    "description":"Create and document procedures and metadata definitions."
   },
   {
     "skillUri":"f8c1295e-6666-4c47-aa1d-4b6936b464d0",
